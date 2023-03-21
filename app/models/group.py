@@ -24,6 +24,7 @@ class Group(db.Model):
             'description': self.description,
             'groupPic': self.group_pic,
             'adminId': self.admin_id,
+            'posts': [post.to_dict() for post in self.group_posts],
             'members': [member.to_dict() for member in self.members]
         }
 

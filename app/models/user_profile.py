@@ -14,9 +14,7 @@ class UserProfile(db.Model):
     location = db.Column(db.String(600), nullable=True)
 
     # Relationship Attributes
-    # need all user info to populate here
-    #need all post info to populate here for photos
-
+    user = db.relationship("User", backref='posts', lazy=True)
 
     def to_dict(self):
         return {
@@ -26,4 +24,5 @@ class UserProfile(db.Model):
             'coverPhoto': self.cover_photo,
             'bio': self.bio,
             'location': self.location,
+            'user': self.user.to_dict()
         }

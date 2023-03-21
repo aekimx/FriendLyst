@@ -1,39 +1,30 @@
-from app.models import db, User, environment, SCHEMA
+from app.models import db, Post, environment, SCHEMA
 from sqlalchemy.sql import text
 
 
 # Adds a demo user, you can add other users here if you want
-def seed_users():
-    users = [
-        User(
-        first_name='Demo', last_name='Lition', birthday='01/01/2000',
-        email='demo@aa.io', gender='female', password='password'),
-
-        User(first_name='Marnie', last_name='Smith', birthday='01/02/1999',
-              email='marnie@aa.io', gender='female', password='password'),
-
-        User(first_name='Bobbie', last_name='Jones', birthday='05/03,1965',
-              email='bobbie@aa.io', gender='male',password='password'),
-
-        User(first_name='Aileen', last_name='Kim', birthday='08/06/1996',
-             email='akim@gmail.com', gender='female', password='password'
-             ),
-        User(first_name='Jonathan', last_name='Yee', birthday='01/02/1994',
-             email='jyee@gmail.com', gender='male', password='password'
-             ),
-        User(first_name='Nikki', last_name='Schutz', birthday='09/16/1995',
-             email='nschtuz@gmail.com', gender='female', password='password'
-             ),
-        User(first_name='Mona', last_name='Ravioli', birthday='08/06/1996',
-             email='mravioli@gmail.com', gender='female', password='password'
-             ),
-        User(first_name='Kita', last_name='Cannes', birthday='07/14/1997',
-             email='kcannes@gmail.com', gender='female', password='password'
-             ),
+def seed_posts():
+    posts = [
+        #1-5
+        Post(user_id='1',caption='Just got a new pup! He is the cutest. Bonus points if you can guess his breed! ', photo='https://images.squarespace-cdn.com/content/v1/5fcd4f79f35c2027aed964a6/1646421273811-4JP5F4JHMHPUB9CLW5VB/IMG_1491-1.jpg?format=1000w'),
+        Post(user_id='1',caption='Umm. Someone help. This puppy is crazy!', photo='https://i.pinimg.com/originals/a9/4a/95/a94a954fe47af7de367999df72afff08.jpg'),
+        Post(user_id='1',caption='Officially sleep deprived. SOS.', photo=''),
+        Post(user_id='2',caption='Look at this gorgeous sunset today!', photo='https://upload.wikimedia.org/wikipedia/commons/5/58/Sunset_2007-1.jpg'),
+        Post(user_id='3',caption='Had the best pasta ever today.', photo='https://media.cnn.com/api/v1/images/stellar/prod/210211140233-03-classic-italian-dishes.jpg?q=w_2512,h_1413,x_0,y_0,c_fill/w_1280'),
+        #6-10
+        Post(user_id='4',caption='Look at these beautiful lappy puppies. Can\'t wait to get my own', photo='https://4.bp.blogspot.com/-G1gwPeAEW5Q/VzBCr1in3bI/AAAAAAAAEt4/IKDxTUAMVG8fkCwNcaJzgKLcbInjyi60QCLcB/s1600/Finnish-Lapphund-Colour-variation-FLCNSW.jpg'),
+        Post(user_id='4',caption='Going on a hike!', photo='https://www.planetware.com/wpimages/2022/02/pennsylvania-top-rated-hiking-trails-intro-paragraph-trail-sign.jpg'),
+        Post(user_id='5',caption='Visited Tokyo today. Great good', photo='https://www.theworlds50best.com/mena/en/filestore/png/Tokyo-3.png'),
+        Post(user_id='6',caption='Officially moving to Rwanda today for work! Wish me luck!', photo='https://www.tripsavvy.com/thmb/ESemQcXAEmPpFm6kJoIUELBD7Gw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1330741701-a79c6a941e01454e84a41dc442baa99e.jpg'),
+        Post(user_id='7',caption='Does anyone have any book recommendations?', photo=''),
+        #11-13
+        Post(user_id='7',caption='Coffee date today!', photo='https://getliterary.com/app/uploads/2018/07/NYC-Coffee-Shops-1120x630.jpg'),
+        Post(user_id='8',caption='Anyone wanna grab lunch?', photo=''),
+        Post(user_id='8',caption='Going to yoga today!', photo='https://res.cloudinary.com/peerspace-inc/image/upload/c00buk084jhum9tvs61u.jpg'),
 
     ]
 
-    db.session.add_all(users)
+    db.session.add_all(posts)
     db.session.commit()
 
 
@@ -43,10 +34,10 @@ def seed_users():
 # incrementing primary key, CASCADE deletes any dependent entities.  With
 # sqlite3 in development you need to instead use DELETE to remove all data and
 # it will reset the primary keys for you as well.
-def undo_users():
+def undo_posts():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.posts RESTART IDENTITY CASCADE;")
     else:
-        db.session.execute(text("DELETE FROM users"))
+        db.session.execute(text("DELETE FROM posts"))
 
     db.session.commit()

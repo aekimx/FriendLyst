@@ -8,7 +8,7 @@ class Post(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    caption = db.Column(db.String(2000), nullable=True)
+    caption = db.Column(db.String(2000), nullable=False)
     photo = db.Column(db.String(2000), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
@@ -26,5 +26,6 @@ class Post(db.Model):
             'caption': self.caption,
             'photo': self.photo,
             'user': self.user.to_dict_no_post(),
+            'createdAt': self.created_at,
             'comments': [comment.to_dict() for comment in self.comments]
         }

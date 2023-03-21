@@ -1,4 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
+from datetime import datetime
 
 class GroupPost(db.Model):
     __tablename__ = 'group_posts'
@@ -9,13 +10,13 @@ class GroupPost(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     caption = db.Column(db.String(2000), nullable=True)
     photo = db.Column(db.String(2000), nullable=True)
-
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     group_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('groups.id')), nullable=False)
 
     # Relationship Attributes
-    user = db.relationship("User", backref='posts', lazy=True)
-    comments = db.relationship("Comment", backref='comments', lazy=True)
+    user = db.relationship("User", backref='group_posts', lazy=True)
+    comments = db.relationship("Comment", backref='group_posts', lazy=True, delete='all, delete-orphan')
 
 
     def to_dict(self):
