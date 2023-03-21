@@ -14,13 +14,12 @@ def seed_posts():
         #6-10
         Post(user_id='4',caption='Look at these beautiful lappy puppies. Can\'t wait to get my own', photo='https://4.bp.blogspot.com/-G1gwPeAEW5Q/VzBCr1in3bI/AAAAAAAAEt4/IKDxTUAMVG8fkCwNcaJzgKLcbInjyi60QCLcB/s1600/Finnish-Lapphund-Colour-variation-FLCNSW.jpg'),
         Post(user_id='4',caption='Going on a hike!', photo='https://www.planetware.com/wpimages/2022/02/pennsylvania-top-rated-hiking-trails-intro-paragraph-trail-sign.jpg'),
-        Post(user_id='5',caption='Visited Tokyo today. Great good', photo='https://www.theworlds50best.com/mena/en/filestore/png/Tokyo-3.png'),
-        Post(user_id='6',caption='Officially moving to Rwanda today for work! Wish me luck!', photo='https://www.tripsavvy.com/thmb/ESemQcXAEmPpFm6kJoIUELBD7Gw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1330741701-a79c6a941e01454e84a41dc442baa99e.jpg'),
-        Post(user_id='7',caption='Does anyone have any book recommendations?', photo=''),
-        #11-13
-        Post(user_id='7',caption='Coffee date today!', photo='https://getliterary.com/app/uploads/2018/07/NYC-Coffee-Shops-1120x630.jpg'),
-        Post(user_id='8',caption='Anyone wanna grab lunch?', photo=''),
-        Post(user_id='8',caption='Going to yoga today!', photo='https://res.cloudinary.com/peerspace-inc/image/upload/c00buk084jhum9tvs61u.jpg'),
+        Post(user_id='5',caption='Officially moving to Rwanda today for work! Wish me luck!', photo='https://www.tripsavvy.com/thmb/ESemQcXAEmPpFm6kJoIUELBD7Gw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1330741701-a79c6a941e01454e84a41dc442baa99e.jpg'),
+        Post(user_id='6',caption='Does anyone have any book recommendations?', photo=''),
+        Post(user_id='6',caption='Coffee date today!', photo='https://getliterary.com/app/uploads/2018/07/NYC-Coffee-Shops-1120x630.jpg'),
+        #11-12
+        Post(user_id='7',caption='Anyone wanna grab lunch?', photo=''),
+        Post(user_id='7',caption='Going to yoga today!', photo='https://res.cloudinary.com/peerspace-inc/image/upload/c00buk084jhum9tvs61u.jpg'),
 
     ]
 

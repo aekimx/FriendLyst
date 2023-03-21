@@ -20,7 +20,7 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     #Relationship Attributes
-    posts = db.relationship("Post", backref='user', lazy=True, cascade='all. delete-orphan')
+    posts = db.relationship("Post", backref='user', lazy=True, cascade='all, delete-orphan')
 
 
     @property
@@ -55,10 +55,4 @@ class User(db.Model, UserMixin):
             'gender': self.gender,
             'email': self.email,
             'createdAt': self.created_at,
-        }
-
-    def to_dict_name(self):
-        return {
-            'firstName': self.firstName,
-            'lastName': self.lastName,
         }
