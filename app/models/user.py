@@ -11,13 +11,17 @@ class User(db.Model, UserMixin):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    firstName= db.Column(db.String(100), nullable=False)
-    lastName = db.Column(db.String(100), nullable=False)
+    first_name= db.Column(db.String(100), nullable=False)
+    last_name = db.Column(db.String(100), nullable=False)
     birthday = db.Column(db.Integer, nullable=False)
     email = db.Column(db.String(255), nullable=True, unique=True)
     gender = db.Column(db.String(50), nullable=False)
     hashed_password = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    #Relationship Attributes
+    posts = db.relationship("Post", backref='user', lazy=True, cascade='all. delete-orphan')
+
 
     @property
     def password(self):
@@ -33,10 +37,28 @@ class User(db.Model, UserMixin):
     def to_dict(self):
         return {
             'id': self.id,
+            'firstName': self.first_name,
+            'lastName': self.last_name,
+            'birthday': self.birthday,
+            'gender': self.gender,
+            'email': self.email,
+            'createdAt': self.created_at,
+            'posts': [post.to_dict() for post in self.posts]
+        }
+
+    def to_dict_no_post(self):
+        return {
+            'id': self.id,
             'firstName': self.firstName,
             'lastName': self.lastName,
             'birthday': self.birthday,
             'gender': self.gender,
             'email': self.email,
             'createdAt': self.created_at,
+        }
+
+    def to_dict_name(self):
+        return {
+            'firstName': self.firstName,
+            'lastName': self.lastName,
         }

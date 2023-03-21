@@ -5,39 +5,28 @@ from sqlalchemy.sql import text
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     users = [
-
-        # 1 Demo
         User(
         first_name='Demo', last_name='Lition', birthday='01/01/2000',
         email='demo@aa.io', gender='female', password='password'),
 
-        # 2
         User(first_name='Marnie', last_name='Smith', birthday='01/02/1999',
               email='marnie@aa.io', gender='female', password='password'),
 
-        # 3
         User(first_name='Bobbie', last_name='Jones', birthday='05/03,1965',
               email='bobbie@aa.io', gender='male',password='password'),
-        # 4
+
         User(first_name='Aileen', last_name='Kim', birthday='08/06/1996',
              email='akim@gmail.com', gender='female', password='password'
              ),
-        # 5
         User(first_name='Jonathan', last_name='Yee', birthday='01/02/1994',
              email='jyee@gmail.com', gender='male', password='password'
              ),
-
-        # 6
         User(first_name='Nikki', last_name='Schutz', birthday='09/16/1995',
              email='nschtuz@gmail.com', gender='female', password='password'
              ),
-
-        # 7
         User(first_name='Mona', last_name='Ravioli', birthday='08/06/1996',
              email='mravioli@gmail.com', gender='female', password='password'
              ),
-
-        # 8
         User(first_name='Kita', last_name='Cannes', birthday='07/14/1997',
              email='kcannes@gmail.com', gender='female', password='password'
              ),
