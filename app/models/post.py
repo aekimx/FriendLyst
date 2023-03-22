@@ -20,8 +20,8 @@ class Post(db.Model):
     # Relationship Attributes
     user = db.relationship("User", back_populates='posts', lazy=True)
     comments = db.relationship("Comment", back_populates='post', lazy=True, cascade='all, delete')
-    group = db.relationshp("Group", back_populates='group_posts', lazy=True)
-    event = db.relationshp("Event", back_populates='event_posts', lazy=True)
+    group = db.relationship("Group", back_populates='group_posts', lazy=True)
+    event = db.relationship("Event", back_populates='event_posts', lazy=True)
 
 
     def to_dict(self):

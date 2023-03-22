@@ -14,9 +14,9 @@ class Message(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     chatting_user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
 
-
     # Relationship Attributes
-    users = db.relationship("User", back_populates='messages', lazy=True)
+    user = db.relationship("User", lazy=True, foreign_keys=[user_id])
+    chatting_user = db.relationship("User", lazy=True, foreign_keys=[chatting_user_id])
 
 
     def to_dict(self):
@@ -26,5 +26,6 @@ class Message(db.Model):
             'userId': self.user_id,
             'chattingUserId': self.chatting_user_id,
             'createdAt': self.created_at,
-            'users': self.user.to_dict_no_post()
+            'user': self.user.to_dict_no_post(),
+            'chattingUser': self.chatting_user.to_dict_no_post()
         }

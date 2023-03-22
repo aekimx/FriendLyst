@@ -16,7 +16,7 @@ class Event(db.Model):
 
     # Relationship Attributes
     event_posts = db.relationship("Post", back_populates='event', lazy=True, cascade='all, delete')
-    members = db.relationship('User', back_populates='event', lazy=True, cascade='all, delete')
+    event_members = db.relationship('EventMember', back_populates='event', lazy=True, cascade='all, delete')
 
 
     def to_dict(self):
