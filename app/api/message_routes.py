@@ -3,7 +3,7 @@ from flask_login import login_required
 from app.models import Message, db
 from app.forms import MessageForm
 
-message_routes = Blueprint('friends', __name__)
+message_routes = Blueprint('messages', __name__)
 
 @message_routes.route('', methods=['GET'])
 # @login_required

@@ -89,7 +89,7 @@ def delete_group(id):
 
 @group_routes.route('/<int:id>/members/pending', methods=['GET'])
 # @login_required
-def get_group_members(id):
+def get_pending_members(id):
     ''' Query for all pending group members'''
     all_members = GroupMember.query.filter(GroupMember.group_id == id).filter(GroupMember.status == 'Pending').all()
 
@@ -101,7 +101,7 @@ def get_group_members(id):
 
 @group_routes.route('/<int:id>/members', methods=['GET'])
 # @login_required
-def get_group_members(id):
+def get_accepted_group_members(id):
     ''' Query for all accepted group members  '''
     all_members = GroupMember.query.filter(GroupMember.group_id == id).filter(GroupMember.status == 'Accepted').all()
 
@@ -147,7 +147,7 @@ def accept_group_member(id2):
 
 @group_routes.route('/<int:id>/posts', methods=['GET'])
 # @login_required
-def accept_group_member(id):
+def get_group_posts(id):
     ''' Get all posts for a group '''
     group_posts = Post.query.filter(Post.group_id == id).all()
 

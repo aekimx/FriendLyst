@@ -8,9 +8,7 @@ auth_routes = Blueprint('auth', __name__)
 
 
 def validation_errors_to_error_messages(validation_errors):
-    """
-    Simple function that turns the WTForms validation errors into a simple list
-    """
+    """ Simple function that turns the WTForms validation errors into a simple list """
     errorMessages = []
     for field in validation_errors:
         for error in validation_errors[field]:
@@ -20,9 +18,7 @@ def validation_errors_to_error_messages(validation_errors):
 
 @auth_routes.route('/')
 def authenticate():
-    """
-    Authenticates a user.
-    """
+    """ Authenticates a user. """
     if current_user.is_authenticated:
         return current_user.to_dict()
     return {'errors': ['Unauthorized']}
@@ -30,9 +26,7 @@ def authenticate():
 
 @auth_routes.route('/login', methods=['POST'])
 def login():
-    """
-    Logs a user in
-    """
+    """ Logs a user in """
     form = LoginForm()
     # Get the csrf_token from the request cookie and put it into the
     # form manually to validate_on_submit can be used
@@ -40,6 +34,7 @@ def login():
     if form.validate_on_submit():
         # Add the user to the session, we are logged in!
         user = User.query.filter(User.email == form.data['email']).first()
+        print('user from query afte from.validate on submit', user)
         login_user(user)
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
@@ -47,25 +42,26 @@ def login():
 
 @auth_routes.route('/logout')
 def logout():
-    """
-    Logs a user out
-    """
+    """ Logs a user out """
     logout_user()
     return {'message': 'User logged out'}
 
 
 @auth_routes.route('/signup', methods=['POST'])
 def sign_up():
-    """
-    Creates a new user and logs them in
-    """
+    """ Creates a new user and logs them in """
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    data = request.get_json()
+
     if form.validate_on_submit():
         user = User(
-            username=form.data['username'],
-            email=form.data['email'],
-            password=form.data['password']
+            first_name= data['firstName'],
+            last_name= data['lastName'],
+            email= data['email'],
+            password= data['password'],
+            birthday= data['birthday'],
+            gender= data['gender'],
         )
         db.session.add(user)
         db.session.commit()
@@ -76,7 +72,5 @@ def sign_up():
 
 @auth_routes.route('/unauthorized')
 def unauthorized():
-    """
-    Returns unauthorized JSON when flask-login authentication fails
-    """
+    """ Returns unauthorized JSON when flask-login authentication fails """
     return {'errors': ['Unauthorized']}, 401
