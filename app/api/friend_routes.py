@@ -29,9 +29,6 @@ def find_friend_request(id):
 def add_friend():
     ''' Create a new friend request and return the newly created friend request as a dictionary '''
     data = request.get_json()
-    # form = CommentForm()
-    # form["csrf_token"].data = request.cookies["csrf_token"]
-
 
     friend_request = Friend( user_id = data['user_id'],  friend_id = data['friend_id'], status = "Pending")
     db.session.add(friend_request)
@@ -43,7 +40,7 @@ def add_friend():
 @friend_routes.route('/<int:id>', methods=["PUT"])
 # @login_required
 def accept_friend_request(id):
-    ''' Query for a Comment by ID and update it if post exists. Returned as a dictionary.'''
+    ''' Query for a friend request by ID and update it if request exists. Returned as a dictionary.'''
     friend = Friend.query.get(id)
 
     if friend is None:

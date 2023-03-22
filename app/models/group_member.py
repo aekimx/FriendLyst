@@ -7,7 +7,7 @@ class GroupMember(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    status = db.Column(db.String(50), nullable=False)
+    status = db.Column(db.String(50), nullable=False, default="Pending")
     group_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('groups.id')), nullable=False)
     member_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
 
@@ -20,5 +20,12 @@ class GroupMember(db.Model):
             'id': self.id,
             'status': self.status,
             'group': self.group.to_dict_no_members(),
-            'members': [user.to_dict_no_post() for user in self.users()]
+            'user': self.user.to_dict_no_post()
+        }
+
+    def to_dict_no_group(self):
+        return {
+            'id': self.id,
+            'status': self.status,
+            'user': self.user.to_dict_no_post()
         }

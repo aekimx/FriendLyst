@@ -65,7 +65,7 @@ def get_friend_requests(id):
 @user_routes.route('/<int:id>/friends', methods=["GET"])
 # @login_required
 def get_friend_list(id):
-    ''' Query for a user's friends list. Return in a list of dictionaries '''
+    ''' Query for a user's accepted friends list. Return in a list of dictionaries '''
     all_friends = Friend.query.filter(Friend.user_id == id).filter(Friend.status == 'Accepted').all()
 
     if all_friends is None:

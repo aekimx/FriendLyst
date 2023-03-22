@@ -27,5 +27,5 @@ class Message(db.Model):
             'chattingUserId': self.chatting_user_id,
             'createdAt': self.created_at,
             'user': self.user.to_dict_no_post(),
-            'chattingUser': self.chatting_user.to_dict_no_post()
+            'chattingUser': self.chatting_user.to_dict_no_post_profile()
         }
