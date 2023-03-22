@@ -1,0 +1,89 @@
+.signupform-container {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(35,37,38);
+  color: rgb(228,230,235);
+}
+
+.signupform-container {
+  font-family: 'Ruda', sans-serif;
+}
+
+.signupform-text {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.signupform-signup {
+  font-size: 45px;
+}
+
+.signupform-easy {
+  font-size: 30px;
+}
+
+.signupform-form > input:focus {
+  font-family: 'Ruda', sans-serif;
+  outline: none
+}
+
+.signupform-email, .signupform-password, .signupform-confirm-password {
+  background-color: rgb(58,59,61);
+  border: none;
+  color: rgb(228,230,235);
+  height: 40px;
+  width: 350px;
+  font-size: 20px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.signupform-form > form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signupform-name-container {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.signupform-fname, .signupform-lname {
+  background-color: rgb(58,59,61);
+  border: none;
+  color: rgb(228,230,235);
+  height: 40px;
+  width: 160px;
+  font-size: 20px;
+  padding: 2px 1px 1px 2px;
+  border-radius: 5px;
+}
+.signupform-lname {
+  margin-left: 26px;
+}
+
+.signupform-email-pw-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.signupform-fname::placeholder, .signupform-lname::placeholder, .signupform-email::placeholder,
+.signupform-password::placeholder, .signupform-confirm-password::placeholder {
+  padding-left: 8px;
+}
+
+
+.signupform-birthday-text {
+  display: flex;
+  justify-content: left;
+}

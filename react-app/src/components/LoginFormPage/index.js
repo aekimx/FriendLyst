@@ -31,12 +31,24 @@ function LoginFormPage() {
 				}
 			)
 	};
+  const demoUserLogin2 = async (e) => {
+		e.preventDefault();
+		await dispatch(login('akijm@gmail.com', 'password'))
+			.catch(
+				async (res) => {
+					const errData = await res.json();
+					console.log(errData)
+				}
+			)
+	};
 
 
 
   return (
     <>
     <div className='loginform-container'>
+      <div className='loginform-signin'>
+      <div className='loginform-logo'> FriendLyst </div>
       <div className='loginform-title'>Connect with friends and the world around you on FriendLyst </div>
       <div className='loginform-input-container'>
         <form onSubmit={handleSubmit}>
@@ -65,9 +77,14 @@ function LoginFormPage() {
             />
 
           <div className='loginform-submit-div'  onClick={handleSubmit}> Log In </div>
-          <div className='loginform-demouser-div' onClick={demoUserLogin}> Demo User</div>
-          <Link to ='/signup'> Create new account </Link>
+          <div> <Link to ='/signup' className='loginform-signup'> Create new account </Link></div>
+          {/* to fix later! to the side */}
         </form>
+      </div>
+      </div>
+      <div className='loginform-demo containers'>
+          <div className='loginform-demouser-div' onClick={demoUserLogin}> Demo User 1 </div>
+          <div className='loginform-demouser-div' onClick={demoUserLogin2}> Demo User 2 </div>
       </div>
     </div>
   </>

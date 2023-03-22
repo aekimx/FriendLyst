@@ -23,9 +23,7 @@ function SignupFormPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('----------name------', firstName, lastName)
     const birthday = month+'/'+day+'/'+year
-    console.log('----------birthday------', birthday)
 
     if (password === confirmPassword) {
         const data = await dispatch(signUp(firstName, lastName, email, birthday, gender, password));
@@ -47,15 +45,20 @@ function SignupFormPage() {
 
   return (
     <>
-      <div>Sign Up</div>
-      <div>It's quick and easy.</div>
-      <form onSubmit={handleSubmit}>
+    <div className='signupform-container'>
+      <div className='signupform-text'>
+        <div className='signupform-signup'>Sign Up</div>
+        <div className='signupform-easy'>It's quick and easy.</div>
+      </div>
+      <div className='signupform-form'>
+      <form onSubmit={handleSubmit} className='signupform-form-overall'>
         <ul>
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>
-
+      <div className='signupform-name-container'>
           <input
             type="text"
+            className='signupform-fname'
             placeholder='First name'
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
@@ -63,25 +66,27 @@ function SignupFormPage() {
           />
           <input
             type="text"
+            className='signupform-lname'
             placeholder='Last name'
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             required
           />
+        </div>
 
-
+    <div className='signupform-email-pw-container'>
           <input
             type="text"
+            className='signupform-email'
             placeholder='Email'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
 
-
-
           <input
             type="password"
+            className='signupform-password'
             placeholder='New password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -90,13 +95,15 @@ function SignupFormPage() {
 
           <input
             type="password"
+            className='signupform-confirm-password'
             placeholder = 'Confirm password'
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
-          <div className='birthday container' >
-            <div>Birthday</div>
+        </div>
+          <div className='signupform-birthday-container' >
+            <div className="signupform-bday-text">Birthday</div>
             <select onChange={(e) => setMonth(e.target.value)}>
               {generateOptions(1, 12)}
             </select>
@@ -128,6 +135,8 @@ function SignupFormPage() {
         <div> By clicking sign up, you agree to our Terms, Privacy Policy, and Cookies Policy. </div>
         <button type="submit">Sign Up</button>
       </form>
+      </div>
+    </div>
     </>
   );
 }

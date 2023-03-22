@@ -1,5 +1,4 @@
 
-
 .loginform-container {
   display: flex;
   position: fixed;
@@ -7,17 +6,32 @@
   left: 0;
   right: 0;
   bottom: 0;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   background-color: rgb(35,37,38);
   color: rgb(228,230,235);
+  font-family: 'Ruda', sans-serif;
+}
+.loginform-signin {
+  display: flex;
+  width: 500px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
 }
 
-.loginform-title,
 .loginform-input-email::placeholder,
-.loginform-input-password::placeholder, .loginform-submit-div, .loginform-demouser-div {
-  font-family: 'Ruda', sans-serif;
+.loginform-input-password::placeholder {
+  font-size: 20px;
+  margin-left: 5px;
+  /* margin-bottom: -5px; */
+}
+
+.loginform-logo {
+  font-size: 50px;
+  margin-bottom: 10px;
 }
 
 .loginform-input-container > form {
@@ -27,14 +41,45 @@
 
 .loginform-input-email, .loginform-input-password, .loginform-submit-div, .loginform-demouser-div {
   margin-bottom: 10px;
-
 }
 
-.loginform-submit-div, .loginform-demouser-div {
+.loginform-input-email, .loginform-input-password {
+  background-color: rgb(58,59,61);
+  border: none;
+  color: rgb(228,230,235);
+  height: 40px;
+  width: 300px;
+  font-size: 20px;
+}
+.loginform-input-email:focus, .loginform-input-password:focus {
+  outline: none;
+}
+
+.loginform-submit-div {
   cursor: pointer;
   display: flex;
   height: 40px;
-  width: 250px;
+  width: 300px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid white;
+  border-radius: 5px;
+}
+
+.loginform-signup {
+  text-decoration: none;
+  color: rgb(228,230,235);
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.loginform-demouser-div {
+  background-color: rgb(43,116,225);
+  cursor: pointer;
+  display: flex;
+  height: 40px;
+  width: 200px;
   justify-content: center;
   align-items: center;
   border: 1px solid white;

@@ -1,0 +1,59 @@
+
+.userprofile-profpic {
+  width: 200px;
+  border-radius: 100px;
+}
+
+.userprofile-container {
+  background-color: rgb(35,37,38);
+  font-family: 'Ruda', sans-serif;
+  color: rgb(228,230,235);
+  margin-left: -10px;
+  margin-top: -10px;
+  margin-bottom: -10px;
+}
+
+.userprofile-container-inside {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.userprofile-bio {
+  border: 2px solid red;
+  height: 100%;
+}
+
+.userprofile-posts-profpic {
+  width: 50px;
+  border-radius: 30px;
+}
+
+.userprofile-coverphoto {
+  width: 80%;
+  height: 400px;
+}
+
+.userprofile-profpic-name {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+  align-items: left;
+}
+
+.userprof-name-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.userprof-fname {
+  margin-right: 10px;
+}
+
+.userprof-bio-posts-container {
+  display: flex;
+  flex-direction: row;
+}

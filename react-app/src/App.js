@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { authenticate } from "./store/session";
 import HomePage from "./components/Home";
+import UserProfile from "./components/UserProfile";
 // import Navigation from "./components/Navigation";
 
 function App() {
@@ -25,9 +26,14 @@ function App() {
         <SignupFormPage />
       </Route>
     {isLoaded && (
+      <>
       <Route path="/home">
         <HomePage />
       </Route>
+      <Route path="/users/:id">
+        <UserProfile />
+      </Route>
+      </>
     )}
     </Switch>
     </>
