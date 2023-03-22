@@ -13,8 +13,7 @@ class Group(db.Model):
     admin_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
 
     # Relationship Attributes
-    group_posts = db.relationship("GroupPost", back_populates='groups', lazy=True, cascade='all, delete')
-    members = db.relationship('User', back_populates='groups', lazy=True)
+    group_posts = db.relationship("Post", back_populates='group', lazy=True, cascade='all, delete')
     group_members = db.relationship('GroupMember', back_populates='group', lazy=True, cascade='all, delete')
 
 
@@ -26,7 +25,7 @@ class Group(db.Model):
             'groupPic': self.group_pic,
             'adminId': self.admin_id,
             'posts': [post.to_dict_no_members() for post in self.group_posts],
-            'members': [member.to_dict() for member in self.members]
+            'members': [member.to_dict() for member in self.group_members]
         }
 
     def to_dict_no_members(self):

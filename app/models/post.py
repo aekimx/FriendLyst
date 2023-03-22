@@ -13,9 +13,15 @@ class Post(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
 
+    # Optional Foreign Key to specify whether in an event or group
+    group_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('groups.id')), nullable=True)
+    event_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('events.id')), nullable=True)
+
     # Relationship Attributes
     user = db.relationship("User", back_populates='posts', lazy=True)
     comments = db.relationship("Comment", back_populates='post', lazy=True, cascade='all, delete')
+    group = db.relationshp("Group", back_populates='group_posts', lazy=True)
+    event = db.relationshp("Event", back_populates='event_posts', lazy=True)
 
 
     def to_dict(self):

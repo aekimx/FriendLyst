@@ -15,8 +15,6 @@ class GroupMember(db.Model):
     user = db.relationship("User", back_populates='group_member', lazy=True)
     group = db.relationship("Group", back_populates='', lazy=True, cascade='all, delete')
 
-
-
     def to_dict(self):
         return {
             'id': self.id,

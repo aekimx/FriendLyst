@@ -16,7 +16,7 @@ class Message(db.Model):
 
 
     # Relationship Attributes
-    user = db.relationship("User", backref='messages', lazy=True)
+    users = db.relationship("User", back_populates='messages', lazy=True)
 
 
     def to_dict(self):

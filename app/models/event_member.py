@@ -13,7 +13,7 @@ class EventMember(db.Model):
 
     # Relationship Attributes
     user = db.relationship("User", backref='event_members', lazy=True)
-    event = db.relationship("Event", backref='event_members', lazy=True)
+    event = db.relationship("Event", back_populates='event_members', lazy=True)
 
 
 

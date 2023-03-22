@@ -20,13 +20,17 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     #Relationship Attributes
+    user_profile = db.relationship("UserProfile", back_populates='user', lazy=True, cascade='all, delete')
+
+    friends = db.relationship("Friend", back_populates='users', lazy=True, cascade='all, delete')
+
     posts = db.relationship("Post", back_populates='user', lazy=True, cascade='all, delete')
-    groups = db.relationship("Group", back_populates='members', lazy=True, cascade='all, delete')
-    comments = db.relationship("Comment", back_populates="user", lazy=True, cascade='all, delete')
+    comments = db.relationship("Comment", back_populates="user", lazy=True)
 
-    group_member = db.relationship("GroupMember", back_populates='user', lazy=True, cascade='all, delete')
-    group_posts = db.relationship("GroupPost", back_populates='user', lazy=True, cascade='all, delete')
+    messages = db.relationship("Message", back_populates='users', lazy=True, cascade='all, delete')
 
+    group_member = db.relationship("GroupMember", back_populates='user', lazy=True)
+    event_member = db.relationship("EventMember", back_populates='user', lazy=True)
 
     @property
     def password(self):

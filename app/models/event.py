@@ -15,8 +15,8 @@ class Event(db.Model):
     owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
 
     # Relationship Attributes
-    event_posts = db.relationship("EventPost", backref='events', lazy=True, cascade='all, delete-orphan')
-    members = db.relationship('User', backref='events', lazy=True)
+    event_posts = db.relationship("Post", back_populates='event', lazy=True, cascade='all, delete')
+    members = db.relationship('User', back_populates='event', lazy=True, cascade='all, delete')
 
 
     def to_dict(self):
@@ -27,4 +27,13 @@ class Event(db.Model):
             'ownerId': self.owner_id,
             'posts': [post.to_dict() for post in self.event_posts],
             'members': [member.to_dict_no_post() for member in self.members]
+        }
+
+    def to_dict_no_members(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description,
+            'ownerId': self.owner_id,
+            'posts': [post.to_dict() for post in self.event_posts],
         }
