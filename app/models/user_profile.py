@@ -26,3 +26,12 @@ class UserProfile(db.Model):
             'location': self.location,
             'user': self.user.to_dict()
         }
+    def to_dict_no_self(self):
+        return {
+            'id': self.id,
+            'userId': self.user_id,
+            'profilePic': self.profile_pic,
+            'coverPhoto': self.cover_photo,
+            'bio': self.bio,
+            'location': self.location,
+        }

@@ -21,6 +21,15 @@ class Friend(db.Model):
             'id': self.id,
             'userId': self.user_id,
             'friendId': self.friend_id,
+            'status': self.status,
             'user': self.user.to_dict_no_post(),
             'friend': self.friend.to_dict_no_post()
+        }
+    def to_dict_no_self(self):
+        return {
+            'id': self.id,
+            'userId': self.user_id,
+            'friendId': self.friend_id,
+            'status': self.status,
+            'friend': self.friend.to_dict_no_post_profile()
         }

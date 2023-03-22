@@ -15,7 +15,7 @@ def seed_users():
               email='marnie@aa.io', gender='female', password='password'),
 
         # 3
-        User(first_name='Bobbie', last_name='Jones', birthday='05/03,1965',
+        User(first_name='Bobbie', last_name='Jones', birthday='05/03/1965',
               email='bobbie@aa.io', gender='male',password='password'),
         # 4
         User(first_name='Aileen', last_name='Kim', birthday='08/06/1996',

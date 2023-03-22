@@ -52,7 +52,7 @@ class User(db.Model, UserMixin):
             'gender': self.gender,
             'email': self.email,
             'createdAt': self.created_at,
-            'posts': [post.to_dict() for post in self.posts]
+            'posts': [post.to_dict_no_user() for post in self.posts]
         }
 
     def to_dict_no_post(self):
@@ -64,4 +64,15 @@ class User(db.Model, UserMixin):
             'gender': self.gender,
             'email': self.email,
             'createdAt': self.created_at,
+        }
+    def to_dict_no_post_profile(self):
+        return {
+            'id': self.id,
+            'firstName': self.first_name,
+            'lastName': self.last_name,
+            'birthday': self.birthday,
+            'gender': self.gender,
+            'email': self.email,
+            'createdAt': self.created_at,
+            'profile': [profile.to_dict_no_self() for profile in self.user_profiles]
         }

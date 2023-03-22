@@ -71,7 +71,6 @@ def update_post(id):
     form["csrf_token"].data = request.cookies["csrf_token"]
 
     if post and form.validate_on_submit():
-        print('hits the if statement')
         post.caption = data['caption'] or post.caption
         post.photo = data['photo'] or post.photo
         db.session.commit()
@@ -82,7 +81,7 @@ def update_post(id):
 
 
 
-@post_routes.route('/<int:id>', methods=['delete'])
+@post_routes.route('/<int:id>', methods=['DELETE'])
 # @login_required
 def delete_post(id):
     ''' Query for a post by ID and delete it if post exists. Return a successful message '''

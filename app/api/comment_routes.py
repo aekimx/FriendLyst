@@ -1,95 +1,85 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import Post, db
+from app.models import Comment, db
 from app.forms import CommentForm
 
-post_routes = Blueprint('posts', __name__)
+comment_routes = Blueprint('comments', __name__)
 
-@post_routes.route('', methods=['GET'])
+@comment_routes.route('', methods=['GET'])
 # @login_required
-def get_all_posts():
-    ''' Query for all posts and return in a list of dictionaries '''
-    all_posts = Post.query.all()
-    return [post.to_dict() for post in all_posts]
+def get_all_comments():
+    ''' Query for all comments and return in a list of dictionaries '''
+    all_comments = Comment.query.all()
+    return [comment.to_dict() for comment in all_comments]
 
 
-@post_routes.route('/<int:id>', methods=["GET"])
+@comment_routes.route('/<int:id>', methods=["GET"])
 # @login_required
-def get_post_by_id(id):
-    ''' Query for a post by ID and return '''
-    post = Post.query.get(id)
+def get_commment_by_id(id):
+    ''' Query for a comment by ID and return as a dictionary'''
+    comment = Comment.query.get(id)
 
-    if post is None:
-        return jsonify({'error': 'Post not found'}), 404
+    if comment is None:
+        return jsonify({'error': 'Comment not found'}), 404
 
-    return post.to_dict()
+    return comment.to_dict()
 
 
-@post_routes.route('', methods=['POST'])
+@comment_routes.route('', methods=['POST'])
 # @login_required
-def create_post():
-    ''' Create a new post and return the newly created post as a dictionary '''
+def create_comment():
+    ''' Create a new comment and return the newly created comment as a dictionary '''
     data = request.get_json()
-    form = PostForm()
+    form = CommentForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
 
-    errors = {}
-
-    if len(data["caption"]) > 2000:
-        errors["message"] = "Messages must be less than 2000 characters"
-        return jsonify({"errors": errors}), 400
-
+    if len(data["comment"]) > 2000:
+        return jsonify({"errors": "Comments must be less than 2000 characters"}), 400
 
     if form.validate_on_submit():
-        new_post = Post(
-            caption= data['caption'],
-            photo= data['photo'],
-            user_id= data['user_id']
+        new_comment = Comment(
+            comment= data['comment'],
+            user_id= data['user_id'],
+            post_id= data['post_id']
          )
-        db.session.add(new_post)
+        db.session.add(new_comment)
         db.session.commit()
-        return new_post.to_dict()
-
-    return jsonify(errors), 400
+        return new_comment.to_dict()
 
 
-@post_routes.route('/<int:id>', methods=["PUT"])
+
+@comment_routes.route('/<int:id>', methods=["PUT"])
 # @login_required
-def update_post(id):
-    ''' Query for a post by ID and update it if post exists. Returned as a dictionary.'''
-    post = Post.query.get(id)
+def update_comment(id):
+    ''' Query for a Comment by ID and update it if post exists. Returned as a dictionary.'''
+    comment = Comment.query.get(id)
 
-    if post is None:
-        return jsonify({'error': 'Post not found'}), 404
+    if comment is None:
+        return jsonify({'error': 'Comment not found'}), 404
 
     data = request.get_json()
 
-    if len(data["caption"]) > 2000:
+    if len(data["comment"]) > 2000:
         return jsonify({"errors": 'Messages must be less than 2000 characters'}), 400
 
-    form = PostForm()
+    form = CommentForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
 
-    if post and form.validate_on_submit():
-        print('hits the if statement')
-        post.caption = data['caption'] or post.caption
-        post.photo = data['photo'] or post.photo
+    if comment and form.validate_on_submit():
+        comment.comment = data['comment'] or comment.comment
         db.session.commit()
-        return jsonify(post.to_dict()), 200
+        return jsonify(comment.to_dict()), 200
 
 
 
-
-
-
-@post_routes.route('/<int:id>', methods=['delete'])
+@comment_routes.route('/<int:id>', methods=['DELETE'])
 # @login_required
-def delete_post(id):
-    ''' Query for a post by ID and delete it if post exists. Return a successful message '''
-    post = Post.query.get(id)
-    if post is None:
-        return jsonify({'error': 'Post not found'}), 404
+def delete_comment(id):
+    ''' Query for a comment by ID and delete it if comment exists. Return a successful message '''
+    comment = Comment.query.get(id)
+    if comment is None:
+        return jsonify({'error': 'Comment not found'}), 404
 
-    db.session.delete(post)
+    db.session.delete(comment)
     db.session.commit()
-    return jsonify({'Success': 'Post successfully deleted'})
+    return jsonify({'Success': 'Comment successfully deleted'})
