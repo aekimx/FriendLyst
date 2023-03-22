@@ -7,7 +7,7 @@ from .comments import seed_comments, undo_comments
 from .likes import seed_likes, undo_likes
 from .groups import seed_groups, undo_groups
 from .group_members import seed_group_members, undo_group_members
-
+from .messages import seed_messages, undo_messages
 
 from app.models.db import db, environment, SCHEMA
 
@@ -30,11 +30,13 @@ def seed():
         undo_comments()
         undo_posts()
         undo_friends()
+        undo_messages()
         undo_user_profiles()
         undo_users()
     seed_users()
     seed_user_profiles()
     seed_friends()
+    seed_messages()
     seed_posts()
     seed_comments()
     seed_likes()

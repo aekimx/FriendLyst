@@ -58,8 +58,8 @@ class User(db.Model, UserMixin):
     def to_dict_no_post(self):
         return {
             'id': self.id,
-            'firstName': self.firstName,
-            'lastName': self.lastName,
+            'firstName': self.first_name,
+            'lastName': self.last_name,
             'birthday': self.birthday,
             'gender': self.gender,
             'email': self.email,
