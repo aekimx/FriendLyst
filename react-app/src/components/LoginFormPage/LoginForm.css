@@ -1,0 +1,42 @@
+
+
+.loginform-container {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(35,37,38);
+  color: rgb(228,230,235);
+}
+
+.loginform-title,
+.loginform-input-email::placeholder,
+.loginform-input-password::placeholder, .loginform-submit-div, .loginform-demouser-div {
+  font-family: 'Ruda', sans-serif;
+}
+
+.loginform-input-container > form {
+  display: flex;
+  flex-direction: column;
+}
+
+.loginform-input-email, .loginform-input-password, .loginform-submit-div, .loginform-demouser-div {
+  margin-bottom: 10px;
+
+}
+
+.loginform-submit-div, .loginform-demouser-div {
+  cursor: pointer;
+  display: flex;
+  height: 40px;
+  width: 250px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid white;
+  border-radius: 5px;
+}

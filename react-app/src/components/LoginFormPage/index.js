@@ -36,38 +36,41 @@ function LoginFormPage() {
 
   return (
     <>
-      <div>FriendLyst Logo Here </div>
-      <div>Connect with friends and the world around you on FriendLyst </div>
-      <div>
-      <form onSubmit={handleSubmit}>
-        <ul>
-          {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
-          ))}
-        </ul>
+    <div className='loginform-container'>
+      <div className='loginform-title'>Connect with friends and the world around you on FriendLyst </div>
+      <div className='loginform-input-container'>
+        <form onSubmit={handleSubmit}>
+          <ul>
+            {errors.map((error, idx) => (
+              <li key={idx}>{error}</li>
+            ))}
+          </ul>
 
-          <input
-            type="text"
-            placeholder='Email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+            <input
+              className="loginform-input-email"
+              type="text"
+              placeholder='Email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
 
-          <input
-            type="password"
-            placeholder='Password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+            <input
+              className="loginform-input-password"
+              type="password"
+              placeholder='Password'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
 
-        <button type="submit" onClick={handleSubmit}>Log In</button>
-        <button type='submit' onClick={demoUserLogin}> Demo User</button>
-        <Link to ='/signup'> Create new account </Link>
-      </form>
+          <div className='loginform-submit-div'  onClick={handleSubmit}> Log In </div>
+          <div className='loginform-demouser-div' onClick={demoUserLogin}> Demo User</div>
+          <Link to ='/signup'> Create new account </Link>
+        </form>
       </div>
-    </>
+    </div>
+  </>
   );
 }
 
