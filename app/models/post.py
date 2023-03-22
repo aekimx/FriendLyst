@@ -11,12 +11,11 @@ class Post(db.Model):
     caption = db.Column(db.String(2000), nullable=False)
     photo = db.Column(db.String(2000), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
-
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
 
     # Relationship Attributes
-    user = db.relationship("User", backref='posts', lazy=True)
-    comments = db.relationship("Comment", backref='comments', lazy=True)
+    user = db.relationship("User", back_populates='posts', lazy=True)
+    comments = db.relationship("Comment", back_populates='post', lazy=True, cascade='all, delete')
 
 
     def to_dict(self):

@@ -15,7 +15,8 @@ class Comment(db.Model):
     post_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('posts.id')), nullable=False)
 
     # Relationship Attributes
-    user = db.relationship("User", backref='comments', lazy=True)
+    user = db.relationship("User", back_populates='comments', lazy=True)
+    post = db.relationship("Post", back_populates='comments', lazy=True)
 
 
     def to_dict(self):

@@ -20,7 +20,12 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     #Relationship Attributes
-    posts = db.relationship("Post", backref='user', lazy=True, cascade='all, delete-orphan')
+    posts = db.relationship("Post", back_populates='user', lazy=True, cascade='all, delete')
+    groups = db.relationship("Group", back_populates='members', lazy=True, cascade='all, delete')
+    comments = db.relationship("Comment", back_populates="user", lazy=True, cascade='all, delete')
+
+    group_member = db.relationship("GroupMember", back_populates='user', lazy=True, cascade='all, delete')
+    group_posts = db.relationship("GroupPost", back_populates='user', lazy=True, cascade='all, delete')
 
 
     @property

@@ -14,7 +14,7 @@ class UserProfile(db.Model):
     location = db.Column(db.String(600), nullable=True)
 
     # Relationship Attributes
-    user = db.relationship("User", backref='posts', lazy=True)
+    user = db.relationship("User", backref='user_profiles', lazy=True)
 
     def to_dict(self):
         return {

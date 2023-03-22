@@ -1,8 +1,8 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
 
-class GroupPost(db.Model):
-    __tablename__ = 'group_posts'
+class EventPost(db.Model):
+    __tablename__ = 'event_posts'
 
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
@@ -13,12 +13,11 @@ class GroupPost(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    group_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('groups.id')), nullable=False)
+    event_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('events.id')), nullable=False)
 
     # Relationship Attributes
     user = db.relationship("User", backref='group_posts', lazy=True)
-    comments = db.relationship("Comment", back_populates='group_posts', lazy=True, cascade='all, delete')
-    group = db.relationship("Group", back_populates='group_posts', lazy=True)
+    comments = db.relationship("Comment", backref='group_posts', lazy=True, delete='all, delete-orphan')
 
 
     def to_dict(self):
