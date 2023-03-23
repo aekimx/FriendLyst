@@ -1,7 +1,9 @@
 import React from "react"
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
 import { logout } from "../../store/session";
+
+import './HomePage.css'
 
 export default function HomePage() {
   const dispatch = useDispatch()
@@ -15,21 +17,26 @@ export default function HomePage() {
     });
   };
 
+  const user = useSelector(state => state.session.user)
 
 
 
   return (
     <>
+    <div className='home-feed-overall-container'>
     <div className='home-navbar'>
-        <div> FL Logo Here</div>
         <input type='text' placeholder='Search Facebook' />
+        <div className='home-navbar-middle-icons'>
+          <div> House </div>
+          <div> Watch </div>
+          <div> Marketplace </div>
+          <div> Groups </div>
+          <div> Gaming </div>
+        </div>
         <div>
-        <div> House </div>
-        <div> Watch </div>
-        <div> Marketplace </div>
-        <div> Groups </div>
-        <div> Gaming </div>
-      </div>
+          <Link to={`/users/${user.id}`}> User Profile </Link>
+          {/* <div> User Profile</div> */}
+        </div>
     </div>
 
       <div className='home-feed-container'>
@@ -43,11 +50,27 @@ export default function HomePage() {
         <div> Marketplace </div>
       </div>
 
-      <div> POST FORM COMPONENT GOES HERE </div>
+      <div className='home-feed-middle-container'>
+        <div> POST FORM COMPONENT GOES HERE </div>
+        <div> ALL POSTS HERE </div>
+        <div> ALL POSTS HERE </div>
+        <div> ALL POSTS HERE </div>
+      </div>
+
+      <div className='home-feed-right-contacts'>
+        <div>USER</div>
+        <div>USER</div>
+        <div>USER</div>
+        <div>USER</div>
+        <div>USER</div>
+      </div>
 
 
       </div>
-    <div onClick={handleLogout}> Logout </div>
+
+    {/* <div onClick={handleLogout}> Logout </div> */}
+
+    </div>
     </>
   )
 }

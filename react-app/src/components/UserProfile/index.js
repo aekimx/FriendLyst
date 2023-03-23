@@ -28,7 +28,6 @@ export default function UserProfile() {
   return (
     <>
     <div className='userprofile-container'>
-
     <div className='userprofile-container-inside'>
     <img src={user.coverPhoto} alt='cover photo' className='userprofile-coverphoto'/>
 

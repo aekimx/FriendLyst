@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 384dae59057b
+Revision ID: 92be2ec75a96
 Revises:
-Create Date: 2023-03-23 00:53:44.961750
+Create Date: 2023-03-23 01:21:21.057460
 
 """
 from alembic import op
@@ -14,7 +14,7 @@ SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
-revision = '384dae59057b'
+revision = '92be2ec75a96'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -26,7 +26,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('first_name', sa.String(length=100), nullable=False),
     sa.Column('last_name', sa.String(length=100), nullable=False),
-    sa.Column('birthday', sa.Integer(), nullable=False),
+    sa.Column('birthday', sa.String(length=50), nullable=False),
     sa.Column('email', sa.String(length=255), nullable=True),
     sa.Column('gender', sa.String(length=50), nullable=False),
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
@@ -175,6 +175,7 @@ def upgrade():
 
     if environment == "production":
         op.execute(f"ALTER TABLE likes SET SCHEMA {SCHEMA};")
+
     # ### end Alembic commands ###
 
 
