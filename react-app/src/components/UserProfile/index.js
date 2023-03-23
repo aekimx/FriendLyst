@@ -33,7 +33,7 @@ export default function UserProfile() {
 
     <div className='userprofile-profpic-name'>
       <div>
-        <img src={user.profilePic} alt='profile pic' className='userprofile-profpic'/>
+        <img src={user.user?.profilePic} alt='profile pic' className='userprofile-profpic'/>
       </div>
       <div className='userprof-name-container'>
         <div className='userprof-fname'> {user.user?.firstName} </div>
