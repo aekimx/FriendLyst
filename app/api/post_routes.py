@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.models import Post, db
 from app.forms import PostForm
+from app import upload_file_to_s3, get_unique_filename
 
 post_routes = Blueprint('posts', __name__)
 
@@ -31,7 +32,16 @@ def create_post():
     ''' Create a new post and return the newly created post as a dictionary '''
     data = request.get_json()
     form = PostForm()
+
     form["csrf_token"].data = request.cookies["csrf_token"]
+
+    # AWS Creating a unique file name and uploading to our s3 bucket.
+    photo = data['photo']
+    photo.filename = get_unique_filename(photo.filename)
+    upload = upload_file_to_s3(photo)
+
+    if "url" not in upload:
+        return jsonify({"errors": "Unique filename was not created for upload"})
 
     if len(data["caption"]) > 2000:
         return jsonify({"errors": "Messages must be less than 2000 characters"}), 400
@@ -40,7 +50,7 @@ def create_post():
     if form.validate_on_submit():
         new_post = Post(
             caption= data['caption'],
-            photo= data['photo'],
+            photo= upload['url'],           # Note the upload here!
             user_id= data['user_id']
          )
         db.session.add(new_post)
