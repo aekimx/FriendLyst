@@ -5,11 +5,11 @@ from app.forms import CommentForm
 
 comment_routes = Blueprint('comments', __name__)
 
-@comment_routes.route('', methods=['GET'])
+@comment_routes.route('/<int:postId>/comments', methods=['GET'])
 # @login_required
-def get_all_comments():
+def get_all_comments(postId):
     ''' Query for all comments and return in a list of dictionaries '''
-    all_comments = Comment.query.all()
+    all_comments = Comment.query.filter(Comment.post_id == postId).all()
     return [comment.to_dict() for comment in all_comments]
 
 

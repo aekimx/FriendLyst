@@ -59,7 +59,7 @@ export const updateUserThunk = (userId, userProfile) => async (dispatch) => {
 
 const initialState = { user: null };
 
-// Reducer
+// ----------------------------------- Reducer  ----------------------------------------
 export default function userReducer(state = initialState, action) {
   let newState = {}
 	switch (action.type) {

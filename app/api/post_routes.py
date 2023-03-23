@@ -3,6 +3,7 @@ from flask_login import login_required
 from app.models import Post, db
 from app.forms import PostForm
 from app.api.aws_helpers import upload_file_to_s3, get_unique_filename
+from sqlalchemy import desc, asc
 
 post_routes = Blueprint('posts', __name__)
 
@@ -10,7 +11,7 @@ post_routes = Blueprint('posts', __name__)
 # @login_required
 def get_all_posts():
     ''' Query for all posts and return in a list of dictionaries '''
-    all_posts = Post.query.all()
+    all_posts = Post.query.order_by(Post.created_at.desc()).all()
     return [post.to_dict() for post in all_posts]
 
 
@@ -33,10 +34,8 @@ def create_post():
     form = PostForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
 
-    print('-------------- form.data without photo', form.data)
     upload = ''
     if form.data['photo'] is None:
-        print('******** SUCCESS ******* ')
         pass
     else:
         photo = form.data['photo']
@@ -59,7 +58,6 @@ def create_post():
             user_id= form.data['user_id']
          )
 
-        print('---------new post created -------' , new_post)
         db.session.add(new_post)
         db.session.commit()
         return new_post.to_dict()

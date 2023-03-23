@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAllPostsThunk } from "../../store/post";
 
+
 import './PostFeed.css'
 
 export default function PostFeed() {
@@ -15,8 +16,13 @@ export default function PostFeed() {
   }, [dispatch])
 
   if (!allPosts) return null;
+
   let postsArr;
   if (allPosts) postsArr = Object.values(allPosts)
+
+  // Newest posts first!
+  postsArr.reverse()
+
 
   return (
     <>
@@ -36,7 +42,7 @@ export default function PostFeed() {
           <div> WHO LIKED HERE </div>
           <div> OPTION TO LIKE HERE </div>
           <div> HOW MANY COMMENTS  </div>
-          <div> COMMENTS GO HERE </div>
+          <div> DO WE WANT ALL COMMENTS TO SHOW? </div>
           <div> OPTION TO COMMENT GOES HERE </div>
 
         </div>

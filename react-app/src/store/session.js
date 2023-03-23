@@ -107,7 +107,7 @@ export const signUp = (firstName, lastName, email, birthday, gender, password) =
 
 const initialState = { user: null, target: null };
 
-// Reducer
+// ----------------------------------- Reducer  ----------------------------------------
 export default function reducer(state = initialState, action) {
 	switch (action.type) {
 		case SET_USER:

@@ -18,7 +18,7 @@ export default function PostForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('-------------photo---------', photo)
+
     const formData = new FormData();
     formData.append("caption", caption);
     formData.append('user_id', user.id);
@@ -30,14 +30,10 @@ export default function PostForm() {
   }
 
   const updatePhoto = (e) => {
-    console.log('--------- e target files --------' , e.target.files[0])
     setPhoto(e.target.files[0])
   }
 
-
-
   if (!user) return null;
-
 
   return (
     <>
