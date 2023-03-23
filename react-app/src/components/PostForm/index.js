@@ -10,30 +10,32 @@ export default function PostForm() {
 
   const user = useSelector(state => state.session.user);
 
-  const [caption, setCaption] = useState("")
-  const [photo, setPhoto] = useState("")
-  const [photoLoading, setPhotoLoading] = useState(false)
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const formData = new FormData()
-    formData.append("photo", photo)
-    formData.append("caption", caption)
-    formData.append('userId', userId)
-
-    // Set to true as AWS may be slow to load ??
-    setPhotoLoading(true)
-
-    dispatch(createPostThunk(formData))
-    .then(() => setPhoto(""))
-    .then(() => setCaption(""))
-    .catch((res) => console.log(res))
-
-  }
-
+  const [caption, setCaption] = useState("");
+  const [photo, setPhoto] = useState('');
 
   let userId;
   if (user) userId = user.id
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log('-------------photo---------', photo)
+    const formData = new FormData();
+    formData.append("caption", caption);
+    formData.append('user_id', user.id);
+    formData.append("photo", photo);
+
+    dispatch(createPostThunk(formData))
+    setCaption("")
+    setPhoto("")
+  }
+
+  const updatePhoto = (e) => {
+    console.log('--------- e target files --------' , e.target.files[0])
+    setPhoto(e.target.files[0])
+  }
+
+
+
   if (!user) return null;
 
 
@@ -44,13 +46,19 @@ export default function PostForm() {
       <form className='feed-post-form'
         onSubmit={handleSubmit}
         encType="multipart/form-data">
+
           <div className='feed-inside-form-container'>
-            <input placeholder={`What's on your mind, ${user.firstName}?`}
-            onChange={(e) => {setCaption(e.target.value)}}/>
+
+            <input type='text'
+            placeholder={`What's on your mind, ${user.firstName}?`}
+            onChange={(e) => {setCaption(e.target.value)}}
+            value={caption}
+            />
+
             <input
                   type="file"
                   accept="image/*"
-                  onChange={(e) => {setPhoto(e.target.files[0])}}
+                  onChange={updatePhoto}
                 />
 
             <button type='submit'> Post </button>

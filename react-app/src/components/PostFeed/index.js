@@ -27,8 +27,8 @@ export default function PostFeed() {
         <div className='postfeed-each-post-container'>
 
         <div key={`feedpost${post.id}`} className=''>
-          <img src = {post.user.profilePic } alt='person' className='postfeed-userpost-pic'/>
-          <div> {post.user.firstName} {post.user.lastName} </div>
+          <img src = {post.user?.profilePic } alt='person' className='postfeed-userpost-pic'/>
+          <div> {post.user?.firstName} {post.user?.lastName} </div>
           <div> {post.createdAt} </div>
           <div> Caption: {post.caption} </div>
           {post.photo ? <img src={post.photo} alt='post' className="postfeed-post-pic"/> : null }

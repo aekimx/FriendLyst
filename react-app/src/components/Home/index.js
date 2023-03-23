@@ -26,10 +26,7 @@ export default function HomePage() {
     <>
     <div className='home-feed-overall-container'>
       <NavBar />
-
-      <div>
       <SideBarMenu />
-      </div>
 
       <div className='home-feed-middle-container'>
         <PostForm />

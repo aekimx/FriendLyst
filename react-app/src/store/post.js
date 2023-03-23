@@ -1,3 +1,4 @@
+
 // ----------------------------------- constants  ----------------------------------------
 const GET_ALL_POSTS = 'posts/GET_ALL_POSTS'
 const CREATE_POST = 'posts/CREATE_POST'
@@ -30,13 +31,15 @@ export const getAllPostsThunk = () => async (dispatch) => {
 }
 
 export const createPostThunk = (formData) => async (dispatch) => {
-  const response = await fetch(`/api/posts`, {
+  console.log('------- create post thunk running ------- ')
+  const res = await fetch(`/api/posts`, {
     method: "POST",
     body: formData,
   })
 
-  if (response.ok) {
-    let data = await response.json()
+  if (res.ok) {
+    let data = await res.json()
+    console.log('------- response.OK!! ------- ', data)
     dispatch(createPost(data))
     return data
   }
@@ -57,8 +60,8 @@ export default function postReducer(state = initialState, action) {
       });
       return newState;
     case CREATE_POST:
-      newState = {...state, allPosts: {...state.allPosts}, post: {...state.post}}
-      // newState.allPosts[action.post.id] = action.post
+      newState = {...state, allPosts: {...state.allPosts}}
+      newState.allPosts[action.post.id] = action.post
 			return newState
 		default:
 			return state;

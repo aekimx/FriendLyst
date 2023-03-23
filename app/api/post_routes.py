@@ -30,33 +30,41 @@ def get_post_by_id(id):
 # @login_required
 def create_post():
     ''' Create a new post and return the newly created post as a dictionary '''
-    data = request.get_json()
     form = PostForm()
-
     form["csrf_token"].data = request.cookies["csrf_token"]
 
-
-    if len(data["caption"]) > 2000:
-        return jsonify({"errors": "Messages must be less than 2000 characters"}), 400
-
-
-    if form.validate_on_submit():
-        #AWS to get the file, assign a unique filename, upload to s3 bucket.
-        photo = data['photo']
+    print('-------------- form.data without photo', form.data)
+    upload = ''
+    if form.data['photo'] is None:
+        print('******** SUCCESS ******* ')
+        pass
+    else:
+        photo = form.data['photo']
         photo.filename = get_unique_filename(photo.filename)
         upload = upload_file_to_s3(photo)
 
         if "url" not in upload:
-            return jsonify({"errors": "Unique filename was not created for upload"})
+            return jsonify({"errors": "An error occurred when uploading"}), 400
 
+
+    if len(form.data["caption"]) > 2000:
+        return jsonify({"errors": "Messages must be less than 2000 characters"}), 400
+
+    url = upload['url'] if upload is not "" else ''
+
+    if form.validate_on_submit():
         new_post = Post(
-            caption= data['caption'],
-            photo= upload['url'],           # Note the upload here!
-            user_id= data['user_id']
+            caption= form.data['caption'],
+            photo=  url if url is not None else upload,
+            user_id= form.data['user_id']
          )
+
+        print('---------new post created -------' , new_post)
         db.session.add(new_post)
         db.session.commit()
         return new_post.to_dict()
+
+    return jsonify({'error': "form did not validate on submit"})
 
 
 
