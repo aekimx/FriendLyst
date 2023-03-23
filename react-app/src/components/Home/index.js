@@ -20,7 +20,30 @@ export default function HomePage() {
 
   return (
     <>
-    <h1> home! </h1>
+    <div className='home-navbar'>
+        <div> FL Logo Here</div>
+        <input type='text' placeholder='Search Facebook' />
+        <div>
+        <div> House </div>
+        <div> Watch </div>
+        <div> Marketplace </div>
+        <div> Groups </div>
+        <div> Gaming </div>
+      </div>
+
+      <div className='home-feed-container'>
+      <div className='sidebar-menu'>
+        <div> User Profile </div>
+        <div> Friends </div>
+        <div> Friend Requests </div>
+        <div> Groups </div>
+        <div> Events </div>
+        <div> Marketplace </div>
+
+      </div>
+
+      </div>
+    </div>
     <div onClick={handleLogout}> Logout </div>
     </>
   )

@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: d295e8ef62ab
+Revision ID: 384dae59057b
 Revises:
-Create Date: 2023-03-21 22:15:29.886238
+Create Date: 2023-03-23 00:53:44.961750
 
 """
 from alembic import op
@@ -12,8 +12,9 @@ import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
+
 # revision identifiers, used by Alembic.
-revision = 'd295e8ef62ab'
+revision = '384dae59057b'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -36,7 +37,6 @@ def upgrade():
 
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
-
 
     op.create_table('user_profiles',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -65,6 +65,73 @@ def upgrade():
     if environment == "production":
         op.execute(f"ALTER TABLE friends SET SCHEMA {SCHEMA};")
 
+    op.create_table('events',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('name', sa.String(length=150), nullable=False),
+    sa.Column('description', sa.String(length=2000), nullable=False),
+    sa.Column('photo', sa.String(length=500), nullable=True),
+    sa.Column('location', sa.String(length=500), nullable=True),
+    sa.Column('owner_id', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE events SET SCHEMA {SCHEMA};")
+
+    op.create_table('groups',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('name', sa.String(length=150), nullable=False),
+    sa.Column('description', sa.String(length=2000), nullable=False),
+    sa.Column('group_pic', sa.String(length=2000), nullable=False),
+    sa.Column('admin_id', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['admin_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE groups SET SCHEMA {SCHEMA};")
+
+    op.create_table('messages',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('message', sa.String(length=2000), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
+    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('chatting_user_id', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['chatting_user_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE messages SET SCHEMA {SCHEMA};")
+
+    op.create_table('event_members',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('status', sa.String(length=50), nullable=False),
+    sa.Column('event_id', sa.Integer(), nullable=False),
+    sa.Column('member_id', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['event_id'], ['events.id'], ),
+    sa.ForeignKeyConstraint(['member_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE event_members SET SCHEMA {SCHEMA};")
+
+    op.create_table('group_members',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('status', sa.String(length=50), nullable=False),
+    sa.Column('group_id', sa.Integer(), nullable=False),
+    sa.Column('member_id', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['group_id'], ['groups.id'], ),
+    sa.ForeignKeyConstraint(['member_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE group_members SET SCHEMA {SCHEMA};")
+
     op.create_table('posts',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('caption', sa.String(length=2000), nullable=False),
@@ -81,6 +148,7 @@ def upgrade():
 
     if environment == "production":
         op.execute(f"ALTER TABLE posts SET SCHEMA {SCHEMA};")
+
 
     op.create_table('comments',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -107,83 +175,19 @@ def upgrade():
 
     if environment == "production":
         op.execute(f"ALTER TABLE likes SET SCHEMA {SCHEMA};")
-
-    op.create_table('events',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('name', sa.String(length=150), nullable=False),
-    sa.Column('description', sa.String(length=2000), nullable=False),
-    sa.Column('photo', sa.String(length=500), nullable=True),
-    sa.Column('location', sa.String(length=500), nullable=True),
-    sa.Column('owner_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id')
-    )
-    if environment == "production":
-        op.execute(f"ALTER TABLE events SET SCHEMA {SCHEMA};")
-
-    op.create_table('groups',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('name', sa.String(length=150), nullable=False),
-    sa.Column('description', sa.String(length=2000), nullable=False),
-    sa.Column('group_pic', sa.String(length=2000), nullable=False),
-    sa.Column('admin_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['admin_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id')
-    )
-    if environment == "production":
-        op.execute(f"ALTER TABLE groups SET SCHEMA {SCHEMA};")
-
-    op.create_table('messages',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('message', sa.String(length=2000), nullable=False),
-    sa.Column('created_at', sa.DateTime(), nullable=True),
-    sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('chatting_user_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['chatting_user_id'], ['users.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id')
-    )
-    if environment == "production":
-        op.execute(f"ALTER TABLE messages SET SCHEMA {SCHEMA};")
-
-    op.create_table('event_members',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('status', sa.String(length=50), nullable=False),
-    sa.Column('event_id', sa.Integer(), nullable=False),
-    sa.Column('member_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['event_id'], ['events.id'], ),
-    sa.ForeignKeyConstraint(['member_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id')
-    )
-
-    if environment == "production":
-        op.execute(f"ALTER TABLE event_members SET SCHEMA {SCHEMA};")
-
-    op.create_table('group_members',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('status', sa.String(length=50), nullable=False),
-    sa.Column('group_id', sa.Integer(), nullable=False),
-    sa.Column('member_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['group_id'], ['groups.id'], ),
-    sa.ForeignKeyConstraint(['member_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id')
-    )
-    if environment == "production":
-        op.execute(f"ALTER TABLE group_members SET SCHEMA {SCHEMA};")
-
     # ### end Alembic commands ###
 
 
 def downgrade():
     # ### commands auto generated by Alembic - please adjust! ###
-    op.drop_table('group_members')
-    op.drop_table('groups')
-    op.drop_table('event_members')
-    op.drop_table('events')
     op.drop_table('likes')
     op.drop_table('comments')
     op.drop_table('posts')
+    op.drop_table('group_members')
+    op.drop_table('event_members')
     op.drop_table('messages')
+    op.drop_table('groups')
+    op.drop_table('events')
     op.drop_table('friends')
     op.drop_table('user_profiles')
     op.drop_table('users')

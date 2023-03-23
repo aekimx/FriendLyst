@@ -41,6 +41,7 @@ def create_post():
 
 
     if form.validate_on_submit():
+        #AWS to get the file, assign a unique filename, upload to s3 bucket.
         photo = data['photo']
         photo.filename = get_unique_filename(photo.filename)
         upload = upload_file_to_s3(photo)
