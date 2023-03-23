@@ -30,6 +30,7 @@ export default function HomePage() {
         <div> Groups </div>
         <div> Gaming </div>
       </div>
+    </div>
 
       <div className='home-feed-container'>
       <div className='sidebar-menu'>
@@ -38,12 +39,14 @@ export default function HomePage() {
         <div> Friend Requests </div>
         <div> Groups </div>
         <div> Events </div>
+        <div> Messages </div>
         <div> Marketplace </div>
-
       </div>
 
+      <div> POST FORM COMPONENT GOES HERE </div>
+
+
       </div>
-    </div>
     <div onClick={handleLogout}> Logout </div>
     </>
   )
