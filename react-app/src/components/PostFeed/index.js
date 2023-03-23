@@ -9,17 +9,14 @@ export default function PostFeed() {
   const dispatch = useDispatch()
 
   const allPosts = useSelector(state => state.post?.allPosts)
-  console.log('allPosts use selector used correctly', allPosts)
-
 
   useEffect(() => {
     dispatch(getAllPostsThunk())
-  }, [dispatch, allPosts])
+  }, [dispatch])
 
   if (!allPosts) return null;
   let postsArr;
   if (allPosts) postsArr = Object.values(allPosts)
-
 
   return (
     <>
