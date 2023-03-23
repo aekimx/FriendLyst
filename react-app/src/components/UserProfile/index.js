@@ -20,7 +20,7 @@ export default function UserProfile() {
 
   }
 
-  if (user === undefined) return null
+  if (!user) return null
 
   // const userPosts = Object.values(user.user?.posts)
 
@@ -33,7 +33,7 @@ export default function UserProfile() {
 
     <div className='userprofile-profpic-name'>
       <div>
-        <img src={user.user?.profilePic} alt='profile pic' className='userprofile-profpic'/>
+        <img src={user.user?.profilePic} alt='profile' className='userprofile-profpic'/>
       </div>
       <div className='userprof-name-container'>
         <div className='userprof-fname'> {user.user?.firstName} </div>

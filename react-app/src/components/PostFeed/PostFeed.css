@@ -1,0 +1,31 @@
+.postfeed-container {
+  position: fixed;
+  top: 150px;
+  left: 200px;
+  right: 200px;
+  bottom: 0;
+  background-color: rgb(24,25,26);
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.postfeed-each-post-container {
+  width: 1000px;
+  border: 1px solid red;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.postfeed-userpost-pic {
+  width: 50px;
+  border-radius: 25px;
+}
+
+.postfeed-post-pic {
+  width: 500px;
+}

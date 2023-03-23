@@ -1,0 +1,23 @@
+.home-navbar {
+  display: flex;
+  flex-direction: row;
+  height: 50px;
+  justify-content: space-between;
+  background-color: rgb(35,37,38);
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+}
+
+.home-navbar-middle-icons {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.home-navbar-middle-icons div {
+  margin-left: 10px;
+}

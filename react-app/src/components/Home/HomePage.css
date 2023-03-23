@@ -1,40 +1,5 @@
 .home-feed-overall-container {
   font-family: 'Ruda', sans-serif;
-  background-color: rgb(24,25,26);
   color: rgb(228,230,235);
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
 
-.home-navbar {
-  display: flex;
-  flex-direction: row;
-  height: 30px;
-  justify-content: space-between;
-  background-color: rgb(35,37,38);
-  align-items: center;
-}
-
-.home-navbar-middle-icons {
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-}
-
-.home-navbar-middle-icons div {
-  margin-left: 10px;
-}
-
-.home-feed-container {
-  display:flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.home-logo-search {
-  display: flex;
-  flex-direction: row;
 }

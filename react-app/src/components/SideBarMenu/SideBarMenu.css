@@ -1,0 +1,9 @@
+.sidebar-menu-container {
+  width: 200px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  top: 50px;
+  height: 100%;
+  background-color: rgb(35,37,38);
+}

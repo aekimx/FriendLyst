@@ -2,6 +2,10 @@ import React from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { logout } from "../../store/session";
+import PostForm from "../PostForm";
+import PostFeed from "../PostFeed";
+import NavBar from "../NavBar";
+import SideBarMenu from "../SideBarMenu";
 
 import './HomePage.css'
 
@@ -17,45 +21,20 @@ export default function HomePage() {
     });
   };
 
-  const user = useSelector(state => state.session.user)
 
   return (
     <>
     <div className='home-feed-overall-container'>
-    <div className='home-navbar'>
-        <div className='home-logo-search'>
-          <div> LOGO </div>
-          <input type='text' placeholder='Search Facebook' />
-        </div>
-        <div className='home-navbar-middle-icons'>
-          <div> House </div>
-          <div> Watch </div>
-          <div> Marketplace </div>
-          <div> Groups </div>
-          <div> Gaming </div>
-        </div>
-        <div>
-          <Link to={`/users/${user.id}`}> User Profile </Link>
-          {/* <div> User Profile</div> */}
-        </div>
-    </div>
+      <NavBar />
 
-      <div className='home-feed-container'>
-      <div className='sidebar-menu'>
-        <div> User Profile </div>
-        <div> Friends </div>
-        <div> Friend Requests </div>
-        <div> Groups </div>
-        <div> Events </div>
-        <div> Messages </div>
-        <div> Marketplace </div>
+      <div>
+      <SideBarMenu />
       </div>
 
       <div className='home-feed-middle-container'>
-        <div> POST FORM COMPONENT GOES HERE </div>
-        <div> ALL POSTS HERE </div>
-        <div> ALL POSTS HERE </div>
-        <div> ALL POSTS HERE </div>
+        <PostForm />
+        <PostFeed />
+
       </div>
 
       <div className='home-feed-right-contacts'>
@@ -64,9 +43,6 @@ export default function HomePage() {
         <div>USER</div>
         <div>USER</div>
         <div>USER</div>
-      </div>
-
-
       </div>
 
     {/* <div onClick={handleLogout}> Logout </div> */}

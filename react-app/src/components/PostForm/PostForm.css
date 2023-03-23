@@ -1,0 +1,22 @@
+.feed-user-profpic {
+  width: 100px;
+  height: auto;
+  border-radius: 50px;
+}
+
+.feed-postform-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: fixed;
+  top: 50px;
+  left: 200px;
+  right: 200px;
+  background-color: rgb(24,25,26);
+
+}
+
+.feed-inside-form-container {
+  display: flex;
+  flex-direction: column;
+}

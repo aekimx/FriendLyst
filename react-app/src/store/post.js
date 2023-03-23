@@ -1,5 +1,6 @@
 // ----------------------------------- constants  ----------------------------------------
-const GET_ALL_POSTS = 'post/GET_ALL_POSTS'
+const GET_ALL_POSTS = 'posts/GET_ALL_POSTS'
+const CREATE_POST = 'posts/CREATE_POST'
 
 
 // ----------------------------------- action creators   ---------------------------------
@@ -8,17 +9,37 @@ const getAllPosts = (posts) => ({
 	posts
 })
 
+const createPost = (post) => ({
+  type: CREATE_POST,
+  post
+})
+
 
 // ----------------------------------- thunks  ----------------------------------------
 
 export const getAllPostsThunk = () => async (dispatch) => {
+  console.log('----- get all posts thunk running -----')
 	const response = await fetch(`/api/posts`)
 
 	if (response.ok) {
-		let data = await response.json()
+    let data = await response.json()
+    console.log('RESPONSE.OK ----- data ', data )
 		dispatch(getAllPosts(data))
     return data
 	}
+}
+
+export const createPostThunk = (formData) => async (dispatch) => {
+  const response = await fetch(`/api/posts`, {
+    method: "POST",
+    body: formData,
+  })
+
+  if (response.ok) {
+    let data = await response.json()
+    dispatch(createPost(data))
+    return data
+  }
 }
 
 
@@ -26,14 +47,18 @@ export const getAllPostsThunk = () => async (dispatch) => {
 const initialState = { allPosts: {}, post: {} };
 
 // Reducer
-export default function userReducer(state = initialState, action) {
+export default function postReducer(state = initialState, action) {
   let newState = {}
 	switch (action.type) {
 		case GET_ALL_POSTS:
-      newState = {...state}
+      newState = {...state, allPosts: {}, post: {...state.post}}
       action.posts.forEach(post => {
         newState.allPosts[post.id] = post
       });
+      return newState;
+    case CREATE_POST:
+      newState = {...state, allPosts: {...state.allPosts}, post: {...state.post}}
+      // newState.allPosts[action.post.id] = action.post
 			return newState
 		default:
 			return state;
