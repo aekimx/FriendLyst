@@ -16,6 +16,10 @@ export default function UserProfile() {
     dispatch(getUserThunk(id))
   }, [dispatch, id])
 
+  const updateUserProfile = () => {
+
+  }
+
   if (user === undefined) return null
 
   // const userPosts = Object.values(user.user?.posts)
