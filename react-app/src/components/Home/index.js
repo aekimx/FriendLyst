@@ -19,13 +19,14 @@ export default function HomePage() {
 
   const user = useSelector(state => state.session.user)
 
-
-
   return (
     <>
     <div className='home-feed-overall-container'>
     <div className='home-navbar'>
-        <input type='text' placeholder='Search Facebook' />
+        <div className='home-logo-search'>
+          <div> LOGO </div>
+          <input type='text' placeholder='Search Facebook' />
+        </div>
         <div className='home-navbar-middle-icons'>
           <div> House </div>
           <div> Watch </div>
