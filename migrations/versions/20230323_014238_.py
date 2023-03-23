@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 92be2ec75a96
+Revision ID: ac7cabb5a72b
 Revises:
-Create Date: 2023-03-23 01:21:21.057460
+Create Date: 2023-03-23 01:42:38.208864
 
 """
 from alembic import op
@@ -31,6 +31,7 @@ def upgrade():
     sa.Column('gender', sa.String(length=50), nullable=False),
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=True),
+    sa.Column('profile_pic', sa.String(length=500), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email')
     )
@@ -41,13 +42,13 @@ def upgrade():
     op.create_table('user_profiles',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('profile_pic', sa.String(length=500), nullable=True),
     sa.Column('cover_photo', sa.String(length=500), nullable=True),
     sa.Column('bio', sa.String(length=500), nullable=False),
     sa.Column('location', sa.String(length=600), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+
 
     if environment == "production":
         op.execute(f"ALTER TABLE user_profiles SET SCHEMA {SCHEMA};")

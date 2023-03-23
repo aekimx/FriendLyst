@@ -8,7 +8,6 @@ class UserProfile(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    profile_pic = db.Column(db.String(500), nullable=True )
     cover_photo = db.Column(db.String(500), nullable=True )
     bio = db.Column(db.String(500), nullable=False)
     location = db.Column(db.String(600), nullable=True)
@@ -20,7 +19,6 @@ class UserProfile(db.Model):
         return {
             'id': self.id,
             'userId': self.user_id,
-            'profilePic': self.profile_pic,
             'coverPhoto': self.cover_photo,
             'bio': self.bio,
             'location': self.location,
@@ -30,7 +28,6 @@ class UserProfile(db.Model):
         return {
             'id': self.id,
             'userId': self.user_id,
-            'profilePic': self.profile_pic,
             'coverPhoto': self.cover_photo,
             'bio': self.bio,
             'location': self.location,

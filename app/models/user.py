@@ -18,6 +18,7 @@ class User(db.Model, UserMixin):
     gender = db.Column(db.String(50), nullable=False)
     hashed_password = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    profile_pic = db.Column(db.String(500), nullable=True, default='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN-aNaQpyxUSwKvjMiX7hlOuovb_GS_x6kMQ&usqp=CAU')
 
     #Relationship Attributes
     user_profiles = db.relationship("UserProfile", back_populates='user', lazy=True, cascade='all, delete')
@@ -48,6 +49,7 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'firstName': self.first_name,
             'lastName': self.last_name,
+            'profilePic': self.profile_pic,
             'birthday': self.birthday,
             'gender': self.gender,
             'email': self.email,
@@ -60,6 +62,7 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'firstName': self.first_name,
             'lastName': self.last_name,
+            'profilePic': self.profile_pic,
             'birthday': self.birthday,
             'gender': self.gender,
             'email': self.email,
@@ -70,6 +73,7 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'firstName': self.first_name,
             'lastName': self.last_name,
+            'profilePic': self.profile_pic,
             'birthday': self.birthday,
             'gender': self.gender,
             'email': self.email,
