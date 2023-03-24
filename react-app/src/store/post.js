@@ -26,8 +26,8 @@ const createPost = (post) => ({
 
 // ----------------------------------- thunks  ----------------------------------------
 
-export const getAllPostsThunk = () => async (dispatch) => {
-	const response = await fetch(`/api/posts`)
+export const getAllPostsThunk = (userId) => async (dispatch) => {
+	const response = await fetch(`/api/posts/${userId}/posts`)
 
 	if (response.ok) {
     let data = await response.json()
@@ -36,11 +36,13 @@ export const getAllPostsThunk = () => async (dispatch) => {
 	}
 }
 
-export const getPostDetail = (id) => async (dispatch) => {
+export const getPostDetailThunk = (id) => async (dispatch) => {
+  console.log(' ------- get post detail thunk running -----')
   const response = await fetch(`/api/posts/${id}`)
 
   if (response.ok) {
     let data = await response.json()
+    console.log('RESPONSE.OK!!!! ', data)
     dispatch(getPostById(data))
     return data
   }
@@ -75,7 +77,7 @@ export default function postReducer(state = initialState, action) {
       });
       return newState;
     case GET_POST_DETAIL:
-      newState = {...state, allPosts: {...state.allPosts}, post: {}}
+      newState = {...state, allPosts: {}, post: {}}
       newState.post = action.post
       return newState
     case CREATE_POST:

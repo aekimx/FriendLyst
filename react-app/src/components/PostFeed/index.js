@@ -10,9 +10,13 @@ export default function PostFeed() {
   const dispatch = useDispatch()
 
   const allPosts = useSelector(state => state.post?.allPosts)
+  const user = useSelector(state => state.session.user)
+
+  let userId;
+  if (user) userId = user.id
 
   useEffect(() => {
-    dispatch(getAllPostsThunk())
+    dispatch(getAllPostsThunk(userId))
   }, [dispatch])
 
   if (!allPosts) return null;

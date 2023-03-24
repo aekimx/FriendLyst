@@ -33,7 +33,7 @@ function LoginFormPage() {
 	};
   const demoUserLogin2 = async (e) => {
 		e.preventDefault();
-		await dispatch(login('akijm@gmail.com', 'password'))
+		await dispatch(login('akim@gmail.com', 'password'))
 			.catch(
 				async (res) => {
 					const errData = await res.json();

@@ -1,17 +1,27 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import Post, db
+from app.models import Post, db, Friend
 from app.forms import PostForm
 from app.api.aws_helpers import upload_file_to_s3, get_unique_filename
-from sqlalchemy import desc, asc
+from sqlalchemy.orm import load_only
+
+
 
 post_routes = Blueprint('posts', __name__)
 
-@post_routes.route('', methods=['GET'])
+@post_routes.route('/<int:userId>/posts', methods=['GET'])
 # @login_required
-def get_all_posts():
+def get_all_posts(userId):
     ''' Query for all posts and return in a list of dictionaries '''
-    all_posts = Post.query.order_by(Post.created_at.desc()).all()
+
+
+    friends = Friend.query.options(load_only(Friend.friend_id)).filter(Friend.user_id == userId).filter(Friend.status=='Accepted').all()
+    friendsList = [friend.to_dict_no_self() for friend in friends]
+    friendIds = [friend['friendId'] for friend in friendsList]
+    friendIds.append(userId)
+
+    all_posts = Post.query.filter(Post.user_id.in_(friendIds)).all()
+
     return [post.to_dict() for post in all_posts]
 
 

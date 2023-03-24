@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { authenticate } from "./store/session";
 import HomePage from "./components/Home";
 import UserProfile from "./components/UserProfile";
+import PostDetail from "./components/PostDetail";
 // import Navigation from "./components/Navigation";
 
 function App() {
@@ -32,6 +33,9 @@ function App() {
       </Route>
       <Route path="/users/:id">
         <UserProfile />
+      </Route>
+      <Route path="/TESTINGPOSTS/:id">
+        <PostDetail />
       </Route>
       </>
     )}
