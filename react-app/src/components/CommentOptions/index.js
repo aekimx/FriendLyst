@@ -1,11 +1,12 @@
 import React, { useState, useRef, useEffect } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons'
+import OpenModalButton from "../OpenModalButton"
+import CommentDelete from "../CommentDelete"
 
 import './CommentOptions.css'
 
-export default function CommentOptions( ) {
-
+export default function CommentOptions({comment}) {
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef()
 
@@ -38,8 +39,16 @@ export default function CommentOptions( ) {
 
     <div className={ulClassName} ref={ulRef}>
       <div className='commentoptions-dropdown'>
-        <div className='commentoptions-edit'> Edit </div>
-        <div className='commentoptions-delete'> Delete </div>
+
+        <OpenModalButton buttonText='edit'
+        modalComponent=''
+        className='commentoptions-edit'/>
+
+          <OpenModalButton buttonText='delete'
+          modalComponent={<CommentDelete comment={comment}/>}
+          className='commentoptions-delete'
+          />
+
       </div>
     </div>
     </>

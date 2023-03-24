@@ -1,0 +1,77 @@
+.deletecomment-modal-container {
+  width: 500px;
+  height: 160px;
+  background-color: rgb(35,37,38);
+  color: rgb(228,230,235);
+  font-family: 'Ruda', sans-serif;
+  border-radius: 15px;
+  padding: 5px;
+}
+
+.deletecomment-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 0.5px solid rgb(65, 64, 64);
+  height: 50px;
+  margin-bottom: 10px;
+}
+
+.deletecomment-x-icon {
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  padding: 5px;
+  border-radius: 20px;
+  background-color: rgb(58,59,61);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.deletecomment-x-icon:hover {
+  background-color: rgb(79,80,81);
+}
+
+.deletecomment-action-text {
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+}
+
+.deletecomment-button-container {
+  display: flex;
+  justify-content: center;
+  height: 50px;
+  align-items: center;
+}
+
+.deletecomment-deletebutton, .deletecomment-cancelbutton {
+  width: 100px;
+  height: 35px;
+  margin-left: 5px;
+  margin-right: 5px;
+  border:none;
+  border-radius: 10px;
+  font-size: 18px;
+}
+
+.deletecomment-deletebutton {
+  background-color: rgb(43,116,225);
+  color: rgb(228,230,235);
+}
+
+.deletecomment-cancelbutton {
+  background-color: rgb(35,37,38);
+  color: rgb(43,116,225);
+}
+
+.deletecomment-deletebutton:hover {
+  background-color: rgb(61, 126, 224);
+}
+
+.deletecomment-cancelbutton:hover {
+  background-color: rgb(58,59,61);
+}

@@ -3,7 +3,6 @@ import thunk from 'redux-thunk';
 import session from './session'
 import userReducer from './user';
 import postReducer from './post';
-import commentReducer from './comment';
 
 
 
@@ -11,7 +10,6 @@ const rootReducer = combineReducers({
   session,
   user: userReducer,
   post: postReducer,
-  comment: commentReducer
 });
 
 

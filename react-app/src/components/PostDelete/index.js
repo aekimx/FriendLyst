@@ -13,7 +13,6 @@ export default function PostDelete(postId) {
 
   const handleDelete = (e) => {
     e.preventDefault()
-    console.log('what is passed into post ID?', postId)
     dispatch(deletePostThunk(postId))
     .then(() => {closeModal()})
 

@@ -20,7 +20,7 @@ export default function CommentsForm({postId}) {
     e.preventDefault()
     const newComment = {comment, userId, postId}
     dispatch(createCommentThunk(newComment))
-    .then(dispatch(getAllPostsThunk()))
+    .then(dispatch(getAllPostsThunk(userId)))
     setComment('')
   }
 

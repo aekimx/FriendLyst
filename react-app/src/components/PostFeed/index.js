@@ -1,7 +1,7 @@
 import React from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getAllPostsThunk, deletePostThunk } from "../../store/post";
+import { getAllPostsThunk} from "../../store/post";
 import { Link } from "react-router-dom";
 import CommentsForm from "../CommentsForm";
 import AllComments from "../Comments"
@@ -17,13 +17,11 @@ export default function PostFeed() {
   const dispatch = useDispatch()
 
   const allPosts = useSelector(state => state.post?.allPosts)
-  const user = useSelector(state => state.session.user)
+  const user = useSelector(state => state.session?.user)
 
-  let userId;
-  if (user) userId = user.id
 
   useEffect(() => {
-    dispatch(getAllPostsThunk(userId))
+    dispatch(getAllPostsThunk(user?.id))
   }, [dispatch])
 
   if (!allPosts) return null;

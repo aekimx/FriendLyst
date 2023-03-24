@@ -5,6 +5,9 @@ const CREATE_POST = 'posts/CREATE_POST'
 const UPDATE_POST = 'posts/UPDATE_POST'
 const DELETE_POST = 'posts/DELETE_POST'
 const CREATE_COMMENT = 'posts/CREATE_COMMENT'
+const UPDATE_COMMENT = 'posts/UPDATE_COMMENT'
+const DELETE_COMMENT = 'posts/DELETE_COMMENT'
+
 
 // ----------------------------------- action creators   ---------------------------------
 const getAllPosts = (posts) => ({
@@ -36,6 +39,18 @@ const createComment = (comment) => ({
   type: CREATE_COMMENT,
   comment
 })
+
+const updateComment = (comment) => ({
+  type: UPDATE_COMMENT,
+  comment
+})
+
+const deleteComment = (comment) => ({
+  type: DELETE_COMMENT,
+  comment
+})
+
+
 
 
 // ----------------------------------- thunks  ----------------------------------------
@@ -115,6 +130,33 @@ export const createCommentThunk = (comment) => async (dispatch) => {
   }
 }
 
+export const updateCommentThunk = (comment) => async (dispatch) => {
+  const res = await fetch(`/api/comments`, {
+    method: "PUT",
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(comment),
+  })
+
+  if (res.ok) {
+    let data = await res.json()
+    dispatch(createComment(data))
+    return data
+  }
+}
+
+export const deleteCommentThunk = (comment) => async (dispatch) => {
+  console.log("comment coming through correctly?", comment)
+  const response = await fetch(`/api/comments/${comment.id}`, {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+  })
+
+  if (response.ok) {
+    dispatch(deleteComment(comment))
+    return ('successfully deleted!')
+  }
+}
+
 
 
 const initialState = { allPosts: {}, post: {} };
@@ -136,24 +178,29 @@ export default function postReducer(state = initialState, action) {
       newState.post = action.post
       return newState
 
-    case CREATE_POST:
+    case CREATE_POST, UPDATE_POST:
       newState = {...state, allPosts: {...state.allPosts}}
       newState.allPosts[action.post.id] = action.post
 			return newState
-
-    case UPDATE_POST:
-      newState = {...state, allPosts: {...state.allPosts}}
-      newState.allPosts[action.post.id] = action.post
-      return newState
 
     case DELETE_POST:
       newState = {...state, allPosts: {...state.allPosts}}
       delete newState.allPosts[action.postId]
       return newState
 
-    case CREATE_COMMENT:
+    case CREATE_COMMENT, UPDATE_COMMENT:
+      newState = {...state,}
+      newState[action.comment.postId].comments[action.comments.id] = action.comment
+      return newState
+
+    case DELETE_COMMENT:
       newState = {...state, allPosts: {...state.allPosts}}
-      newState.allPosts[action.comment.postId].comments[action.comment.id] = action.comment
+      let index;
+      for (let i=0; i < newState.allPosts[action.comment.postId].comments.length; i++) {
+        let comment = newState.allPosts[action.comment.postId].comments[i];
+        if (comment?.id == action.comment.id) index = i;
+      }
+      delete newState.allPosts[action.comment.postId].comments[index]
       return newState
 
 		default:

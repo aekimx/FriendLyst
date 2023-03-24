@@ -52,7 +52,7 @@ export default function AllComments({comments}) {
             </div>
 
             <div className='post-comment-options-div'>
-              <CommentOptions />
+              <CommentOptions comment={comment}/>
             </div>
 
 
