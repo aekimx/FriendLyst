@@ -25,6 +25,7 @@ export default function PostDetail() {
   return (
     <>
     <div> TESTING </div>
+    <img src={post.user?.profilePic} alt='userimage'/>
     <div> {post.user?.firstName} {post.user?.lastName} </div>
     <div> {post.caption} </div>
     <img src={post.photo} />

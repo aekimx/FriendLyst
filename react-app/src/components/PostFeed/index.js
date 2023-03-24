@@ -2,13 +2,14 @@ import React from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAllPostsThunk } from "../../store/post";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 
 
 import './PostFeed.css'
 
 export default function PostFeed() {
   const dispatch = useDispatch()
+  const history = useHistory()
 
   const allPosts = useSelector(state => state.post?.allPosts)
   const user = useSelector(state => state.session.user)
@@ -28,12 +29,6 @@ export default function PostFeed() {
   // Newest posts first!
   postsArr.reverse()
 
-  const postDetail = (postId) => {
-    return (
-      <Redirect to={`/posts/${postId}`} />
-    )
-  }
-
 
   return (
     <>
@@ -47,8 +42,12 @@ export default function PostFeed() {
           <img src = {post.user?.profilePic } alt='person' className='postfeed-userpost-pic'/>
           <div> {post.user?.firstName} {post.user?.lastName} </div>
           <div> {post.createdAt} </div>
-          <div onClick={postDetail}> Caption: {post.caption} </div>
-          {post.photo ? <img src={post.photo} alt='post' className="postfeed-post-pic" onClick={postDetail}/> : null }
+
+          <Link to={`/posts/${post.id}`}>
+            <div> Caption: {post.caption} </div>
+            {post.photo ? <img src={post.photo} alt='post' className="postfeed-post-pic"/> : null }
+          </Link>
+
         </div>
           <div> WHO LIKED HERE </div>
           <div> OPTION TO LIKE HERE </div>
