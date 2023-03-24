@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import CommentsForm from "../CommentsForm";
 import AllComments from "../Comments"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGear, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { faGear, faXmark, faMessage, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 import PostUpdate from "../PostUpdate/index"
 import OpenModalButton from "../OpenModalButton"
 import PostDelete from "../PostDelete";
@@ -76,12 +76,19 @@ export default function PostFeed() {
 
           <div className='feed-like-comment-count'>
             <div> WHO LIKED HERE </div>
-            <div className='feed-comments'> HOW MANY COMMENTS  </div>
+            <div className='feed-comments'> {post.comments.length > 0 ? `${post.comments.length} Comments` : null }</div>
           </div>
 
           <div className='feed-like-comment-buttons'>
-            <div className='feed-like-button'> LIKE BUTTON </div>
-            <div className='feed-comment-button'> COMMENT BUTTON </div>
+            <div className='feed-like-button'>
+              <FontAwesomeIcon icon={faThumbsUp} />
+              <div> Like </div>
+            </div>
+
+            <div className='feed-comment-button'>
+              <FontAwesomeIcon icon={faMessage} />
+              <div> Comment </div>
+            </div>
           </div>
 
           <CommentsForm postId={post.id}/>

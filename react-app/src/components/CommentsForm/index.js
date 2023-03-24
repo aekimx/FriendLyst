@@ -1,6 +1,8 @@
 import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { createCommentThunk } from "../../store/comment";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCommentDots, faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 
 import "./CommentsForm.css"
 
@@ -29,7 +31,10 @@ export default function CommentsForm({postId}) {
         className='commentform-input'
         style={{ color: 'rgb(228,230,235)', paddingLeft:'10px'}}
         value={comment}
-        onChange={(e) => setComment(e.target.value)}/>
+        onChange={(e) => setComment(e.target.value)}>
+        </input>
+        <FontAwesomeIcon icon={faPaperPlane} className='commentform-sendbutton'/>
+
       </form>
       </div>
   )
