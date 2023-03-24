@@ -11,15 +11,14 @@ export default function NavBar() {
     <>
     <div className='home-navbar'>
         <div className='home-logo-search'>
-          <div> LOGO </div>
-          <input type='text' placeholder='Search Facebook' />
+          <Link to={'/home'} > Home </Link>
+          <input type='text' placeholder='Search Facebook' className='navbar-searchbar'/>
         </div>
         <div className='home-navbar-middle-icons'>
-          <div> House </div>
-          <div> Watch </div>
-          <div> Marketplace </div>
-          <div> Groups </div>
-          <div> Gaming </div>
+          <div className='home-home'> <i className="fa-solid fa-house"/> </div>
+          <div className='home-video'> <i className="fa-solid fa-video" /> </div>
+          <div className='home-store'> <i className="fa-solid fa-store" /> </div>
+          <div className='home-game'> <i className="fa-solid fa-gamepad" /> </div>
         </div>
         <div>
           <Link to={`/users/${user?.id}`}> User Profile </Link>

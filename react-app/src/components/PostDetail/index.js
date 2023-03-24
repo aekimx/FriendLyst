@@ -28,6 +28,7 @@ export default function PostDetail() {
     <div> TESTING </div>
     <FontAwesomeIcon icon={faGear} />
     <FontAwesomeIcon icon={faBars} />
+    <i class="fa-solid fa-gear" />
     <img src={post.user?.profilePic} alt='userimage'/>
     <div> {post.user?.firstName} {post.user?.lastName} </div>
     <div> {post.caption} </div>
