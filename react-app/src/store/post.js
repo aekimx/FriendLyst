@@ -124,10 +124,14 @@ export default function postReducer(state = initialState, action) {
 
     case UPDATE_POST:
       newState = {...state, allPosts: {...state.allPosts}}
-      console.log('new state!! in reducer', newState.allPosts[action.post.id])
       newState.allPosts[action.post.id] = action.post
-
       return newState
+
+    case DELETE_POST:
+      newState = {...state, allPosts: {...state.allPosts}}
+      delete newState.allPosts[action.postId]
+      return newState
+
 		default:
 			return state;
 	}
