@@ -51,7 +51,9 @@ def create_post():
     else:
         print('****** PHOTO  ******')
         photo = form.data['photo']
+        print('****** PHOTO = form.data[photo]  ******', photo)
         photo.filename = get_unique_filename(photo.filename)
+        print('****** PHOTO assigning the filename with unique filename  ******', photo)
         upload = upload_file_to_s3(photo)
         print(' ********** upload! ************', upload)
 

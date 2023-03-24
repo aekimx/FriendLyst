@@ -21,6 +21,8 @@ export default function PostForm() {
     const formData = new FormData();
     formData.append("caption", caption);
     formData.append('user_id', user.id);
+
+    console.log("PHOTO PROPERLY GETTING SENT?????" , photo)
     formData.append("photo", photo);
 
     dispatch(createPostThunk(formData))

@@ -59,6 +59,7 @@ export const getPostDetailThunk = (id) => async (dispatch) => {
 
 
 export const createPostThunk = (formData) => async (dispatch) => {
+  console.log('create post thunk running ---- form data is ' , formData)
   const res = await fetch(`/api/posts`, {
     method: "POST",
     body: formData,
@@ -66,6 +67,7 @@ export const createPostThunk = (formData) => async (dispatch) => {
 
   if (res.ok) {
     let data = await res.json()
+    console.log('RES.OK!!!!' , data)
     dispatch(createPost(data))
     return data
   }
