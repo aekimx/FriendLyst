@@ -92,12 +92,16 @@ def update_post(id):
 
     form = PostForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
+    print('CAPTION PRINTING??????', form.data['caption'])
+    print('USERID PRINTING??????', form.data['user_id'])
 
-    if post and form.validate_on_submit():
+
+    if form.validate_on_submit():
         post.caption = data['caption'] or post.caption
-        post.photo = data['photo'] or post.photo
         db.session.commit()
         return jsonify(post.to_dict()), 200
+
+    return jsonify({"error": "form did not validate on submit"})
 
 
 

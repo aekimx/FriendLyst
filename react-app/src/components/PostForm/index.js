@@ -1,6 +1,8 @@
 import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { createPostThunk } from "../../store/post";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faImages } from '@fortawesome/free-solid-svg-icons'
 
 import './PostForm.css'
 
@@ -36,6 +38,7 @@ export default function PostForm() {
 
   return (
     <>
+    <div className='feed-postform-overall-container'>
     <div className='feed-postform-container'>
       <img src={user.profilePic} alt='profile' className='feed-user-profpic'/>
       <form className='feed-post-form'
@@ -48,17 +51,24 @@ export default function PostForm() {
             placeholder={`What's on your mind, ${user.firstName}?`}
             onChange={(e) => {setCaption(e.target.value)}}
             value={caption}
+            style={{ color: 'rgb(228,230,235)', paddingLeft:'10px', outline:"none"}}
+            className='feed-postform-inputtext'
             />
 
+          <label htmlFor="feed-postform-fileupload" className='postform-label'>
+          <FontAwesomeIcon icon={faImages} />
             <input
                   type="file"
                   accept="image/*"
                   onChange={updatePhoto}
+                  id='feed-postform-fileupload'
                 />
+                </label>
 
-            <button type='submit'> Post </button>
+            <div onClick={handleSubmit} className='feed-postform-button'> Post </div>
         </div>
       </form>
+    </div>
     </div>
     </>
   )

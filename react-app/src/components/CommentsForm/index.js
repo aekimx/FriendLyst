@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { createCommentThunk } from "../../store/comment";
 
+import "./CommentsForm.css"
 
 export default function CommentsForm({postId}) {
   const dispatch = useDispatch()
@@ -21,9 +22,13 @@ export default function CommentsForm({postId}) {
   }
 
   return (
-    <div>
+    <div className='commentform-input-container'>
+      <img src={user.profilePic} className='commentform-userprof'/>
       <form onSubmit={handleSubmit}>
-        <input placeholder='comment' value={comment}
+        <input placeholder='Write a comment...'
+        className='commentform-input'
+        style={{ color: 'rgb(228,230,235)', paddingLeft:'10px'}}
+        value={comment}
         onChange={(e) => setComment(e.target.value)}/>
       </form>
       </div>

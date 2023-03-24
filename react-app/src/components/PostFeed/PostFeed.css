@@ -14,7 +14,7 @@
 }
 
 .postfeed-each-post-container {
-  width: 1000px;
+  width: 850px;
   margin-bottom: 15px;
   display: flex;
   flex-direction: column;
@@ -83,4 +83,19 @@
 
 .postfeed-time {
   font-size: 13px;
+}
+
+.postfeed-user-prof-link {
+  text-decoration: none;
+  color: rgb(228,230,235);
+}
+
+.postfeed-gear-icon, .postfeed-x-icon {
+  font-size: 20px;
+  padding: 2px;
+  cursor: pointer;
+}
+
+.postfeed-x-icon {
+  margin-left: 10px;
 }

@@ -1,10 +1,30 @@
 .feed-user-profpic {
-  width: 100px;
+  width: 70px;
   height: auto;
   border-radius: 50px;
+  margin-left: 10px;
 }
 
 .feed-postform-container {
+  flex-direction: row;
+  background-color: rgb(35,37,38);
+  width: 850px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  border-radius: 20px;
+  position: relative;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+
+.feed-inside-form-container {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.feed-postform-overall-container {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -13,10 +33,39 @@
   left: 200px;
   right: 200px;
   background-color: rgb(24,25,26);
-
+  justify-content: center;
 }
 
-.feed-inside-form-container {
+.feed-postform-inputtext {
+  width: 600px;
+  height: 40px;
+  border-radius: 50px;
+  background-color: rgb(58,59,61);
+  border: none;
+  padding-left: 5px;
+  margin-left: 10px;
+}
+
+.postform-label > input[type='file'] {
+  display: none
+}
+
+.postform-label {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  font-size: 25px;
+  cursor: pointer;
+  margin-left: 15px;
+}
+
+.feed-postform-button {
+  border: 1px solid white;
+  border-radius: 10px;
+  margin-left: 15px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+
 }

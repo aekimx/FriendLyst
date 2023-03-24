@@ -1,34 +1,25 @@
-import React,{ useEffect } from "react"
-import { useSelector, useDispatch } from "react-redux"
-import { getAllCommentsThunk } from "../../store/comment";
+import React from "react"
 
 
-export default function AllComments({postId}) {
-  const dispatch = useDispatch();
+import "./Comments.css"
 
-  const allComments = useSelector(state => state.comment);
-  console.log('all comments... is it properly filtering per post?', allComments)
+export default function AllComments({comments}) {
 
-  useEffect(() => {
-    dispatch(getAllCommentsThunk(postId))
-  }, [dispatch])
-
-  let commentsArr;
-    if (!allComments) return null;
-    else commentsArr = Object.values(allComments);
-    // console.log('commentsArr!!!!', commentsArr)
+  if (!comments.length) return null
 
 
   return (
     <>
-      {commentsArr.map(comment => {
+      {comments.map(comment => {
         return (
-          <div key={`postcomment${comment.id}`}>
-            <img src={comment.user.profilePic} alt='profilepic'/>
-            <div>
-              <div> {comment.comment} </div>
+          <div key={`postcomment${comment.id}`} className='post-comment-container'>
+            <img src={comment.user.profilePic} alt='profilepic' className='post-comment-profpic'/>
+
+            <div className='post-comment-comment'>
               <div> {comment.user.firstName} {comment.user.lastName} </div>
+              <div> {comment.comment} </div>
             </div>
+
           </div>
         )
       })}

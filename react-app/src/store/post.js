@@ -69,8 +69,7 @@ export const createPostThunk = (formData) => async (dispatch) => {
   }
 }
 
-export const updatePostThunk = (id, post) => async (dispatch) => {
-  console.log('update post thunk running')
+export const updatePostThunk = (post, id) => async (dispatch) => {
   const res = await fetch(`/api/posts/${id}`, {
     method: 'PUT',
     headers: { "Content-Type": "application/json" },
@@ -125,7 +124,10 @@ export default function postReducer(state = initialState, action) {
 
     case UPDATE_POST:
       newState = {...state, allPosts: {...state.allPosts}}
-      newState.post = action.post
+      console.log('new state!! in reducer', newState.allPosts[action.post.id])
+      newState.allPosts[action.post.id] = action.post
+
+      return newState
 		default:
 			return state;
 	}
