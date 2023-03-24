@@ -36,19 +36,28 @@ export default function PostFeed() {
     {postsArr.map(post => {
       return (
         <>
-        <div className='postfeed-each-post-container'>
+        <div className='postfeed-each-post-container' key={`feedpost${post.id}`}>
 
-        <div key={`feedpost${post.id}`} className=''>
-          <img src = {post.user?.profilePic } alt='person' className='postfeed-userpost-pic'/>
-          <div> {post.user?.firstName} {post.user?.lastName} </div>
-          <div> {post.createdAt} </div>
+          <div className="postfeed-propic-name-time">
+            <img src = {post.user?.profilePic } alt='person' className='postfeed-userpost-pic'/>
+            <div>
+              <div className='postfeed-name'> {post.user?.firstName} {post.user?.lastName} </div>
+              <div className='postfeed-time'> {post.createdAt.split(" ")[4].slice(0,5)} </div>
+            </div>
+          </div>
+          <div className='postfeed-edit-delete'>
+            <div> EDIT </div>
+            <div> DELETE </div>
+          </div>
 
-          <Link to={`/posts/${post.id}`}>
-            <div> Caption: {post.caption} </div>
-            {post.photo ? <img src={post.photo} alt='post' className="postfeed-post-pic"/> : null }
-          </Link>
+          <div className='feedpost-caption-photo'>
+            <Link to={`/posts/${post.id}`}>
+              <div> Caption: {post.caption} </div>
+              {post.photo ? <img src={post.photo} alt='post' className="postfeed-post-pic"/> : null }
+            </Link>
+          </div>
 
-        </div>
+
           <div className='feed-like-comment-count'>
             <div> WHO LIKED HERE </div>
             <div className='feed-comments'> HOW MANY COMMENTS  </div>
@@ -59,7 +68,7 @@ export default function PostFeed() {
           </div>
           <CommentsForm postId={post.id}/>
           <div> ALL COMMENTS SHOWN HERE? </div>
-          <AllComments postId={post.id} />
+          {/* <AllComments postId={post.id} /> */}
 
         </div>
         </>

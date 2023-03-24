@@ -9,16 +9,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* justify-content: center; */
 
 }
 
 .postfeed-each-post-container {
   width: 1000px;
-  border: 1px solid red;
   margin-bottom: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: rgb(35,37,38);
+  border-radius: 20px;
+  position: relative;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .postfeed-userpost-pic {
@@ -48,4 +53,34 @@
   justify-content: center;
   align-items: center;
 
+}
+
+.postfeed-propic-name-time {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: absolute;
+  left: 25px;
+
+}
+
+.postfeed-edit-delete {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: absolute;
+  right: 25px;
+  margin-top: 15px;
+}
+
+.feedpost-caption-photo {
+  margin-top: 50px;
+}
+
+.postfeed-name, .postfeed-time {
+  margin-left: 10px;
+}
+
+.postfeed-time {
+  font-size: 13px;
 }

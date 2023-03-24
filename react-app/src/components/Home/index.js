@@ -6,6 +6,7 @@ import PostForm from "../PostForm";
 import PostFeed from "../PostFeed";
 import NavBar from "../NavBar";
 import SideBarMenu from "../SideBarMenu";
+import UserSideBar from "../UserSideBar";
 
 import './HomePage.css'
 
@@ -35,11 +36,7 @@ export default function HomePage() {
       </div>
 
       <div className='home-feed-right-contacts'>
-        <div>USER</div>
-        <div>USER</div>
-        <div>USER</div>
-        <div>USER</div>
-        <div>USER</div>
+        <UserSideBar />
       </div>
 
     {/* <div onClick={handleLogout}> Logout </div> */}
