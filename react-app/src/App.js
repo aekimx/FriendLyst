@@ -34,7 +34,7 @@ function App() {
       <Route path="/users/:id">
         <UserProfile />
       </Route>
-      <Route path="/TESTINGPOSTS/:id">
+      <Route path="/posts/:id">
         <PostDetail />
       </Route>
       </>

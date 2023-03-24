@@ -1,6 +1,5 @@
 import React, { useEffect }  from "react"
 import { useSelector, useDispatch } from "react-redux"
-import AllComments from '../Comments'
 import { getPostDetailThunk } from "../../store/post"
 import { useParams } from "react-router-dom"
 
@@ -18,8 +17,8 @@ export default function PostDetail() {
     dispatch(getPostDetailThunk(id))
   }, [dispatch])
 
-  const commentsArr = post.comments
-  console.log('commentsArr')
+  const commentsArr = post?.comments
+  console.log('commentsArr', commentsArr)
 
 
 
@@ -30,15 +29,15 @@ export default function PostDetail() {
     <div> {post.caption} </div>
     <img src={post.photo} />
     <div>
-      {/* {commentsArr.map(comment => {
+      {commentsArr?.map(comment => {
         return (
-          <div>
+          <div key={`comment${comment.id}`}>
           <img src={comment.user.profilePic} />
           <div> {comment.user.firstName} {comment.user.lastName} </div>
-          <div> {comment} </div>
+          <div> {comment.comment} </div>
           </div>
         )
-      })} */}
+      })}
     </div>
     </>
   )

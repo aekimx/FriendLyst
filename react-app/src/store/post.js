@@ -1,9 +1,10 @@
 
 // ----------------------------------- constants  ----------------------------------------
 const GET_ALL_POSTS = 'posts/GET_ALL_POSTS'
-const CREATE_POST = 'posts/CREATE_POST'
 const GET_POST_DETAIL = 'posts/GET_POST_DETAIL'
-
+const CREATE_POST = 'posts/CREATE_POST'
+const UPDATE_POST = 'posts/UPDATE_POST'
+const DELETE_POST = 'posts/DELETE_POST'
 
 // ----------------------------------- action creators   ---------------------------------
 const getAllPosts = (posts) => ({
@@ -12,7 +13,7 @@ const getAllPosts = (posts) => ({
 })
 
 const getPostById = (post) => ({
-  type: GET_ALL_POSTS,
+  type: GET_POST_DETAIL,
   post
 })
 
@@ -21,7 +22,15 @@ const createPost = (post) => ({
   post
 })
 
+const updatePost = (post) => ({
+  type: UPDATE_POST,
+  post
+})
 
+const deletePost = (postId) => ({
+  type: UPDATE_POST,
+  postId
+})
 
 
 // ----------------------------------- thunks  ----------------------------------------
@@ -62,6 +71,34 @@ export const createPostThunk = (formData) => async (dispatch) => {
   }
 }
 
+export const updatePostThunk = (id, post) => async (dispatch) => {
+  console.log('update post thunk running')
+  const res = await fetch(`/api/posts/${id}`, {
+    method: 'PUT',
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(post)
+  })
+
+  if (res.ok) {
+    const data = await res.json()
+    dispatch(updatePost(data))
+    return data
+  }
+}
+
+export const deletePostThunk = (postId) => async (dispatch) => {
+  console.log('delete post thunk running')
+  const response = await fetch(`/api/posts/${postId}`, {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+  })
+
+  if (response.ok) {
+    dispatch(deletePost(postId))
+    return ('successfully deleted!')
+  }
+
+}
 
 
 const initialState = { allPosts: {}, post: {} };
@@ -70,20 +107,27 @@ const initialState = { allPosts: {}, post: {} };
 export default function postReducer(state = initialState, action) {
   let newState = {}
 	switch (action.type) {
-		case GET_ALL_POSTS:
+
+    case GET_ALL_POSTS:
       newState = {...state, allPosts: {}, post: {...state.post}}
       action.posts.forEach(post => {
         newState.allPosts[post.id] = post
       });
       return newState;
+
     case GET_POST_DETAIL:
       newState = {...state, allPosts: {}, post: {}}
       newState.post = action.post
       return newState
+
     case CREATE_POST:
       newState = {...state, allPosts: {...state.allPosts}}
       newState.allPosts[action.post.id] = action.post
 			return newState
+
+    case UPDATE_POST:
+      newState = {...state, allPosts: {...state.allPosts}}
+      newState.post = action.post
 		default:
 			return state;
 	}
