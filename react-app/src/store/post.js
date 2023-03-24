@@ -130,8 +130,9 @@ export const createCommentThunk = (comment) => async (dispatch) => {
   }
 }
 
-export const updateCommentThunk = (comment) => async (dispatch) => {
-  const res = await fetch(`/api/comments`, {
+export const updateCommentThunk = (comment, commentId) => async (dispatch) => {
+  console.log('update comment thunk running!', comment, commentId)
+  const res = await fetch(`/api/comments/${commentId}`, {
     method: "PUT",
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(comment),
@@ -139,7 +140,8 @@ export const updateCommentThunk = (comment) => async (dispatch) => {
 
   if (res.ok) {
     let data = await res.json()
-    dispatch(createComment(data))
+    console.log("res.OK!!!", data)
+    dispatch(updateComment(data))
     return data
   }
 }
@@ -189,8 +191,8 @@ export default function postReducer(state = initialState, action) {
       return newState
 
     case CREATE_COMMENT, UPDATE_COMMENT:
-      newState = {...state,}
-      newState[action.comment.postId].comments[action.comments.id] = action.comment
+      newState = {...state}
+      newState.allPosts[action.comment.postId].comments[action.comment.id] = action.comment
       return newState
 
     case DELETE_COMMENT:
@@ -200,7 +202,7 @@ export default function postReducer(state = initialState, action) {
         let comment = newState.allPosts[action.comment.postId].comments[i];
         if (comment?.id == action.comment.id) index = i;
       }
-      delete newState.allPosts[action.comment.postId].comments[index]
+      delete newState.allPosts[action.comment?.postId].comments[index]
       return newState
 
 		default:

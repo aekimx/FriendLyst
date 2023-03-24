@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons'
 import OpenModalButton from "../OpenModalButton"
 import CommentDelete from "../CommentDelete"
+import CommentUpdate from "../CommentUpdate"
 
 import './CommentOptions.css'
 
@@ -41,7 +42,7 @@ export default function CommentOptions({comment}) {
       <div className='commentoptions-dropdown'>
 
         <OpenModalButton buttonText='edit'
-        modalComponent=''
+        modalComponent={<CommentUpdate comment={comment}/>}
         className='commentoptions-edit'/>
 
           <OpenModalButton buttonText='delete'

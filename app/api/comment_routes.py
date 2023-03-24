@@ -62,13 +62,14 @@ def update_comment(id):
 
     data = request.get_json()
 
-    if len(data["comment"]) > 2000:
-        return jsonify({"errors": 'Messages must be less than 2000 characters'}), 400
+    # if len(data["comment"]) > 2000:
+    #     return jsonify({"errors": 'Messages must be less than 2000 characters'}), 400
 
     form = CommentForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
+    print('*********** form.data looks like?', form.data)
 
-    if comment and form.validate_on_submit():
+    if form.validate_on_submit():
         comment.comment = data['comment'] or comment.comment
         db.session.commit()
         return jsonify(comment.to_dict()), 200

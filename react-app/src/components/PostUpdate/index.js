@@ -2,7 +2,6 @@ import React from "react"
 import { useDispatch } from "react-redux"
 import { updatePostThunk } from "../../store/post"
 import { useState } from "react"
-import { useHistory } from "react-router-dom"
 import { useModal } from "../../context/Modal";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
@@ -11,7 +10,6 @@ import './PostUpdate.css'
 
 export default function PostUpdate({post}) {
   const dispatch = useDispatch()
-  const history = useHistory()
   const { closeModal } = useModal();
 
   const [caption, setCaption] = useState(post.caption)

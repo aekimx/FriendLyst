@@ -1,0 +1,105 @@
+.commentupdate-modal-container {
+  width: 500px;
+  height: 500px;
+  background-color: rgb(35,37,38);
+  color: rgb(228,230,235);
+  font-family: 'Ruda', sans-serif;
+  border-radius: 15px;
+  padding: 5px;
+}
+
+.commentupdate-modal-profpic {
+  display: 50px;
+  height: 50px;
+  border-radius: 25px;
+}
+
+.commentupdate-profpic-user {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 10px;
+  margin-top: 15px;
+}
+
+.commentupdate-textarea {
+  width: 450px;
+  height: 300px;
+  background-color: rgb(35,37,38);
+  border: none;
+  color: rgb(228,230,235);
+  font-family: 'Ruda', sans-serif;
+  font-size: 20px;
+  padding: 5px;
+  resize: none;
+}
+
+.commentupdate-textarea::placeholder {
+  font-family: 'Ruda', sans-serif;
+}
+
+.commentupdate-textarea:focus {
+  outline: none
+}
+
+.commentupdate-form-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+
+}
+
+.commentupdate-edit-text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  border-bottom: 0.5px solid rgb(65, 64, 64);
+  font-size: 25px;
+  padding: 5px;
+}
+
+.commentupdate-user-name {
+  margin-left: 10px;
+}
+
+.commentupdate-closemodal {
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+  border-radius: 20px;
+  background-color: rgb(58,59,61);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.commentupdate-closemodal:hover {
+  background-color: rgb(79,80,81);
+}
+
+.commentupdate-update-button {
+  width: 425px;
+  height: 35px;
+  background-color: rgb(43,116,225);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 10px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  color: rgb(228,230,235);
+  border: none;
+}
+
+.commentupdate-update-button:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
+.commentupdate-button:hover {
+  background-color: rgb(61, 126, 224);
+}
