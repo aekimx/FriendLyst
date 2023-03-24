@@ -1,7 +1,7 @@
 import React from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getAllPostsThunk } from "../../store/post";
+import { getAllPostsThunk, deletePostThunk } from "../../store/post";
 import { Link } from "react-router-dom";
 import CommentsForm from "../CommentsForm";
 import AllComments from "../Comments"
@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGear, faXmark } from '@fortawesome/free-solid-svg-icons'
 import PostUpdate from "../PostUpdate/index"
 import OpenModalButton from "../OpenModalButton"
+import PostDelete from "../PostDelete";
 
 import './PostFeed.css'
 
@@ -34,6 +35,8 @@ export default function PostFeed() {
   postsArr.reverse()
 
 
+
+
   return (
     <>
     <div className='postfeed-container'>
@@ -57,7 +60,10 @@ export default function PostFeed() {
           <OpenModalButton buttonText={<FontAwesomeIcon icon={faGear} className='postfeed-gear-icon'
             />} modalComponent={<PostUpdate post={post} />} />
 
-            <FontAwesomeIcon icon={faXmark} className='postfeed-x-icon' />
+          <OpenModalButton buttonText={<FontAwesomeIcon icon={faXmark} className='postfeed-x-icon'
+            />} modalComponent={<PostDelete postId={post.id} />} />
+
+
           </div>
 
           <div className='feedpost-caption-photo'>

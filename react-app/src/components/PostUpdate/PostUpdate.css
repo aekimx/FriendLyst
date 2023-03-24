@@ -99,3 +99,7 @@
   background-color: gray;
   cursor: not-allowed;
 }
+
+.postupdate-update-button:hover {
+  background-color: rgb(61, 126, 224);
+}

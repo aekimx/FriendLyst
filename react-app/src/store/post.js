@@ -28,7 +28,7 @@ const updatePost = (post) => ({
 })
 
 const deletePost = (postId) => ({
-  type: UPDATE_POST,
+  type: DELETE_POST,
   postId
 })
 
@@ -83,7 +83,7 @@ export const updatePostThunk = (post, id) => async (dispatch) => {
   }
 }
 
-export const deletePostThunk = (postId) => async (dispatch) => {
+export const deletePostThunk = ({postId}) => async (dispatch) => {
   console.log('delete post thunk running')
   const response = await fetch(`/api/posts/${postId}`, {
     method: 'DELETE',
