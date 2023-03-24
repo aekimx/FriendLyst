@@ -2,14 +2,14 @@ import React from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAllPostsThunk } from "../../store/post";
-import { Link, Redirect, useHistory } from "react-router-dom";
-
+import { Link } from "react-router-dom";
+import CommentsForm from "../CommentsForm";
+import AllComments from "../Comments"
 
 import './PostFeed.css'
 
 export default function PostFeed() {
   const dispatch = useDispatch()
-  const history = useHistory()
 
   const allPosts = useSelector(state => state.post?.allPosts)
   const user = useSelector(state => state.session.user)
@@ -49,11 +49,17 @@ export default function PostFeed() {
           </Link>
 
         </div>
-          <div> WHO LIKED HERE </div>
-          <div> OPTION TO LIKE HERE </div>
-          <div> HOW MANY COMMENTS  </div>
-          <div> DO WE WANT ALL COMMENTS TO SHOW? </div>
-          <div> OPTION TO COMMENT GOES HERE </div>
+          <div className='feed-like-comment-count'>
+            <div> WHO LIKED HERE </div>
+            <div className='feed-comments'> HOW MANY COMMENTS  </div>
+          </div>
+          <div className='feed-like-comment-buttons'>
+            <div className='feed-like-button'> LIKE BUTTON </div>
+            <div className='feed-comment-button'> COMMENT BUTTON </div>
+          </div>
+          <CommentsForm postId={post.id}/>
+          <div> ALL COMMENTS SHOWN HERE? </div>
+          <AllComments postId={post.id} />
 
         </div>
         </>

@@ -29,3 +29,23 @@
 .postfeed-post-pic {
   width: 500px;
 }
+
+.feed-like-comment-count, .feed-like-comment-buttons {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid white;
+}
+
+.feed-comments {
+  margin-left: 300px;
+}
+
+.feed-like-button, .feed-comment-button {
+  width: 200px;
+  height: 30px;
+  border: 1px solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}

@@ -46,12 +46,10 @@ export const getAllPostsThunk = (userId) => async (dispatch) => {
 }
 
 export const getPostDetailThunk = (id) => async (dispatch) => {
-  console.log(' ------- get post detail thunk running -----')
   const response = await fetch(`/api/posts/${id}`)
 
   if (response.ok) {
     let data = await response.json()
-    console.log('RESPONSE.OK!!!! ', data)
     dispatch(getPostById(data))
     return data
   }
@@ -59,7 +57,6 @@ export const getPostDetailThunk = (id) => async (dispatch) => {
 
 
 export const createPostThunk = (formData) => async (dispatch) => {
-  console.log('create post thunk running ---- form data is ' , formData)
   const res = await fetch(`/api/posts`, {
     method: "POST",
     body: formData,
@@ -67,7 +64,6 @@ export const createPostThunk = (formData) => async (dispatch) => {
 
   if (res.ok) {
     let data = await res.json()
-    console.log('RES.OK!!!!' , data)
     dispatch(createPost(data))
     return data
   }

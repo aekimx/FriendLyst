@@ -46,19 +46,13 @@ def create_post():
 
     upload = ''
     if form.data['photo'] is None:
-        print('****** PHOTO NOT INCLUDED ******')
         pass
     else:
-        print('****** PHOTO  ******')
         photo = form.data['photo']
-        print('****** PHOTO = form.data[photo]  ******', photo)
         photo.filename = get_unique_filename(photo.filename)
-        print('****** PHOTO assigning the filename with unique filename  ******', photo)
         upload = upload_file_to_s3(photo)
-        print(' ********** upload! ************', upload)
 
         if "url" not in upload:
-            print("*********** WHAT IS IN UPLOAD THEN **********", upload)
             return jsonify({"errors": "An error occurred when uploading"}), 400
 
 

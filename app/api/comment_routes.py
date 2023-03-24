@@ -10,6 +10,9 @@ comment_routes = Blueprint('comments', __name__)
 def get_all_comments(postId):
     ''' Query for all comments and return in a list of dictionaries '''
     all_comments = Comment.query.filter(Comment.post_id == postId).all()
+
+    print('-------- is this querying correctly? ------' , all_comments)
+
     return [comment.to_dict() for comment in all_comments]
 
 
