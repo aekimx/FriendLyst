@@ -32,13 +32,18 @@
 }
 
 .postfeed-post-pic {
-  width: 500px;
+  width: 600px;
 }
 
 .feed-like-comment-count, .feed-like-comment-buttons {
   display: flex;
   justify-content: space-between;
-  border: 1px solid white;
+  margin-top: 10px;
+
+}
+
+.feed-like-comment-count {
+  width: 700px;
 }
 
 .feed-comments {
@@ -46,14 +51,31 @@
 }
 
 .feed-like-button, .feed-comment-button {
-  width: 200px;
+  width: 400px;
   height: 30px;
-  border: 1px solid white;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding-top: 3px;
+  padding-bottom: 3px;
 
 }
+
+.feed-like-button:hover, .feed-comment-button:hover {
+  background-color: rgb(58,59,61);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.feed-like-comment-buttons {
+  width: 700px;
+  border-bottom: 0.5px solid rgb(58,59,61);;
+  border-top: 0.5px solid rgb(58,59,61);;
+  margin-top: 10px;
+}
+
 
 .postfeed-propic-name-time {
   display: flex;

@@ -30,20 +30,7 @@ export const getAllCommentsThunk = (postId) => async (dispatch) => {
 	}
 }
 
-export const createCommentThunk = (comment) => async (dispatch) => {
 
-  const res = await fetch(`/api/comments`, {
-    method: "POST",
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(comment),
-  })
-
-  if (res.ok) {
-    let data = await res.json()
-    dispatch(createComment(data))
-    return data
-  }
-}
 
 
 

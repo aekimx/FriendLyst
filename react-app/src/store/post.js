@@ -1,10 +1,10 @@
-
 // ----------------------------------- constants  ----------------------------------------
 const GET_ALL_POSTS = 'posts/GET_ALL_POSTS'
 const GET_POST_DETAIL = 'posts/GET_POST_DETAIL'
 const CREATE_POST = 'posts/CREATE_POST'
 const UPDATE_POST = 'posts/UPDATE_POST'
 const DELETE_POST = 'posts/DELETE_POST'
+const CREATE_COMMENT = 'posts/CREATE_COMMENT'
 
 // ----------------------------------- action creators   ---------------------------------
 const getAllPosts = (posts) => ({
@@ -30,6 +30,11 @@ const updatePost = (post) => ({
 const deletePost = (postId) => ({
   type: DELETE_POST,
   postId
+})
+
+const createComment = (comment) => ({
+  type: CREATE_COMMENT,
+  comment
 })
 
 
@@ -94,8 +99,22 @@ export const deletePostThunk = ({postId}) => async (dispatch) => {
     dispatch(deletePost(postId))
     return ('successfully deleted!')
   }
-
 }
+
+export const createCommentThunk = (comment) => async (dispatch) => {
+  const res = await fetch(`/api/comments`, {
+    method: "POST",
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(comment),
+  })
+
+  if (res.ok) {
+    let data = await res.json()
+    dispatch(createComment(data))
+    return data
+  }
+}
+
 
 
 const initialState = { allPosts: {}, post: {} };
@@ -130,6 +149,11 @@ export default function postReducer(state = initialState, action) {
     case DELETE_POST:
       newState = {...state, allPosts: {...state.allPosts}}
       delete newState.allPosts[action.postId]
+      return newState
+
+    case CREATE_COMMENT:
+      newState = {...state, allPosts: {...state.allPosts}}
+      newState.allPosts[action.comment.postId].comments[action.comment.id] = action.comment
       return newState
 
 		default:

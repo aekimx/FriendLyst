@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { createCommentThunk } from "../../store/comment";
+import { createCommentThunk, getAllPostsThunk } from "../../store/post";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCommentDots, faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 
@@ -20,6 +20,7 @@ export default function CommentsForm({postId}) {
     e.preventDefault()
     const newComment = {comment, userId, postId}
     dispatch(createCommentThunk(newComment))
+    .then(dispatch(getAllPostsThunk()))
     setComment('')
   }
 
@@ -29,6 +30,7 @@ export default function CommentsForm({postId}) {
       <form onSubmit={handleSubmit}>
         <input placeholder='Write a comment...'
         className='commentform-input'
+        maxLength='2000'
         style={{ color: 'rgb(228,230,235)', paddingLeft:'10px'}}
         value={comment}
         onChange={(e) => setComment(e.target.value)}>

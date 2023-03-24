@@ -42,8 +42,8 @@ def create_comment():
     if form.validate_on_submit():
         new_comment = Comment(
             comment= data['comment'],
-            user_id= data['user_id'],
-            post_id= data['post_id']
+            user_id= data['userId'],
+            post_id= data['postId']
          )
         db.session.add(new_comment)
         db.session.commit()

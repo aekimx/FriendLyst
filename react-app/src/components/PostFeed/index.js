@@ -75,8 +75,8 @@ export default function PostFeed() {
 
 
           <div className='feed-like-comment-count'>
-            <div> WHO LIKED HERE </div>
-            <div className='feed-comments'> {post.comments.length > 0 ? `${post.comments.length} Comments` : null }</div>
+            <div> 1 Like </div>
+            <div className='feed-comments'> {post.comments?.length > 0 ? `${post.comments.length} Comments` : null }</div>
           </div>
 
           <div className='feed-like-comment-buttons'>
@@ -91,8 +91,8 @@ export default function PostFeed() {
             </div>
           </div>
 
-          <CommentsForm postId={post.id}/>
           <AllComments comments={post.comments} />
+          <CommentsForm postId={post.id}/>
 
         </div>
         </>
