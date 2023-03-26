@@ -1,6 +1,7 @@
 // ----------------------------------- constants  ----------------------------------------
 const GET_ALL_FRIENDS = 'friends/GET_ALL_FRIENDS'
 const GET_ALL_REQUESTS = 'friends/GET_ALL_REQUESTS'
+const ACCEPT_REQUEST = 'friends/ACCEPT_REQUEST'
 
 // ----------------------------------- action creators   ---------------------------------
 const getAllFriends = (friends) => ({
@@ -13,6 +14,11 @@ const getAllRequests = (requests) => ({
   requests
 })
 
+const acceptRequest = (request) => ({
+  type: ACCEPT_REQUEST,
+  request
+})
+
 
 // ----------------------------------- thunks  ----------------------------------------
 
@@ -20,9 +26,9 @@ export const getAllFriendsThunk = (userId) => async (dispatch) => {
   const res = await fetch(`/api/friends/user/${userId}`)
 
   if (res.ok) {
-    let data = await res.json()
-    dispatch(getAllFriends(data))
-    return data
+    let data = await res.json();
+    dispatch(getAllFriends(data));
+    return data;
   }
 
 }
@@ -31,9 +37,19 @@ export const getAllRequestsThunk = (userId) => async (dispatch) => {
   const res = await fetch(`/api/friends/user/${userId}/requests`)
 
   if (res.ok) {
-    let data = await res.json()
-    dispatch(getAllRequests(data))
-    return data
+    let data = await res.json();
+    dispatch(getAllRequests(data));
+    return data;
+  }
+}
+
+export const acceptRequestThunk = (friendRequestId) => async (dispatch) => {
+  const res = await fetch(`/api/friends/${friendRequestId}`)
+
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(acceptRequest(data))
+    return data;
   }
 
 }
@@ -74,7 +90,14 @@ export default function friendReducer(state = initialState, action) {
         newState.allRequests[request.id] = request
       })
       return newState
-		default:
+
+    case ACCEPT_REQUEST:
+      newState = {...state, allFriends: {...state.allFriends}, allRequests: {...state.allRequests}}
+      delete newState.allRequests[action.request.id]
+      newState.allFriends[action.request.id] = action.request
+      return newState;
+
+      default:
 			return state;
 	}
 }

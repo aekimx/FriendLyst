@@ -7,6 +7,9 @@ import "./NavBar.css"
 export default function NavBar() {
   const user = useSelector(state => state.session.user)
 
+  let userId;
+  if (user) userId = user.id;
+
   return (
     <>
     <div className='home-navbar'>
@@ -21,7 +24,7 @@ export default function NavBar() {
           <i className="fa-solid fa-gamepad home-game" />
         </div>
         <div>
-          <Link to={`/${user.firstName}.${user.lastName}.${user.id}/profile`} userId={user?.id}> User Profile </Link>
+          <Link to={`/${user.firstName}.${user.lastName}.${user.id}/profile`} > User Profile </Link>
           {/* <div> User Profile</div> */}
         </div>
     </div>

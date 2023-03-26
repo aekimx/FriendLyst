@@ -57,3 +57,30 @@
   height: 50px;
   align-items: center;
 }
+
+.friendrequests-userprof-link {
+  color: rgb(228,230,235);
+  text-decoration: none;
+}
+
+.accept-delete-container {
+  display: flex;
+  flex-direction: row;
+  margin-left: 20px;
+}
+
+.friendrequest-accept, .friendrequest-delete {
+  width: 25px;
+  height: 25px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid gray;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.friendrequest-accept:hover, .friendrequest-delete:hover {
+  background-color: rgb(91, 93, 96);
+}

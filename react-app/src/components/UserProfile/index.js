@@ -6,15 +6,14 @@ import NavBar from "../NavBar"
 
 import './UserProfile.css'
 
-export default function UserProfile(userId) {
-
+export default function UserProfile() {
   const dispatch = useDispatch()
+  const url = useParams()
+  const userId = url.userId.split(".")[2]
 
   const user = useSelector(state => state.user)
 
   useEffect(() => {
-    console.log('use effect running in user profile')
-    console.log(user)
     dispatch(getUserThunk(userId))
   }, [dispatch])
 
