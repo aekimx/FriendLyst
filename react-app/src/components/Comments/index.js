@@ -23,7 +23,7 @@ export default function AllComments({comments}) {
 
             <div className='post-comment-comment'>
 
-              <Link to={`/users/${comment.user.id}`} className='post-comment-link'>
+              <Link to={`/${comment.user?.firstName}.${comment.user?.lastName}.${comment.user.id}/profile`} className='post-comment-link'>
                 <div> {comment.user.firstName} {comment.user.lastName} </div>
               </Link>
 

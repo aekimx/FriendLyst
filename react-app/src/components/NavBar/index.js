@@ -21,7 +21,7 @@ export default function NavBar() {
           <i className="fa-solid fa-gamepad home-game" />
         </div>
         <div>
-          <Link to={`/users/${user?.id}`}> User Profile </Link>
+          <Link to={`/${user.firstName}.${user.lastName}.${user.id}/profile`} userId={user?.id}> User Profile </Link>
           {/* <div> User Profile</div> */}
         </div>
     </div>

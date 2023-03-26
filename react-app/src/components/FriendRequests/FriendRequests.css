@@ -1,4 +1,4 @@
-.friendslist-overall-container {
+.friendrequests-overall-container {
   margin-top: 50px;
   background-color: rgb(24,25,26);
   color: rgb(228,230,235);
@@ -11,7 +11,7 @@
   border-left: 0.5px solid rgb(58,59,61);
 }
 
-.friendslist-each-container {
+.friendrequests-each-container {
   height: 100%;
   display: flex;
   flex-direction: row;
@@ -21,27 +21,27 @@
   border-bottom:0.5px solid rgb(58,59,61);
 }
 
-.friendslist-each-container:hover {
+.friendrequests-each-container:hover {
   background-color: rgb(58,59,61);
 }
 
-.friendlist-friend-profpic {
+.friendrequests-friend-profpic {
   width: 60px;
   height: 60px;
   border-radius: 30px;
   cursor: pointer;
 }
 
-.friendslist-name {
+.friendrequests-name {
   margin-left: 10px;
   cursor: pointer;
 }
 
-.friendslist-name:hover {
+.friendrequests-name:hover {
   text-decoration: underline;
 }
 
-.friendslist-allfriends-text {
+.friendrequests-allfriends-text {
   display: flex;
   justify-content: center;
   margin-top: 10px;
@@ -49,4 +49,11 @@
   padding-top: 5px;
   padding-bottom: 5px;
   border-bottom:0.5px solid rgb(58,59,61);
+}
+
+.friendrequests-none {
+  display: flex;
+  justify-content: center;
+  height: 50px;
+  align-items: center;
 }

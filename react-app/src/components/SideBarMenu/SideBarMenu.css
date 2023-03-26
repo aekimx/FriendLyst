@@ -6,4 +6,22 @@
   top: 50px;
   height: 100%;
   background-color: rgb(24,25,26);
+  color: rgb(228,230,235);
+  font-family: 'Ruda', sans-serif;
+}
+
+.sidebar-smaller-container {
+  margin-top: 50px;
+  margin-left: 10px;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebar-link {
+  cursor: pointer;
+  text-decoration: none;
+  color: rgb(228,230,235);
+
 }

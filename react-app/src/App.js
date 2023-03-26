@@ -8,6 +8,7 @@ import HomePage from "./components/Home";
 import UserProfile from "./components/UserProfile";
 import PostDetail from "./components/PostDetail";
 import FriendsList from "./components/FriendsList";
+import FriendRequests from "./components/FriendRequests";
 // import Navigation from "./components/Navigation";
 
 function App() {
@@ -32,7 +33,7 @@ function App() {
       <Route path="/home">
         <HomePage />
       </Route>
-      <Route path="/users/:id">
+      <Route path="/:userId/profile">
         <UserProfile />
       </Route>
       <Route path="/posts/:id">
@@ -40,6 +41,9 @@ function App() {
       </Route>
       <Route path="/:userId/friends">
         <FriendsList />
+      </Route>
+      <Route path="/:userId/requests">
+        <FriendRequests />
       </Route>
       </>
     )}

@@ -18,6 +18,8 @@ const updateUserProfile = (user) => ({
 // ----------------------------------- thunks  ----------------------------------------
 
 export const getUserThunk = (id) => async (dispatch) => {
+  console.log('get user thunk running')
+  console.log("what's getting passed into user thunk?", id)
 	const response = await fetch(`/api/users/${id}`)
 
 	if (response.ok) {

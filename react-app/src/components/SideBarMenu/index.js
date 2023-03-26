@@ -9,14 +9,30 @@ export default function SideBarMenu() {
   return (
     <>
     <div className='sidebar-menu-container'>
-        <div> User Profile </div>
-        <div> <Link to={`/${user.firstName}${user.lastName}${user.id}/friends`}> Friends </Link></div>
-        <div> Friend Requests </div>
-        <div> Groups </div>
-        <div> Events </div>
-        <div> Messages </div>
-        <div> Marketplace </div>
+      <div className='sidebar-smaller-container'>
+
+        <div className='sidebar-link'>
+        <i className="fa-solid fa-user" />
+        <Link to={`/${user.firstName}.${user.lastName}.${user.id}/profile`} className='sidebar-link'> User Profile </Link>
+        </div>
+
+        <div className='sidebar-link'>
+          <i class="fa-solid fa-users" />
+          <Link to={`/${user.firstName}.${user.lastName}.${user.id}/friends`} className='sidebar-link'> Friends </Link>
+        </div>
+
+        <div className='sidebar-link'>
+          <i className="fa-solid fa-user-plus" />
+          <Link to={`/${user.firstName}.${user.lastName}.${user.id}/requests`} className='sidebar-link'> Friend Requests </Link>
+        </div>
+
+
+        <div className='sidebar-link'> <i class="fa-solid fa-users-rectangle" /> Groups </div>
+        <div className='sidebar-link'> <i class="fa-solid fa-calendar-plus" /> Events </div>
+        <div className='sidebar-link'> <i class="fa-solid fa-comments" /> Messages </div>
+        <div className='sidebar-link'> <i class="fa-solid fa-shop" /> Marketplace </div>
       </div>
+    </div>
     </>
   )
 }

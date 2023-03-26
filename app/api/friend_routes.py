@@ -13,6 +13,15 @@ def get_all_friends(id):
     return [friend.to_dict_no_self() for friend in all_friends]
 
 
+@friend_routes.route('/user/<int:id>/requests', methods=['GET'])
+# @login_required
+def get_all_requests(id):
+    ''' Query for all friends and return in a list of dictionaries '''
+
+    all_friends = Friend.query.filter(Friend.status == 'Pending').filter(Friend.user_id == id).all()
+    return [friend.to_dict_no_self() for friend in all_friends]
+
+
 @friend_routes.route('/<int:id>', methods=['GET'])
 # @login_required
 def find_friend_request(id):
