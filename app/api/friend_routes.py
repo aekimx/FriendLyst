@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.models import Friend, db
+from app.forms import FriendForm
 
 friend_routes = Blueprint('friends', __name__)
 
@@ -52,13 +53,15 @@ def add_friend():
 def accept_friend_request(id):
     ''' Query for a friend request by ID and update it if request exists. Returned as a dictionary.'''
     friend = Friend.query.get(id)
+    print('******* WHAT ABOUT THIS IS THIS WORKING???????? ******', friend.to_dict_no_self())
 
     if friend is None:
         return jsonify({'error': 'Friend not found'}), 404
 
     friend.status = "Accepted"
     db.session.commit()
-    return jsonify(friend.to_dict()), 200
+    print('****** DID THIS UPDATE PROPERLY???? *********',friend.to_dict_no_self())
+    return jsonify(friend.to_dict_no_self()), 200
 
 
 

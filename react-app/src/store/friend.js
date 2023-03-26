@@ -2,6 +2,7 @@
 const GET_ALL_FRIENDS = 'friends/GET_ALL_FRIENDS'
 const GET_ALL_REQUESTS = 'friends/GET_ALL_REQUESTS'
 const ACCEPT_REQUEST = 'friends/ACCEPT_REQUEST'
+const DELETE_REQUEST = 'friends/DELETE_REQUEST'
 
 // ----------------------------------- action creators   ---------------------------------
 const getAllFriends = (friends) => ({
@@ -16,6 +17,11 @@ const getAllRequests = (requests) => ({
 
 const acceptRequest = (request) => ({
   type: ACCEPT_REQUEST,
+  request
+})
+
+const deleteRequest = (request) => ({
+  type: DELETE_REQUEST,
   request
 })
 
@@ -44,7 +50,10 @@ export const getAllRequestsThunk = (userId) => async (dispatch) => {
 }
 
 export const acceptRequestThunk = (friendRequestId) => async (dispatch) => {
-  const res = await fetch(`/api/friends/${friendRequestId}`)
+  const res = await fetch(`/api/friends/${friendRequestId}`, {
+    method: "PUT",
+    headers: { 'Content-Type': 'application/json' },
+  })
 
   if (res.ok) {
     const data = await res.json();
@@ -54,21 +63,18 @@ export const acceptRequestThunk = (friendRequestId) => async (dispatch) => {
 
 }
 
+export const deleteRequestThunk = (friendRequestId) => async (dispatch) => {
+  const res = await fetch(`/api/friends/${friendRequestId}`, {
+    method: "DELETE",
+    headers: { 'Content-Type': 'application/json' },
+  })
 
-// export const createUserThunk = (userProfile) => async (dispatch) => {
-//   const response = await fetch('/api/users', {
-//     method: 'POST',
-//     headers: { "Content-Type": "application/json" },
-//     body: JSON.stringify(userProfile)
-//   })
-
-//   if (response.ok) {
-//     const data = response.json()
-//     dispatch(createUserThunk(data))
-//     return data
-//   }
-
-// }
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(deleteRequest(data))
+    return data;
+  }
+}
 
 
 // ----------------------------------- Reducer  ----------------------------------------
@@ -92,7 +98,7 @@ export default function friendReducer(state = initialState, action) {
       return newState
 
     case ACCEPT_REQUEST:
-      newState = {...state, allFriends: {...state.allFriends}, allRequests: {...state.allRequests}}
+      newState = {...state}
       delete newState.allRequests[action.request.id]
       newState.allFriends[action.request.id] = action.request
       return newState;

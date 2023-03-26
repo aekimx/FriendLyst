@@ -102,10 +102,6 @@ def update_post(id):
     return jsonify({"error": "form did not validate on submit"})
 
 
-
-
-
-
 @post_routes.route('/<int:id>', methods=['DELETE'])
 # @login_required
 def delete_post(id):

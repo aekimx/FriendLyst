@@ -11,7 +11,6 @@ export default function AcceptRequest({request}) {
   const acceptRequest = (e) => {
     e.preventDefault();
     dispatch(acceptRequestThunk(request.id))
-    .then(() => dispatch(getAllRequestsThunk(user?.id)))
   }
 
 

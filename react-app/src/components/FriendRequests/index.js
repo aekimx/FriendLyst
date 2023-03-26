@@ -1,10 +1,11 @@
 import NavBar from "../NavBar"
 import SideBarMenu from "../SideBarMenu"
 import AcceptRequest from "../FriendAcceptRequest";
+import DeleteRequest from "../FriendDeleteRequest"
 import React from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getAllRequestsThunk, acceptRequestThunk } from "../../store/friend";
+import { getAllRequestsThunk } from "../../store/friend";
 
 import './FriendRequests.css'
 import { Link } from "react-router-dom";
@@ -43,10 +44,8 @@ export default function FriendRequests() {
                 <div className='accept-delete-container'>
 
                   <AcceptRequest request={friend}/>
+                  <DeleteRequest request={friend}/>
 
-                  <div className='friendrequest-delete'>
-                    <i className="fa-solid fa-x" />
-                  </div>
               </div>
               </div>
             )
