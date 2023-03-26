@@ -4,12 +4,13 @@ from app.models import Friend, db
 
 friend_routes = Blueprint('friends', __name__)
 
-@friend_routes.route('', methods=['GET'])
+@friend_routes.route('/user/<int:id>', methods=['GET'])
 # @login_required
-def get_all_friends():
+def get_all_friends(id):
     ''' Query for all friends and return in a list of dictionaries '''
-    all_friends = Friend.query.all()
-    return [friend.to_dict() for friend in all_friends]
+
+    all_friends = Friend.query.filter(Friend.status == 'Accepted').filter(Friend.user_id == id).all()
+    return [friend.to_dict_no_self() for friend in all_friends]
 
 
 @friend_routes.route('/<int:id>', methods=['GET'])
@@ -24,7 +25,7 @@ def find_friend_request(id):
     return friend_request.to_dict()
 
 
-@friend_routes.route('', methods=['POST'])
+@friend_routes.route('/user/<int:id>', methods=['POST'])
 # @login_required
 def add_friend():
     ''' Create a new friend request and return the newly created friend request as a dictionary '''

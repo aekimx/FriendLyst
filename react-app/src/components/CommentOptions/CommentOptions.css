@@ -8,8 +8,7 @@
 
 .commentoptions-dropdown {
   border-radius: 5px;
-  /* border: 0.5px solid rgb(58,59,61); */
-  width: 120px;
+  width: 150px;
   height: 70px;
   display: flex;
   flex-direction: column;
@@ -19,8 +18,8 @@
   left: 30px;
   top: -20px;
   padding-left: 0px;
-  background-color: rgb(24,25,26);
-  box-shadow: 1px 1px 1px rgb(56, 57, 59);
+  border: 0.5px solid rgb(60, 60, 60);
+  box-shadow: 1px 1px black
 }
 
 .commentoptions-edit, .commentoptions-delete {
@@ -28,6 +27,10 @@
   margin-top: 2px;
   margin-bottom: 2px;
   cursor: pointer;
+  background-color: rgb(35,37,38);
+  border: none;
+  color: rgb(228,230,235);
+  text-align: left;
 }
 
 .commentoptions-edit:hover, .commentoptions-delete:hover {

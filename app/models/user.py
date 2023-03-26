@@ -26,6 +26,7 @@ class User(db.Model, UserMixin):
     # friends = db.relationship("Friend", back_populates='users', lazy=True, cascade='all, delete')
 
     posts = db.relationship("Post", back_populates='user', lazy=True, cascade='all, delete')
+    likes = db.relationship("Like", back_populates='user', lazy=True, cascade='all, delete')
     comments = db.relationship("Comment", back_populates="user", lazy=True)
 
     # messages = db.relationship("Message", back_populates='users', lazy=True, cascade='all, delete')
@@ -68,6 +69,7 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'createdAt': self.created_at,
         }
+
     def to_dict_no_post_profile(self):
         return {
             'id': self.id,
@@ -79,4 +81,10 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'createdAt': self.created_at,
             'profile': [profile.to_dict_no_self() for profile in self.user_profiles]
+        }
+    def to_dict_name(self):
+        return {
+            'id': self.id,
+            'firstName': self.first_name,
+            'lastName': self.last_name,
         }

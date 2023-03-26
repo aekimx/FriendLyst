@@ -22,6 +22,7 @@ class Post(db.Model):
     comments = db.relationship("Comment", back_populates='post', lazy=True, cascade='all, delete')
     group = db.relationship("Group", back_populates='group_posts', lazy=True)
     event = db.relationship("Event", back_populates='event_posts', lazy=True)
+    likes = db.relationship("Like", back_populates='post', lazy=True, cascade='all, delete')
 
 
     def to_dict(self):
@@ -32,6 +33,7 @@ class Post(db.Model):
             'photo': self.photo,
             'user': self.user.to_dict_no_post(),
             'createdAt': self.created_at,
+            'likes': [like.to_dict() for like in self.likes],
             'comments': [comment.to_dict() for comment in self.comments]
         }
     def to_dict_no_user(self):

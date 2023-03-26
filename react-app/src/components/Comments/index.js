@@ -1,37 +1,17 @@
-import React, { useState, useRef, useEffect } from "react"
+import React from "react"
+import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEllipsis } from '@fortawesome/free-solid-svg-icons'
 import CommentOptions from "../CommentOptions"
 
 
 import "./Comments.css"
 
 export default function AllComments({comments}) {
-  const [showMenu, setShowMenu] = useState(false);
-  const ulRef = useRef()
 
-  const openMenu = () => {
-    if (showMenu) return;
-    setShowMenu(true);
-  };
-
-  useEffect(() => {
-    if (!showMenu) return;
-
-    const closeMenu = (e) => {
-      setShowMenu(false);
-    };
-
-    document.addEventListener('click', closeMenu);
-
-    return () => document.removeEventListener("click", closeMenu);
-  }, [showMenu]);
-
+  const user = useSelector(state => state.session.user)
 
   if (!comments.length) return null
 
-  const ulClassName = 'emojismodal-openmodalmenu' + (showMenu ? "" : " hidden")
 
   return (
     <>
@@ -52,7 +32,7 @@ export default function AllComments({comments}) {
             </div>
 
             <div className='post-comment-options-div'>
-              <CommentOptions comment={comment}/>
+              {user?.id == comment.userId ? <CommentOptions comment={comment}/> : null}
             </div>
 
 

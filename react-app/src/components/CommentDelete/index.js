@@ -1,6 +1,6 @@
 import React from "react"
 import { useDispatch } from "react-redux";
-import { deleteCommentThunk } from "../../store/post";
+import { deleteCommentThunk, getAllPostsThunk } from "../../store/post";
 import { useModal } from "../../context/Modal";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faXmark } from '@fortawesome/free-solid-svg-icons'
@@ -14,6 +14,7 @@ export default function CommentDelete({comment}) {
   const handleDelete = (e) => {
     e.preventDefault()
     dispatch(deleteCommentThunk(comment))
+    dispatch(getAllPostsThunk(comment.userId))
     .then(() => {closeModal()})
 
   }

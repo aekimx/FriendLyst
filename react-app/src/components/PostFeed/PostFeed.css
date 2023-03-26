@@ -1,5 +1,5 @@
 .postfeed-container {
-  position: fixed;
+  position: absolute;
   top: 150px;
   left: 200px;
   right: 200px;
@@ -71,8 +71,8 @@
 
 .feed-like-comment-buttons {
   width: 700px;
-  border-bottom: 0.5px solid rgb(58,59,61);;
-  border-top: 0.5px solid rgb(58,59,61);;
+  border-bottom: 0.5px solid rgb(58,59,61);
+  border-top: 0.5px solid rgb(58,59,61);
   margin-top: 10px;
 }
 
@@ -118,6 +118,13 @@
   cursor: pointer;
 }
 
-.postfeed-x-icon {
+.postfeed-editpost {
+  background-color: rgb(35,37,38);
+  color: white;
+  border: none
+
+}
+
+.feed-like-text, .feed-comment-text {
   margin-left: 10px;
 }

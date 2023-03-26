@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { createPostThunk } from "../../store/post";
+import { createPostThunk, getAllPostsThunk } from "../../store/post";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faImages } from '@fortawesome/free-solid-svg-icons'
 
@@ -26,6 +26,7 @@ export default function PostForm() {
     formData.append("photo", photo);
 
     dispatch(createPostThunk(formData))
+    dispatch(getAllPostsThunk(userId))
     setCaption("")
     setPhoto("")
   }

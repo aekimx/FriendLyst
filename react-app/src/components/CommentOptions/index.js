@@ -41,11 +41,13 @@ export default function CommentOptions({comment}) {
     <div className={ulClassName} ref={ulRef}>
       <div className='commentoptions-dropdown'>
 
-        <OpenModalButton buttonText='edit'
+        <OpenModalButton
+        buttonText='Edit'
         modalComponent={<CommentUpdate comment={comment}/>}
         className='commentoptions-edit'/>
 
-          <OpenModalButton buttonText='delete'
+          <OpenModalButton
+          buttonText='Delete'
           modalComponent={<CommentDelete comment={comment}/>}
           className='commentoptions-delete'
           />

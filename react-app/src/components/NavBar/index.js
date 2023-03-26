@@ -15,10 +15,10 @@ export default function NavBar() {
           <input type='text' placeholder='Search Facebook' className='navbar-searchbar'/>
         </div>
         <div className='home-navbar-middle-icons'>
-          <div className='home-home'> <i className="fa-solid fa-house"/> </div>
-          <div className='home-video'> <i className="fa-solid fa-video" /> </div>
-          <div className='home-store'> <i className="fa-solid fa-store" /> </div>
-          <div className='home-game'> <i className="fa-solid fa-gamepad" /> </div>
+          <Link to={'/home'} > <i className="fa-solid fa-house home-home"/> </Link>
+          <i className="fa-solid fa-video home-video" />
+          <i className="fa-solid fa-store home-store" />
+          <i className="fa-solid fa-gamepad home-game" />
         </div>
         <div>
           <Link to={`/users/${user?.id}`}> User Profile </Link>

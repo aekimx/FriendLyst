@@ -104,7 +104,6 @@ export const updatePostThunk = (post, id) => async (dispatch) => {
 }
 
 export const deletePostThunk = ({postId}) => async (dispatch) => {
-  console.log('delete post thunk running')
   const response = await fetch(`/api/posts/${postId}`, {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json' },
@@ -131,7 +130,6 @@ export const createCommentThunk = (comment) => async (dispatch) => {
 }
 
 export const updateCommentThunk = (comment, commentId) => async (dispatch) => {
-  console.log('update comment thunk running!', comment, commentId)
   const res = await fetch(`/api/comments/${commentId}`, {
     method: "PUT",
     headers: { 'Content-Type': 'application/json' },
@@ -140,14 +138,12 @@ export const updateCommentThunk = (comment, commentId) => async (dispatch) => {
 
   if (res.ok) {
     let data = await res.json()
-    console.log("res.OK!!!", data)
     dispatch(updateComment(data))
     return data
   }
 }
 
 export const deleteCommentThunk = (comment) => async (dispatch) => {
-  console.log("comment coming through correctly?", comment)
   const response = await fetch(`/api/comments/${comment.id}`, {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json' },

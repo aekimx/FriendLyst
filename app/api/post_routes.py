@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import Post, db, Friend
-from app.forms import PostForm
+from app.models import Post, db, Friend, Like
+from app.forms import PostForm, LikeForm
 from app.api.aws_helpers import upload_file_to_s3, get_unique_filename
 from sqlalchemy.orm import load_only
 
@@ -92,8 +92,6 @@ def update_post(id):
 
     form = PostForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
-    print('CAPTION PRINTING??????', form.data['caption'])
-    print('USERID PRINTING??????', form.data['user_id'])
 
 
     if form.validate_on_submit():
@@ -119,3 +117,23 @@ def delete_post(id):
     db.session.delete(post)
     db.session.commit()
     return jsonify({'Success': 'Post successfully deleted'})
+
+@post_routes.route('/<int:id>/like', methods=['POST'])
+# @login_required
+def like_post(id):
+    ''' Query for a post by ID and like it if post exists. Return a successful message '''
+    post = Post.query.get(id)
+
+    if post is None:
+        return jsonify({'error': 'Post not found'}), 404
+
+    data = request.get_json()
+
+    form = LikeForm()
+
+    if form.validate_on_submit():
+        new_like = Like( user_id= data['userId'], post_id = data['postId'] )
+
+        db.session.add(new_like)
+        db.session.commit()
+        return new_like.to_dict()

@@ -5,8 +5,6 @@ import { getAllPostsThunk} from "../../store/post";
 import { Link } from "react-router-dom";
 import CommentsForm from "../CommentsForm";
 import AllComments from "../Comments"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGear, faXmark, faMessage, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 import PostUpdate from "../PostUpdate/index"
 import OpenModalButton from "../OpenModalButton"
 import PostDelete from "../PostDelete";
@@ -33,8 +31,6 @@ export default function PostFeed() {
   postsArr.reverse()
 
 
-
-
   return (
     <>
     <div className='postfeed-container'>
@@ -54,14 +50,21 @@ export default function PostFeed() {
           </div>
 
           <div className='postfeed-edit-delete'>
+          {user?.id == post.userId ?
+          <>
+          <OpenModalButton
+          className='postfeed-editpost'
+          buttonText={<i class="fa-solid fa-gear postfeed-gear-icon" />}
+          modalComponent={<PostUpdate post={post} />}
+          />
 
-          <OpenModalButton buttonText={<FontAwesomeIcon icon={faGear} className='postfeed-gear-icon'
-            />} modalComponent={<PostUpdate post={post} />} />
-
-          <OpenModalButton buttonText={<FontAwesomeIcon icon={faXmark} className='postfeed-x-icon'
-            />} modalComponent={<PostDelete postId={post.id} />} />
-
-
+          <OpenModalButton
+          className='postfeed-editpost'
+          buttonText= {<i class="fa-solid fa-xmark postfeed-x-icon" />}
+           modalComponent={<PostDelete postId={post.id} />}
+          />
+          </>
+          : null }
           </div>
 
           <div className='feedpost-caption-photo'>
@@ -73,19 +76,19 @@ export default function PostFeed() {
 
 
           <div className='feed-like-comment-count'>
-            <div> 1 Like </div>
-            <div className='feed-comments'> {post.comments?.length > 0 ? `${post.comments.length} Comments` : null }</div>
+            { post.likes.length > 0 ? <div> {post.likes.length} {post.likes.length == 1 ? "like" : "likes "} </div> : <div></div>}
+            <div className='feed-comments'> {post.comments?.length > 0 ? `${post.comments.length} ${post.comments.length == 1 ? 'comment' : 'comments'}` : null }</div>
           </div>
 
           <div className='feed-like-comment-buttons'>
             <div className='feed-like-button'>
-              <FontAwesomeIcon icon={faThumbsUp} />
-              <div> Like </div>
+            <i className="fa-regular fa-thumbs-up" />
+              <div className='feed-like-text'> Like </div>
             </div>
 
             <div className='feed-comment-button'>
-              <FontAwesomeIcon icon={faMessage} />
-              <div> Comment </div>
+              <i className="fa-regular fa-message" />
+              <div className='feed-comment-text'> Comment </div>
             </div>
           </div>
 

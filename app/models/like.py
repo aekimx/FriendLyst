@@ -13,12 +13,12 @@ class Like(db.Model):
     post_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('posts.id')), nullable=False)
 
     # Relationship Attributes
-    user = db.relationship("User", backref='users', lazy=True)
+    user = db.relationship("User", back_populates='likes', lazy=True)
+    post = db.relationship("Post", back_populates='likes', lazy=True)
 
     def to_dict(self):
         return {
             'id': self.id,
-            'liked': self.liked,
             'user': self.user.to_dict_name(),
             'postId': self.post_id,
         }

@@ -1,0 +1,43 @@
+.friendslist-overall-container {
+  margin-top: 50px;
+  background-color: rgb(24,25,26);
+  color: rgb(228,230,235);
+  font-family: 'Ruda', sans-serif;
+  position: absolute;
+  left: 180px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  border-left: 0.5px solid rgb(58,59,61);
+}
+
+.friendslist-each-container {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 75px;
+  padding-left: 20px;
+  /* border-top: 0.5px solid rgb(58,59,61); */
+  border-bottom:0.5px solid rgb(58,59,61);
+}
+
+.friendlist-friend-profpic {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+}
+
+.friendslist-name {
+  margin-left: 10px;
+}
+
+.friendslist-allfriends-text {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  font-size: 40px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-bottom:0.5px solid rgb(58,59,61);
+}
