@@ -1,7 +1,7 @@
 import React from "react"
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { acceptRequestThunk, getAllRequestsThunk } from "../../store/friend";
+import { deleteRequestThunk, getAllRequestsThunk } from "../../store/friend";
 
 
 export default function DeleteRequest({request}) {
@@ -10,7 +10,7 @@ export default function DeleteRequest({request}) {
 
   const deleteRequest = (e) => {
     e.preventDefault();
-    dispatch(acceptRequestThunk(request.id))
+    dispatch(deleteRequestThunk(request.id))
     .then(() => dispatch(getAllRequestsThunk(user?.id)))
   }
 

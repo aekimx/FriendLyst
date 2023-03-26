@@ -26,6 +26,39 @@ def get_user_by_id(id):
 
     return user_profile.to_dict()
 
+@user_routes.route('/search', methods=["GET"])
+# @login_required
+def get_user_by_id(id):
+    """ Query for a user by the search input provided  and returns that user's profile in a dictionary """
+
+    # get the data as a single string
+    data = request.get_json();
+    # split the data to get first and last name presumably...
+    # what happens if you split something and it doesn't have a space?
+    search = data.split(" ").lower()
+
+    #different combos for what the search could have been!
+    users_full_name = User.query.filter(User.first_name == search[0]).filter(User.last_name == search[1]).all()
+    users_full_name_two = User.query.filter(User.first_name == search[1]).filter(User.last_name == search[0]).all()
+
+    users_first_name = User.query.filter(User.first_name == search[0]).all()
+    users_first_name_two = User.query.filter(User.first_name == search[1]).all()
+
+    users_last_name = User.query.filter(User.last_name == search[1]).all()
+    user_last_name_two = User.query.filter(User.last_name == search[0]).all()
+
+
+
+
+
+
+    # if you can't find any users by that name
+
+    if users is None:
+        return jsonify({"error": "User not found"})
+
+    return user_profile.to_dict()
+
 
 @user_routes.route('/<int:id>', methods=["PUT"])
 # @login_required
