@@ -13,20 +13,25 @@ export default function NavBar() {
   return (
     <>
     <div className='home-navbar'>
+
         <div className='home-logo-search'>
           <Link to={'/home'} > Home </Link>
           <input type='text' placeholder='Search Facebook' className='navbar-searchbar'/>
         </div>
+
         <div className='home-navbar-middle-icons'>
           <Link to={'/home'} > <i className="fa-solid fa-house home-home"/> </Link>
           <i className="fa-solid fa-video home-video" />
           <i className="fa-solid fa-store home-store" />
           <i className="fa-solid fa-gamepad home-game" />
         </div>
-        <div>
-          <Link to={`/${user.firstName}.${user.lastName}.${user.id}/profile`} > User Profile </Link>
-          {/* <div> User Profile</div> */}
+
+        <div className='navbar-profileimg-container'>
+          <Link to={`/${user.firstName}.${user.lastName}.${user.id}/profile`} >
+            <img src={user.profilePic} className='home-navbar-profile-link'/>
+          </Link>
         </div>
+
     </div>
     </>
   )

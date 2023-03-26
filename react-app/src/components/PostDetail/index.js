@@ -2,9 +2,6 @@ import React, { useEffect }  from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { getPostDetailThunk } from "../../store/post"
 import { useParams } from "react-router-dom"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGear } from '@fortawesome/free-solid-svg-icons'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
 
 export default function PostDetail() {
   const dispatch = useDispatch()
@@ -25,9 +22,6 @@ export default function PostDetail() {
 
   return (
     <>
-    <div> TESTING </div>
-    <FontAwesomeIcon icon={faGear} />
-    <FontAwesomeIcon icon={faBars} />
     <i class="fa-solid fa-gear" />
     <img src={post.user?.profilePic} alt='userimage'/>
     <div> {post.user?.firstName} {post.user?.lastName} </div>

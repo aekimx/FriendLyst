@@ -4,20 +4,21 @@ import { useSelector } from "react-redux";
 import { acceptRequestThunk, getAllRequestsThunk } from "../../store/friend";
 
 
-export default function AcceptRequest({request}) {
+export default function DeleteRequest({request}) {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session?.user);
 
-  const acceptRequest = (e) => {
+  const deleteRequest = (e) => {
     e.preventDefault();
     dispatch(acceptRequestThunk(request.id))
+    .then(() => dispatch(getAllRequestsThunk(user?.id)))
   }
 
 
   return (
     <>
-    <div className='friendrequest-accept' onClick={acceptRequest}>
-      <i className="fa-solid fa-check" />
+    <div className='friendrequest-delete' onClick={deleteRequest}>
+      <i className="fa-solid fa-x" />
     </div>
     </>
   )
