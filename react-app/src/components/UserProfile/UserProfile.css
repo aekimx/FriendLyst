@@ -20,6 +20,8 @@
   margin-left: -10px;
   margin-top: -10px;
   margin-bottom: -10px;
+
+
 }
 
 .userprofile-container-inside {
@@ -33,6 +35,9 @@
 .userprofile-bio {
   border: 2px solid red;
   height: 100%;
+  width: 400px;
+  margin-right: 20px;
+
 }
 
 .userprofile-posts-profpic {

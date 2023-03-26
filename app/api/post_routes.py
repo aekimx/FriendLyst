@@ -9,6 +9,7 @@ from sqlalchemy.orm import load_only
 
 post_routes = Blueprint('posts', __name__)
 
+# GET POSTS IN FEED
 @post_routes.route('/<int:userId>/posts', methods=['GET'])
 # @login_required
 def get_all_posts(userId):
@@ -24,11 +25,11 @@ def get_all_posts(userId):
 
     return [post.to_dict() for post in all_posts]
 
-
+# GET POST BY ID
 @post_routes.route('/<int:id>', methods=["GET"])
-# @login_required
+@login_required
 def get_post_by_id(id):
-    ''' Query for a post by ID and return '''
+    ''' Query for a post by ID and return as a dictionary'''
     post = Post.query.get(id)
 
     if post is None:
@@ -36,9 +37,21 @@ def get_post_by_id(id):
 
     return post.to_dict()
 
+@post_routes.route("/<int:userId>/posts")
+@login_required
+def get_users_posts(userId):
+    ''' Query for posts created by user ID and return in a list of dictionaries '''
+    user_posts = Post.query.filter(Post.user_id == userId).all()
 
+    if user_posts is None:
+        return jsonify({'error': 'Posts not found'}), 404
+
+    return [post.to_dict() for post in user_posts]
+
+
+# CREATE NEW POST
 @post_routes.route('', methods=['POST'])
-# @login_required
+@login_required
 def create_post():
     ''' Create a new post and return the newly created post as a dictionary '''
     form = PostForm()
@@ -74,10 +87,9 @@ def create_post():
 
     return jsonify({'error': "form did not validate on submit"})
 
-
-
+# UPDATE POST
 @post_routes.route('/<int:id>', methods=["PUT"])
-# @login_required
+@login_required
 def update_post(id):
     ''' Query for a post by ID and update it if post exists. Returned as a dictionary.'''
     post = Post.query.get(id)
@@ -101,9 +113,9 @@ def update_post(id):
 
     return jsonify({"error": "form did not validate on submit"})
 
-
+# DELETE POST
 @post_routes.route('/<int:id>', methods=['DELETE'])
-# @login_required
+@login_required
 def delete_post(id):
     ''' Query for a post by ID and delete it if post exists. Return a successful message '''
     post = Post.query.get(id)
@@ -114,8 +126,9 @@ def delete_post(id):
     db.session.commit()
     return jsonify({'Success': 'Post successfully deleted'})
 
+# LIKE POST
 @post_routes.route('/<int:id>/like', methods=['POST'])
-# @login_required
+@login_required
 def like_post(id):
     ''' Query for a post by ID and like it if post exists. Return a successful message '''
     post = Post.query.get(id)

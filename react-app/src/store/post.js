@@ -8,12 +8,13 @@ const CREATE_COMMENT = 'posts/CREATE_COMMENT'
 const UPDATE_COMMENT = 'posts/UPDATE_COMMENT'
 const DELETE_COMMENT = 'posts/DELETE_COMMENT'
 
-
 // ----------------------------------- action creators   ---------------------------------
 const getAllPosts = (posts) => ({
 	type: GET_ALL_POSTS,
 	posts
 })
+
+
 
 const getPostById = (post) => ({
   type: GET_POST_DETAIL,
@@ -64,6 +65,8 @@ export const getAllPostsThunk = (userId) => async (dispatch) => {
     return data
 	}
 }
+
+
 
 export const getPostDetailThunk = (id) => async (dispatch) => {
   const response = await fetch(`/api/posts/${id}`)

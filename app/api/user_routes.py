@@ -28,7 +28,7 @@ def get_user_by_id(id):
 
 @user_routes.route('/search', methods=["GET"])
 # @login_required
-def get_user_by_id(id):
+def search_user():
     """ Query for a user by the search input provided  and returns that user's profile in a dictionary """
 
     # get the data as a single string

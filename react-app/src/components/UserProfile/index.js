@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { getUserThunk } from '../../store/user'
 import NavBar from "../NavBar"
+import UserProfilePosts from '../UserProfilePosts'
 
 import './UserProfile.css'
 
@@ -61,7 +62,8 @@ export default function UserProfile() {
       <div className='userprofile-posts-container'>
         {/* I think I should have a separate post component here */}
         <div> Posts </div>
-        {user.user?.posts.map(post => {
+        <UserProfilePosts userId={userId}/>
+        {/* {user.user?.posts.map(post => {
           return (
             <div className='userprofile-posts-div' key={`userprofilepost${post.id}`}>
               <div>
@@ -72,8 +74,7 @@ export default function UserProfile() {
               <img src={post.photo} />
             </div>
           )
-        })}
-        {/* I think I should have a comment component here */}
+        })} */}
 
       </div>
       </div>
