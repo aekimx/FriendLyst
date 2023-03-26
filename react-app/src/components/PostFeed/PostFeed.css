@@ -28,7 +28,8 @@
 
 .postfeed-userpost-pic {
   width: 50px;
-  border-radius: 25px;
+  height: 50px;
+  border-radius: 30px;
 }
 
 .postfeed-post-pic {

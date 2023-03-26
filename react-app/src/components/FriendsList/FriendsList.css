@@ -50,3 +50,8 @@
   padding-bottom: 5px;
   border-bottom:0.5px solid rgb(58,59,61);
 }
+
+.friendslist-name-link {
+  color: rgb(228,230,235);
+  text-decoration: none;
+}

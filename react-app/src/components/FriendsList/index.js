@@ -4,6 +4,7 @@ import React from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAllFriendsThunk } from "../../store/friend";
+import { Link } from "react-router-dom";
 
 import './FriendsList.css'
 
@@ -31,7 +32,12 @@ export default function FriendsList() {
         return (
           <div className='friendslist-each-container' key={`friendlist${friend.id}`}>
             <img src={friend.friend.profilePic} className='friendlist-friend-profpic'/>
-            <div className='friendslist-name'> {friend.friend.firstName} {friend.friend.lastName} </div>
+            <div className='friendslist-name'>
+              <Link to={`/${friend.friend.firstName}.${friend.friend.lastName}.${friend.friend.id}/profile`}
+              className='friendslist-name-link'>
+              {friend.friend.firstName} {friend.friend.lastName}
+              </Link>
+            </div>
           </div>
         )
       })}
