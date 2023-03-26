@@ -2,8 +2,6 @@ import React from "react"
 import { useDispatch } from "react-redux";
 import { deleteCommentThunk, getAllPostsThunk } from "../../store/post";
 import { useModal } from "../../context/Modal";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {  faXmark } from '@fortawesome/free-solid-svg-icons'
 
 import './CommentDelete.css'
 
@@ -25,7 +23,9 @@ export default function CommentDelete({comment}) {
       <div className='deletecomment-header'>
         <div> </div>
         <div className='deletecomment-confirm-text'> Are you sure you want to delete your comment? </div>
-        <div onClick={closeModal}> <FontAwesomeIcon icon={faXmark} className='deletecomment-x-icon' /> </div>
+        <div onClick={closeModal}>
+        <i class="fa-solid fa-x deletecomment-x-icon" />
+        </div>
       </div>
 
       <div className='deletecomment-action-text'> This action cannot be undone </div>
