@@ -37,7 +37,7 @@ export default function PostFeed() {
     {postsArr.map(post => {
       return (
         <>
-        <div className='postfeed-each-post-container' key={`feedpost${post.id}`}>
+        <div className='postfeed-each-post-container' key={`feedpostpost${post.id}`}>
 
           <div className="postfeed-propic-name-time">
 
@@ -50,7 +50,7 @@ export default function PostFeed() {
           </div>
 
           <div className='postfeed-edit-delete'>
-          {user?.id == post.userId ?
+          {user?.id === post.userId ?
           <>
           <OpenModalButton
           className='postfeed-editpost'
@@ -76,8 +76,8 @@ export default function PostFeed() {
 
 
           <div className='feed-like-comment-count'>
-            { post.likes.length > 0 ? <div> {post.likes.length} {post.likes.length == 1 ? "like" : "likes "} </div> : <div></div>}
-            <div className='feed-comments'> {post.comments?.length > 0 ? `${post.comments.length} ${post.comments.length == 1 ? 'comment' : 'comments'}` : null }</div>
+            { post.likes.length > 0 ? <div> {post.likes.length} {post.likes.length === 1 ? "like" : "likes "} </div> : <div></div>}
+            <div className='feed-comments'> {post.comments?.length > 0 ? `${post.comments.length} ${post.comments.length === 1 ? 'comment' : 'comments'}` : null }</div>
           </div>
 
           <div className='feed-like-comment-buttons'>

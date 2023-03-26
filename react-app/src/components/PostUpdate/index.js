@@ -3,8 +3,6 @@ import { useDispatch } from "react-redux"
 import { updatePostThunk } from "../../store/post"
 import { useState } from "react"
 import { useModal } from "../../context/Modal";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faXmark } from '@fortawesome/free-solid-svg-icons'
 
 import './PostUpdate.css'
 
@@ -33,7 +31,7 @@ export default function PostUpdate({post}) {
         <div> </div>
         <div>Edit Post </div>
         <div onClick={closeModal} className='postupdate-closemodal'>
-          <FontAwesomeIcon icon={faXmark} />
+        <i className="fa-solid fa-x" />
         </div>
       </div>
 

@@ -176,7 +176,12 @@ export default function postReducer(state = initialState, action) {
       newState.post = action.post
       return newState
 
-    case CREATE_POST, UPDATE_POST:
+    case CREATE_POST:
+      newState = {...state, allPosts: {...state.allPosts}}
+      newState.allPosts[action.post.id] = action.post
+			return newState
+
+    case UPDATE_POST:
       newState = {...state, allPosts: {...state.allPosts}}
       newState.allPosts[action.post.id] = action.post
 			return newState
@@ -196,7 +201,7 @@ export default function postReducer(state = initialState, action) {
       let index;
       for (let i=0; i < newState.allPosts[action.comment.postId].comments.length; i++) {
         let comment = newState.allPosts[action.comment.postId].comments[i];
-        if (comment?.id == action.comment.id) index = i;
+        if (comment?.id === action.comment.id) index = i;
       }
       delete newState.allPosts[action.comment?.postId].comments[index]
       return newState

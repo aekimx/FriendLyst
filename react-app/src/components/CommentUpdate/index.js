@@ -3,8 +3,6 @@ import { useDispatch } from "react-redux"
 import { getAllPostsThunk, updateCommentThunk } from "../../store/post"
 import { useState } from "react"
 import { useModal } from "../../context/Modal";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faXmark } from '@fortawesome/free-solid-svg-icons'
 
 import './CommentUpdate.css'
 
@@ -35,7 +33,7 @@ export default function CommentUpdate({comment}) {
         <div> </div>
         <div>Edit Comment </div>
         <div onClick={closeModal} className='commentupdate-closemodal'>
-          <FontAwesomeIcon icon={faXmark} />
+        <i className="fa-solid fa-x" />
         </div>
       </div>
 

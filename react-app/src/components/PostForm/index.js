@@ -1,8 +1,6 @@
 import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { createPostThunk, getAllPostsThunk } from "../../store/post";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faImages } from '@fortawesome/free-solid-svg-icons'
 
 import './PostForm.css'
 
@@ -57,7 +55,7 @@ export default function PostForm() {
             />
 
           <label htmlFor="feed-postform-fileupload" className='postform-label'>
-          <FontAwesomeIcon icon={faImages} />
+          <i class="fa-solid fa-image" />
             <input
                   type="file"
                   accept="image/*"

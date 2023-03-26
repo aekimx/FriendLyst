@@ -1,8 +1,6 @@
 import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { createCommentThunk, getAllPostsThunk } from "../../store/post";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCommentDots, faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 
 import "./CommentsForm.css"
 
@@ -35,7 +33,7 @@ export default function CommentsForm({postId}) {
         value={comment}
         onChange={(e) => setComment(e.target.value)}>
         </input>
-        <FontAwesomeIcon icon={faPaperPlane} className='commentform-sendbutton'/>
+        <i className="fa-solid fa-paper-plane commentform-sendbutton"/>
 
       </form>
       </div>

@@ -2,8 +2,6 @@ import React from "react"
 import { useDispatch } from "react-redux";
 import { deletePostThunk } from "../../store/post";
 import { useModal } from "../../context/Modal";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {  faXmark } from '@fortawesome/free-solid-svg-icons'
 
 import "./PostDelete.css"
 
@@ -24,7 +22,9 @@ export default function PostDelete(postId) {
       <div className='deletepost-header'>
         <div> </div>
         <div className='deletepost-confirm-text'> Are you sure you want to delete your post? </div>
-        <div onClick={closeModal}> <FontAwesomeIcon icon={faXmark} className='postdelete-x-icon' /> </div>
+        <div onClick={closeModal}>
+          <i class="fa-solid fa-x postdelete-x-icon" />
+        </div>
       </div>
 
       <div className='deletepost-action-text'> This action cannot be undone </div>

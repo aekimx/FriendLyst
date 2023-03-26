@@ -1,7 +1,6 @@
 // constants
 const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
-const GET_USER = 'session/GET_USER'
 
 //Action Creators
 const setUser = (user) => ({
@@ -12,11 +11,6 @@ const setUser = (user) => ({
 const removeUser = () => ({
 	type: REMOVE_USER,
 });
-
-const getUserProfile = (user) => ({
-	type: GET_USER,
-	target: user
-})
 
 
 // Thunks

@@ -1,6 +1,4 @@
 import React, { useState, useRef, useEffect } from "react"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEllipsis } from '@fortawesome/free-solid-svg-icons'
 import OpenModalButton from "../OpenModalButton"
 import CommentDelete from "../CommentDelete"
 import CommentUpdate from "../CommentUpdate"
@@ -33,9 +31,7 @@ export default function CommentOptions({comment}) {
   return (
     <>
     <div className='commentoptions-container'>
-
-      <FontAwesomeIcon icon={faEllipsis} className='post-comment-options'
-      onClick={openMenu} />
+      <i className="fa-solid fa-ellipsis post-comment-options" onClick={openMenu} />
     </div>
 
     <div className={ulClassName} ref={ulRef}>
