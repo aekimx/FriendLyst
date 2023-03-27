@@ -3,6 +3,7 @@ const GET_USER_PROFILE = 'user/GET_USER_PROFILE'
 const CREATE_USER_PROFILE = 'user/CREATE_USER_PROFILE'
 const UPDATE_USER_PROFILE = 'user/UPDATE_USER_PROFILE'
 const GET_USER_POSTS = 'user/GET_USER_POSTS'
+const SEARCH_USERS = 'user/SEARCH_USERS'
 
 // ----------------------------------- action creators   ---------------------------------
 const getUserProfile = (user) => ({
@@ -18,6 +19,11 @@ const updateUserProfile = (user) => ({
 const getUserPosts = (posts) => ({
   type: GET_USER_POSTS,
   posts
+})
+
+const searchUsers = (users) => ({
+  type: SEARCH_USERS,
+  users
 })
 
 // ----------------------------------- thunks  ----------------------------------------
@@ -71,10 +77,15 @@ export const getUserPostsThunk = (userId) => async (dispatch) => {
   }
 }
 
+// export const searchUsersThunk = () = async (dispatch) => {
 
-const initialState = { user: { } , posts: { } };
+// }
+
 
 // ----------------------------------- Reducer  ----------------------------------------
+
+const initialState = { user: { } , posts: { } , search: { } };
+
 export default function userReducer(state = initialState, action) {
   let newState = {};
 	switch (action.type) {

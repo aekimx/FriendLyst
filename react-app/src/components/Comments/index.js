@@ -31,9 +31,7 @@ export default function AllComments({comments}) {
 
             </div>
 
-            <div className='post-comment-options-div'>
-              {user?.id == comment.userId ? <CommentOptions comment={comment}/> : null}
-            </div>
+              {user?.id == comment.userId ?  <div className='post-comment-options-div'> <CommentOptions comment={comment}/> </div> : null}
 
 
           </div>
