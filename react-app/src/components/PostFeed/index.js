@@ -22,8 +22,6 @@ export default function PostFeed() {
     dispatch(getAllPostsThunk(user?.id))
   }, [dispatch])
 
-  if (!allPosts) return null;
-
   let postsArr;
   if (allPosts) postsArr = Object.values(allPosts)
 

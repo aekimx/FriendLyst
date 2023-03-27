@@ -23,8 +23,6 @@ const getUserPosts = (posts) => ({
 // ----------------------------------- thunks  ----------------------------------------
 
 export const getUserThunk = (id) => async (dispatch) => {
-  console.log('get user thunk running')
-  console.log("what's getting passed into user thunk?", id)
 	const response = await fetch(`/api/users/${id}`)
 
 	if (response.ok) {
@@ -64,12 +62,10 @@ export const updateUserThunk = (userId, userProfile) => async (dispatch) => {
 }
 
 export const getUserPostsThunk = (userId) => async (dispatch) => {
-  console.log('get user posts thunk running')
   const res = await fetch(`/api/posts/${userId}/posts/current`)
 
   if (res.ok) {
     let data = await res.json()
-    console.log('RES.OK!!! from get user posts thunk', data)
     dispatch(getUserPosts(data))
     return data
   }

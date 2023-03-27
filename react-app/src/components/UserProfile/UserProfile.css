@@ -10,7 +10,8 @@
 
 .userprofile-profpic {
   width: 200px;
-  border-radius: 100px;
+  height: 200px;
+  border-radius: 150px;
 }
 
 .userprofile-container {
@@ -81,6 +82,9 @@
 
 .userprofile-intro-text {
   font-size: 25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .userprofile-bio > div {
@@ -107,4 +111,12 @@
 
 .userprof-friends {
   font-size: 20px;
+}
+
+.userprofile-posts-text {
+  font-size: 30px;
+  background-color: rgb(35,37,38);
+  width: 730px;
+  border-radius: 20px;
+  padding: 10px;
 }

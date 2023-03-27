@@ -1,0 +1,117 @@
+.userprof-update-modal-container {
+  width: 500px;
+  height: 330px;
+  background-color: rgb(35,37,38);
+  color: rgb(228,230,235);
+  font-family: 'Ruda', sans-serif;
+  border-radius: 15px;
+  padding: 15px;
+}
+
+
+.userupdate-closemodal {
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+  border-radius: 20px;
+  background-color: rgb(58,59,61);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.userupdate-closemodal:hover {
+  background-color: rgb(79,80,81);
+}
+
+.userupdate-update-button {
+  width: 300px;
+  height: 35px;
+  margin-left: 100px;
+  margin-top: 10px;
+  background-color: rgb(43,116,225);
+  cursor: pointer;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  color: rgb(228,230,235);
+  border: none;
+}
+
+.userupdate-update-button:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
+.userupdate-button:hover {
+  background-color: rgb(61, 126, 224);
+}
+
+.userprof-bio-bio {
+  display: flex;
+  flex-direction: row;
+}
+
+.userprofile-bio-text {
+  margin-left: 10px;
+}
+
+.userprof-update-bio {
+  font-size: 18px;
+  cursor: pointer;
+  background-color: rgb(35,37,38);
+  color: rgb(228,230,235);
+  border: none;
+}
+
+.userprof-update-bio-text, .userprof-update-location-text {
+  background-color: rgb(58,59,61);
+  border: none;
+  width: 450px;
+  padding: 10px;
+  border-radius: 12px;
+  color: rgb(228,230,235);
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 5px;
+  font-family: 'Ruda', sans-serif;
+  font-size: 15px;
+}
+
+.userprof-update-bio-text {
+  font-family: 'Ruda', sans-serif;
+  resize: none;
+  height: 35px;
+  border-radius: 20px;
+  overflow-y: wrap;
+}
+
+.userprof-update-bio-text:focus, .userprof-update-location-text:focus {
+  outline: none;
+}
+
+.userprof-update-form-inputs-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.userprof-solo-inputs-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.userprof-update-form-inputs-container label {
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.userupdate-closemodal {
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+}
+
+.userupdate-closemodal i {
+  font-size: 15px;
+}

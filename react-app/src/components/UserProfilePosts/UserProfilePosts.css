@@ -1,5 +1,5 @@
 .userprofileposts-container {
-  width: 700px;
+  width: 750px;
   position: relative;
 }
 
@@ -21,6 +21,8 @@
 
 .userpost-caption {
   padding: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .userpost-profpic {
@@ -41,4 +43,69 @@
 
 .userpost-date-text {
   margin-left: 10px
+}
+
+.userpost-comment-profpic {
+  width: 50px;
+  height: 50px;
+  border-radius: 30px;
+}
+
+.userpost-comment-name-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+}
+
+.userpost-each-comment-container {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.userpost-each-comment {
+  margin-left: 10px;
+  background-color: rgb(58,59,61);
+  padding: 15px;
+  border-radius: 30px;
+}
+
+.userpost-like-comment-count, .userpost-like-comment-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+
+}
+
+.userpost-like-comment-count {
+  width: 700px;
+  border-bottom: 0.5px solid rgb(58,59,61);
+  padding-bottom:7px;
+}
+
+.userpost-comments {
+  margin-left: 300px;
+}
+
+.userpost-comments-text {
+  margin-top: 10px;
+  font-size: 20px;
+  text-decoration: 0.5px underline;
+}
+
+.userpost-comment-createdat {
+  font-size: 12px;
+  margin-left: 5px;
+}
+
+.userpost-comment-link {
+  color: white;
+  text-decoration: none;
+}
+
+.userpost-comment-link:hover {
+  color: white;
+  text-decoration: underline;
 }

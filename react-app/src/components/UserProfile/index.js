@@ -4,7 +4,8 @@ import { useParams } from 'react-router-dom'
 import { getUserThunk } from '../../store/user'
 import NavBar from "../NavBar"
 import UserProfilePosts from '../UserProfilePosts'
-import { getUserPostsThunk } from '../../store/user'
+import OpenModalButton from '../OpenModalButton'
+import UserProfileUpdate from '../UserProfileUpdate'
 
 import './UserProfile.css'
 import '../UserProfilePosts/UserProfilePosts.css'
@@ -15,14 +16,9 @@ export default function UserProfile() {
   const userId = url.userId.split(".")[2]
 
   const user = useSelector(state => state.user.user)
-  const sessionUser = useSelector(state => state.session.user)
-
-  console.log('are we properly doing the ternary? ', sessionUser.id === user.id)
-
 
   useEffect(() => {
     dispatch(getUserThunk(userId))
-    dispatch(getUserPostsThunk(userId))
   }, [dispatch])
 
   // if (!user) return null
@@ -54,10 +50,28 @@ export default function UserProfile() {
       <div className='userprof-bio-posts-container'>
       <div>
         <div className='userprofile-bio'>
-          <div className='userprofile-intro-text'> Intro </div>
-          <div className='userprofile-bio-text'> <i className="fa-solid fa-address-card" /> {user.bio} </div>
-          <div> <i className="fa-solid fa-cake-candles" /> Birthday {user.user?.birthday} </div>
-          <div> <i className="fa-solid fa-house" /> Lives in {user.location} </div>
+          <div className='userprofile-intro-text'>
+            <div> Intro  </div>
+            <OpenModalButton
+            buttonText={<i className="fa-solid fa-gear"/>}
+            modalComponent={<UserProfileUpdate user={user}/>}
+            className='userprof-update-bio'/>
+          </div>
+
+          <div className='userprof-bio-bio'>
+            <i className="fa-solid fa-address-card" />
+            <div className='userprofile-bio-text'> {user.bio} </div>
+          </div>
+
+          <div className='userprof-bio-bio'>
+            <i className="fa-solid fa-cake-candles" />
+            <div className='userprofile-bio-text'> {user.user?.birthday} </div>
+          </div>
+
+          <div className='userprof-bio-bio'>
+            <i className="fa-solid fa-house" />
+            <div className='userprofile-bio-text'>  Lives in {user.location} </div>
+          </div>
         </div>
 
         <div className='userprofile-photos'>
@@ -68,10 +82,7 @@ export default function UserProfile() {
 
 
       <div className='userprofile-posts-container'>
-
-        {/* {sessionUser.id === userId ? <div> POST FORM </div> : null} */}
-
-        <div> Posts </div>
+        <div className='userprofile-posts-text'> Posts </div>
         <UserProfilePosts userId={userId}/>
 
 
