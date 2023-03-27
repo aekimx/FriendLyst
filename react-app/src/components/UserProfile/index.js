@@ -8,7 +8,8 @@ import OpenModalButton from '../OpenModalButton'
 import UserProfileUpdate from '../UserProfileUpdate'
 
 import './UserProfile.css'
-import '../UserProfilePosts/UserProfilePosts.css'
+// import '../UserProfilePosts/UserProfilePosts.css'
+import { getAllFriendsThunk } from '../../store/friend'
 
 export default function UserProfile() {
   const dispatch = useDispatch()
@@ -16,9 +17,13 @@ export default function UserProfile() {
   const userId = url.userId.split(".")[2]
 
   const user = useSelector(state => state.user.user)
+  const friends = useSelector(state => state.friends.allFriends)
+
+  const friendsArr = Object.values(friends)
 
   useEffect(() => {
     dispatch(getUserThunk(userId))
+    dispatch(getAllFriendsThunk(userId))
   }, [dispatch])
 
   // if (!user) return null
@@ -41,7 +46,7 @@ export default function UserProfile() {
         </div>
         <div className='userprof-name-container'>
           <div className='userprof-name'> {user.user?.firstName} {user.user?.lastName} </div>
-          <div className='userprof-friends'> 5 friends </div>
+          <div className='userprof-friends'> {friendsArr.length} Friends </div>
 
         </div>
       </div>
@@ -50,6 +55,7 @@ export default function UserProfile() {
       <div className='userprof-bio-posts-container'>
       <div>
         <div className='userprofile-bio'>
+
           <div className='userprofile-intro-text'>
             <div> Intro  </div>
             <OpenModalButton

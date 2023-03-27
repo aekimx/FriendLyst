@@ -16,7 +16,7 @@ export default function NavBar() {
 
         <div className='home-logo-search'>
           <Link to={'/home'} > Home </Link>
-          <input type='text' placeholder='Search Facebook' className='navbar-searchbar'/>
+          <input type='text' placeholder='Search FriendLyst' className='navbar-searchbar'/>
         </div>
 
         <div className='home-navbar-middle-icons'>

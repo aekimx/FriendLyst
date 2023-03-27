@@ -9,7 +9,7 @@ import UserProfile from "./components/UserProfile";
 import PostDetail from "./components/PostDetail";
 import FriendsList from "./components/FriendsList";
 import FriendRequests from "./components/FriendRequests";
-// import Navigation from "./components/Navigation";
+import SearchResults from "./components/SearchResults";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,17 +33,25 @@ function App() {
       <Route path="/home">
         <HomePage />
       </Route>
+
       <Route path="/:userId/profile">
         <UserProfile />
       </Route>
+
       <Route path="/posts/:id">
         <PostDetail />
       </Route>
+
       <Route path="/:userId/friends">
         <FriendsList />
       </Route>
+
       <Route path="/:userId/requests">
         <FriendRequests />
+      </Route>
+
+      <Route path="/search/results">
+        <SearchResults />
       </Route>
       </>
     )}

@@ -7,7 +7,7 @@ user_routes = Blueprint('users', __name__)
 
 
 @user_routes.route('')
-# @login_required
+@login_required
 def get_all_users():
     """ Query for all users and returns them in a list of user dictionaries """
     users = User.query.all()
@@ -15,7 +15,7 @@ def get_all_users():
 
 
 @user_routes.route('/<int:id>', methods=["GET"])
-# @login_required
+@login_required
 def get_user_by_id(id):
     """ Query for a user by id and returns that user's profile in a dictionary """
 
@@ -26,8 +26,8 @@ def get_user_by_id(id):
 
     return user_profile.to_dict()
 
-@user_routes.route('/search', methods=["GET"])
-# @login_required
+@user_routes.route('/search', methods=["PUT"])
+@login_required
 def search_user():
     """ Query for a user by the search input provided  and returns that user's profile in a dictionary """
 
@@ -47,17 +47,13 @@ def search_user():
     users_last_name = User.query.filter(User.last_name == search[1]).all()
     user_last_name_two = User.query.filter(User.last_name == search[0]).all()
 
-
-
-
-
-
+    return jsonify({"test": "Test"})
     # if you can't find any users by that name
 
-    if users is None:
-        return jsonify({"error": "User not found"})
+    # if users is None:
+    #     return jsonify({"error": "User not found"})
 
-    return user_profile.to_dict()
+    # return user_profile.to_dict()
 
 
 @user_routes.route('/<int:id>', methods=["PUT"])

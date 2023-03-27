@@ -43,7 +43,9 @@ def seed_friends():
         Friend(user_id=6, friend_id=7, status='Accepted'),
 
         # 7 Kita is friends with all her gfs
-        Friend(user_id=6, friend_id=7, status='Accepted'),
+        Friend(user_id=7, friend_id=6, status='Accepted'),
+        Friend(user_id=7, friend_id=5, status='Accepted'),
+        Friend(user_id=7, friend_id=4, status='Accepted'),
     ]
 
     db.session.add_all(friends)

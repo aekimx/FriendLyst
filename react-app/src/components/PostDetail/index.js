@@ -3,24 +3,20 @@ import { useSelector, useDispatch } from "react-redux"
 import { getPostDetailThunk } from "../../store/post"
 import { useParams } from "react-router-dom"
 import NavBar from "../NavBar"
-import SideBarMenu from "../SideBarMenu"
 
 import "./PostDetail.css"
 
 export default function PostDetail() {
   const dispatch = useDispatch()
   const {id} = useParams()
-  console.log('id is...', id)
 
   const post = useSelector(state => state.post.post)
-  console.log('post is working???', post)
 
   useEffect(() => {
     dispatch(getPostDetailThunk(id))
   }, [dispatch])
 
   const commentsArr = post?.comments
-  console.log('commentsArr', commentsArr)
 
 
 
