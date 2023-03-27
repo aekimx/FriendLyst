@@ -22,7 +22,6 @@ export default function PostDetail() {
 
   return (
     <>
-    <i class="fa-solid fa-gear" />
     <img src={post.user?.profilePic} alt='userimage'/>
     <div> {post.user?.firstName} {post.user?.lastName} </div>
     <div> {post.caption} </div>
