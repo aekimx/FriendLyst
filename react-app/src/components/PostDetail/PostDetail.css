@@ -51,9 +51,18 @@
 
 .postdetail-photo-container {
   position: fixed;
-  left: 160px;
-  top: 160px;
+  left: 0px;
+  top: 60px;
+  bottom: 0;
+  right: 520px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
+}
+
+.postdetail-photo {
+  width: 900px;
 }
 
 .postdetail-user-name {
