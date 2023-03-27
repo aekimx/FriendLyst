@@ -1,5 +1,44 @@
 .userprofileposts-container {
   width: 700px;
-  border: 2px solid red;
+  position: relative;
+}
 
+.userprofileposts-each-post {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: rgb(35,37,38);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.userpost-photo {
+  object-fit: contain;
+  width: 100%;
+}
+
+.userpost-caption {
+  padding: 5px;
+}
+
+.userpost-profpic {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+}
+
+.userpost-name-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.userpost-name-text {
+  margin-left: 10px;
+}
+
+.userpost-date-text {
+  margin-left: 10px
 }

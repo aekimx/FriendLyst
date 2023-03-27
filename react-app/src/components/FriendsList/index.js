@@ -12,14 +12,14 @@ import './FriendsList.css'
 
 export default function FriendsList() {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.session?.user)
-  const allFriends = useSelector(state => state.friends?.allFriends)
+  const user = useSelector(state => state.session.user)
+  const allFriends = useSelector(state => state.friends.allFriends)
 
   useEffect(() => {
     dispatch(getAllFriendsThunk(user?.id))
   }, [dispatch])
 
-  if (!allFriends) return null;
+  // if (!allFriends) return null;
   const allFriendsArr = Object.values(allFriends)
 
   return (

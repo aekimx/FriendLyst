@@ -2,8 +2,8 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  height: 400px;
-  margin-top: 50px;
+  height: 500px;
+  margin-top: 20px;
   background: linear-gradient(#efd6d6, #292a31);
 }
 
@@ -14,29 +14,30 @@
 }
 
 .userprofile-container {
-  background-color: rgb(35,37,38);
+  background-color: rgb(24,25,26);
   font-family: 'Ruda', sans-serif;
   color: rgb(228,230,235);
+  margin-top: 10px;
   margin-left: -10px;
-  margin-top: -10px;
   margin-bottom: -10px;
-
-
-}
-
-.userprofile-container-inside {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: relative;
+  overflow-y: scroll;
+  height: 100%;
+
 }
 
 .userprofile-bio {
-  border: 2px solid red;
-  height: 100%;
-  width: 400px;
+  width: 500px;
   margin-right: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: rgb(35,37,38);
+  border-radius: 20px;
+  padding: 15px;
 
 }
 
@@ -55,20 +56,55 @@
   flex-direction: row;
   margin-bottom: 10px;
   align-items: left;
+  width: 1200px;
+  margin-top: -80px;
 }
 
 .userprof-name-container {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-left: 10px
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 10px;
 }
 
-.userprof-fname {
+.userprof-name {
   margin-right: 10px;
+  margin-top: 40px;
+  font-size: 35px;
 }
 
 .userprof-bio-posts-container {
   display: flex;
   flex-direction: row;
+}
+
+
+.userprofile-intro-text {
+  font-size: 25px;
+}
+
+.userprofile-bio > div {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.userprofile-posts-container {
+  width: 700px;
+  height: 100%;
+}
+
+.userprofile-photos {
+  width: 500px;
+  margin-right: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: rgb(35,37,38);
+  border-radius: 20px;
+  padding: 15px;
+  margin-top: 15px;
+}
+
+.userprof-friends {
+  font-size: 20px;
 }

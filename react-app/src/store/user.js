@@ -2,7 +2,7 @@
 const GET_USER_PROFILE = 'user/GET_USER_PROFILE'
 const CREATE_USER_PROFILE = 'user/CREATE_USER_PROFILE'
 const UPDATE_USER_PROFILE = 'user/UPDATE_USER_PROFILE'
-const GET_USER_POSTS = 'posts/GET_USER_POSTS'
+const GET_USER_POSTS = 'user/GET_USER_POSTS'
 
 // ----------------------------------- action creators   ---------------------------------
 const getUserProfile = (user) => ({
@@ -64,39 +64,45 @@ export const updateUserThunk = (userId, userProfile) => async (dispatch) => {
 }
 
 export const getUserPostsThunk = (userId) => async (dispatch) => {
-  const res = await fetch(`/api/posts/${userId}/posts`)
+  console.log('get user posts thunk running')
+  const res = await fetch(`/api/posts/${userId}/posts/current`)
 
   if (res.ok) {
     let data = await res.json()
+    console.log('RES.OK!!! from get user posts thunk', data)
     dispatch(getUserPosts(data))
     return data
   }
 }
 
 
-const initialState = { user: null };
+const initialState = { user: { } , posts: { } };
 
 // ----------------------------------- Reducer  ----------------------------------------
 export default function userReducer(state = initialState, action) {
-  let newState = {}
+  let newState = {};
 	switch (action.type) {
-
     case GET_USER_PROFILE:
-      newState = { ...action.user}
+      newState = {...state, user: {}}
+      newState.user = action.user
 			return newState
 
     case UPDATE_USER_PROFILE:
-      newState = { ...action.user}
+      newState = {...state, user: {}}
+      newState.user = { ...action.user}
       return newState
 
     case CREATE_USER_PROFILE:
-      newState = {...action.newUser}
+      newState = {...state, user: {}}
+      newState.user = {...action.newUser}
       return newState
 
     case GET_USER_POSTS:
-      newState = {...state}
+      newState = {...state, posts: { } }
+      action.posts.forEach(post => newState.posts[post.id] = post )
+      return newState
 
-      default:
+    default:
 			return state;
 	}
 }

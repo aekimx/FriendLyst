@@ -4,34 +4,34 @@ import { useParams } from 'react-router-dom'
 import { getUserThunk } from '../../store/user'
 import NavBar from "../NavBar"
 import UserProfilePosts from '../UserProfilePosts'
+import { getUserPostsThunk } from '../../store/user'
 
 import './UserProfile.css'
+import '../UserProfilePosts/UserProfilePosts.css'
 
 export default function UserProfile() {
   const dispatch = useDispatch()
   const url = useParams()
   const userId = url.userId.split(".")[2]
 
-  const user = useSelector(state => state.user)
+  const user = useSelector(state => state.user.user)
+  const sessionUser = useSelector(state => state.session.user)
+
+  console.log('are we properly doing the ternary? ', sessionUser.id === user.id)
+
 
   useEffect(() => {
     dispatch(getUserThunk(userId))
+    dispatch(getUserPostsThunk(userId))
   }, [dispatch])
 
-  const updateUserProfile = () => {
-
-  }
-
-  if (!user) return null
-
-  // const userPosts = Object.values(user.user?.posts)
+  // if (!user) return null
 
 
   return (
     <>
     <NavBar />
     <div className='userprofile-container'>
-    <div className='userprofile-container-inside'>
 
       {/* SECTION ONE */}
       <div className='userprofile-coverphoto-container'>
@@ -44,42 +44,40 @@ export default function UserProfile() {
           <img src={user.user?.profilePic} alt='profile' className='userprofile-profpic'/>
         </div>
         <div className='userprof-name-container'>
-          <div className='userprof-fname'> {user.user?.firstName} </div>
-          <div className='userprof-fname'> {user.user?.lastName} </div>
+          <div className='userprof-name'> {user.user?.firstName} {user.user?.lastName} </div>
+          <div className='userprof-friends'> 5 friends </div>
+
         </div>
       </div>
 
       {/* SECTION THREE */}
       <div className='userprof-bio-posts-container'>
-      <div className='userprofile-bio'>
-        <div> Intro </div>
-        <div> Bio {user.bio} </div>
-        <div> Birthday {user.user?.birthday} </div>
-        <div> Lives in {user.location} </div>
+      <div>
+        <div className='userprofile-bio'>
+          <div className='userprofile-intro-text'> Intro </div>
+          <div className='userprofile-bio-text'> <i className="fa-solid fa-address-card" /> {user.bio} </div>
+          <div> <i className="fa-solid fa-cake-candles" /> Birthday {user.user?.birthday} </div>
+          <div> <i className="fa-solid fa-house" /> Lives in {user.location} </div>
+        </div>
+
+        <div className='userprofile-photos'>
+          Photos
+        </div>
+
       </div>
 
 
       <div className='userprofile-posts-container'>
-        {/* I think I should have a separate post component here */}
+
+        {/* {sessionUser.id === userId ? <div> POST FORM </div> : null} */}
+
         <div> Posts </div>
         <UserProfilePosts userId={userId}/>
-        {/* {user.user?.posts.map(post => {
-          return (
-            <div className='userprofile-posts-div' key={`userprofilepost${post.id}`}>
-              <div>
-                <img src={user.profilePic} className='userprofile-posts-profpic'/>
-                <div> {post.createdAt} </div>
-              </div>
-              <div> {post.caption} </div>
-              <img src={post.photo} />
-            </div>
-          )
-        })} */}
+
 
       </div>
       </div>
 
-      </div>
 
       </div>
       </>

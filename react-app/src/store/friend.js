@@ -36,7 +36,6 @@ export const getAllFriendsThunk = (userId) => async (dispatch) => {
     dispatch(getAllFriends(data));
     return data;
   }
-
 }
 
 export const getAllRequestsThunk = (userId) => async (dispatch) => {
@@ -84,21 +83,21 @@ export default function friendReducer(state = initialState, action) {
   let newState = {}
 	switch (action.type) {
     case GET_ALL_FRIENDS:
-      newState = {...state}
+      newState = {...state, allFriends: {}}
       action.friends.forEach(friend => {
         newState.allFriends[friend.id] = friend
       })
       return newState
 
     case GET_ALL_REQUESTS:
-      newState = {...state}
+      newState = {...state, allRequests: {}}
       action.requests.forEach(request => {
         newState.allRequests[request.id] = request
       })
       return newState
 
     case ACCEPT_REQUEST:
-      newState = {...state}
+      newState = {...state, allRequests: {} }
       delete newState.allRequests[action.request.id]
       newState.allFriends[action.request.id] = action.request
       return newState;

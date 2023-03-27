@@ -37,10 +37,13 @@ def get_post_by_id(id):
 
     return post.to_dict()
 
-@post_routes.route("/<int:userId>/posts")
+
+# GET POSTS BY ONE USER
+@post_routes.route("/<int:userId>/posts/current", methods=["GET"])
 @login_required
 def get_users_posts(userId):
     ''' Query for posts created by user ID and return in a list of dictionaries '''
+
     user_posts = Post.query.filter(Post.user_id == userId).all()
 
     if user_posts is None:

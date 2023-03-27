@@ -50,7 +50,7 @@ export default function PostFeed() {
           </div>
 
           <div className='postfeed-edit-delete'>
-          {user?.id === post.userId ?
+          {user.id === post.userId ?
           <>
           <OpenModalButton
           className='postfeed-editpost'
