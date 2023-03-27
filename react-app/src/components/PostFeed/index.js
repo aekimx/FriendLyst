@@ -66,8 +66,8 @@ export default function PostFeed() {
           </div>
 
           <div className='feedpost-caption-photo'>
+            <div> Caption: {post.caption} </div>
             <Link to={`/posts/${post.id}`} className='postfeed-user-prof-link'>
-              <div> Caption: {post.caption} </div>
               {post.photo ? <img src={post.photo} alt='post' className="postfeed-post-pic"/> : null }
             </Link>
           </div>

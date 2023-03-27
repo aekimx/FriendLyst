@@ -1,3 +1,106 @@
-.fa-solid {
-  color: red;
+.postdetail-container {
+  background-color: rgb(24,25,26);
+  color: rgb(228,230,235);
+  font-family: 'Ruda', sans-serif;
+  position: fixed;
+  top: 53px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  display: flex;
+  flex-direction: row;
+}
+
+.postdetail-userprof {
+  width: 50px;
+  height: 50px;
+  border-radius: 40px;
+}
+
+
+.postdetail-comment-userprof {
+  width: 40px;
+  height: 40px;
+  border-radius: 30px;
+}
+
+.postdetail-comments-overall-container {
+  /* border: 2px solid red; */
+  position: fixed;
+  border-top: 0.5px solid gray;
+  right: 0px;
+  top: 160px;
+  width: 500px;
+  bottom: 0;
+  overflow-y: scroll;
+  padding: 10px;
+  background-color: rgb(35,37,38);
+}
+
+.postdetail-userinfo {
+  /* border: 2px solid green; */
+  background-color: rgb(35,37,38);
+  position: fixed;
+  right: 0px;
+  top: 55px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.postdetail-photo-container {
+  position: fixed;
+  left: 160px;
+  top: 160px;
+
+}
+
+.postdetail-user-name {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.postdetail-caption {
+  margin-left: 50px;
+  padding-bottom: 20px;
+}
+
+.postdetail-comments-text {
+  font-size: 25px;
+}
+
+.postdetail-comment-name-time {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.postdetail-comment-userinfo {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(58,59,61);
+  border-radius: 15px;
+  padding: 15px;
+  margin-left: 5px;
+}
+
+.postdetail-each-comment {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+}
+
+.postdetail-comment-content {
+  margin-top: 5px;
+}
+
+.postdetail-comment-createdat {
+  font-size: 10px;
+  margin-left: 10px;
 }
