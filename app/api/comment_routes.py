@@ -6,7 +6,7 @@ from app.forms import CommentForm
 comment_routes = Blueprint('comments', __name__)
 
 @comment_routes.route('/<int:postId>/comments', methods=['GET'])
-# @login_required
+@login_required
 def get_all_comments(postId):
     ''' Query for all comments and return in a list of dictionaries '''
     all_comments = Comment.query.filter(Comment.post_id == postId).all()
@@ -17,7 +17,7 @@ def get_all_comments(postId):
 
 
 @comment_routes.route('/<int:id>', methods=["GET"])
-# @login_required
+@login_required
 def get_commment_by_id(id):
     ''' Query for a comment by ID and return as a dictionary'''
     comment = Comment.query.get(id)
@@ -29,7 +29,7 @@ def get_commment_by_id(id):
 
 
 @comment_routes.route('', methods=['POST'])
-# @login_required
+@login_required
 def create_comment():
     ''' Create a new comment and return the newly created comment as a dictionary '''
     data = request.get_json()
@@ -52,7 +52,7 @@ def create_comment():
 
 
 @comment_routes.route('/<int:id>', methods=["PUT"])
-# @login_required
+@login_required
 def update_comment(id):
     ''' Query for a Comment by ID and update it if post exists. Returned as a dictionary.'''
     comment = Comment.query.get(id)
@@ -77,7 +77,7 @@ def update_comment(id):
 
 
 @comment_routes.route('/<int:id>', methods=['DELETE'])
-# @login_required
+@login_required
 def delete_comment(id):
     ''' Query for a comment by ID and delete it if comment exists. Return a successful message '''
     comment = Comment.query.get(id)

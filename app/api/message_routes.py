@@ -6,16 +6,15 @@ from app.forms import MessageForm
 message_routes = Blueprint('messages', __name__)
 
 @message_routes.route('', methods=['GET'])
-# @login_required
+@login_required
 def get_all_messages():
     ''' Query for all messages and return in a list of dictionaries '''
     all_messages = Message.query.all()
     return [message.to_dict() for message in all_messages]
 
 
-# DO WE NEED THIS ROUTE??
 @message_routes.route('/<int:id>', methods=['GET'])
-# @login_required
+@login_required
 def find_message(id):
     ''' Query for a message and return in a dictionary '''
     message = Message.query.get(id)
@@ -27,7 +26,7 @@ def find_message(id):
 
 
 @message_routes.route('', methods=['POST'])
-# @login_required
+@login_required
 def create_message():
     ''' Create a message and return as a dictionary '''
     data = request.get_json()
@@ -43,7 +42,7 @@ def create_message():
 
 
 @message_routes.route('/<int:id>', methods=["PUT"])
-# @login_required
+@login_required
 def accept_friend_request(id):
     ''' Query for a message by ID and update it if message exists. Returned as a dictionary.'''
     message = Message.query.get(id)
@@ -64,7 +63,7 @@ def accept_friend_request(id):
 
 
 @message_routes.route('/<int:id>', methods=['DELETE'])
-# @login_required
+@login_required
 def remove_friend(id):
     ''' Query for a message by ID and delete it if message exists. Return sucess response '''
     message = Message.query.get(id)

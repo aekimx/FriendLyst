@@ -7,7 +7,7 @@ group_routes = Blueprint('groups', __name__)
 
 
 @group_routes.route('', methods=['GET'])
-# @login_required
+@login_required
 def get_all_groups():
     ''' Query for all groups and return in a list of dictionaries '''
     all_groups = Group.query.all()
@@ -15,7 +15,7 @@ def get_all_groups():
 
 
 @group_routes.route('/<int:id>', methods=["GET"])
-# @login_required
+@login_required
 def get_group_by_id(id):
     ''' Query for a post by ID and return as a dictionary '''
     group = Group.query.get(id)
@@ -27,7 +27,7 @@ def get_group_by_id(id):
 
 
 @group_routes.route('', methods=['POST'])
-# @login_required
+@login_required
 def create_group():
     ''' Create a new group and return the newly created group as a dictionary '''
     data = request.get_json()
@@ -50,7 +50,7 @@ def create_group():
 
 
 @group_routes.route('/<int:id>', methods=["PUT"])
-# @login_required
+@login_required
 def update_group(id):
     ''' Query for a group by ID and update it if group exists. Returned as a dictionary.'''
     group = Group.query.get(id)
@@ -75,7 +75,7 @@ def update_group(id):
 
 
 @group_routes.route('/<int:id>', methods=['DELETE'])
-# @login_required
+@login_required
 def delete_group(id):
     ''' Query for a group by ID and delete it if group exists. Return a successful message '''
     group = Group.query.get(id)
@@ -88,7 +88,7 @@ def delete_group(id):
 
 
 @group_routes.route('/<int:id>/members/pending', methods=['GET'])
-# @login_required
+@login_required
 def get_pending_members(id):
     ''' Query for all pending group members'''
     all_members = GroupMember.query.filter(GroupMember.group_id == id).filter(GroupMember.status == 'Pending').all()
@@ -100,7 +100,7 @@ def get_pending_members(id):
 
 
 @group_routes.route('/<int:id>/members', methods=['GET'])
-# @login_required
+@login_required
 def get_accepted_group_members(id):
     ''' Query for all accepted group members  '''
     all_members = GroupMember.query.filter(GroupMember.group_id == id).filter(GroupMember.status == 'Accepted').all()
@@ -113,7 +113,7 @@ def get_accepted_group_members(id):
 
 
 @group_routes.route('/<int:id>/members', methods=['POST'])
-# @login_required
+@login_required
 def create_group_member_request(id):
     ''' Create a group member '''
     data = request.get_json()
@@ -131,7 +131,7 @@ def create_group_member_request(id):
 
 
 @group_routes.route('/<int:id>/members/<int:id2>', methods=['PUT'])
-# @login_required
+@login_required
 def accept_group_member(id2):
     ''' Accept a group member and return as a dictionary '''
     data = request.get_json()
@@ -146,7 +146,7 @@ def accept_group_member(id2):
     return group_member.to_dict_no_group
 
 @group_routes.route('/<int:id>/posts', methods=['GET'])
-# @login_required
+@login_required
 def get_group_posts(id):
     ''' Get all posts for a group '''
     group_posts = Post.query.filter(Post.group_id == id).all()

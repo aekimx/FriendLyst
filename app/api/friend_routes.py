@@ -5,7 +5,7 @@ from app.models import Friend, db
 friend_routes = Blueprint('friends', __name__)
 
 @friend_routes.route('/user/<int:id>', methods=['GET'])
-# @login_required
+@login_required
 def get_all_friends(id):
     ''' Query for all friends and return in a list of dictionaries '''
 
@@ -14,7 +14,7 @@ def get_all_friends(id):
 
 
 @friend_routes.route('/user/<int:id>/requests', methods=['GET'])
-# @login_required
+@login_required
 def get_all_requests(id):
     ''' Query for all friends and return in a list of dictionaries '''
 
@@ -23,7 +23,7 @@ def get_all_requests(id):
 
 
 @friend_routes.route('/<int:id>', methods=['GET'])
-# @login_required
+@login_required
 def find_friend_request(id):
     ''' Query for friend request and return in a dictionary '''
     friend_request = Friend.query.get(id)
@@ -35,7 +35,7 @@ def find_friend_request(id):
 
 
 @friend_routes.route('/user/<int:id>', methods=['POST'])
-# @login_required
+@login_required
 def add_friend():
     ''' Create a new friend request and return the newly created friend request as a dictionary '''
     data = request.get_json()
@@ -48,7 +48,7 @@ def add_friend():
 
 
 @friend_routes.route('/<int:id>', methods=["PUT"])
-# @login_required
+@login_required
 def accept_friend_request(id):
     ''' Query for a friend request by ID and update it if request exists. Returned as a dictionary.'''
     friend = Friend.query.get(id)
@@ -65,7 +65,7 @@ def accept_friend_request(id):
 
 
 @friend_routes.route('/<int:id>', methods=['DELETE'])
-# @login_required
+@login_required
 def remove_friend(id):
     ''' Query for a comment by ID and delete it if comment exists. Return a successful message '''
     friend = Friend.query.get(id)

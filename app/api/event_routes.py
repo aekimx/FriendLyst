@@ -6,7 +6,7 @@ from app.forms import PostForm
 event_routes = Blueprint('events', __name__)
 
 @event_routes.route('', methods=['GET'])
-# @login_required
+@login_required
 def get_all_posts():
     ''' Query for all posts and return in a list of dictionaries '''
     all_posts = Post.query.all()
@@ -14,7 +14,7 @@ def get_all_posts():
 
 
 @event_routes.route('/<int:id>', methods=["GET"])
-# @login_required
+@login_required
 def get_post_by_id(id):
     ''' Query for a post by ID and return '''
     post = Post.query.get(id)
@@ -26,7 +26,7 @@ def get_post_by_id(id):
 
 
 @event_routes.route('', methods=['POST'])
-# @login_required
+@login_required
 def create_post():
     ''' Create a new post and return the newly created post as a dictionary '''
     data = request.get_json()
@@ -54,7 +54,7 @@ def create_post():
 
 
 @event_routes.route('/<int:id>', methods=["PUT"])
-# @login_required
+@login_required
 def update_post(id):
     ''' Query for a post by ID and update it if post exists. Returned as a dictionary.'''
     post = Post.query.get(id)
@@ -82,7 +82,7 @@ def update_post(id):
 
 
 @event_routes.route('/<int:id>', methods=['DELETE'])
-# @login_required
+@login_required
 def delete_post(id):
     ''' Query for a post by ID and delete it if post exists. Return a successful message '''
     post = Post.query.get(id)
