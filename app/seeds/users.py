@@ -7,7 +7,7 @@ def seed_users():
     users = [
         # 1 Demo
         User(
-        first_name='Demo', last_name='Lition', birthday='01/01/2000',
+        first_name='Demo', last_name='Lition', birthday='01/01/1987',
         email='demo@aa.io', gender='female', password='password',
         profile_pic='https://i.pinimg.com/736x/f8/f3/83/f8f383bfebdcd8692728b0fd266a50d9.jpg'),
 
@@ -32,7 +32,7 @@ def seed_users():
              profile_pic='https://media.istockphoto.com/id/1336447951/vector/curly-red-hair-woman-portrait-isolated-on-white-background-girl-with-freckles.jpg?s=612x612&w=0&k=20&c=DhdwMKuHmk9OP2rOJc3Sjhc7gBeEOERwkN_T7n3Hjvw=',
              ),
         # 6
-        User(first_name='Mona', last_name='Ravioli', birthday='08/06/1996',
+        User(first_name='Mona', last_name='Ravis', birthday='08/06/1996',
              email='mravioli@gmail.com', gender='female', password='password',
              profile_pic='https://media.istockphoto.com/id/1323034211/vector/happy-smiling-female-character-is-enjoing-her-coffee.jpg?s=612x612&w=0&k=20&c=P43nfNc5scd4viwFT05nGZrHgczvqQxoA2rEVvVuHcc=',
              ),

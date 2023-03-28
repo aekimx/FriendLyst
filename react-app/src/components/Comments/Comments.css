@@ -59,3 +59,15 @@
 .post-comment-options-div:hover {
   background-color: rgb(58,59,61);
 }
+
+.post-comment-name-time {
+  display: flex;
+  flex-direction: row;
+}
+
+.post-comment-createdat {
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  margin-left: 8px;
+}

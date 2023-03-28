@@ -23,9 +23,12 @@ export default function AllComments({comments}) {
 
             <div className='post-comment-comment'>
 
-              <Link to={`/${comment.user?.firstName}.${comment.user?.lastName}.${comment.user.id}/profile`} className='post-comment-link'>
-                <div> {comment.user.firstName} {comment.user.lastName} </div>
-              </Link>
+              <div className='post-comment-name-time'>
+                <Link to={`/${comment.user?.firstName}.${comment.user?.lastName}.${comment.user.id}/profile`} className='post-comment-link'>
+                  <div> {comment.user.firstName} {comment.user.lastName} </div>
+                </Link>
+                <div className='post-comment-createdat'> {comment.createdAt.slice(0,11)} </div>
+              </div>
 
               <div className='post-comment-content'> {comment.comment} </div>
 

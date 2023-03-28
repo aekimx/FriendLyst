@@ -1,32 +1,45 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { getUserThunk } from '../../store/user'
 import NavBar from "../NavBar"
 import UserProfilePosts from '../UserProfilePosts'
 import OpenModalButton from '../OpenModalButton'
 import UserProfileUpdate from '../UserProfileUpdate'
+import { getAllFriendsThunk } from '../../store/friend'
+
 
 import './UserProfile.css'
-// import '../UserProfilePosts/UserProfilePosts.css'
-import { getAllFriendsThunk } from '../../store/friend'
 
 export default function UserProfile() {
   const dispatch = useDispatch()
   const url = useParams()
   const userId = url.userId.split(".")[2]
+  const [option, setOption] = useState("Add")
 
-  const user = useSelector(state => state.user.user)
-  const friends = useSelector(state => state.friends.allFriends)
+  const user = useSelector(state => state.user?.user)
+  const friends = useSelector(state => state.friends?.allFriends)
+  const sessionUser = useSelector(state => state.session?.user)
 
   const friendsArr = Object.values(friends)
+  for (let friend in friendsArr) {
+    if (friend.friendId === sessionUser.id) {
+      setOption("Remove")
+    }
+  }
 
   useEffect(() => {
     dispatch(getUserThunk(userId))
     dispatch(getAllFriendsThunk(userId))
   }, [dispatch])
 
-  // if (!user) return null
+
+  // evnet listening on comment button that would set class onfocus and cursor will go inside input
+  // use ref hook for comment set var that uses a use ref hook and on comment input ref = { refvar }
+  // when you click on that other ting you reference that variable and set it to on focus
+
+  // Navlink is a side bar thing className and active class name
+  // or use location key = pathname
 
 
   return (
@@ -34,24 +47,25 @@ export default function UserProfile() {
     <NavBar />
     <div className='userprofile-container'>
 
-      {/* SECTION ONE */}
       <div className='userprofile-coverphoto-container'>
         <img src={user.coverPhoto} alt='cover photo' className='userprofile-coverphoto'/>
       </div>
 
-      {/* SECTION TWO */}
       <div className='userprofile-profpic-name'>
-        <div>
-          <img src={user.user?.profilePic} alt='profile' className='userprofile-profpic'/>
-        </div>
-        <div className='userprof-name-container'>
-          <div className='userprof-name'> {user.user?.firstName} {user.user?.lastName} </div>
-          <div className='userprof-friends'> {friendsArr.length} Friends </div>
 
+        <div className='userprof-name-pic-container'>
+            <img src={user.user?.profilePic} alt='profile' className='userprofile-profpic'/>
+          <div className='userprof-name-container'>
+            <div className='userprof-name'> {user.user?.firstName} {user.user?.lastName} </div>
+            <div className='userprof-friends'> {friendsArr.length} Friends </div>
+          </div>
         </div>
-      </div>
 
-      {/* SECTION THREE */}
+          <div className='userprof-friend-option'> ADD FRIEND REMOVE FRIEND HERE?</div>
+        </div>
+
+
+
       <div className='userprof-bio-posts-container'>
       <div>
         <div className='userprofile-bio'>
@@ -82,6 +96,10 @@ export default function UserProfile() {
 
         <div className='userprofile-photos'>
           Photos
+        </div>
+
+        <div className='userprofile-friends-list'>
+          Friends
         </div>
 
       </div>

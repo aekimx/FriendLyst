@@ -55,10 +55,12 @@
 .userprofile-profpic-name {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   margin-bottom: 10px;
   align-items: left;
-  width: 1200px;
+  width: 1300px;
   margin-top: -80px;
+  margin-left: 80px;
 }
 
 .userprof-name-container {
@@ -107,6 +109,7 @@
   border-radius: 20px;
   padding: 15px;
   margin-top: 15px;
+  font-size: 25px;
 }
 
 .userprof-friends {
@@ -119,4 +122,29 @@
   width: 730px;
   border-radius: 20px;
   padding: 10px;
+}
+
+.userprof-friend-option {
+  display: flex;
+  align-items: center;
+  margin-right: 80px;
+  border: 2px solid blue;
+}
+
+.userprof-name-pic-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.userprofile-friends-list {
+  width: 500px;
+  margin-right: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: rgb(35,37,38);
+  border-radius: 20px;
+  padding: 15px;
+  margin-top: 15px;
+  font-size: 25px;
 }

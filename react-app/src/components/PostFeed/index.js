@@ -42,7 +42,7 @@ export default function PostFeed() {
             <img src = {post.user?.profilePic } alt='person' className='postfeed-userpost-pic'/>
             <div>
               <div className='postfeed-name'> {post.user?.firstName} {post.user?.lastName} </div>
-              <div className='postfeed-time'> {post.createdAt.split(" ")[4].slice(0,5)} </div>
+              <div className='postfeed-time'> {post.createdAt.slice(0,11)} </div>
             </div>
 
           </div>
@@ -66,7 +66,7 @@ export default function PostFeed() {
           </div>
 
           <div className='feedpost-caption-photo'>
-            <div> Caption: {post.caption} </div>
+            <div className='feedpost-caption-text'> {post.caption} </div>
             <Link to={`/posts/${post.id}`} className='postfeed-user-prof-link'>
               {post.photo ? <img src={post.photo} alt='post' className="postfeed-post-pic"/> : null }
             </Link>
@@ -74,7 +74,7 @@ export default function PostFeed() {
 
 
           <div className='feed-like-comment-count'>
-            { post.likes.length > 0 ? <div> {post.likes.length} {post.likes.length === 1 ? "like" : "likes "} </div> : <div></div>}
+            { post.likes.length > 0 ? <div> {post.likes.length} {post.likes.length === 1 ? "like" : "likes"} </div> : <div></div>}
             <div className='feed-comments'> {post.comments?.length > 0 ? `${post.comments.length} ${post.comments.length === 1 ? 'comment' : 'comments'}` : null }</div>
           </div>
 
