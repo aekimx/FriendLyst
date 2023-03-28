@@ -13,17 +13,17 @@ export default function SideBarMenu() {
 
         <div className='sidebar-link'>
         <i className="fa-solid fa-user" />
-        <Link to={`/${user.firstName}.${user.lastName}.${user.id}/profile`} className='sidebar-link'> User Profile </Link>
+        <Link to={`/${user?.firstName}.${user?.lastName}.${user?.id}/profile`} className='sidebar-link'> User Profile </Link>
         </div>
 
         <div className='sidebar-link'>
           <i class="fa-solid fa-users" />
-          <Link to={`/${user.firstName}.${user.lastName}.${user.id}/friends`} className='sidebar-link'> Friends </Link>
+          <Link to={`/${user?.firstName}.${user?.lastName}.${user?.id}/friends`} className='sidebar-link'> Friends </Link>
         </div>
 
         <div className='sidebar-link'>
           <i className="fa-solid fa-user-plus" />
-          <Link to={`/${user.firstName}.${user.lastName}.${user.id}/requests`} className='sidebar-link'> Friend Requests </Link>
+          <Link to={`/${user?.firstName}.${user?.lastName}.${user?.id}/requests`} className='sidebar-link'> Friend Requests </Link>
         </div>
 
 

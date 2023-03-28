@@ -24,7 +24,7 @@ export default function CommentsForm({postId}) {
 
   return (
     <div className='commentform-input-container'>
-      <img src={user.profilePic} className='commentform-userprof'/>
+      <img src={user?.profilePic} className='commentform-userprof'/>
       <form onSubmit={handleSubmit}>
         <input placeholder='Write a comment...'
         className='commentform-input'
