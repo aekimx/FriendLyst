@@ -54,7 +54,9 @@ function LoginFormPage() {
         <form onSubmit={handleSubmit}>
           <ul>
             {errors.map((error, idx) => (
-              <li key={idx}>{error}</li>
+              <li key={idx} className='loginform-error'>
+                {error}
+                </li>
             ))}
           </ul>
 
@@ -78,7 +80,6 @@ function LoginFormPage() {
 
           <div className='loginform-submit-div'  onClick={handleSubmit}> Log In </div>
           <div> <Link to ='/signup' className='loginform-signup'> Create new account </Link></div>
-          {/* to fix later! to the side */}
         </form>
       </div>
       </div>

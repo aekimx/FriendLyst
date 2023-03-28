@@ -25,8 +25,7 @@
 .loginform-input-email::placeholder,
 .loginform-input-password::placeholder {
   font-size: 20px;
-  margin-left: 5px;
-  /* margin-bottom: -5px; */
+  padding-left: 5px;
 }
 
 .loginform-logo {
@@ -50,6 +49,7 @@
   height: 40px;
   width: 300px;
   font-size: 20px;
+  border-radius: 5px;
 }
 .loginform-input-email:focus, .loginform-input-password:focus {
   outline: none;
@@ -66,12 +66,21 @@
   border-radius: 5px;
 }
 
+.loginform-submit-div:hover {
+  background-color: rgb(43,116,225);
+  transition: 0.2s ease-out;
+}
+
 .loginform-signup {
   text-decoration: none;
   color: rgb(228,230,235);
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
+}
+
+.loginform-signup:hover {
+  text-decoration: underline;
 }
 
 .loginform-demouser-div {
@@ -84,4 +93,10 @@
   align-items: center;
   border: 1px solid white;
   border-radius: 5px;
+}
+
+.loginform-error {
+  list-style: none;
+  color: rgb(218, 65, 65);
+  font-size: 15px;
 }

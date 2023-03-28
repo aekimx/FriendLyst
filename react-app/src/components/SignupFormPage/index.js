@@ -53,13 +53,15 @@ function SignupFormPage() {
       <div className='signupform-form'>
       <form onSubmit={handleSubmit} className='signupform-form-overall'>
         <ul>
-          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+          {errors.map((error, idx) => <li key={idx} className='signupform-errors'>{error}</li>)}
         </ul>
       <div className='signupform-name-container'>
           <input
             type="text"
             className='signupform-fname'
             placeholder='First name'
+            minLength='3'
+            maxLength='15'
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             required
@@ -68,6 +70,8 @@ function SignupFormPage() {
             type="text"
             className='signupform-lname'
             placeholder='Last name'
+            minLength='2'
+            maxLength='15'
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             required
@@ -76,9 +80,10 @@ function SignupFormPage() {
 
     <div className='signupform-email-pw-container'>
           <input
-            type="text"
+            type="email"
             className='signupform-email'
             placeholder='Email'
+            minLength='6'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -88,6 +93,8 @@ function SignupFormPage() {
             type="password"
             className='signupform-password'
             placeholder='New password'
+            minLength='6'
+            maxLength='15'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -97,6 +104,8 @@ function SignupFormPage() {
             type="password"
             className='signupform-confirm-password'
             placeholder = 'Confirm password'
+            minLength='6'
+            maxLength='15'
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
@@ -104,36 +113,40 @@ function SignupFormPage() {
         </div>
           <div className='signupform-birthday-container' >
             <div className="signupform-bday-text">Birthday</div>
-            <select onChange={(e) => setMonth(e.target.value)}>
+            <select
+            className='signupform-select-month'
+            onChange={(e) => setMonth(e.target.value)}>
               {generateOptions(1, 12)}
             </select>
 
-            <select onChange={(e) => setDay(e.target.value)}>
+            <select
+            className='signupform-select-day'
+            onChange={(e) => setDay(e.target.value)}>
               {generateOptions(1,31)}
             </select>
 
-            <select onChange={(e) => setYear(e.target.value)}>
+            <select
+            className='signupform-select-year'
+            onChange={(e) => setYear(e.target.value)}>
               {generateOptions(1940, new Date().getFullYear())}
             </select>
           </div>
-          <div>
-            <div>Gender</div>
-              <div>
-                <input name='gender' type='radio' id='female' value='Female' onClick={(e) => {setGender(e.target.value)}} /> <label for='female'> Female </label>
-              </div>
-              <div>
-                <input name='gender' type='radio' id='male' value='Male' onClick={(e) => {setGender(e.target.value)}} /> <label for='male'> Male </label>
-              </div>
-              <div>
-                <input name='gender' type='radio' id='other' value='Other' onClick={(e) => {setGender(e.target.value)}} /> <label for='other'> Other </label>
-              </div>
+          <div className='signupform-gender-container'>
+            <div className='signupform-gender-text'>Gender</div>
+            <div>
+              <input name='gender' type='radio' id='female' value='Female' onClick={(e) => {setGender(e.target.value)}} /> <label for='female'> Female </label>
+            </div>
+            <div>
+              <input name='gender' type='radio' id='male' value='Male' onClick={(e) => {setGender(e.target.value)}} /> <label for='male'> Male </label>
+            </div>
+            <div>
+              <input name='gender' type='radio' id='other' value='Other' onClick={(e) => {setGender(e.target.value)}} /> <label for='other'> Other </label>
+            </div>
 
-            {/* <input type='radio' value='Male' onClick={(e) => {setGender(e.target.value)}}> Male </input>
-            <input type='radio' value='Other' onClick={(e) => {setGender(e.target.value)}}> Other </input> */}
           </div>
 
-        <div> By clicking sign up, you agree to our Terms, Privacy Policy, and Cookies Policy. </div>
-        <button type="submit">Sign Up</button>
+        <div className='signupform-privacy'> By clicking sign up, you agree to our Terms, Privacy Policy, and Cookies Policy. </div>
+        <button className='signupform-signup-button' type="submit">Sign Up</button>
       </form>
       </div>
     </div>

@@ -10,9 +10,6 @@
   align-items: center;
   background-color: rgb(35,37,38);
   color: rgb(228,230,235);
-}
-
-.signupform-container {
   font-family: 'Ruda', sans-serif;
 }
 
@@ -63,13 +60,13 @@
   border: none;
   color: rgb(228,230,235);
   height: 40px;
-  width: 160px;
+  width: 170px;
   font-size: 20px;
   padding: 2px 1px 1px 2px;
   border-radius: 5px;
 }
 .signupform-lname {
-  margin-left: 26px;
+  margin-left: 9px;
 }
 
 .signupform-email-pw-container {
@@ -82,8 +79,49 @@
   padding-left: 8px;
 }
 
+.signupform-select-month, .signupform-select-year, .signupform-select-day {
+  background-color: rgb(58,59,61);
+  color: rgb(228,230,235);
+  font-family: 'Ruda', sans-serif;
+  width: 115px;
+  height: 40px;
+  font-size: 15px;
+  margin-left: 3px;
+  margin-right: 3px;
+  margin-bottom: 10px;
+}
 
-.signupform-birthday-text {
+.signupform-bday-text {
+  margin-left: 3px;
+  margin-bottom: 5px;
+}
+
+.signupform-gender-container {
   display: flex;
-  justify-content: left;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  width: 350px;
+}
+
+.signupform-privacy {
+  margin-bottom: 15px;
+}
+
+.signupform-signup-button {
+  background-color: rgb(43,116,225);
+  color: rgb(228,230,235);
+  font-family: 'Ruda', sans-serif;
+  border: none;
+  width: 300px;
+  height: 40px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.signupform-errors {
+  list-style: none;
+  color: rgb(218, 65, 65);
+
 }
