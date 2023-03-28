@@ -38,6 +38,7 @@ export default function CommentUpdate({comment}) {
       </div>
 
       <div className='commentupdate-modal'>
+
         <div className='commentupdate-profpic-user'>
           <img src={comment.user?.profilePic} className='commentupdate-modal-profpic'/>
           <div className='commentupdate-user-name'>  {comment.user?.firstName} {comment.user?.lastName} </div>
@@ -48,12 +49,17 @@ export default function CommentUpdate({comment}) {
             <textarea placeholder={`What's on your mind, ${comment.user?.firstName}?`}
             value={content}
             className='commentupdate-textarea'
+            maxLength='500'
             onChange={(e) => setContent(e.target.value)}
             />
+            <div className='commentupdate-error'> {content.length === 500 ? 'Comments must be less than 500 characters' : null}</div>
+            <div className='commentupdate-error'> {content.length === 0 ? 'Comment is required' : null}</div>
+
             <button className='commentupdate-update-button' type='submit'
-            disabled={comment.length < 1}> Save </button>
+            disabled={content.length < 1 || content.length === 500}> Save </button>
           </form>
         </div>
+
 
       </div>
     </div>

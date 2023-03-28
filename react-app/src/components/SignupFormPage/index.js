@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { signUp } from "../../store/session";
 import './SignupForm.css';
 
@@ -47,7 +47,8 @@ function SignupFormPage() {
     <>
     <div className='signupform-container'>
       <div className='signupform-text'>
-        <div className='signupform-signup'>Sign Up</div>
+        <div> FRIENDLYST LOGO </div>
+        <div className='signupform-signup'>Sign Up for FriendLyst</div>
         <div className='signupform-easy'>It's quick and easy.</div>
       </div>
       <div className='signupform-form'>
@@ -147,6 +148,7 @@ function SignupFormPage() {
 
         <div className='signupform-privacy'> By clicking sign up, you agree to our Terms, Privacy Policy, and Cookies Policy. </div>
         <button className='signupform-signup-button' type="submit">Sign Up</button>
+        <Link to='/' className='signupform-signin'> Already have an account? </Link>
       </form>
       </div>
     </div>

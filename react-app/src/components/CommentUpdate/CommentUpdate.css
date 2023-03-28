@@ -24,7 +24,7 @@
 
 .commentupdate-textarea {
   width: 450px;
-  height: 300px;
+  height: 275px;
   background-color: rgb(35,37,38);
   border: none;
   color: rgb(228,230,235);
@@ -102,4 +102,15 @@
 
 .commentupdate-button:hover {
   background-color: rgb(61, 126, 224);
+}
+
+.commentupdate-error {
+  text-align: center;
+  margin-bottom: 10px;
+  margin-top: -20px;
+  height: 20px;
+  font-size: 15px;
+  color: rgb(218, 65, 65);
+
+
 }

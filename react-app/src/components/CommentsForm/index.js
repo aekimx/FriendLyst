@@ -23,20 +23,24 @@ export default function CommentsForm({postId}) {
   }
 
   return (
+    <>
     <div className='commentform-input-container'>
       <img src={user?.profilePic} className='commentform-userprof'/>
       <form onSubmit={handleSubmit}>
         <input placeholder='Write a comment...'
         className='commentform-input'
-        maxLength='2000'
+        maxLength='500'
         style={{ color: 'rgb(228,230,235)', paddingLeft:'10px'}}
         value={comment}
         onChange={(e) => setComment(e.target.value)}>
         </input>
-        <i className="fa-solid fa-paper-plane commentform-sendbutton"/>
-
+        <button className='commentform-sendbutton'
+        disabled={comment.length === 500}> <i className="fa-solid fa-paper-plane"/></button>
       </form>
-      </div>
+    </div>
+
+    {comment.length === 500 ? <div className='commentform-error'> Comments must be less than 500 characters </div>: null}
+    </>
   )
 
 }
