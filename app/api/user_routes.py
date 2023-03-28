@@ -5,7 +5,7 @@ from app.forms import UserProfileForm
 
 user_routes = Blueprint('users', __name__)
 
-
+#GET ALL USERS
 @user_routes.route('')
 @login_required
 def get_all_users():
@@ -13,7 +13,7 @@ def get_all_users():
     users = User.query.all()
     return {'users': [user.to_dict() for user in users]}
 
-
+#GET USER BY ID
 @user_routes.route('/<int:id>', methods=["GET"])
 @login_required
 def get_user_by_id(id):
@@ -26,36 +26,54 @@ def get_user_by_id(id):
 
     return user_profile.to_dict()
 
+#SEARCH FOR USERS
 @user_routes.route('/search', methods=["PUT"])
 @login_required
 def search_user():
-    """ Query for a user by the search input provided  and returns that user's profile in a dictionary """
+    """ Query for a user by the search input provided and returns that user's profile in a dictionary """
 
     # get the data as a single string
-    data = request.get_json();
-    # split the data to get first and last name presumably...
-    # what happens if you split something and it doesn't have a space?
-    search = data.split(" ").lower()
+    data = request.get_json()
+    search = data.split()
+
+    results = []
 
     #different combos for what the search could have been!
-    users_full_name = User.query.filter(User.first_name == search[0]).filter(User.last_name == search[1]).all()
-    users_full_name_two = User.query.filter(User.first_name == search[1]).filter(User.last_name == search[0]).all()
 
-    users_first_name = User.query.filter(User.first_name == search[0]).all()
-    users_first_name_two = User.query.filter(User.first_name == search[1]).all()
+    if len(search) == 2:
+        users_full_name = User.query.filter(User.first_name.contains(search[0])).filter(User.last_name.contains(search[1])).all()
+        users_full_name_two = User.query.filter(User.first_name.contains(search[1])).filter(User.last_name.contains(search[0])).all()
 
-    users_last_name = User.query.filter(User.last_name == search[1]).all()
-    user_last_name_two = User.query.filter(User.last_name == search[0]).all()
+        users_first_name_two = User.query.filter(User.first_name.contains(search[1])).all()
 
-    return jsonify({"test": "Test"})
-    # if you can't find any users by that name
-
-    # if users is None:
-    #     return jsonify({"error": "User not found"})
-
-    # return user_profile.to_dict()
+        users_last_name = User.query.filter(User.last_name.contains(search[1])).all()
 
 
+        if users_full_name:
+            results.extend([user.to_dict_no_post() for user in users_full_name])
+
+        if users_full_name_two:
+            results.extend([user.to_dict_no_post() for user in users_full_name_two])
+
+        if users_first_name_two:
+            results.extend([user.to_dict_no_post() for user in users_first_name_two])
+
+        if users_last_name:
+            results.extend([user.to_dict_no_post() for user in users_last_name])
+
+
+    users_first_name = User.query.filter(User.first_name.contains(search[0])).all()
+    users_last_name_two = User.query.filter(User.last_name.contains(search[0])).all()
+
+    if users_first_name:
+        results.extend([user.to_dict_no_post() for user in users_first_name])
+    if users_last_name_two:
+        results.extend([user.to_dict_no_post() for user in users_last_name_two])
+
+    return jsonify(results)
+
+
+#UPDATE USER BY ID
 @user_routes.route('/<int:id>', methods=["PUT"])
 # @login_required
 def update_user_by_id(id):

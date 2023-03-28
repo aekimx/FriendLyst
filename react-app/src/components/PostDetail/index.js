@@ -52,8 +52,8 @@ export default function PostDetail() {
                     <div> {comment.user.firstName} {comment.user.lastName} </div>
                     <div className='postdetail-comment-createdat'> {comment.createdAt.slice(0,11)} </div>
                   </div>
-                  <div className='postdetail-comment-content'> {comment.comment} </div>
 
+                  <div className='postdetail-comment-content'> {comment.comment} </div>
 
                 </div>
 

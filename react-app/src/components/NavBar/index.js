@@ -1,14 +1,32 @@
-import React from "react"
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import React, { useState } from "react"
+import { Link, useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { searchUsersThunk } from "../../store/user";
 
 import "./NavBar.css"
 
 export default function NavBar() {
-  const user = useSelector(state => state.session.user)
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const user = useSelector(state => state.session.user);
+
+  const [search, setSearch] = useState('');
 
   let userId;
   if (user) userId = user.id;
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    dispatch(searchUsersThunk(search))
+    .then(() => history.push("/search/results"))
+    .catch((res) => console.log('error!', res))
+
+    setSearch("")
+
+  }
+
 
   return (
     <>
@@ -16,7 +34,13 @@ export default function NavBar() {
 
         <div className='home-logo-search'>
           <Link to={'/home'} > Home </Link>
-          <input type='text' placeholder='Search FriendLyst' className='navbar-searchbar'/>
+
+          <form onSubmit={handleSubmit}>
+            <input type='text' placeholder='Search FriendLyst'
+            className='navbar-searchbar' onChange={(e) => setSearch(e.target.value)} />
+            <button type='submit'> search </button>
+          </form>
+
         </div>
 
         <div className='home-navbar-middle-icons'>

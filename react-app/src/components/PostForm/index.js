@@ -29,9 +29,7 @@ export default function PostForm() {
     setPhoto("")
   }
 
-  const updatePhoto = (e) => {
-    setPhoto(e.target.files[0])
-  }
+  const updatePhoto = (e) => { setPhoto(e.target.files[0]) }
 
   if (!user) return null;
 
@@ -71,50 +69,4 @@ export default function PostForm() {
     </div>
     </>
   )
-
 }
-
-
-// const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     const formData = new FormData();
-//     formData.append("image", image);
-
-//     // aws uploads can be a bit slow—displaying
-//     // some sort of loading message is a good idea
-//     setImageLoading(true);
-
-//     const res = await fetch('/api/images', {
-//         method: "POST",
-//         body: formData,
-//     });
-//     if (res.ok) {
-//         await res.json();
-//         setImageLoading(false);
-//         history.push("/images");
-//     }
-//     else {
-//         setImageLoading(false);
-//         // a real app would probably use more advanced
-//         // error handling
-//         console.log("error");
-//     }
-// }
-
-// return (
-//     <form
-//         onSubmit={handleSubmit}
-//         encType="multipart/form-data")
-//     >
-//         <input
-//           type="file"
-//           accept="image/*"
-//           onChange={(e) => setImage(e.target.files[0])}
-//         />
-//         <button type="submit">Submit</button>
-//         {(imageLoading)&& <p>Loading...</p>}
-//     </form>
-// )
-// }
-
-// export default UploadPicture;

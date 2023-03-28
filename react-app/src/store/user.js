@@ -61,9 +61,9 @@ export const updateUserThunk = (userId, userProfile) => async (dispatch) => {
   })
 
   if (response.ok) {
-    const data = response.json()
-    dispatch(updateUserProfile(data))
-    return data
+    const userProfile = response.json();
+    dispatch(updateUserProfile(userProfile));
+    return userProfile;
   }
 }
 
@@ -71,15 +71,26 @@ export const getUserPostsThunk = (userId) => async (dispatch) => {
   const res = await fetch(`/api/posts/${userId}/posts/current`)
 
   if (res.ok) {
-    let data = await res.json()
-    dispatch(getUserPosts(data))
-    return data
+    let userPosts = await res.json();
+    dispatch(getUserPosts(userPosts));
+    return userPosts;
   }
 }
 
-// export const searchUsersThunk = () = async (dispatch) => {
+export const searchUsersThunk = (search) => async (dispatch) => {
+  const res = await fetch(`/api/users/search`, {
+    method: 'PUT',
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(search)
+  })
 
-// }
+
+  if (res.ok) {
+    let users = await res.json();
+    dispatch(searchUsers(users))
+    return users
+  }
+}
 
 
 // ----------------------------------- Reducer  ----------------------------------------
@@ -106,8 +117,17 @@ export default function userReducer(state = initialState, action) {
 
     case GET_USER_POSTS:
       newState = {...state, posts: { } }
-      action.posts.forEach(post => newState.posts[post.id] = post )
+      action.posts.forEach(post => {
+        newState.posts[post.id] = post
+      })
       return newState
+
+    case SEARCH_USERS:
+      newState = {...state, search: {}}
+      action.users.forEach(user => {
+        newState.search[user.id] = user
+      })
+      return newState;
 
     default:
 			return state;

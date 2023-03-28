@@ -1,0 +1,64 @@
+.searchresults-overall-container {
+  border: 2px solid red;
+  position: fixed;
+  left: 200px;
+  right: 0px;
+  top: 50px;
+  bottom: 0px;
+  background-color: rgb(24,25,26);
+  color: rgb(228,230,235);
+  font-family: 'Ruda', sans-serif;
+  border-left: 0.5px solid rgb(58,59,61);
+}
+
+.searchres-each-user {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.searchres-each-user:hover {
+  background-color: rgb(79,80,81);
+  cursor: pointer;
+}
+
+.searchres-userprof {
+  width: 50px;
+  height: 50px;
+  border-radius: 30px;
+  margin-left: 10px;
+}
+
+.searchres-text {
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  border-bottom: 0.5px solid rgb(65, 64, 64);
+  padding: 10px;
+}
+
+.searchres-people {
+  font-size: 25px;
+  padding: 10px;
+  margin-left: 10px;
+}
+
+.searchres-username {
+  margin-left: 10px;
+}
+
+.searchres-username:hover {
+  text-decoration: underline;
+}
+
+.searchres-user-link {
+  text-decoration: none;
+  color: rgb(228,230,235);
+}
+
+.searchres-none {
+  margin-left: 20px;
+}
