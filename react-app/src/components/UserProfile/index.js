@@ -26,7 +26,6 @@ export default function UserProfile() {
   for (let i = 0; i < friendsArr.length; i++) {
     let friend = friendsArr[i];
     if (friend.friendId === sessionUser.id) {
-      console.log("Hitting this!!! this is a friend!!!")
       setOption("Remove")
   }
 }

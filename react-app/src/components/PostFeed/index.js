@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAllPostsThunk} from "../../store/post";
 import { Link } from "react-router-dom";
-import CommentsForm from "../CommentsForm";
 import AllComments from "../Comments"
 import PostUpdate from "../PostUpdate/index"
 import OpenModalButton from "../OpenModalButton"
@@ -12,21 +11,22 @@ import PostDelete from "../PostDelete";
 import './PostFeed.css'
 
 export default function PostFeed() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const allPosts = useSelector(state => state.post?.allPosts)
-  const user = useSelector(state => state.session?.user)
+
+  const allPosts = useSelector(state => state.post?.allPosts);
+  const user = useSelector(state => state.session?.user);
 
 
   useEffect(() => {
-    dispatch(getAllPostsThunk(user?.id))
+    dispatch(getAllPostsThunk(user?.id));
   }, [dispatch])
 
   let postsArr;
-  if (allPosts) postsArr = Object.values(allPosts)
+  if (allPosts) postsArr = Object.values(allPosts);
 
   // Newest posts first!
-  postsArr.reverse()
+  postsArr.reverse();
 
 
   return (
@@ -78,7 +78,7 @@ export default function PostFeed() {
             <div className='feed-comments'> {post.comments?.length > 0 ? `${post.comments.length} ${post.comments.length === 1 ? 'comment' : 'comments'}` : null }</div>
           </div>
 
-          <div className='feed-like-comment-buttons'>
+          {/* <div className='feed-like-comment-buttons'>
             <div className='feed-like-button'>
             <i className="fa-regular fa-thumbs-up" />
               <div className='feed-like-text'> Like </div>
@@ -88,10 +88,10 @@ export default function PostFeed() {
               <i className="fa-regular fa-message" />
               <div className='feed-comment-text'> Comment </div>
             </div>
-          </div>
+          </div> */}
 
-          <AllComments comments={post.comments} />
-          <CommentsForm postId={post.id}/>
+          <AllComments comments={post.comments} postId={post.id}/>
+          {/* <CommentsForm postId={post.id}/> */}
 
         </div>
         </>

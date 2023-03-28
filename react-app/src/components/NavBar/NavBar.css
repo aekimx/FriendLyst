@@ -57,11 +57,11 @@
 .home-home:hover, .home-video:hover, .home-store:hover,
 .home-game:hover , .home-navbar-logout:hover{
   background-color: rgb(58,59,61);
-  background: linear-gradient(10deg, #c4198a, #359ed1);
   border-bottom: 3px solid #359ed1;
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
 
+  background: linear-gradient(to right, #c4198a, #359ed1);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -73,7 +73,7 @@
 
 .home-home {
   color: #c4198a;
-  background: linear-gradient(#c4198a, #359ed1);
+  background: linear-gradient(to right, #c4198a, #359ed1);
   /* border-bottom: 3px solid #359ed1; */
   border-bottom: 3px solid transparent;
   border-image: linear-gradient(#c4198a, #359ed1);
@@ -123,6 +123,18 @@
 .home-navbar-logout:hover {
   text-decoration: underline;
   cursor: pointer;
+  background: linear-gradient(to right, #c4198a, #359ed1);
+  /* border-bottom: 3px solid #359ed1; */
+  border-bottom: 3px solid transparent;
+  border-image: linear-gradient(#c4198a, #359ed1);
+  border-image-slice: 1;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 100% 100%;
+  background-position: 100%;
+  transition: background-position 10s ease;
+
 }
 
 

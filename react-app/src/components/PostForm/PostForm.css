@@ -40,7 +40,7 @@
 .feed-postform-inputtext {
   width: 600px;
 
-  height: 35px;
+  height: 30px;
   /* transition: height 0.2s ease-in-out; */
   overflow: auto;
 
@@ -48,7 +48,7 @@
   background-color: rgb(58,59,61);
   border: none;
   padding-left: 10px;
-  padding-top: 10px;
+  padding-top: 5px;
   margin-left: 10px;
   resize: none;
   font-family: 'Ruda', sans-serif;
@@ -57,14 +57,19 @@
 }
 
 .feed-postform-inputtext:focus {
-  /* height: 50px;
+  height: 50px;
   padding-left: 15px;
   padding-top: 15px;
-  padding-right: 15px; */
+  text-overflow: wrap;
+  padding-right: 15px;
 }
 
 .feed-postform-inputtext::placeholder {
-  padding-top: 10px;
+  padding-top: 7px;
+}
+
+.feed-postform-inputtext:focus::placeholder {
+  padding-top: 3px;
 }
 
 .postform-label > input[type='file'] {
@@ -127,7 +132,7 @@
 }
 
 .feed-postform-uploaded {
-  font-size: 12px;
-  margin-left: 20px;
+  font-size: 11px;
+  margin-left: 5px;
   text-decoration: underline;
 }
