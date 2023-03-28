@@ -1,5 +1,4 @@
 .searchresults-overall-container {
-  border: 2px solid red;
   position: fixed;
   left: 200px;
   right: 0px;
@@ -22,7 +21,6 @@
 
 .searchres-each-user:hover {
   background-color: rgb(79,80,81);
-  cursor: pointer;
 }
 
 .searchres-userprof {

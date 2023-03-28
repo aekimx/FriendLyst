@@ -41,12 +41,12 @@ def search_user():
     #different combos for what the search could have been!
 
     if len(search) == 2:
-        users_full_name = User.query.filter(User.first_name.contains(search[0])).filter(User.last_name.contains(search[1])).all()
-        users_full_name_two = User.query.filter(User.first_name.contains(search[1])).filter(User.last_name.contains(search[0])).all()
+        users_full_name = User.query.filter(User.first_name.contains(search[0])).filter(User.last_name.contains(search[1])).order_by(User.first_name.desc()).all()
+        users_full_name_two = User.query.filter(User.first_name.contains(search[1])).filter(User.last_name.contains(search[0])).order_by(User.first_name.desc()).all()
 
-        users_first_name_two = User.query.filter(User.first_name.contains(search[1])).all()
+        users_first_name_two = User.query.filter(User.first_name.contains(search[1])).order_by(User.first_name.desc()).all()
 
-        users_last_name = User.query.filter(User.last_name.contains(search[1])).all()
+        users_last_name = User.query.filter(User.last_name.contains(search[1])).order_by(User.first_name.desc()).all()
 
 
         if users_full_name:
@@ -62,8 +62,8 @@ def search_user():
             results.extend([user.to_dict_no_post() for user in users_last_name])
 
 
-    users_first_name = User.query.filter(User.first_name.contains(search[0])).all()
-    users_last_name_two = User.query.filter(User.last_name.contains(search[0])).all()
+    users_first_name = User.query.filter(User.first_name.contains(search[0])).order_by(User.first_name.desc()).all()
+    users_last_name_two = User.query.filter(User.last_name.contains(search[0])).order_by(User.first_name.desc()).all()
 
     if users_first_name:
         results.extend([user.to_dict_no_post() for user in users_first_name])
