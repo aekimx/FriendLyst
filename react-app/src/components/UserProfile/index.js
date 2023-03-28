@@ -22,11 +22,15 @@ export default function UserProfile() {
   const sessionUser = useSelector(state => state.session?.user)
 
   const friendsArr = Object.values(friends)
-  for (let friend in friendsArr) {
+
+  for (let i = 0; i < friendsArr.length; i++) {
+    let friend = friendsArr[i];
     if (friend.friendId === sessionUser.id) {
+      console.log("Hitting this!!! this is a friend!!!")
       setOption("Remove")
-    }
   }
+}
+
 
   useEffect(() => {
     dispatch(getUserThunk(userId))
@@ -41,6 +45,7 @@ export default function UserProfile() {
   // Navlink is a side bar thing className and active class name
   // or use location key = pathname
 
+  const buttonClassName = (option === "Add" ? "userprofile-add" : "userprofile-remove")
 
   return (
     <>
@@ -61,7 +66,7 @@ export default function UserProfile() {
           </div>
         </div>
 
-          <div className='userprof-friend-option'> ADD FRIEND REMOVE FRIEND HERE?</div>
+         {userId === sessionUser.id ? null : <div className={buttonClassName}> ADD FRIEND REMOVE FRIEND HERE?</div> }
         </div>
 
 

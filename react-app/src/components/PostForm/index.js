@@ -44,16 +44,18 @@ export default function PostForm() {
 
           <div className='feed-inside-form-container'>
 
-            <input type='text'
+            <textarea type='text'
             placeholder={`What's on your mind, ${user.firstName}?`}
             onChange={(e) => {setCaption(e.target.value)}}
             value={caption}
+            maxLength='2000'
             style={{ color: 'rgb(228,230,235)', paddingLeft:'10px', outline:"none"}}
             className='feed-postform-inputtext'
             />
 
+          <div className='feed-postform-upload-container'>
           <label htmlFor="feed-postform-fileupload" className='postform-label'>
-          <i class="fa-solid fa-image" />
+          <i className="fa-solid fa-image" />
             <input
                   type="file"
                   accept="image/*"
@@ -61,11 +63,16 @@ export default function PostForm() {
                   id='feed-postform-fileupload'
                 />
                 </label>
+            {photo ? <div className="feed-postform-uploaded"> File Attached </div> : null}
+            </div>
 
-            <div onClick={handleSubmit} className='feed-postform-button'> Post </div>
+            <button onClick={handleSubmit}
+            disabled={caption.length === 2000 || caption.length === 0}
+            className='feed-postform-button'> Post </button>
         </div>
       </form>
     </div>
+    {caption.length === 2000 ? <div className='feed-postform-error'> Posts cannot be more than 2000 characters </div> : null }
     </div>
     </>
   )

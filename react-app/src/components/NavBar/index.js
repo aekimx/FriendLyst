@@ -48,7 +48,7 @@ export default function NavBar() {
     <div className='home-navbar'>
 
         <div className='home-logo-search'>
-          <Link to={'/home'} > Home </Link>
+          <Link to={'/home'} > <img src='https://friendlyst-bucket.s3.amazonaws.com/FullLogo_Transparent_NoBuffer.png' className='navbar-logo'/> </Link>
 
           <form onSubmit={handleSubmit}>
             <input type='text' placeholder='Search FriendLyst'

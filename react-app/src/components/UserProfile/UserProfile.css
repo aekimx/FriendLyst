@@ -124,13 +124,6 @@
   padding: 10px;
 }
 
-.userprof-friend-option {
-  display: flex;
-  align-items: center;
-  margin-right: 80px;
-  border: 2px solid blue;
-}
-
 .userprof-name-pic-container {
   display: flex;
   flex-direction: row;
@@ -147,4 +140,18 @@
   padding: 15px;
   margin-top: 15px;
   font-size: 25px;
+}
+
+.userprofile-add {
+  display: flex;
+  align-items: center;
+  margin-right: 80px;
+  border: 2px solid blue;
+}
+
+.userprofile-remove {
+  display: flex;
+  align-items: center;
+  margin-right: 80px;
+  border: 2px solid red;
 }

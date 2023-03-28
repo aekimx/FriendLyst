@@ -19,7 +19,7 @@
   text-align: center;
 }
 .signupform-signup {
-  font-size: 45px;
+  font-size: 40px;
 }
 
 .signupform-easy {
@@ -110,7 +110,8 @@
 }
 
 .signupform-signup-button {
-  background-color: rgb(43,116,225);
+  background-color: rgb(58,59,61);
+  /* background: linear-gradient(to right, #c4198a, #359ed1); */
   color: rgb(228,230,235);
   font-family: 'Ruda', sans-serif;
   border: none;
@@ -119,6 +120,15 @@
   border-radius: 5px;
   cursor: pointer;
   font-size: 18px;
+}
+
+.signupform-signup-button:hover {
+  background: linear-gradient(to right, #c4198a, #359ed1);
+  transition-property: background;
+  transition-duration: 2s;
+  border: 1px solid rgb(228,230,235);
+
+
 }
 
 .signupform-errors {
@@ -130,4 +140,14 @@
   color: rgb(228,230,235);
   margin-top: 10px;
   font-size: 13px;
+}
+
+.signupform-logo {
+  width: 500px;
+}
+
+.signupform-fname:focus, .signupform-lname:focus, .signupform-email:focus,
+.signupform-password:focus, .signupform-confirm-password:focus, .signupform-select-month:focus,
+.signupform-select-year:focus, .signupform-select-day:focus {
+  outline: none;
 }

@@ -47,7 +47,7 @@ function SignupFormPage() {
     <>
     <div className='signupform-container'>
       <div className='signupform-text'>
-        <div> FRIENDLYST LOGO </div>
+        <img src='https://friendlyst-bucket.s3.amazonaws.com/FullLogo_Text_NoBuffer.png' className='signupform-logo'/>
         <div className='signupform-signup'>Sign Up for FriendLyst</div>
         <div className='signupform-easy'>It's quick and easy.</div>
       </div>

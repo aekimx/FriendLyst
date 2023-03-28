@@ -39,12 +39,32 @@
 
 .feed-postform-inputtext {
   width: 600px;
-  height: 40px;
+
+  height: 35px;
+  /* transition: height 0.2s ease-in-out; */
+  overflow: auto;
+
   border-radius: 50px;
   background-color: rgb(58,59,61);
   border: none;
-  padding-left: 5px;
+  padding-left: 10px;
+  padding-top: 10px;
   margin-left: 10px;
+  resize: none;
+  font-family: 'Ruda', sans-serif;
+  color: rgb(228,230,235);
+  padding-top: 5px;
+}
+
+.feed-postform-inputtext:focus {
+  /* height: 50px;
+  padding-left: 15px;
+  padding-top: 15px;
+  padding-right: 15px; */
+}
+
+.feed-postform-inputtext::placeholder {
+  padding-top: 10px;
 }
 
 .postform-label > input[type='file'] {
@@ -60,13 +80,54 @@
 }
 
 .feed-postform-button {
-  border: 1px solid white;
+  border: 2px solid rgb(58,59,61);
   border-radius: 10px;
+  margin-top: 5px;
   margin-left: 15px;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 50px;
+  height: 35px;
+  background-color: rgb(58,59,61);
+  color: rgb(228,230,235);
 
+}
+
+.feed-postform-button:hover {
+  background: linear-gradient(to right, #c4198a, #359ed1);
+  transition: 0.2s ease-out;
+}
+
+.feed-postform-button:disabled {
+  color: rgb(24,25,26);
+  cursor: not-allowed;
+}
+
+.feed-postform-error {
+  width: 200px;
+  margin-right: -210px;
+  margin-left: 10px;
+  color: rgb(218, 65, 65);
+  font-size: 15px;
+}
+
+.feed-postform-upload-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
+}
+
+.feed-postform-upload-container i {
+  margin-bottom: 5px;
+  margin-top: -5px;
+}
+
+.feed-postform-uploaded {
+  font-size: 12px;
+  margin-left: 20px;
+  text-decoration: underline;
 }

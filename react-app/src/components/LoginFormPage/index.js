@@ -48,7 +48,7 @@ function LoginFormPage() {
     <>
     <div className='loginform-container'>
       <div className='loginform-signin'>
-      <div className='loginform-logo'> FriendLyst LOGO </div>
+      <div className='loginform-logo'> <img src="https://friendlyst-bucket.s3.amazonaws.com/FullLogo_Text_NoBuffer.png" className='loginform-logo'/> </div>
       <div className='loginform-title'>Connect with friends and the world around you on FriendLyst </div>
       <div className='loginform-input-container'>
         <form onSubmit={handleSubmit}>
@@ -82,10 +82,10 @@ function LoginFormPage() {
           <div> <Link to ='/signup' className='loginform-signup'> Create new account </Link></div>
         </form>
       </div>
-      </div>
       <div className='loginform-demo-containers'>
           <div className='loginform-demouser-div' onClick={demoUserLogin}> Demo User 1 </div>
           <div className='loginform-demouser-div' onClick={demoUserLogin2}> Demo User 2 </div>
+      </div>
       </div>
     </div>
   </>

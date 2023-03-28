@@ -1,6 +1,7 @@
 
 .loginform-container {
   display: flex;
+  border: 2px solid red;
   position: fixed;
   top: 0;
   left: 0;
@@ -31,6 +32,7 @@
 .loginform-logo {
   font-size: 50px;
   margin-bottom: 10px;
+  width: 600px;
 }
 
 .loginform-input-container > form {
@@ -67,8 +69,8 @@
 }
 
 .loginform-submit-div:hover {
-  background-color: rgb(43,116,225);
-  transition: 0.2s ease-out;
+  background: linear-gradient(to right, #c4198a, #359ed1);
+  transition: background 10s ease-out;
 }
 
 .loginform-signup {
@@ -77,22 +79,33 @@
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
-}
-
-.loginform-signup:hover {
   text-decoration: underline;
 }
 
+.loginform-signup:hover {
+  background: linear-gradient(10deg, #c4198a, #359ed1);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 100% 100%;
+  background-position: 100%;
+  transition: background-position 5s ease;
+}
+
 .loginform-demouser-div {
-  background-color: rgb(43,116,225);
+  border: 1px solid white;
   cursor: pointer;
   display: flex;
   height: 40px;
   width: 200px;
   justify-content: center;
   align-items: center;
-  border: 1px solid white;
   border-radius: 5px;
+}
+
+.loginform-demouser-div:hover {
+  background: linear-gradient(to right, #c4198a, #359ed1);
+  transition: background 10s ease-out;
 }
 
 .loginform-error {
@@ -102,5 +115,5 @@
 }
 
 .loginform-demo-containers {
-  margin-top: 40px;
+  margin-top: 10px;
 }
