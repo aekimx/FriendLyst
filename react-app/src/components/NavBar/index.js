@@ -28,8 +28,8 @@ export default function NavBar() {
 
   const handleLogout = async (e) => {
     e.preventDefault();
-    dispatch(logout());
-    history.push("/");
+    await dispatch(logout())
+    .then(() => history.push("/"))
   };
 
   // 1. Once you come up with a logo for the site, it would be cool if you could change the Home button to the logo and perhaps
