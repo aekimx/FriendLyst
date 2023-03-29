@@ -23,13 +23,15 @@ export default function UserProfile() {
 
   const friendsArr = Object.values(friends)
   const currentFriend = friendsArr.find(el => el.friendId === sessionUser?.id)
+
   const requestsArr = Object.values(allRequests)
   const currentRequest = requestsArr.find(el => el.friendId === sessionUser?.id)
+
 
   useEffect(() => {
     dispatch(getUserThunk(userId))
     dispatch(getAllFriendsThunk(userId))
-    dispatch(getAllRequestsThunk(userId))
+    dispatch(getAllRequestsThunk(sessionUser.id))
     dispatch(getUserPostsThunk(userId))
   }, [dispatch, userId])
 
@@ -39,9 +41,10 @@ export default function UserProfile() {
   }
 
   const addFriend = async () => {
-    const request = {userId: sessionUser.id, friendId: userId}
+    const request = {userId: +userId, friendId: sessionUser.id}
     dispatch(addFriendThunk(request))
-    dispatch(getAllRequestsThunk(userId))
+    // dispatch(getAllRequestsThunk(userId))
+    // dispatch(getAllRequestsThunk(sessionUser?.id))
   }
 
 
@@ -67,7 +70,8 @@ export default function UserProfile() {
          {currentFriend !== undefined ? <div className='userprofile-remove' onClick={removeFriend}>  Remove Friend </div>
          : <div>
             {sessionUser?.id === +userId ? null :
-              <>{currentRequest ? <div className='userprofile-pending'> Friend Request Pending </div> : <div className='userprofile-add' onClick={addFriend}>  Add Friend </div> }</> }
+              <>{currentRequest ? <div className='userprofile-pending'> Friend Request Pending </div> :
+              <div className='userprofile-add' onClick={addFriend}>  Add Friend </div> } </> }
            </div> }
 
         </div>

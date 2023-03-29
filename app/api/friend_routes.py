@@ -41,11 +41,8 @@ def add_friend():
     data = request.get_json()
 
     friend_request = Friend( user_id = data['userId'],  friend_id = data['friendId'], status = "Pending")
-    other_side_request = Friend( user_id = data['friendId'],  friend_id = data['userId'], status = "Pending")
 
     db.session.add(friend_request)
-    db.session.commit()
-    db.session.add(other_side_request)
     db.session.commit()
 
     return friend_request.to_dict()
@@ -57,7 +54,6 @@ def add_friend():
 def accept_friend_request(id):
     ''' Query for a friend request by ID and update it if request exists. Returned as a dictionary.'''
     friend = Friend.query.get(id)
-    otherSide = Friend.query.filter(Friend.friend_id == friend.user_id).filter(Friend.user_id == friend.friend_id).first()
 
 
     if friend is None:
@@ -66,7 +62,8 @@ def accept_friend_request(id):
     friend.status = "Accepted"
     db.session.commit()
 
-    otherSide.status = "Accepted"
+    new_friend = Friend(friend_id = friend.friend_id, user_id = friend.user_id, status = "Accepted")
+    db.session.add(new_friend)
     db.session.commit()
     return jsonify(friend.to_dict_no_self()), 200
 
@@ -78,14 +75,12 @@ def remove_friend(id):
     ''' Query for a friend request by ID, whether accepted or pending and delete it if request exists. Return a successful message '''
     friend = Friend.query.get(id)
 
-    otherSide = Friend.query.filter(Friend.friend_id == friend.user_id).filter(Friend.user_id == friend.friend_id).first()
+    other_side = Friend.query.filter(Friend.friend_id == friend.user_id).filter(Friend.user_id == friend.friend_id).first()
 
     if friend is None:
         return jsonify({'error': 'Friend not found'}), 404
 
     db.session.delete(friend)
-    db.session.commit()
-
-    db.session.delete(otherSide)
+    db.session.delete(other_side)
     db.session.commit()
     return jsonify(friend.to_dict())
