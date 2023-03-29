@@ -6,7 +6,7 @@ import NavBar from "../NavBar"
 import UserProfilePosts from '../UserProfilePosts'
 import OpenModalButton from '../OpenModalButton'
 import UserProfileUpdate from '../UserProfileUpdate'
-import { getAllFriendsThunk, deleteFriendThunk, addFriendThunk } from '../../store/friend'
+import { getAllFriendsThunk, deleteFriendThunk, addFriendThunk, getAllRequestsThunk } from '../../store/friend'
 
 
 import './UserProfile.css'
@@ -19,13 +19,17 @@ export default function UserProfile() {
   const user = useSelector(state => state.user?.user)
   const friends = useSelector(state => state.friends?.allFriends)
   const sessionUser = useSelector(state => state.session?.user)
+  const allRequests = useSelector(state => state.friends?.allRequests)
 
   const friendsArr = Object.values(friends)
   const currentFriend = friendsArr.find(el => el.friendId === sessionUser?.id)
+  const requestsArr = Object.values(allRequests)
+  const currentRequest = requestsArr.find(el => el.friendId === sessionUser?.id)
 
   useEffect(() => {
     dispatch(getUserThunk(userId))
     dispatch(getAllFriendsThunk(userId))
+    dispatch(getAllRequestsThunk(userId))
     dispatch(getUserPostsThunk(userId))
   }, [dispatch, userId])
 
@@ -36,8 +40,8 @@ export default function UserProfile() {
 
   const addFriend = async () => {
     const request = {userId: sessionUser.id, friendId: userId}
-    console.log("ADD FRIEND CLICKED")
     dispatch(addFriendThunk(request))
+    dispatch(getAllRequestsThunk(userId))
   }
 
 
@@ -60,9 +64,10 @@ export default function UserProfile() {
           </div>
         </div>
 
-         {currentFriend !== undefined ? <div className='userprofile-remove' onClick={removeFriend}>  REMOVE FRIEND </div>
+         {currentFriend !== undefined ? <div className='userprofile-remove' onClick={removeFriend}>  Remove Friend </div>
          : <div>
-            {sessionUser?.id === +userId ? null : <div className='userprofile-add' onClick={addFriend}>  ADD FRIEND </div>}
+            {sessionUser?.id === +userId ? null :
+              <>{currentRequest ? <div className='userprofile-pending'> Friend Request Pending </div> : <div className='userprofile-add' onClick={addFriend}>  Add Friend </div> }</> }
            </div> }
 
         </div>

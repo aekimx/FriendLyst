@@ -57,7 +57,7 @@
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 10px;
-  align-items: left;
+  align-items: center;
   width: 1300px;
   margin-top: -80px;
   margin-left: 80px;
@@ -142,16 +142,20 @@
   font-size: 25px;
 }
 
-.userprofile-add {
+.userprofile-add, .userprofile-remove, .userprofile-pending {
   display: flex;
   align-items: center;
-  margin-right: 80px;
-  border: 2px solid blue;
+  justify-content: center;
+  margin-right: 150px;
+  margin-top: 40px;
+  height: 40px;
+  width: 125px;
+  padding: 5px;
+  border: 1px solid rgb(228,230,235);
+  border-radius: 20px;
 }
 
-.userprofile-remove {
-  display: flex;
-  align-items: center;
-  margin-right: 80px;
-  border: 2px solid red;
+.userprofile-add:hover, .userprofile-remove:hover {
+  background: linear-gradient(to right, #c4198a, #359ed1);
+  cursor: pointer;
 }
