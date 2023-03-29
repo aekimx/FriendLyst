@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { getUserThunk } from '../../store/user'
+import { getUserPostsThunk, getUserThunk } from '../../store/user'
 import NavBar from "../NavBar"
 import UserProfilePosts from '../UserProfilePosts'
 import OpenModalButton from '../OpenModalButton'
@@ -15,7 +15,6 @@ export default function UserProfile() {
   const dispatch = useDispatch()
   const url = useParams()
   const userId = url.userId.split(".")[2]
-  const [option, setOption] = useState("Add")
 
   const user = useSelector(state => state.user?.user)
   const friends = useSelector(state => state.friends?.allFriends)
@@ -23,28 +22,13 @@ export default function UserProfile() {
 
   const friendsArr = Object.values(friends)
 
-  for (let i = 0; i < friendsArr.length; i++) {
-    let friend = friendsArr[i];
-    if (friend.friendId === sessionUser.id) {
-      setOption("Remove")
-  }
-}
-
-
   useEffect(() => {
     dispatch(getUserThunk(userId))
     dispatch(getAllFriendsThunk(userId))
-  }, [dispatch])
+    dispatch(getUserPostsThunk(userId))
+  }, [dispatch, userId])
 
-
-  // evnet listening on comment button that would set class onfocus and cursor will go inside input
-  // use ref hook for comment set var that uses a use ref hook and on comment input ref = { refvar }
-  // when you click on that other ting you reference that variable and set it to on focus
-
-  // Navlink is a side bar thing className and active class name
-  // or use location key = pathname
-
-  const buttonClassName = (option === "Add" ? "userprofile-add" : "userprofile-remove")
+  const currentFriend = friendsArr.find(el => el.friendId === sessionUser.id)
 
   return (
     <>
@@ -65,7 +49,11 @@ export default function UserProfile() {
           </div>
         </div>
 
-         {userId === sessionUser.id ? null : <div className={buttonClassName}> ADD FRIEND REMOVE FRIEND HERE?</div> }
+         {currentFriend !== undefined ? <div className='userprofile-remove'>  REMOVE FRIEND </div>
+         : <div>
+            {sessionUser.id === +userId ? null : <div className='userprofile-add'>  ADD FRIEND </div>}
+           </div> }
+
         </div>
 
 

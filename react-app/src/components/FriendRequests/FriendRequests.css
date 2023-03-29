@@ -82,5 +82,6 @@
 }
 
 .friendrequest-accept:hover, .friendrequest-delete:hover {
-  background-color: rgb(91, 93, 96);
+  background: linear-gradient(to right, #c4198a, #359ed1);
+
 }

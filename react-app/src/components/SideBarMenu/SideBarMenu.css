@@ -33,5 +33,13 @@
   -webkit-text-fill-color: transparent;
   background-size: 100% 100%;
   background-position: 100%;
-  transition: background-position 5s ease;
+}
+
+.sidebar-link.active {
+  background: linear-gradient(to right, #c4198a, #359ed1);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 100% 100%;
+  background-position: 100%;
 }

@@ -1,10 +1,13 @@
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 import './SideBarMenu.css'
 
 export default function SideBarMenu() {
   const user = useSelector(state => state.session?.user)
+
+  // Navlink is a side bar thing className and active class name
+  // or use location key = pathname
 
   return (
     <>
@@ -12,25 +15,51 @@ export default function SideBarMenu() {
       <div className='sidebar-smaller-container'>
 
         <div className='sidebar-link'>
-        <i className="fa-solid fa-user" />
-        <Link to={`/${user?.firstName}.${user?.lastName}.${user?.id}/profile`} className='sidebar-link'> User Profile </Link>
+
+        <NavLink to={`/${user?.firstName}.${user?.lastName}.${user?.id}/profile`} className='sidebar-link'>
+          <i className="fa-solid fa-user" />
+          <span> User Profile </span>
+        </NavLink>
         </div>
 
         <div className='sidebar-link'>
-          <i class="fa-solid fa-users" />
-          <Link to={`/${user?.firstName}.${user?.lastName}.${user?.id}/friends`} className='sidebar-link'> Friends </Link>
+
+          <NavLink to={`/${user?.firstName}.${user?.lastName}.${user?.id}/friends`} className='sidebar-link'>
+            <i class="fa-solid fa-users" />
+            <span> Friends </span>
+          </NavLink>
         </div>
 
         <div className='sidebar-link'>
-          <i className="fa-solid fa-user-plus" />
-          <Link to={`/${user?.firstName}.${user?.lastName}.${user?.id}/requests`} className='sidebar-link'> Friend Requests </Link>
+
+          <NavLink to={`/${user?.firstName}.${user?.lastName}.${user?.id}/requests`} className='sidebar-link'>
+            <i className="fa-solid fa-user-plus" />
+            <span> Friend Requests </span>
+          </NavLink>
         </div>
 
+        <div className='sidebar-link' >
+          <NavLink to={`/${user?.firstName}.${user?.lastName}.${user?.id}/events`} className='sidebar-link'>
+            <i class="fa-solid fa-calendar-plus" />
+            <span> Events </span>
+          </NavLink>
+        </div>
 
-        <div className='sidebar-link'> <i class="fa-solid fa-users-rectangle" /> Groups </div>
-        <div className='sidebar-link'> <i class="fa-solid fa-calendar-plus" /> Events </div>
-        <div className='sidebar-link'> <i class="fa-solid fa-comments" /> Messages </div>
-        <div className='sidebar-link'> <i class="fa-solid fa-shop" /> Marketplace </div>
+        <div className='sidebar-link' >
+          <NavLink to={`/${user?.firstName}.${user?.lastName}.${user?.id}/messages`} className='sidebar-link'>
+            <i class="fa-solid fa-comments" />
+            <span> Messages </span>
+          </NavLink>
+        </div>
+
+        <div className='sidebar-link' >
+          <NavLink to='placeholder' className='sidebar-link'>
+            <i class="fa-solid fa-users-rectangle" />
+            <span> Groups </span>
+          </NavLink>
+        </div>
+
+        {/* <div className='sidebar-link'> <i class="fa-solid fa-shop" /> Marketplace </div> */}
       </div>
     </div>
     </>

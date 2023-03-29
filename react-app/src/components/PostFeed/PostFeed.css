@@ -104,6 +104,15 @@
   margin-left: 10px;
 }
 
+.postfeed-name {
+  text-decoration: none;
+  color: rgb(228,230,235);
+}
+
+.postfeed-name:hover {
+  text-decoration: underline;
+}
+
 .postfeed-time {
   font-size: 13px;
 }

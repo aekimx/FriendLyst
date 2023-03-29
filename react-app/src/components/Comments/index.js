@@ -9,12 +9,12 @@ import "./CommentsForm.css"
 
 
 export default function AllComments({comments, postId}) {
-  const inputRef = useRef(null);
   const dispatch = useDispatch();
 
   const user = useSelector(state => state.session.user)
   const [content, setContent] = useState("")
 
+  const inputRef = useRef(null);
   const handleClick = () => {
     inputRef.current.focus()
   }
