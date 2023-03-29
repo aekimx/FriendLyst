@@ -13,8 +13,8 @@ class Friend(db.Model):
     friend_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
 
     # Relationship Attributes
-    user = db.relationship("User", lazy=True, foreign_keys=[user_id])
-    friend = db.relationship("User", lazy=True, foreign_keys=[friend_id])
+    user = db.relationship("User", lazy=False, foreign_keys=[user_id])
+    friend = db.relationship("User", lazy=False, foreign_keys=[friend_id])
 
     def to_dict(self):
         return {

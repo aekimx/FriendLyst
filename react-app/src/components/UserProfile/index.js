@@ -6,7 +6,7 @@ import NavBar from "../NavBar"
 import UserProfilePosts from '../UserProfilePosts'
 import OpenModalButton from '../OpenModalButton'
 import UserProfileUpdate from '../UserProfileUpdate'
-import { getAllFriendsThunk } from '../../store/friend'
+import { getAllFriendsThunk, deleteFriendThunk, addFriendThunk } from '../../store/friend'
 
 
 import './UserProfile.css'
@@ -21,6 +21,7 @@ export default function UserProfile() {
   const sessionUser = useSelector(state => state.session?.user)
 
   const friendsArr = Object.values(friends)
+  const currentFriend = friendsArr.find(el => el.friendId === sessionUser?.id)
 
   useEffect(() => {
     dispatch(getUserThunk(userId))
@@ -28,7 +29,17 @@ export default function UserProfile() {
     dispatch(getUserPostsThunk(userId))
   }, [dispatch, userId])
 
-  const currentFriend = friendsArr.find(el => el.friendId === sessionUser.id)
+  const removeFriend = async () => {
+    dispatch(deleteFriendThunk(currentFriend.id))
+    dispatch(getAllFriendsThunk(userId))
+  }
+
+  const addFriend = async () => {
+    const request = {userId: sessionUser.id, friendId: userId}
+    console.log("ADD FRIEND CLICKED")
+    dispatch(addFriendThunk(request))
+  }
+
 
   return (
     <>
@@ -49,9 +60,9 @@ export default function UserProfile() {
           </div>
         </div>
 
-         {currentFriend !== undefined ? <div className='userprofile-remove'>  REMOVE FRIEND </div>
+         {currentFriend !== undefined ? <div className='userprofile-remove' onClick={removeFriend}>  REMOVE FRIEND </div>
          : <div>
-            {sessionUser.id === +userId ? null : <div className='userprofile-add'>  ADD FRIEND </div>}
+            {sessionUser?.id === +userId ? null : <div className='userprofile-add' onClick={addFriend}>  ADD FRIEND </div>}
            </div> }
 
         </div>
