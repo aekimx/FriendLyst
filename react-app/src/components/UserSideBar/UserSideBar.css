@@ -67,11 +67,23 @@
   display: flex;
   justify-content: left;
   margin-top: 10px;
-  font-size: 20px;
+  font-size: 18px;
+  margin-bottom: 5px;
 }
 
 .usersidebar-bday-content {
   display: flex;
   flex-direction: row;
+  justify-content: left;
+}
+
+.usersidebar-bday-content i {
+  font-size: 25px;
+  margin-top: 3px;
+}
+
+.usersidebar-bday-names {
+  margin-left: 10px;
+  display: flex;
   justify-content: left;
 }

@@ -25,7 +25,7 @@ export default function UserSideBar() {
       <div className='usersidebar-bday-text'> Birthdays</div>
       <div className='usersidebar-bday-content'>
         <i className="fa-solid fa-cake-candles" />
-        <div> Who has a bday today? </div>
+        <div className='usersidebar-bday-names'> There are no birthdays today! </div>
       </div>
 
     </div>

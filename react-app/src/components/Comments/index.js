@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import CommentOptions from "../CommentOptions"
-import { createCommentThunk, getAllPostsThunk } from "../../store/post";
+import { createCommentThunk, getAllPostsThunk, likePostThunk, unlikePostThunk } from "../../store/post";
 
 import "./Comments.css"
 import "./CommentsForm.css"
@@ -12,7 +12,12 @@ export default function AllComments({comments, postId}) {
   const dispatch = useDispatch();
 
   const user = useSelector(state => state.session.user)
+  const likes = useSelector(state => state.post.allPosts[postId]?.likes)
+
   const [content, setContent] = useState("")
+
+  const currentLike = likes.find(el => el.user?.id === user?.id)
+
 
   const inputRef = useRef(null);
   const handleClick = () => {
@@ -30,14 +35,31 @@ export default function AllComments({comments, postId}) {
   let userId;
   if (user) userId = user.id
 
+  const likePost = async () => {
+    const like = {postId, userId}
+    dispatch(likePostThunk(like))
+    dispatch(getAllPostsThunk(userId))
+  }
+
+  const unlikePost = async () => {
+    dispatch(unlikePostThunk(currentLike))
+    dispatch(getAllPostsThunk(userId))
+  }
+
 
   return (
     <>
     <div className='feed-like-comment-buttons'>
-            <div className='feed-like-button'>
-            <i className="fa-regular fa-thumbs-up" />
-              <div className='feed-like-text'> Like </div>
-            </div>
+      {currentLike ?
+        <div className='feed-liked' onClick={unlikePost}>
+          <i class="fa-solid fa-thumbs-up" />
+          <div className='feed-like-text'> Like </div>
+        </div>  :
+        <div className='feed-like-button' onClick={likePost}>
+          <i className="fa-regular fa-thumbs-up" />
+          <div className='feed-like-text'> Like </div>
+        </div>
+      }
 
             <div className='feed-comment-button' onClick={handleClick}>
               <i className="fa-regular fa-message" />

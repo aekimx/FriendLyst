@@ -34,7 +34,9 @@
 }
 
 .postfeed-post-pic {
-  width: 600px;
+  width: 700px;
+  object-fit: contain;
+  max-height: 500px;
 }
 
 .feed-like-comment-count, .feed-like-comment-buttons {
@@ -52,31 +54,7 @@
   margin-left: 300px;
 }
 
-.feed-like-button, .feed-comment-button {
-  width: 400px;
-  height: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: 5px;
-  margin-right: 5px;
-  padding-top: 3px;
-  padding-bottom: 3px;
 
-}
-
-.feed-like-button:hover, .feed-comment-button:hover {
-  background-color: rgb(58,59,61);
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-.feed-like-comment-buttons {
-  width: 700px;
-  border-bottom: 0.5px solid rgb(58,59,61);
-  border-top: 0.5px solid rgb(58,59,61);
-  margin-top: 10px;
-}
 
 
 .postfeed-propic-name-time {
@@ -99,6 +77,7 @@
 
 .feedpost-caption-photo {
   margin-top: 50px;
+
 }
 
 .postfeed-name, .postfeed-time {
@@ -144,4 +123,9 @@
   width: 700px;
   margin-top: 20px;
   margin-bottom: 10px;
+}
+
+.feedpost-photo-container {
+  display: flex;
+  justify-content: center;
 }

@@ -62,7 +62,7 @@ def accept_friend_request(id):
     friend.status = "Accepted"
     db.session.commit()
 
-    new_friend = Friend(friend_id = friend.friend_id, user_id = friend.user_id, status = "Accepted")
+    new_friend = Friend(friend_id = friend.user_id, user_id = friend.friend_id, status = "Accepted")
     db.session.add(new_friend)
     db.session.commit()
     return jsonify(friend.to_dict_no_self()), 200

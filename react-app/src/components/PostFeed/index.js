@@ -1,7 +1,7 @@
 import React from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getAllPostsThunk} from "../../store/post";
+import { getAllPostsThunk,} from "../../store/post";
 import { Link } from "react-router-dom";
 import AllComments from "../Comments"
 import PostUpdate from "../PostUpdate/index"
@@ -69,9 +69,11 @@ export default function PostFeed() {
 
           <div className='feedpost-caption-photo'>
             <div className='feedpost-caption-text'> {post.caption} </div>
-            <Link to={`/posts/${post.id}`} className='postfeed-user-prof-link'>
-              {post.photo ? <img src={post.photo} alt='post' className="postfeed-post-pic"/> : null }
-            </Link>
+            {/* <div className='feedpost-photo-container'> */}
+              <Link to={`/posts/${post.id}`} className='postfeed-user-prof-link'>
+                {post.photo ? <img src={post.photo} alt='post' className="postfeed-post-pic"/> : null }
+              </Link>
+            {/* </div> */}
           </div>
 
 

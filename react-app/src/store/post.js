@@ -7,14 +7,14 @@ const DELETE_POST = 'posts/DELETE_POST'
 const CREATE_COMMENT = 'posts/CREATE_COMMENT'
 const UPDATE_COMMENT = 'posts/UPDATE_COMMENT'
 const DELETE_COMMENT = 'posts/DELETE_COMMENT'
+const LIKE_POST = 'posts/LIKE_POST'
+const UNLIKE_POST = 'posts/UNLIKE_POST'
 
 // ----------------------------------- action creators   ---------------------------------
 const getAllPosts = (posts) => ({
 	type: GET_ALL_POSTS,
 	posts
 })
-
-
 
 const getPostById = (post) => ({
   type: GET_POST_DETAIL,
@@ -51,8 +51,15 @@ const deleteComment = (comment) => ({
   comment
 })
 
+const likePost = (like) => ({
+  type: LIKE_POST,
+  like
+})
 
-
+const unlikePost = (like) => ({
+  type: UNLIKE_POST,
+  like
+})
 
 // ----------------------------------- thunks  ----------------------------------------
 
@@ -65,7 +72,6 @@ export const getAllPostsThunk = (userId) => async (dispatch) => {
     return data
 	}
 }
-
 
 
 export const getPostDetailThunk = (id) => async (dispatch) => {
@@ -92,6 +98,7 @@ export const createPostThunk = (formData) => async (dispatch) => {
   }
 }
 
+
 export const updatePostThunk = (post, id) => async (dispatch) => {
   const res = await fetch(`/api/posts/${id}`, {
     method: 'PUT',
@@ -106,6 +113,7 @@ export const updatePostThunk = (post, id) => async (dispatch) => {
   }
 }
 
+
 export const deletePostThunk = ({postId}) => async (dispatch) => {
   const response = await fetch(`/api/posts/${postId}`, {
     method: 'DELETE',
@@ -117,6 +125,7 @@ export const deletePostThunk = ({postId}) => async (dispatch) => {
     return ('successfully deleted!')
   }
 }
+
 
 export const createCommentThunk = (comment) => async (dispatch) => {
   const res = await fetch(`/api/comments`, {
@@ -132,6 +141,7 @@ export const createCommentThunk = (comment) => async (dispatch) => {
   }
 }
 
+
 export const updateCommentThunk = (comment, commentId) => async (dispatch) => {
   const res = await fetch(`/api/comments/${commentId}`, {
     method: "PUT",
@@ -146,19 +156,46 @@ export const updateCommentThunk = (comment, commentId) => async (dispatch) => {
   }
 }
 
+
 export const deleteCommentThunk = (comment) => async (dispatch) => {
-  const response = await fetch(`/api/comments/${comment.id}`, {
+  const res = await fetch(`/api/comments/${comment.id}`, {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json' },
   })
 
-  if (response.ok) {
+  if (res.ok) {
     dispatch(deleteComment(comment))
     return ('successfully deleted!')
   }
 }
 
 
+export const likePostThunk = (like) => async (dispatch) => {
+  const res = await fetch(`/api/posts/${like.postId}/like`, {
+    method: "POST",
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(like)
+  })
+
+  if (res.ok) {
+    let data = await res.json()
+    dispatch(likePost(data))
+    return data
+  }
+}
+
+
+export const unlikePostThunk = (like) => async (dispatch) => {
+  const res = await fetch(`/api/posts/like/${like.id}`, {
+    method: "DELETE",
+    headers: { 'Content-Type': 'application/json' },
+  })
+
+  if (res.ok) {
+    dispatch(unlikePost(like))
+    return
+  }
+}
 
 const initialState = { allPosts: {}, post: {} };
 
@@ -168,46 +205,57 @@ export default function postReducer(state = initialState, action) {
 	switch (action.type) {
 
     case GET_ALL_POSTS:
-      newState = {...state, allPosts: {}, post: {...state.post}}
+      newState = {...state, allPosts: {}, post: {...state.post}};
       action.posts.forEach(post => {
         newState.allPosts[post.id] = post
       });
       return newState;
 
     case GET_POST_DETAIL:
-      newState = {...state, allPosts: {}, post: {}}
-      newState.post = action.post
-      return newState
+      newState = {...state, allPosts: {}, post: {}};
+      newState.post = action.post;
+      return newState;
 
     case CREATE_POST:
-      newState = {...state, allPosts: {...state.allPosts}}
-      newState.allPosts[action.post.id] = action.post
-			return newState
+      newState = {...state, allPosts: {...state.allPosts}};
+      newState.allPosts[action.post.id] = action.post;
+			return newState;
 
     case UPDATE_POST:
-      newState = {...state, allPosts: {...state.allPosts}}
-      newState.allPosts[action.post.id] = action.post
-			return newState
+      newState = {...state, allPosts: {...state.allPosts}};
+      newState.allPosts[action.post.id] = action.post;
+			return newState;
 
     case DELETE_POST:
-      newState = {...state, allPosts: {...state.allPosts}}
-      delete newState.allPosts[action.postId]
-      return newState
+      newState = {...state, allPosts: {...state.allPosts}};
+      delete newState.allPosts[action.postId];
+      return newState;
 
     case CREATE_COMMENT, UPDATE_COMMENT:
-      newState = {...state}
-      newState.allPosts[action.comment.postId].comments[action.comment.id] = action.comment
-      return newState
+      newState = {...state};
+      newState.allPosts[action.comment.postId].comments[action.comment.id] = action.comment;
+      return newState;
 
     case DELETE_COMMENT:
-      newState = {...state, allPosts: {...state.allPosts}}
+      newState = {...state, allPosts: {...state.allPosts}};
       let index;
       for (let i=0; i < newState.allPosts[action.comment.postId].comments.length; i++) {
         let comment = newState.allPosts[action.comment.postId].comments[i];
         if (comment?.id === action.comment.id) index = i;
       }
-      delete newState.allPosts[action.comment?.postId].comments[index]
-      return newState
+      delete newState.allPosts[action.comment?.postId].comments[index];
+      return newState;
+
+    case LIKE_POST:
+      newState = {...state, allPosts: {...state.allPosts}};
+      newState.allPosts[action.like.postId].likes.push(action.like);
+      return newState;
+
+    case UNLIKE_POST:
+      newState = {...state, allPosts: {...state.allPosts}};
+      const newLikes = newState.allPosts[action.like.postId].likes.filter(like => like.id !== action.like.id)
+      newState.allPosts[action.like.postId].likes = newLikes
+      return newState;
 
 		default:
 			return state;

@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import User, UserProfile, db, Friend
+from app.models import User, UserProfile, db, Friend, Post
 from app.forms import UserProfileForm
 
 user_routes = Blueprint('users', __name__)
@@ -75,7 +75,7 @@ def search_user():
 
 #UPDATE USER BY ID
 @user_routes.route('/<int:id>', methods=["PUT"])
-# @login_required
+@login_required
 def update_user_by_id(id):
     ''' Query for a user by id if exists and updates. Returns updated user in a dictionary '''
     user_profile = UserProfile.query.get(id)
@@ -98,7 +98,7 @@ def update_user_by_id(id):
 
 
 @user_routes.route('/<int:id>/friends/pending', methods=["GET"])
-# @login_required
+@login_required
 def get_friend_requests(id):
     ''' Query for a user's pending friend requests. Return in a list of dictionaries '''
     all_friends = Friend.query.filter(Friend.user_id == id).filter(Friend.status == 'Pending').all()
@@ -110,7 +110,7 @@ def get_friend_requests(id):
 
 
 @user_routes.route('/<int:id>/friends', methods=["GET"])
-# @login_required
+@login_required
 def get_friend_list(id):
     ''' Query for a user's accepted friends list. Return in a list of dictionaries '''
     all_friends = Friend.query.filter(Friend.user_id == id).filter(Friend.status == 'Accepted').all()
@@ -119,3 +119,15 @@ def get_friend_list(id):
         return jsonify({"error": "No friends found "})
 
     return jsonify([friend.to_dict_no_self() for friend in all_friends]), 200
+
+@user_routes.route('/<int:id>/photos', methods=["GET"])
+@login_required
+def get_photos(id):
+    ''' Query for all posts with photos by user Id. Return in a list of dictionaries'''
+
+    all_photos = Post.query.filter(Post.user_id == id).filter(len(Post.photo) > 0).all()
+
+    if all_photos is None:
+        return jsonify({'error': 'No photos found'})
+
+    return jsonify([post.to_dict_basic() for post in all_photos])

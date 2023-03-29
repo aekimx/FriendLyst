@@ -10,6 +10,7 @@ import PostDetail from "./components/PostDetail";
 import FriendsList from "./components/FriendsList";
 import FriendRequests from "./components/FriendRequests";
 import SearchResults from "./components/SearchResults";
+import AllMessages from "./components/Messages";
 
 function App() {
   const dispatch = useDispatch();
@@ -48,6 +49,10 @@ function App() {
 
       <Route path="/:userId/requests">
         <FriendRequests />
+      </Route>
+
+      <Route path="/:userId/messages">
+        <AllMessages />
       </Route>
 
       <Route path="/search/results">

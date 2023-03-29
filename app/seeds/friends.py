@@ -16,13 +16,13 @@ def seed_friends():
         # 2 Marnie is friends with other demo users, pending with Aileen
         Friend(user_id=2, friend_id=1, status='Accepted'),
         Friend(user_id=2, friend_id=3, status='Accepted'),
-        Friend(user_id=2, friend_id=4, status='Pending'),
+            # Friend(user_id=2, friend_id=4, status='Pending'),
 
 
         # 3 Bobbie is friends iwth other demo users and pending with Aileen
         Friend(user_id=3, friend_id=1, status='Accepted'),
         Friend(user_id=3, friend_id=2, status='Accepted'),
-        Friend(user_id=3, friend_id=4, status='Pending'),
+            # Friend(user_id=3, friend_id=4, status='Pending'),
 
         # 4 Aileen is friends with her gfs and Demo, pending with Marnie and Bobbie
         Friend(user_id=4, friend_id=1, status='Accepted'),
@@ -36,16 +36,19 @@ def seed_friends():
         Friend(user_id=5, friend_id=4, status='Accepted'),
         Friend(user_id=5, friend_id=6, status='Accepted'),
         Friend(user_id=5, friend_id=7, status='Accepted'),
+        Friend(user_id=5, friend_id=1, status='Accepted'),
 
         # 6 Mona is friends with all her gfs
         Friend(user_id=6, friend_id=4, status='Accepted'),
         Friend(user_id=6, friend_id=5, status='Accepted'),
         Friend(user_id=6, friend_id=7, status='Accepted'),
+        Friend(user_id=6, friend_id=1, status='Accepted'),
 
         # 7 Kita is friends with all her gfs
         Friend(user_id=7, friend_id=6, status='Accepted'),
         Friend(user_id=7, friend_id=5, status='Accepted'),
         Friend(user_id=7, friend_id=4, status='Accepted'),
+        Friend(user_id=7, friend_id=1, status='Accepted'),
     ]
 
     db.session.add_all(friends)

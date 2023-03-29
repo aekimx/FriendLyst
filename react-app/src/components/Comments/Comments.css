@@ -71,3 +71,39 @@
   align-items: center;
   margin-left: 8px;
 }
+
+.feed-like-button, .feed-comment-button, .feed-liked {
+  width: 400px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+
+}
+
+.feed-like-button:hover, .feed-comment-button:hover, .feed-liked:hover {
+  background-color: rgb(58,59,61);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.feed-like-comment-buttons {
+  width: 700px;
+  border-bottom: 0.5px solid rgb(58,59,61);
+  border-top: 0.5px solid rgb(58,59,61);
+  margin-top: 10px;
+}
+
+
+.feed-liked {
+  background: linear-gradient(to right, #c4198a, #359ed1);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 100% 100%;
+  background-position: 100%;
+}

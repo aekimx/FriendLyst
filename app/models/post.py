@@ -45,3 +45,11 @@ class Post(db.Model):
             'createdAt': self.created_at,
             'comments': [comment.to_dict() for comment in self.comments]
         }
+
+    def to_dict_basic(self):
+        return {
+            'id': self.id,
+            'userId': self.user_id,
+            'caption': self.caption,
+            'photo': self.photo,
+        }

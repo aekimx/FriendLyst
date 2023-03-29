@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.models import Post, db, Friend, Like
-from app.forms import PostForm, LikeForm
+from app.forms import PostForm
 from app.api.aws_helpers import upload_file_to_s3, get_unique_filename
 from sqlalchemy.orm import load_only
 
@@ -141,11 +141,22 @@ def like_post(id):
 
     data = request.get_json()
 
-    form = LikeForm()
+    new_like = Like( user_id= data['userId'], post_id = data['postId'] )
 
-    if form.validate_on_submit():
-        new_like = Like( user_id= data['userId'], post_id = data['postId'] )
+    db.session.add(new_like)
+    db.session.commit()
+    return new_like.to_dict()
 
-        db.session.add(new_like)
-        db.session.commit()
-        return new_like.to_dict()
+# UNLIKE POST
+@post_routes.route('/like/<int:id>', methods=['DELETE'])
+@login_required
+def unlike_post(id):
+    ''' Query for a like by ID and delete if like exists. Return a successful message '''
+    like = Like.query.get(id)
+
+    if like is None:
+        return jsonify({'error': 'Like not found'}), 404
+
+    db.session.delete(like)
+    db.session.commit()
+    return like.to_dict()

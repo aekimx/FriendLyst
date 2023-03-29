@@ -1,0 +1,32 @@
+.messages-overall-container {
+  color: rgb(228,230,235);
+  font-family: 'Ruda', sans-serif;
+  background-color: #232526;
+  position: fixed;
+  left: 200px;
+  top: 53px;
+  bottom: 0;
+  right: 0;
+
+}
+
+.messages-sidebar {
+  position: fixed;
+  left: 200px;
+  top: 53px;
+  bottom: 0;
+  width: 300px;
+  border: 2px solid green
+
+}
+
+
+.messages-conversation {
+  position: fixed;
+  left: 500px;
+  border: 2px solid red;
+  top: 53px;
+  bottom: 0;
+  right: 0px;
+
+}
