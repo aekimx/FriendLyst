@@ -35,6 +35,7 @@
   right: 200px;
   background-color: rgb(24,25,26);
   justify-content: center;
+  border-left: 0.5px solid rgb(58,59,61);
 }
 
 .feed-postform-inputtext {

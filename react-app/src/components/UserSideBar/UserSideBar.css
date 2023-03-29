@@ -3,9 +3,75 @@
 .usersidebar-container {
   position: fixed;
   right: 0;
-  top: 50px;
+  top: 150px;
   bottom: 0;
   width: 200px;
   background-color: rgb(24,25,26);
   color: rgb(228,230,235);
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+  border-left: 0.5px solid rgb(58,59,61);
+  border-top: 0.5px solid rgb(58,59,61);
+}
+
+.usersidebar-bday-container {
+  position: fixed;
+  right: 0;
+  top: 53px;
+  width: 200px;
+  height: 110px;
+  padding-left: 10px;
+  border-left: 0.5px solid rgb(58,59,61);
+  border-bottom: 0.5px solid rgb(58,59,61);
+  background-color: rgb(24,25,26);
+  color: rgb(228,230,235);
+}
+
+
+.usersidebar-name {
+  color: rgb(228,230,235);
+  height: 40px;
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.usersidebar-pic {
+  width: 30px;
+  height: 30px;
+  border-radius: 20px;
+}
+
+.usersidebar-name-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.usersidebar-friends-text {
+  display: flex;
+  justify-content: left;
+  font-size: 18px;
+  height: 30px;
+  padding-top: 10px;
+  margin-right: 10px;
+
+}
+
+.usersidebar-bday-text {
+  display: flex;
+  justify-content: left;
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+.usersidebar-bday-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
 }
