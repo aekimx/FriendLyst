@@ -12,11 +12,11 @@ export default function UserProfileUpdate({user}) {
 
   const [bio, setBio] = useState(user.bio)
   const [location, setLocation] = useState(user.location)
-  const [coverPhoto, setCoverPhoto] = useState(user.coverPhoto)
+  // const [coverPhoto, setCoverPhoto] = useState(user.coverPhoto)
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    let updatedUserProfile = {bio, location, coverPhoto}
+    let updatedUserProfile = {bio, location}
     dispatch(updateUserThunk(updatedUserProfile))
     dispatch(getUserThunk(user.id))
     .then(() => {closeModal()})

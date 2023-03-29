@@ -45,11 +45,18 @@ export default function PostUpdate({post}) {
           <form onSubmit={handleSubmit}>
             <textarea placeholder={`What's on your mind, ${post.user?.firstName}?`}
             value={caption}
+            maxLength='2000'
             className='postupdate-textarea'
             onChange={(e) => setCaption(e.target.value)}
             />
+
+            <div className='postupdate-error'>
+             {caption.length === 2000 ? 'Caption must be less than 2000 characters' : null}
+             {caption.length === 0 ?  'Caption is required' : null}
+            </div>
+
             <button className='postupdate-update-button' type='submit'
-            disabled={caption.length < 1}> Save </button>
+            disabled={caption.length < 1 || caption.length === 2000}> Save </button>
           </form>
         </div>
 
