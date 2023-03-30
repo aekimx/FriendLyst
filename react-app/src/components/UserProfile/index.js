@@ -6,8 +6,9 @@ import NavBar from "../NavBar"
 import UserProfilePosts from '../UserProfilePosts'
 import OpenModalButton from '../OpenModalButton'
 import UserProfileUpdate from '../UserProfileUpdate'
-import { getAllFriendsThunk, deleteFriendThunk, addFriendThunk, getAllRequestsThunk } from '../../store/friend'
+import { getAllFriendsThunk, deleteFriendThunk, addFriendThunk, getAllRequestsThunk} from '../../store/friend'
 import UserProfPostForm from '../UserProfilePostForm'
+import { clearUser } from '../../store/user'
 
 
 import './UserProfile.css'
@@ -37,6 +38,7 @@ export default function UserProfile() {
     dispatch(getAllFriendsThunk(userId))
     dispatch(getAllRequestsThunk(sessionUser.id))
     dispatch(getUserPostsThunk(userId))
+    return () => dispatch(clearUser())
   }, [dispatch, userId])
 
   const removeFriend = async () => {

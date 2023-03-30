@@ -14,7 +14,7 @@ def seed_comments():
         Comment(user_id=4, post_id=6, comment='The one to the far right! He\'s so cute.'),
         Comment(user_id=3, post_id=7, comment='Love this hike.'),
         Comment(user_id=7, post_id=9, comment='I love The Idiot by Elif Batuman. Highly recommend!'),
-        Comment(user_id=7, post_id=11, comment='I\'m down!. Craving sweetgreen today.'),
+        Comment(user_id=6, post_id=11, comment='I\'m down!. Craving sweetgreen today.'),
         Comment(user_id=4, post_id=8, comment='I\'m going to miss you so much! Have a safe flight!'),
         Comment(user_id=6, post_id=8, comment='Congrats Nikki!'),
         Comment(user_id=7, post_id=8, comment='That sounds AMAZING. You\'re going to kill it!'),

@@ -1,6 +1,6 @@
 import React, { useEffect }  from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { getPostDetailThunk } from "../../store/post"
+import { getPostDetailThunk, clearPost } from "../../store/post"
 import { useParams } from "react-router-dom"
 import NavBar from "../NavBar"
 
@@ -14,7 +14,8 @@ export default function PostDetail() {
 
   useEffect(() => {
     dispatch(getPostDetailThunk(id))
-  }, [dispatch])
+    return () => dispatch(clearPost())
+  }, [dispatch, id])
 
   const commentsArr = post?.comments
 

@@ -10,6 +10,8 @@ const DELETE_COMMENT = 'posts/DELETE_COMMENT'
 const LIKE_POST = 'posts/LIKE_POST'
 const UNLIKE_POST = 'posts/UNLIKE_POST'
 
+const CLEAR_POST = 'posts/CLEAR_POST'
+
 // ----------------------------------- action creators   ---------------------------------
 const getAllPosts = (posts) => ({
 	type: GET_ALL_POSTS,
@@ -59,6 +61,10 @@ const likePost = (like) => ({
 const unlikePost = (like) => ({
   type: UNLIKE_POST,
   like
+})
+
+export const clearPost = () => ({
+  type: CLEAR_POST
 })
 
 // ----------------------------------- thunks  ----------------------------------------
@@ -255,6 +261,11 @@ export default function postReducer(state = initialState, action) {
       newState = {...state, allPosts: {...state.allPosts}};
       const newLikes = newState.allPosts[action.like.postId].likes.filter(like => like.id !== action.like.id)
       newState.allPosts[action.like.postId].likes = newLikes
+      return newState;
+
+    case CLEAR_POST:
+      newState = {...state, post: {...state.post}}
+      newState.post = {}
       return newState;
 
 		default:

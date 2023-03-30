@@ -9,6 +9,8 @@ const CREATE_USER_COMMENT = 'user/CREATE_USER_COMMENT'
 const LIKE_USER_POST = 'user/LIKE_POST'
 const UNLIKE_USER_POST = 'user/UNLIKE_POST'
 
+const CLEAR_USER = 'user/CLEAR_USER'
+
 // ----------------------------------- action creators   ---------------------------------
 const getUserProfile = (user) => ({
 	type: GET_USER_PROFILE,
@@ -48,6 +50,10 @@ const likeUserPost = (like) => ({
 const unlikeUserPost = (like) => ({
   type: UNLIKE_USER_POST,
   like
+})
+
+export const clearUser = () => ({
+  type: CLEAR_USER
 })
 
 // ----------------------------------- thunks  ----------------------------------------
@@ -225,6 +231,12 @@ export default function userReducer(state = initialState, action) {
       newState = {...state, posts: {...state.posts}};
       const newLikes = newState.posts[action.like.postId].likes.filter(like => like.id !== action.like.id)
       newState.posts[action.like.postId].likes = newLikes
+      return newState;
+
+    case CLEAR_USER:
+      newState = {...state, posts: {...state.posts}, user: {...state.user}}
+      newState.posts = {};
+      newState.user = {};
       return newState;
 
     default:
