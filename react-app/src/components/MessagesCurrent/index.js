@@ -1,24 +1,48 @@
 import React, { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
+import { useParams } from "react-router-dom"
 import { getAllMessagesThunk } from "../../store/message"
-import MessageForm from "../MessageForm"
+import AllMessages from "../Messages"
+
+import "./MessagesCurrent.css"
+
 
 export default function MessagesCurrent() {
+  const dispatch = useDispatch()
 
-  const messages = useSelector(state => state.messages.currentConvo)
+  const {userId, friendId} = useParams();
+
+  const messages = useSelector(state => state.messages)
+
+  useEffect(() => {
+    dispatch(getAllMessagesThunk(userId, friendId))
+  }, [dispatch, friendId])
+
+  let messagesArr;
+  if (messages) messagesArr = Object.values(messages);
 
   return (
     <>
+    <AllMessages />
     <div className='messages-conversation'>
-      <div> MESSAGE </div>
-      <div> MESSAGE </div>
-      <div> MESSAGE </div>
-      <div> MESSAGE </div>
-      <div> MESSAGE </div>
-      <div> MESSAGE </div>
+      <div>
+        <div> Chatting user prof pic </div>
+        <div> Chatting user first name last name </div>
       </div>
 
-      <MessageForm />
+      {messagesArr.map(message => {
+        return (
+        <>
+        <div className='message-item-container' key={`messageitem${message.id}`}>
+          <div className='message-item'>
+            <img src={message.chattingUser.profilePic} className='message-item-chatting-profpic'/>
+            <div> {message.chattingUser.firstName} {message.chattingUser.lastName} </div>
+          </div>
+        </div>
+        </>
+        )
+      })}
+    </div>
     </>
   )
 }

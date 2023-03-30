@@ -10,4 +10,5 @@ from .message import Message
 from .friend import Friend
 from .event import Event
 from .event_member import EventMember
+from .direct_message import DirectMessage
 from .db import environment, SCHEMA

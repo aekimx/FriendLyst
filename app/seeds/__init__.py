@@ -8,6 +8,7 @@ from .likes import seed_likes, undo_likes
 from .groups import seed_groups, undo_groups
 from .group_members import seed_group_members, undo_group_members
 from .messages import seed_messages, undo_messages
+from .direct_messages import seed_dms, undo_dms
 
 from app.models.db import db, environment, SCHEMA
 
@@ -31,11 +32,13 @@ def seed():
         undo_posts()
         undo_friends()
         undo_messages()
+        undo_dms()
         undo_user_profiles()
         undo_users()
     seed_users()
     seed_user_profiles()
     seed_friends()
+    seed_dms()
     seed_messages()
     seed_posts()
     seed_comments()
@@ -55,6 +58,7 @@ def undo():
     undo_comments()
     undo_posts()
     undo_friends()
+    undo_dms()
     undo_user_profiles()
     undo_users()
     # Add other undo functions here

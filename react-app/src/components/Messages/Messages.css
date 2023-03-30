@@ -1,29 +1,14 @@
-.messages-overall-container {
-  color: rgb(228,230,235);
+.messages-each-convo-container {
   font-family: 'Ruda', sans-serif;
   background-color: #232526;
   position: fixed;
   left: 200px;
   top: 53px;
   bottom: 0;
-  right: 0;
-
-}
-
-.messages-each-convo-container {
-  position: fixed;
-  left: 200px;
-  top: 53px;
-  bottom: 0;
   width: 300px;
-  border: 2px solid green;
 }
-
-
-
 
 .messages-each-convo {
-  border: 1px solid blue;
   margin-top: 10px;
   margin-bottom: 10px;
   display: flex;
@@ -42,3 +27,26 @@
 .messages-user-name {
   font-size: 20px;
 }
+
+.messages-convo-link {
+  text-decoration: none;
+  color: rgb(228,230,235);
+}
+
+/* .messages-conversation {
+  position: fixed;
+  left: 500px;
+  border: 2px solid pink;
+  top: 53px;
+  bottom: 50px;
+  right: 0px;
+}
+
+.messageform-container {
+  border: 2px solid blue;
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  left: 500px;
+
+} */

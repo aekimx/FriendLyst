@@ -5,12 +5,13 @@ from app.forms import MessageForm
 
 message_routes = Blueprint('messages', __name__)
 
-@message_routes.route('/user/<int:user_id>', methods=['GET'])
+@message_routes.route('/user/<int:user_id>/<int:friend_id>', methods=['GET'])
 @login_required
 def get_all_messages(user_id, friend_id):
     ''' Query for all messages and return in a list of dictionaries '''
 
-    all_messages = Message.query.filter(Message.user_id == user_id).filter(Message.chatting_user_id == friend_id).all()
+    all_messages = Message.query.filter(Message.user_id == user_id).all()
+
 
     return [message.to_dict() for message in all_messages]
 

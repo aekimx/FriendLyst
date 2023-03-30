@@ -4,6 +4,7 @@ const CREATE_USER_PROFILE = 'user/CREATE_USER_PROFILE'
 const UPDATE_USER_PROFILE = 'user/UPDATE_USER_PROFILE'
 const GET_USER_POSTS = 'user/GET_USER_POSTS'
 const SEARCH_USERS = 'user/SEARCH_USERS'
+const CREATE_USER_POST = 'user/CREATE_USER_POST'
 
 // ----------------------------------- action creators   ---------------------------------
 const getUserProfile = (user) => ({
@@ -24,6 +25,11 @@ const getUserPosts = (posts) => ({
 const searchUsers = (users) => ({
   type: SEARCH_USERS,
   users
+})
+
+const createUserPost = (post) => ({
+  type: CREATE_USER_POST,
+  post
 })
 
 // ----------------------------------- thunks  ----------------------------------------
@@ -92,6 +98,19 @@ export const searchUsersThunk = (search) => async (dispatch) => {
   }
 }
 
+export const createUserPostThunk = (formData) => async (dispatch) => {
+  const res = await fetch(`/api/posts`, {
+    method: "POST",
+    body: formData,
+  })
+
+  if (res.ok) {
+    let data = await res.json()
+    dispatch(createUserPost(data))
+    return data
+  }
+}
+
 
 // ----------------------------------- Reducer  ----------------------------------------
 
@@ -127,6 +146,11 @@ export default function userReducer(state = initialState, action) {
       action.users.forEach(user => {
         newState.search[user.id] = user
       })
+      return newState;
+
+    case CREATE_USER_POST:
+      newState = {...state, posts: {...state.posts} };
+      newState.posts[action.post.id] = action.post;
       return newState;
 
     default:

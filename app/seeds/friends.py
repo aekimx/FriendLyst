@@ -38,13 +38,13 @@ def seed_friends():
         Friend(user_id=5, friend_id=7, status='Accepted'),
         Friend(user_id=5, friend_id=1, status='Accepted'),
 
-        # 6 Mona is friends with all her gfs
+        # 6 Mona is friends with all her gfs and Demo
         Friend(user_id=6, friend_id=4, status='Accepted'),
         Friend(user_id=6, friend_id=5, status='Accepted'),
         Friend(user_id=6, friend_id=7, status='Accepted'),
         Friend(user_id=6, friend_id=1, status='Accepted'),
 
-        # 7 Kita is friends with all her gfs
+        # 7 Kita is friends with all her gfs and Demo
         Friend(user_id=7, friend_id=6, status='Accepted'),
         Friend(user_id=7, friend_id=5, status='Accepted'),
         Friend(user_id=7, friend_id=4, status='Accepted'),

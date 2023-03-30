@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { getUserPostsThunk, getUserThunk } from '../../store/user'
 import NavBar from "../NavBar"
@@ -7,6 +7,7 @@ import UserProfilePosts from '../UserProfilePosts'
 import OpenModalButton from '../OpenModalButton'
 import UserProfileUpdate from '../UserProfileUpdate'
 import { getAllFriendsThunk, deleteFriendThunk, addFriendThunk, getAllRequestsThunk } from '../../store/friend'
+import UserProfPostForm from '../UserProfilePostForm'
 
 
 import './UserProfile.css'
@@ -121,6 +122,7 @@ export default function UserProfile() {
 
 
       <div className='userprofile-posts-container'>
+        <UserProfPostForm />
         <div className='userprofile-posts-text'> Posts </div>
         <UserProfilePosts userId={userId}/>
 

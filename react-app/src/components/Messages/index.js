@@ -7,6 +7,7 @@ import { getAllFriendsThunk } from "../../store/friend"
 import MessagesCurrent from "../MessagesCurrent"
 
 
+
 import "./Messages.css"
 import { Link } from "react-router-dom"
 
@@ -29,11 +30,12 @@ export default function AllMessages() {
     <NavBar />
     <SideBarMenu />
 
-    <div className='messages-overall-container'>
       <div className='messages-each-convo-container'>
         {allFriendsArr.map(friend => {
           return (
-            <Link to={`/messages/${sessionUser.id}/${friend.id}`} key={`messagefriend${friend.id}`}>
+            <>
+            <Link to={`/messages/${sessionUser.id}/${friend.friendId}`} key={`messagefriend${friend.id}`}
+            className='messages-convo-link'>
             <div className='messages-each-convo' >
               <img src={friend.friend?.profilePic} className='messages-user-profpic'/>
               <div className='messages-user-container'>
@@ -42,12 +44,23 @@ export default function AllMessages() {
               </div>
             </div>
             </Link>
-
+          </>
           )
         })}
 
+
+      {/* <div className='messages-conversation'>
+        <MessagesCurrent />
       </div>
+
+      <div className='messageform-container'>
+        <MessageForm />
+      </div> */}
+
+
+
     </div>
+
 
     </>
   )

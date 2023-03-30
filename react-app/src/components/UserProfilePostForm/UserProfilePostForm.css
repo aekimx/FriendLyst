@@ -1,0 +1,116 @@
+.userprof-user-profpic {
+  width: 60px;
+  height: auto;
+  border-radius: 50px;
+  margin-left: 10px;
+}
+
+.userprof-postform-container {
+  flex-direction: row;
+  background-color: rgb(35,37,38);
+  width: 750px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  border-radius: 20px;
+  position: relative;
+  padding-top: 10px;
+  margin-top: 10px;
+  padding-bottom: 10px;
+}
+
+.userprof-inside-form-container {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.userprof-postform-inputtext {
+  width: 520px;
+  height: 35px;
+  overflow: auto;
+
+  border-radius: 50px;
+  background-color: rgb(58,59,61);
+  border: none;
+  padding-left: 10px;
+  padding-top: 5px;
+  margin-left: 10px;
+  resize: none;
+  font-family: 'Ruda', sans-serif;
+  color: rgb(228,230,235);
+  padding-top: 5px;
+}
+
+.userprof-postform-label > input[type='file'] {
+  display: none
+}
+
+.userprof-postform-label {
+  display: flex;
+  align-items: center;
+  font-size: 25px;
+  cursor: pointer;
+  margin-left: 15px;
+}
+
+.userprof-postform-button {
+  border: 2px solid rgb(58,59,61);
+  border-radius: 10px;
+  margin-left: 15px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 25px;
+  top: 20px;
+  width: 50px;
+  height: 35px;
+  background-color: rgb(58,59,61);
+  color: rgb(228,230,235);
+
+}
+
+.userprof-postform-button:hover {
+  background: linear-gradient(to right, #c4198a, #359ed1);
+  transition: 0.2s ease-out;
+}
+
+.userprof-postform-button:disabled {
+  color: rgb(24,25,26);
+  cursor: not-allowed;
+}
+
+.userprof-postform-error {
+  width: 200px;
+  margin-right: -210px;
+  margin-left: 10px;
+  color: rgb(218, 65, 65);
+  font-size: 15px;
+}
+
+.userprof-postform-upload-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
+}
+
+.userprof-postform-upload-container i {
+  margin-bottom: 5px;
+  margin-top: -5px;
+  position: absolute;
+  right: 95px;
+  top: 33px;
+}
+
+.userprof-postform-uploaded {
+  font-size: 11px;
+  margin-left: 5px;
+  text-decoration: underline;
+  position: absolute;
+  right: 75px;
+  top: 60px;
+}
