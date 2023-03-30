@@ -10,6 +10,7 @@ class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     message = db.Column(db.String(2000), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
     # dm_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('direct_messages.id')), nullable=False)
 
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
@@ -25,8 +26,8 @@ class Message(db.Model):
             'id': self.id,
             'message': self.message,
             'createdAt': self.created_at,
-            'dm_id': self.dm_id,
-            'direct_message': self.direct_message.to_dict_no_message()
+            # 'dm_id': self.dm_id,
+            # 'direct_message': self.direct_message.to_dict_no_message()
         }
 
     def to_dict_no_dm(self):
@@ -34,5 +35,5 @@ class Message(db.Model):
             'id': self.id,
             'message': self.message,
             'createdAt': self.created_at,
-            'dm_id': self.dm_id,
+            # 'dm_id': self.dm_id,
         }
