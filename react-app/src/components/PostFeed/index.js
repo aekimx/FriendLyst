@@ -82,20 +82,7 @@ export default function PostFeed() {
             <div className='feed-comments'> {post.comments?.length > 0 ? `${post.comments.length} ${post.comments.length === 1 ? 'comment' : 'comments'}` : null }</div>
           </div>
 
-          {/* <div className='feed-like-comment-buttons'>
-            <div className='feed-like-button'>
-            <i className="fa-regular fa-thumbs-up" />
-              <div className='feed-like-text'> Like </div>
-            </div>
-
-            <div className='feed-comment-button'>
-              <i className="fa-regular fa-message" />
-              <div className='feed-comment-text'> Comment </div>
-            </div>
-          </div> */}
-
           <AllComments comments={post.comments} postId={post.id}/>
-          {/* <CommentsForm postId={post.id}/> */}
 
         </div>
         </>

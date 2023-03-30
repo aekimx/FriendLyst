@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { getUserPostsThunk } from '../../store/user';
 import { Link } from 'react-router-dom';
 import "./UserProfilePosts.css"
+import UserProfileComments from '../UserProfileCommentForm';
 
 export default function UserProfilePosts({userId}) {
   const dispatch = useDispatch();
@@ -38,15 +39,15 @@ export default function UserProfilePosts({userId}) {
               <img src={post.photo} className='userpost-photo'/>
             </div>
 
-
-              { post.likes.length > 0 ?
-              <div className='userpost-like-comment-count'>
-                <div> {post.likes.length} {post.likes.length === 1 ? "like" : "likes "} </div>
-              </div>
-              : null}
+            <div className='feed-like-comment-count'>
+              { post.likes.length > 0 ? <div> {post.likes.length} {post.likes.length === 1 ? "like" : "likes"} </div> : <div></div>}
+              <div className='feed-comments'> {post.comments?.length > 0 ? `${post.comments.length} ${post.comments.length === 1 ? 'comment' : 'comments'}` : null }</div>
+            </div>
 
             <div className='userpost-comments-container'>
-              { post.comments.length ?
+              <UserProfileComments comments={post.comments} postId={post.id} />
+
+              {/* { post.comments.length ?
               <>
               <div className='userpost-comments-text'> Comments </div>
               {post.comments.map(comment => {
@@ -69,7 +70,8 @@ export default function UserProfilePosts({userId}) {
                 )
               })}
               </>
-              : null}
+              : null} */}
+
 
             </div>
           </div>

@@ -122,7 +122,8 @@ export default function UserProfile() {
 
 
       <div className='userprofile-posts-container'>
-        <UserProfPostForm />
+        {+userId === sessionUser.id ? <UserProfPostForm /> : null}
+        {/* <UserProfPostForm /> */}
         <div className='userprofile-posts-text'> Posts </div>
         <UserProfilePosts userId={userId}/>
 

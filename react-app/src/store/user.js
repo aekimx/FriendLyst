@@ -5,6 +5,7 @@ const UPDATE_USER_PROFILE = 'user/UPDATE_USER_PROFILE'
 const GET_USER_POSTS = 'user/GET_USER_POSTS'
 const SEARCH_USERS = 'user/SEARCH_USERS'
 const CREATE_USER_POST = 'user/CREATE_USER_POST'
+const CREATE_COMMENT = 'user/CREATE_COMMENT'
 
 // ----------------------------------- action creators   ---------------------------------
 const getUserProfile = (user) => ({
@@ -30,6 +31,11 @@ const searchUsers = (users) => ({
 const createUserPost = (post) => ({
   type: CREATE_USER_POST,
   post
+})
+
+const createUserComment = (comment) => ({
+  type: CREATE_COMMENT,
+  comment
 })
 
 // ----------------------------------- thunks  ----------------------------------------
@@ -111,6 +117,20 @@ export const createUserPostThunk = (formData) => async (dispatch) => {
   }
 }
 
+export const createUserCommentThunk = (comment) => async (dispatch) => {
+  const res = await fetch(`/api/comments`, {
+    method: "POST",
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(comment),
+  })
+
+  if (res.ok) {
+    let data = await res.json()
+    dispatch(createUserComment(data))
+    return data
+  }
+}
+
 
 // ----------------------------------- Reducer  ----------------------------------------
 
@@ -151,6 +171,11 @@ export default function userReducer(state = initialState, action) {
     case CREATE_USER_POST:
       newState = {...state, posts: {...state.posts} };
       newState.posts[action.post.id] = action.post;
+      return newState;
+
+    case CREATE_COMMENT:
+      newState = {...state, posts: {...state.posts}};
+      newState.posts[action.comment.postId].comments.push(action.comment)
       return newState;
 
     default:
