@@ -11,14 +11,12 @@ class Message(db.Model):
     message = db.Column(db.String(2000), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-    # dm_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('direct_messages.id')), nullable=False)
-
-    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    chatting_user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-
+    sender_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    dm_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('direct_messages.id')), nullable=False)
 
     # Relationship Attributes
-    # direct_message = db.relationship("DirectMessage", back_populates='messages', lazy=True)
+    user = db.Relationship("User", back_populates='messages', lazy=True)
+    direct_message = db.relationship("DirectMessage", back_populates='messages', lazy=True)
 
 
     def to_dict(self):
@@ -26,8 +24,8 @@ class Message(db.Model):
             'id': self.id,
             'message': self.message,
             'createdAt': self.created_at,
-            # 'dm_id': self.dm_id,
-            # 'direct_message': self.direct_message.to_dict_no_message()
+            'dm_id': self.dm_id,
+            'direct_message': self.direct_message.to_dict_no_message()
         }
 
     def to_dict_no_dm(self):

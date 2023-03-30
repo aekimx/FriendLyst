@@ -12,7 +12,7 @@ export default function UserProfileComments({comments, postId}) {
   const dispatch = useDispatch();
 
   const user = useSelector(state => state.session.user)
-  const likes = useSelector(state => state.post.allPosts[postId]?.likes)
+  const likes = useSelector(state => state.user.posts[postId]?.likes)
 
   const [content, setContent] = useState("")
 
