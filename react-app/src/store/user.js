@@ -5,7 +5,9 @@ const UPDATE_USER_PROFILE = 'user/UPDATE_USER_PROFILE'
 const GET_USER_POSTS = 'user/GET_USER_POSTS'
 const SEARCH_USERS = 'user/SEARCH_USERS'
 const CREATE_USER_POST = 'user/CREATE_USER_POST'
-const CREATE_COMMENT = 'user/CREATE_COMMENT'
+const CREATE_USER_COMMENT = 'user/CREATE_USER_COMMENT'
+const LIKE_USER_POST = 'user/LIKE_POST'
+const UNLIKE_USER_POST = 'user/UNLIKE_POST'
 
 // ----------------------------------- action creators   ---------------------------------
 const getUserProfile = (user) => ({
@@ -34,8 +36,18 @@ const createUserPost = (post) => ({
 })
 
 const createUserComment = (comment) => ({
-  type: CREATE_COMMENT,
+  type: CREATE_USER_COMMENT,
   comment
+})
+
+const likeUserPost = (like) => ({
+  type: LIKE_USER_POST,
+  like
+})
+
+const unlikeUserPost = (like) => ({
+  type: UNLIKE_USER_POST,
+  like
 })
 
 // ----------------------------------- thunks  ----------------------------------------
@@ -131,6 +143,32 @@ export const createUserCommentThunk = (comment) => async (dispatch) => {
   }
 }
 
+export const likeUserPostThunk = (like) => async (dispatch) => {
+  const res = await fetch(`/api/posts/${like.postId}/like`, {
+    method: "POST",
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(like)
+  })
+
+  if (res.ok) {
+    let data = await res.json()
+    dispatch(likeUserPost(data))
+    return data
+  }
+}
+
+export const unlikeUserPostThunk = (like) => async (dispatch) => {
+  const res = await fetch(`/api/posts/like/${like.id}`, {
+    method: "DELETE",
+    headers: { 'Content-Type': 'application/json' },
+  })
+
+  if (res.ok) {
+    dispatch(unlikeUserPost(like))
+    return
+  }
+}
+
 
 // ----------------------------------- Reducer  ----------------------------------------
 
@@ -173,9 +211,20 @@ export default function userReducer(state = initialState, action) {
       newState.posts[action.post.id] = action.post;
       return newState;
 
-    case CREATE_COMMENT:
+    case CREATE_USER_COMMENT:
       newState = {...state, posts: {...state.posts}};
       newState.posts[action.comment.postId].comments.push(action.comment)
+      return newState;
+
+    case LIKE_USER_POST:
+      newState = {...state, posts: {...state.posts}};
+      newState.posts[action.like.postId].likes.push(action.like)
+      return newState;
+
+    case UNLIKE_USER_POST:
+      newState = {...state, posts: {...state.posts}};
+      const newLikes = newState.posts[action.like.postId].likes.filter(like => like.id !== action.like.id)
+      newState.posts[action.like.postId].likes = newLikes
       return newState;
 
     default:

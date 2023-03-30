@@ -2,8 +2,7 @@ import React, { useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import CommentOptions from "../CommentOptions"
-import { likePostThunk, unlikePostThunk } from "../../store/post";
-import { createUserCommentThunk, getUserPostsThunk } from "../../store/user";
+import { createUserCommentThunk, getUserPostsThunk, likeUserPostThunk, unlikeUserPostThunk } from "../../store/user";
 
 import "../Comments/Comments.css"
 import "../Comments/CommentsForm.css"
@@ -38,12 +37,12 @@ export default function UserProfileComments({comments, postId}) {
 
   const likePost = async () => {
     const like = {postId, userId}
-    dispatch(likePostThunk(like))
+    dispatch(likeUserPostThunk(like))
     dispatch(getUserPostsThunk(userId))
   }
 
   const unlikePost = async () => {
-    dispatch(unlikePostThunk(currentLike))
+    dispatch(unlikeUserPostThunk(currentLike))
     dispatch(getUserPostsThunk(userId))
   }
 
