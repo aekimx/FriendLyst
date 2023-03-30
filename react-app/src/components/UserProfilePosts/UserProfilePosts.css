@@ -24,6 +24,7 @@
   padding: 5px;
   margin-top: 10px;
   margin-bottom: 10px;
+  word-wrap: break-word;
 }
 
 .userpost-profpic {
@@ -109,4 +110,9 @@
 .userpost-comment-link:hover {
   color: white;
   text-decoration: underline;
+}
+
+.userpost-comment-content {
+  max-width: 600px;
+  word-wrap: break-word;
 }

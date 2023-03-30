@@ -38,6 +38,7 @@
 }
 .post-comment-content {
   font-size: 14px;
+  word-wrap: break-word;
 }
 
 .post-comment-link:hover {

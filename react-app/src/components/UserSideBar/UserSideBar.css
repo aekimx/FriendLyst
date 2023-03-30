@@ -5,7 +5,7 @@
   right: 0;
   top: 150px;
   bottom: 0;
-  width: 200px;
+  width: 205px;
   background-color: rgb(24,25,26);
   color: rgb(228,230,235);
   display: flex;
@@ -19,7 +19,7 @@
   position: fixed;
   right: 0;
   top: 53px;
-  width: 200px;
+  width: 205px;
   height: 110px;
   padding-left: 10px;
   border-left: 0.5px solid rgb(58,59,61);

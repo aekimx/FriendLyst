@@ -4,6 +4,7 @@ import session from './session'
 import userReducer from './user';
 import postReducer from './post';
 import friendReducer from './friend';
+import messageReducer from './message';
 
 
 
@@ -11,7 +12,8 @@ const rootReducer = combineReducers({
   session,
   user: userReducer,
   post: postReducer,
-  friends: friendReducer
+  friends: friendReducer,
+  messages: messageReducer
 });
 
 

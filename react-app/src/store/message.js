@@ -27,7 +27,7 @@ export const getAllMessagesThunk = (userId) => async (dispatch) => {
 // ----------------------------------- Reducer  ----------------------------------------
 let initialState = {allMessages: {}, currentConvo: {}}
 
-export default function friendReducer(state = initialState, action) {
+export default function messageReducer(state = initialState, action) {
   let newState = {}
 	switch (action.type) {
     case GET_ALL_MESSAGES:

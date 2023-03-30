@@ -94,7 +94,7 @@
   justify-content: center;
   align-items: center;
   position: absolute;
-  right: 50px;
+  right: 33px;
   top: 23px;
   width: 50px;
   height: 35px;
@@ -133,7 +133,7 @@
   margin-bottom: 5px;
   margin-top: -5px;
   position: absolute;
-  right: 115px;
+  right: 105px;
   top: 33px;
 }
 
@@ -142,6 +142,6 @@
   margin-left: 5px;
   text-decoration: underline;
   position: absolute;
-  right: 95px;
-  top: 57px;
+  right: 82px;
+  top: 60px;
 }
