@@ -10,7 +10,11 @@ class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     message = db.Column(db.String(2000), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    dm_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('direct_messages.id')), nullable=False)
+    # dm_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('direct_messages.id')), nullable=False)
+
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    chatting_user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+
 
     # Relationship Attributes
     direct_message = db.relationship("DirectMessage", back_populates='messages', lazy=True)
