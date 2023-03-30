@@ -1,8 +1,7 @@
 import React, { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useParams } from "react-router-dom"
-import { getAllMessagesThunk } from "../../store/message"
-import AllMessages from "../Messages"
+import { getDirectMessageThunk, clearMessages, getAllDirectMessagesThunk } from "../../store/message"
 
 import "./MessagesCurrent.css"
 
@@ -10,39 +9,59 @@ import "./MessagesCurrent.css"
 export default function MessagesCurrent() {
   const dispatch = useDispatch()
 
-  const {userId, friendId} = useParams();
+  let {userId, dmId} = useParams();
+  userId = +userId.split(".")[2]
 
-  const messages = useSelector(state => state.messages)
+  const directMessages = useSelector(state => state.messages.currentMessages)
+  const directMessagesArr = Object.values(directMessages)
+
+  const allMessages = useSelector(state => state.messages.allMessages)
+  const currentDM = Object.values(allMessages).find(el => el.id === +dmId)
+
+  let currentFriend;
+  if (currentDM?.userId === userId) currentFriend = currentDM?.userTwo
+  else currentFriend = currentDM?.user
+
 
   useEffect(() => {
-    dispatch(getAllMessagesThunk(userId, friendId))
-  }, [dispatch, friendId])
-
-  let messagesArr;
-  if (messages) messagesArr = Object.values(messages);
+    dispatch(getAllDirectMessagesThunk(userId))
+    dispatch(getDirectMessageThunk(+dmId))
+    return () => dispatch(clearMessages())
+  }, [dispatch, dmId])
 
   return (
     <>
-    <AllMessages />
-    <div className='messages-conversation'>
-      <div>
-        <div> Chatting user prof pic </div>
-        <div> Chatting user first name last name </div>
-      </div>
-
-      {messagesArr.map(message => {
-        return (
-        <>
-        <div className='message-item-container' key={`messageitem${message.id}`}>
-          <div className='message-item'>
-            <img src={message.chattingUser.profilePic} className='message-item-chatting-profpic'/>
-            <div> {message.chattingUser.firstName} {message.chattingUser.lastName} </div>
-          </div>
+    <div className='currmessages-container'>
+        <div className='currmessages-chattingfriend-container'>
+        <div className='currmessages-chattingfriend-name-container'>
+          <img src={currentFriend?.profilePic} alt='currmessages-curr' className='currmessages-currfriend'/>
+          <div className='currmessages-currfriend-name'> {currentFriend?.firstName} {currentFriend?.lastName} </div>
         </div>
-        </>
-        )
-      })}
+
+        <div className='currmessages-chattingfriend-icons'>
+          <i className="fa-solid fa-phone"/>
+          <i className="fa-solid fa-video" />
+          <i class="fa-solid fa-circle-info" />
+        </div>
+      </div>
+    {directMessagesArr.map(message => {
+      return (
+        <div className='currmessages-each-message-container' key={`currmessages${message.id}`}>
+          {message.senderId === userId ?
+          <div className='currmessages-own-message'>
+            <div className='currmessages-msg-content'> {message.message} </div>
+          </div>
+          :
+          <div className='currmessages-friend-message'>
+           <img src={message.user.profilePic} alt='currmessages-pic' className='currmessages-profpic'/>
+           <div className='currmessages-friend-content'> {message.message} </div>
+          </div> }
+
+        </div>
+      )
+    })}
     </div>
+
     </>
   )
 }

@@ -1,31 +1,34 @@
 from flask import Blueprint, jsonify, request
+from sqlalchemy import and_, or_
 from flask_login import login_required
-from app.models import Message, db
+from app.models import Message, db, DirectMessage
 from app.forms import MessageForm
 
 message_routes = Blueprint('messages', __name__)
 
-@message_routes.route('/user/<int:user_id>/<int:friend_id>', methods=['GET'])
+
+#GET ALL USERS DM Channels, messages attached
+@message_routes.route('/user/<int:user_id>', methods=['GET'])
 @login_required
-def get_all_messages(user_id, friend_id):
-    ''' Query for all messages and return in a list of dictionaries '''
+def get_all_dms(user_id):
+    ''' Query for all DM channels of a specific user and return in a dictionary '''
 
-    all_messages = Message.query.filter(Message.user_id == user_id).all()
+    all_dms = DirectMessage.query.filter(or_(DirectMessage.user_id == user_id, DirectMessage.user_id_two == user_id)).all()
+    # all_messages = Message.query.filter(Message.user_id == user_id).all()
+
+    return [dm.to_dict() for dm in all_dms]
 
 
-    return [message.to_dict() for message in all_messages]
-
-
-@message_routes.route('/<int:id>', methods=['GET'])
+@message_routes.route('/<int:dmId>', methods=['GET'])
 @login_required
-def find_message(id):
-    ''' Query for a message and return in a dictionary '''
-    message = Message.query.get(id)
+def get_dm_by_id(dmId):
+    ''' Query for a DM Channel by user Id and friend Id and return it in a dictionary '''
+    messages = Message.query.filter(Message.dm_id == dmId).all()
 
-    if message is None:
-        return jsonify({'error': 'Message not found'}), 404
+    if messages is None:
+        return jsonify({'error': 'DM not found'}), 404
 
-    return message.to_dict()
+    return [message.to_dict_no_dm() for message in messages]
 
 
 @message_routes.route('', methods=['POST'])
@@ -37,45 +40,45 @@ def create_message():
     form["csrf_token"].data = request.cookies["csrf_token"]
 
     if form.validate_on_submit:
-        message = Message( user_id = data['user_id'], chatting_user_id = data['chatting_user_id'], message = data['message'])
+        message = Message( sender_id = data['sender_id'], dm_id = data['dm_id'], message = data['message'])
         db.session.add(message)
         db.session.commit()
         return message.to_dict()
 
-    return jsonify({"error": "error validating message"})
+    return jsonify({"error": "Error validating message"})
 
 
 
-@message_routes.route('/<int:id>', methods=["PUT"])
-@login_required
-def accept_friend_request(id):
-    ''' Query for a message by ID and update it if message exists. Returned as a dictionary.'''
-    message = Message.query.get(id)
+# @message_routes.route('/<int:id>', methods=["PUT"])
+# @login_required
+# def accept_friend_request(id):
+#     ''' Query for a message by ID and update it if message exists. Returned as a dictionary.'''
+#     message = Message.query.get(id)
 
-    if message is None:
-        return jsonify({'error': 'Message not found'}), 404
+#     if message is None:
+#         return jsonify({'error': 'Message not found'}), 404
 
-    data = request.get_json()
-    form = MessageForm()
-    form["csrf_token"].data = request.cookies["csrf_token"]
+#     data = request.get_json()
+#     form = MessageForm()
+#     form["csrf_token"].data = request.cookies["csrf_token"]
 
-    if form.validate_on_submit():
-        message.message = data['message']
-        db.session.commit()
-        return jsonify(message.to_dict()), 200
-
-
+#     if form.validate_on_submit():
+#         message.message = data['message']
+#         db.session.commit()
+#         return jsonify(message.to_dict()), 200
 
 
-@message_routes.route('/<int:id>', methods=['DELETE'])
-@login_required
-def remove_friend(id):
-    ''' Query for a message by ID and delete it if message exists. Return sucess response '''
-    message = Message.query.get(id)
 
-    if message is None:
-        return jsonify({'error': 'Message not found'}), 404
 
-    db.session.delete(message)
-    db.session.commit()
-    return jsonify({'Success': 'Message successfully deleted'})
+# @message_routes.route('/<int:id>', methods=['DELETE'])
+# @login_required
+# def remove_friend(id):
+#     ''' Query for a message by ID and delete it if message exists. Return sucess response '''
+#     message = Message.query.get(id)
+
+#     if message is None:
+#         return jsonify({'error': 'Message not found'}), 404
+
+#     db.session.delete(message)
+#     db.session.commit()
+#     return jsonify({'Success': 'Message successfully deleted'})

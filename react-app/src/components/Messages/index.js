@@ -2,28 +2,25 @@ import React, { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import NavBar from "../NavBar"
 import SideBarMenu from "../SideBarMenu"
-import MessageForm from "../MessageForm"
-import { getAllFriendsThunk } from "../../store/friend"
-import MessagesCurrent from "../MessagesCurrent"
-
-
+import { getAllDirectMessagesThunk } from "../../store/message"
+import { NavLink } from "react-router-dom"
 
 import "./Messages.css"
-import { Link } from "react-router-dom"
 
 
 export default function AllMessages() {
   const dispatch = useDispatch();
 
-  const allFriends = useSelector(state => state.friends.allFriends)
   const sessionUser = useSelector(state => state.session.user)
+  const directMessages = useSelector(state => state.messages?.allMessages)
+  const directMessagesArr = Object.values(directMessages)
+
 
   useEffect(() => {
-    dispatch(getAllFriendsThunk(sessionUser?.id))
+    dispatch(getAllDirectMessagesThunk(sessionUser?.id))
   }, [dispatch])
 
-  const allFriendsArr = Object.values(allFriends)
-
+  // if (!directMessagesArr) return null;
 
   return (
     <>
@@ -31,35 +28,29 @@ export default function AllMessages() {
     <SideBarMenu />
 
       <div className='messages-each-convo-container'>
-        {allFriendsArr.map(friend => {
+        <div className='messages-chats-text'> Chats </div>
+        {directMessagesArr.map(dm => {
           return (
-            <>
-            <Link to={`/messages/${sessionUser.id}/${friend.friendId}`} key={`messagefriend${friend.id}`}
-            className='messages-convo-link'>
-            <div className='messages-each-convo' >
-              <img src={friend.friend?.profilePic} className='messages-user-profpic'/>
+            <NavLink to={`/${sessionUser?.firstName}.${sessionUser?.lastName}.${sessionUser?.id}/messages/${dm.id}`} className='messages-convo-link'>
+            <div key={`dmchannel${dm.id}`} className='messages-each-convo'>
               <div className='messages-user-container'>
-                <div className='messages-user-name'> {friend.friend?.firstName} {friend.friend?.lastName} </div>
-                <div className='messages-user-last-message'> LAST MESSAGE  </div>
+                <img src={dm?.userId === sessionUser?.id ? dm?.userTwo.profilePic : dm?.user.profilePic}
+                className='dms-userprofpic'/>
+                <div className='dms-user-preview'>
+                  <div className='dms-user-name'>
+                  <div className='dms-user-firstname'> {dm.userId === sessionUser?.id  ?  dm.userTwo.firstName : dm.user.firstName} </div>
+                  <div className='dms-user-lastname'> {dm.userId === sessionUser?.id  ?  dm.userTwo.lastName : dm.user.lastName} </div>
+                  </div>
+
+                  {dm.messages?.length > 0 ? <div className='messages-msg-preview'> {dm.messages[dm.messages.length-1].message} </div> :  <div className='messages-msg-preview'> Start a conversation! </div> }
+                </div>
               </div>
             </div>
-            </Link>
-          </>
+            </NavLink>
           )
         })}
-
-
-      {/* <div className='messages-conversation'>
-        <MessagesCurrent />
-      </div>
-
-      <div className='messageform-container'>
-        <MessageForm />
-      </div> */}
-
-
-
     </div>
+    <div className='messages-right-container'> Choose someone to message with! </div>
 
 
     </>

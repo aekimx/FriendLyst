@@ -54,7 +54,11 @@ function App() {
         <FriendRequests />
       </Route>
 
-      <Route path="/messages/:userId/:friendId">
+      <Route path="/:userId/messages">
+        <AllMessages />
+      </Route>
+
+      <Route path="/:userId/messages/:dmId">
         <MessagesCurrent />
         <MessageForm />
       </Route>

@@ -25,7 +25,7 @@ class DirectMessage(db.Model):
             'userIdTwo': self.user_id_two,
             'user': self.user.to_dict_name(),
             'userTwo': self.user_two.to_dict_name(),
-            'messages': self.messages.to_dict_no_dm()
+            'messages': [message.to_dict_no_dm() for message in self.messages]
         }
 
     def to_dict_no_message(self):

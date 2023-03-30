@@ -6,47 +6,96 @@
   top: 53px;
   bottom: 0;
   width: 300px;
+  border-right: 0.5px solid rgb(57, 57, 57);
+
 }
 
+.messages-right-container {
+  background-color: #232526;
+  position: absolute;
+  /* width: 100%; */
+  left: 501px;
+  top: 53px;
+  bottom: 0;
+  right: 0px;
+  border-top: 0.5px solid rgb(57, 57, 57);
+  font-family: 'Ruda', sans-serif;
+  color: rgb(228,230,235);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 20px;
+  font-size: 25px;
+
+}
+
+
 .messages-each-convo {
-  margin-top: 10px;
-  margin-bottom: 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
   height: 50px;
+  margin-top: 10px;
+  margin-bottom: 5px;
 }
 
-.messages-user-profpic {
+.messages-each-convo:hover {
+  background-color: rgb(58,59,61);
+  border-radius: 10px;
+}
+
+.dms-userprofpic {
   width: 30px;
   height: 30px;
   border-radius: 20px;
   margin-right: 10px;
 }
 
-.messages-user-name {
-  font-size: 20px;
-}
 
 .messages-convo-link {
   text-decoration: none;
   color: rgb(228,230,235);
 }
 
-/* .messages-conversation {
-  position: fixed;
-  left: 500px;
-  border: 2px solid pink;
-  top: 53px;
-  bottom: 50px;
-  right: 0px;
+.messages-user-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 2px;
+  margin-left: 5px;
 }
 
-.messageform-container {
-  border: 2px solid blue;
-  position: fixed;
-  bottom: 0px;
-  right: 0px;
-  left: 500px;
+.messages-chats-text {
+  font-size: 25px;
+  color: rgb(228,230,235);
+  padding: 5px;
+  border-top: 0.5px solid rgb(57, 57, 57);
+  padding-top: 10px;
+}
 
-} */
+.messages-msg-preview {
+  font-size: 12px;
+  margin-top: 5px;
+  text-overflow: ellipsis;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  width: 220px;
+  height: 30px;
+}
+
+.dms-user-preview {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.dms-user-name {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.dms-user-firstname {
+  margin-right: 5px;
+}

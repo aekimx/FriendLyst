@@ -33,6 +33,7 @@ class Message(db.Model):
             'id': self.id,
             'message': self.message,
             'createdAt': self.created_at,
-            'senderId': self.sender_id
+            'senderId': self.sender_id,
+            'user': self.user.to_dict_name()
             # 'dm_id': self.dm_id,
         }

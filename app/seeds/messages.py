@@ -20,13 +20,13 @@ def seed_messages():
 
         #Convo between Demo and Nikki
         Message(message='Hey! How is Rwanda? The pictures look amazing!', sender_id=1, dm_id=4),
-        Message(message='It\'s wonderful! It was a super long flight though...', sender_id=7, dm_id=4),
+        Message(message='It\'s wonderful! It was a super long flight though...', sender_id=5, dm_id=4),
         Message(message='Really? How long?!', sender_id=1, dm_id=4),
-        Message(message='There are no nonstop flights, so it took almost 20 hours total!', sender_id=7, dm_id=4),
+        Message(message='There are no nonstop flights, so it took almost 20 hours total!', sender_id=5, dm_id=4),
         Message(message='That\'s insane. I barely would be able to handle that!', sender_id=1, dm_id=4),
-        Message(message='IKR. But honestly so worth it. I\'m so excited for the next few months here.', sender_id=7, dm_id=4),
+        Message(message='IKR. But honestly so worth it. I\'m so excited for the next few months here.', sender_id=5, dm_id=4),
         Message(message='You\'re there for work right?', sender_id=1, dm_id=4),
-        Message(message='Yep! Research project!', sender_id=7, dm_id=4),
+        Message(message='Yep! Research project!', sender_id=5, dm_id=4),
         Message(message='So cool! Good luck!', sender_id=1, dm_id=4),
 
         #Convo between Aileen and Mona
