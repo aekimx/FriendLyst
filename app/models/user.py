@@ -22,6 +22,7 @@ class User(db.Model, UserMixin):
 
     #Relationship Attributes
     user_profiles = db.relationship("UserProfile", back_populates='user', lazy=True, cascade='all, delete')
+    messages = db.relationship("Message", back_populates='user', lazy=True, cascade='all, delete')
 
     # friends = db.relationship("Friend", back_populates='users', lazy=True, cascade='all, delete')
 

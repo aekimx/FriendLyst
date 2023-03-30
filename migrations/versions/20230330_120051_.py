@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: aff72554523e
+Revision ID: 879d6507a61a
 Revises:
-Create Date: 2023-03-24 20:14:51.994813
+Create Date: 2023-03-30 12:00:51.794902
 
 """
 from alembic import op
@@ -13,8 +13,9 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 
+
 # revision identifiers, used by Alembic.
-revision = 'aff72554523e'
+revision = '879d6507a61a'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -49,9 +50,22 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
 
-
     if environment == "production":
         op.execute(f"ALTER TABLE user_profiles SET SCHEMA {SCHEMA};")
+
+
+    op.create_table('direct_messages',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('user_id_two', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['user_id_two'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE direct_messages SET SCHEMA {SCHEMA};")
+
 
     op.create_table('friends',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -177,6 +191,8 @@ def upgrade():
     if environment == "production":
         op.execute(f"ALTER TABLE likes SET SCHEMA {SCHEMA};")
 
+
+
     # ### end Alembic commands ###
 
 
@@ -185,12 +201,13 @@ def downgrade():
     op.drop_table('likes')
     op.drop_table('comments')
     op.drop_table('posts')
+    op.drop_table('messages')
     op.drop_table('group_members')
     op.drop_table('event_members')
-    op.drop_table('messages')
     op.drop_table('groups')
     op.drop_table('events')
     op.drop_table('friends')
+    op.drop_table('direct_messages')
     op.drop_table('user_profiles')
     op.drop_table('users')
     # ### end Alembic commands ###

@@ -5,4 +5,4 @@ from wtforms.validators import DataRequired
 
 # for backend validation
 class MessageForm(FlaskForm):
-    message = StringField("Caption", validators=[DataRequired()])
+    message = StringField("Message", validators=[DataRequired()])

@@ -14,7 +14,7 @@ class DirectMessage(db.Model):
 
     # Relationship Attributes
     user = db.relationship("User", lazy=True, foreign_keys=[user_id])
-    user_two = db.relationship("User", lazy=True, foreign_keys=[chatting_user_id])
+    user_two = db.relationship("User", lazy=True, foreign_keys=[user_id_two])
     messages = db.relationship("Message", back_populates='direct_message', lazy=True, cascade='all, delete')
 
 

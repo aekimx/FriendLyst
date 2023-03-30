@@ -9,13 +9,13 @@ class Message(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     message = db.Column(db.String(2000), nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-
     sender_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     dm_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('direct_messages.id')), nullable=False)
 
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
     # Relationship Attributes
-    user = db.Relationship("User", back_populates='messages', lazy=True)
+    user = db.relationship("User", back_populates='messages', lazy=True)
     direct_message = db.relationship("DirectMessage", back_populates='messages', lazy=True)
 
 
@@ -33,5 +33,6 @@ class Message(db.Model):
             'id': self.id,
             'message': self.message,
             'createdAt': self.created_at,
+            'senderId': self.sender_id
             # 'dm_id': self.dm_id,
         }
