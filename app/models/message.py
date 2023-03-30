@@ -17,7 +17,7 @@ class Message(db.Model):
 
 
     # Relationship Attributes
-    direct_message = db.relationship("DirectMessage", back_populates='messages', lazy=True)
+    # direct_message = db.relationship("DirectMessage", back_populates='messages', lazy=True)
 
 
     def to_dict(self):

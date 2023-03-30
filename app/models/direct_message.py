@@ -15,7 +15,7 @@ class DirectMessage(db.Model):
     # Relationship Attributes
     user = db.relationship("User", lazy=True, foreign_keys=[user_id])
     chatting_user = db.relationship("User", lazy=True, foreign_keys=[chatting_user_id])
-    messages = db.relationship("Message", back_populates='direct_message', lazy=True)
+    # messages = db.relationship("Message", back_populates='direct_message', lazy=True)
 
 
     def to_dict(self):
@@ -25,5 +25,5 @@ class DirectMessage(db.Model):
             'chattingUserId': self.chatting_user_id,
             'user': self.user.to_dict_name(),
             'chattingUser': self.chatting_user.to_dict_name(),
-            'messages': self.messages.to_dict_no_dm()
+            # 'messages': self.messages.to_dict_no_dm()
         }
