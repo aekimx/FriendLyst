@@ -1,0 +1,9 @@
+.messages-conversation {
+  position: fixed;
+  left: 500px;
+  border: 2px solid red;
+  top: 53px;
+  bottom: 0;
+  right: 0px;
+
+}

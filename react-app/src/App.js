@@ -11,6 +11,7 @@ import FriendsList from "./components/FriendsList";
 import FriendRequests from "./components/FriendRequests";
 import SearchResults from "./components/SearchResults";
 import AllMessages from "./components/Messages";
+import MessagesCurrent from "./components/MessagesCurrent";
 
 function App() {
   const dispatch = useDispatch();
@@ -51,8 +52,9 @@ function App() {
         <FriendRequests />
       </Route>
 
-      <Route path="/:userId/messages">
+      <Route path="/:userId/:friendId">
         <AllMessages />
+        <MessagesCurrent />
       </Route>
 
       <Route path="/search/results">

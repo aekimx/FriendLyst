@@ -29,8 +29,6 @@ class User(db.Model, UserMixin):
     likes = db.relationship("Like", back_populates='user', lazy=True, cascade='all, delete')
     comments = db.relationship("Comment", back_populates="user", lazy=True)
 
-    # messages = db.relationship("Message", back_populates='users', lazy=True, cascade='all, delete')
-
     group_member = db.relationship("GroupMember", back_populates='user', lazy=True)
     event_member = db.relationship("EventMember", back_populates='user', lazy=True)
 
@@ -87,4 +85,15 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'firstName': self.first_name,
             'lastName': self.last_name,
+            'profilePic': self.profile_pic,
         }
+
+    # def to_dict_messages(self):
+    #     return {
+    #         'id': self.id,
+    #         'firstName': self.first_name,
+    #         'lastName': self.last_name,
+    #         'profilePic': self.profile_pic,
+    #         'messages': [message.to_dict() for message in self.messages]
+
+    #     }

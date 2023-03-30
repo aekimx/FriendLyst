@@ -5,11 +5,13 @@ from app.forms import MessageForm
 
 message_routes = Blueprint('messages', __name__)
 
-@message_routes.route('', methods=['GET'])
+@message_routes.route('/user/<int:user_id>', methods=['GET'])
 @login_required
-def get_all_messages():
+def get_all_messages(user_id, friend_id):
     ''' Query for all messages and return in a list of dictionaries '''
-    all_messages = Message.query.all()
+
+    all_messages = Message.query.filter(Message.user_id == user_id).filter(Message.chatting_user_id == friend_id).all()
+
     return [message.to_dict() for message in all_messages]
 
 
@@ -33,11 +35,13 @@ def create_message():
     form = MessageForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
 
+    if form.validate_on_submit:
+        message = Message( user_id = data['user_id'], chatting_user_id = data['chatting_user_id'], message = data['message'])
+        db.session.add(message)
+        db.session.commit()
+        return message.to_dict()
 
-    message = Message( user_id = data['user_id'], chatting_user_id = data['chatting_user_id'], message = data['message'])
-    db.session.add(message)
-    db.session.commit()
-    return message.to_dict()
+    return jsonify({"error": "error validating message"})
 
 
 

@@ -10,23 +10,35 @@
 
 }
 
-.messages-sidebar {
+.messages-each-convo-container {
   position: fixed;
   left: 200px;
   top: 53px;
   bottom: 0;
   width: 300px;
-  border: 2px solid green
-
+  border: 2px solid green;
 }
 
 
-.messages-conversation {
-  position: fixed;
-  left: 500px;
-  border: 2px solid red;
-  top: 53px;
-  bottom: 0;
-  right: 0px;
 
+
+.messages-each-convo {
+  border: 1px solid blue;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 50px;
+}
+
+.messages-user-profpic {
+  width: 30px;
+  height: 30px;
+  border-radius: 20px;
+  margin-right: 10px;
+}
+
+.messages-user-name {
+  font-size: 20px;
 }
