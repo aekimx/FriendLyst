@@ -39,16 +39,16 @@ export default function SideBarMenu() {
         </div>
 
         <div className='sidebar-link' >
-          <NavLink to={`/${user?.firstName}.${user?.lastName}.${user?.id}/events`} className='sidebar-link'>
-            <i class="fa-solid fa-calendar-plus" />
-            <span> Events </span>
+          <NavLink to={`/${user?.firstName}.${user?.lastName}.${user?.id}/messages`} className='sidebar-link'>
+            <i class="fa-solid fa-comments" />
+            <span> Messages </span>
           </NavLink>
         </div>
 
         <div className='sidebar-link' >
-          <NavLink to={`/${user?.firstName}.${user?.lastName}.${user?.id}/messages`} className='sidebar-link'>
-            <i class="fa-solid fa-comments" />
-            <span> Messages </span>
+          <NavLink to={`/${user?.firstName}.${user?.lastName}.${user?.id}/events`} className='sidebar-link'>
+            <i class="fa-solid fa-calendar-plus" />
+            <span> Events </span>
           </NavLink>
         </div>
 

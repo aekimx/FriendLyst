@@ -6,7 +6,7 @@ import { getDirectMessageThunk, clearMessages, getAllDirectMessagesThunk } from 
 import "./MessagesCurrent.css"
 
 
-export default function MessagesCurrent() {
+export default function MessagesCurrent({messages}) {
   const dispatch = useDispatch()
 
   let {userId, dmId} = useParams();
@@ -31,19 +31,19 @@ export default function MessagesCurrent() {
 
   return (
     <>
-    <div className='currmessages-container'>
-        <div className='currmessages-chattingfriend-container'>
-        <div className='currmessages-chattingfriend-name-container'>
-          <img src={currentFriend?.profilePic} alt='currmessages-curr' className='currmessages-currfriend'/>
-          <div className='currmessages-currfriend-name'> {currentFriend?.firstName} {currentFriend?.lastName} </div>
-        </div>
-
-        <div className='currmessages-chattingfriend-icons'>
-          <i className="fa-solid fa-phone"/>
-          <i className="fa-solid fa-video" />
-          <i class="fa-solid fa-circle-info" />
-        </div>
+    <div className='currmessages-chattingfriend-container'>
+      <div className='currmessages-chattingfriend-name-container'>
+        <img src={currentFriend?.profilePic} alt='currmessages-curr' className='currmessages-currfriend'/>
+        <div className='currmessages-currfriend-name'> {currentFriend?.firstName} {currentFriend?.lastName} </div>
       </div>
+
+      <div className='currmessages-chattingfriend-icons'>
+        <i className="fa-solid fa-phone"/>
+        <i className="fa-solid fa-video" />
+        <i class="fa-solid fa-circle-info" />
+      </div>
+    </div>
+    <div className='currmessages-container'>
     {directMessagesArr.map(message => {
       return (
         <div className='currmessages-each-message-container' key={`currmessages${message.id}`}>
@@ -60,6 +60,22 @@ export default function MessagesCurrent() {
         </div>
       )
     })}
+    {/* {messages.map(msg => {
+      return (
+        <div className='currmessages-each-message-container' key={`currmessages${msg.id}`}>
+          {msg.senderId === userId ?
+          <div className='currmessages-own-message'>
+            <div className='currmessages-msg-content'> {msg.message} </div>
+          </div>
+          :
+          <div className='currmessages-friend-message'>
+           <img src={msg.user?.profilePic} alt='currmessages-pic' className='currmessages-profpic'/>
+           <div className='currmessages-friend-content'> {msg.message} </div>
+          </div> }
+
+        </div>
+      )
+    })} */}
     </div>
 
     </>

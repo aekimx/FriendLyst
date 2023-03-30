@@ -5,7 +5,7 @@ from sqlalchemy.sql import text
 def seed_user_profiles():
     user_profiles = [
         # Demo 1
-        UserProfile(user_id=1, cover_photo='https://media.istockphoto.com/id/1139149089/photo/pink-sunset.jpg?s=612x612&w=0&k=20&c=oxDfinMGKXwiOEmFi9fmmOG_FMzn0Xcdr9Mzr4w8pig=', bio='Talk to me about anything!', location='New York, NY'),
+        UserProfile(user_id=1, cover_photo='https://www.travelandleisure.com/thmb/HvNi3CSOUaPdhqfp0TqFw3cd9y0=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/TAL-header-northern-lights-finland-lapland-FINLAPLAND1222-51477112b7e94a0cb282009aef4d09db.jpg', bio='Talk to me about anything!', location='New York, NY'),
         # Marnie 2
         UserProfile(user_id=2,  cover_photo='https://cdn.mos.cms.futurecdn.net/wtqqnkYDYi2ifsWZVW2MT4-1200-80.jpg', bio='Cardiothoraic surgeon living her best life in Florida!', location='Miami, FL'),
         #Bobbie 3

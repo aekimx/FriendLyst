@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux";
 import {createMessageThunk, getDirectMessageThunk} from "../../store/message"
 import { io } from 'socket.io-client';
-
+import MessagesCurrent from "../MessagesCurrent"
 
 import "./MessageForm.css"
 
@@ -41,11 +41,12 @@ export default function MessageForm () {
     e.preventDefault()
 
     let newMessage = {dm_id: dmId, message: content, sender_id: user?.id }
+    await dispatch(createMessageThunk(newMessage))
+
     if (socket) {
       socket.emit("chat", newMessage);
     }
 
-    await dispatch(createMessageThunk(newMessage))
     await dispatch(getDirectMessageThunk(+dmId))
 
     setContent("")
@@ -53,12 +54,8 @@ export default function MessageForm () {
 
   return (user && (
     <>
+    <MessagesCurrent messages={messages}/>
     <div className='messageform-container'>
-    {/* <div>
-        {messages.map((message, ind) => (
-            <div key={ind}>{`${message.user}: ${message.msg}`}</div>
-        ))}
-    </div> */}
 
         <form onSubmit={handleSubmit}>
           <div> {content.length === 2000 ? 'Messages must be less than 2000 characters' : null}</div>

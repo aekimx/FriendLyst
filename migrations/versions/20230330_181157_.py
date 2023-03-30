@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 879d6507a61a
+Revision ID: 9d3bac76b2e0
 Revises:
-Create Date: 2023-03-30 12:00:51.794902
+Create Date: 2023-03-30 18:11:57.013675
 
 """
 from alembic import op
@@ -12,10 +12,8 @@ import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
-
-
 # revision identifiers, used by Alembic.
-revision = '879d6507a61a'
+revision = '9d3bac76b2e0'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -39,6 +37,7 @@ def upgrade():
 
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+
 
     op.create_table('user_profiles',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -107,19 +106,21 @@ def upgrade():
     if environment == "production":
         op.execute(f"ALTER TABLE groups SET SCHEMA {SCHEMA};")
 
+
     op.create_table('messages',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('message', sa.String(length=2000), nullable=False),
+    sa.Column('sender_id', sa.Integer(), nullable=False),
+    sa.Column('dm_id', sa.Integer(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=True),
-    sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('chatting_user_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['chatting_user_id'], ['users.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['dm_id'], ['direct_messages.id'], ),
+    sa.ForeignKeyConstraint(['sender_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
 
     if environment == "production":
         op.execute(f"ALTER TABLE messages SET SCHEMA {SCHEMA};")
+
 
     op.create_table('event_members',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -191,8 +192,6 @@ def upgrade():
     if environment == "production":
         op.execute(f"ALTER TABLE likes SET SCHEMA {SCHEMA};")
 
-
-
     # ### end Alembic commands ###
 
 
@@ -204,10 +203,10 @@ def downgrade():
     op.drop_table('messages')
     op.drop_table('group_members')
     op.drop_table('event_members')
-    op.drop_table('groups')
-    op.drop_table('events')
-    op.drop_table('friends')
-    op.drop_table('direct_messages')
     op.drop_table('user_profiles')
+    op.drop_table('groups')
+    op.drop_table('friends')
+    op.drop_table('events')
+    op.drop_table('direct_messages')
     op.drop_table('users')
     # ### end Alembic commands ###

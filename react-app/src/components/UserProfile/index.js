@@ -90,10 +90,15 @@ export default function UserProfile() {
 
           <div className='userprofile-intro-text'>
             <div> Intro  </div>
+
+            {+userId === sessionUser?.id ?
             <OpenModalButton
             buttonText={<i className="fa-solid fa-gear"/>}
             modalComponent={<UserProfileUpdate user={user}/>}
-            className='userprof-update-bio'/>
+            className='userprof-update-bio'/> :
+            null
+          }
+
           </div>
 
           <div className='userprof-bio-bio'>
