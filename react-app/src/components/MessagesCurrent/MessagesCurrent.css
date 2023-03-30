@@ -27,17 +27,20 @@
   padding-bottom: 5px;
   padding-left: 5px;
   padding-right: 5px;
+  word-wrap: break-word;
 }
 
 .currmessages-own-message {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  word-wrap: break-word;
 
 }
 
 .currmessages-msg-content {
   max-width: 700px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -45,6 +48,8 @@
   padding: 8px;
   margin-right: 10px;
   border-radius: 12px;
+  word-break: break-all;
+
 }
 
 .currmessages-friend-content {

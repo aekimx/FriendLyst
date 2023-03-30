@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux";
-import {createMessageThunk} from "../../store/message"
+import {createMessageThunk, getDirectMessageThunk} from "../../store/message"
 import { io } from 'socket.io-client';
 
 
@@ -17,6 +17,7 @@ export default function MessageForm () {
 
   const [content, setContent] = useState("");
   const [messages, setMessages] = useState([]);
+
   const user = useSelector(state => state.session.user)
 
   useEffect(() => {
@@ -24,13 +25,12 @@ export default function MessageForm () {
     socket = io();
 
     if (socket && user) {
-      socket.emit('join', { dm_id: dmId, username: user.username })
+      socket.emit('join', { dm_id: dmId, first_name: user.firstName })
 
       socket.on("chat", (chat) => {
-          setMessages(messages => [...messages, chat])
+        setMessages(messages => [...messages, chat])
       })
   }
-
     // when component unmounts, disconnect
     return (() => {
       socket.disconnect()
@@ -40,29 +40,34 @@ export default function MessageForm () {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    let newMessage = {dmId, message: content, sender_id: user?.id }
+    let newMessage = {dm_id: dmId, message: content, sender_id: user?.id }
     if (socket) {
       socket.emit("chat", newMessage);
     }
+
     await dispatch(createMessageThunk(newMessage))
+    await dispatch(getDirectMessageThunk(+dmId))
+
     setContent("")
   }
 
   return (user && (
     <>
     <div className='messageform-container'>
-        <div>
-            {messages.map((message, ind) => (
-                <div key={ind}>{`${message.user}: ${message.msg}`}</div>
-            ))}
-        </div>
+    {/* <div>
+        {messages.map((message, ind) => (
+            <div key={ind}>{`${message.user}: ${message.msg}`}</div>
+        ))}
+    </div> */}
 
         <form onSubmit={handleSubmit}>
+          <div> {content.length === 2000 ? 'Messages must be less than 2000 characters' : null}</div>
           <div className='messageform-input-container'>
             <input
             placeholder='Aa'
             type='text'
             value={content}
+            maxLength='2000'
             onChange={(e) => setContent(e.target.value)}
             className='messageform-input'/>
 

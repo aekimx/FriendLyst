@@ -26,7 +26,7 @@ export default function MessagesCurrent() {
   useEffect(() => {
     dispatch(getAllDirectMessagesThunk(userId))
     dispatch(getDirectMessageThunk(+dmId))
-    return () => dispatch(clearMessages())
+    // return () => dispatch(clearMessages())
   }, [dispatch, dmId])
 
   return (
@@ -53,7 +53,7 @@ export default function MessagesCurrent() {
           </div>
           :
           <div className='currmessages-friend-message'>
-           <img src={message.user.profilePic} alt='currmessages-pic' className='currmessages-profpic'/>
+           <img src={message.user?.profilePic} alt='currmessages-pic' className='currmessages-profpic'/>
            <div className='currmessages-friend-content'> {message.message} </div>
           </div> }
 

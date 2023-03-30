@@ -27,13 +27,13 @@ def handle_disconnect():
 
 
 # join a room (channel)
-# @socketio.on('join')
-# def on_join(data):
-#     user = data['first_name']
-#     room = data['channel_id']
-#     join_room(room)
+@socketio.on('join')
+def on_join(data):
+    user = data['first_name']
+    room = data['dm_id']
+    join_room(room)
 
-#     emit("welcome", f"{username}", room=room)
+    emit("welcome", f"{user}", room=room)
 
 
 # handle chat messages
