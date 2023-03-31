@@ -28,8 +28,8 @@ export default function UserProfile() {
   const friendsArr = Object.values(friends)
   const currentFriend = friendsArr.find(el => el.friendId === sessionUser?.id)
 
-  console.log("what is in friends arr", friendsArr)
-  console.log("what is current friend?", currentFriend)
+  // console.log("what is in friends arr", friendsArr)
+  // console.log("what is current friend?", currentFriend)
 
   const requestsArr = Object.values(allRequests)
   const currentRequest = requestsArr.find(el => el.friendId === sessionUser?.id)

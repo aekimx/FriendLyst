@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link, useParams } from "react-router-dom"
-import CommentOptions from "../CommentOptions"
 import { createUserCommentThunk, getUserPostsThunk, likeUserPostThunk, unlikeUserPostThunk } from "../../store/user";
 
 import "../Comments/Comments.css"
@@ -82,9 +81,6 @@ export default function UserProfileComments({comments, postId}) {
               </div>
               <div className='post-comment-content'> {comment.comment} </div>
             </div>
-              {user?.id == comment.userId ?
-              <div className='post-comment-options-div'> <CommentOptions comment={comment}/> </div>
-              : null}
           </div>
         )
       })}

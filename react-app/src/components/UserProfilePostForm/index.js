@@ -71,8 +71,8 @@ export default function UserProfPostForm() {
             className='userprof-postform-button'> Post </button>
         </div>
       </form>
-    </div>
     {caption.length === 2000 ? <div className='userprof-postform-error'> Posts cannot be more than 2000 characters </div> : null }
+    </div>
     {/* </div> */}
     </>
     )
