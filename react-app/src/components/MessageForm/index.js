@@ -16,7 +16,7 @@ export default function MessageForm () {
   userId = +userId.split(".")[2];
 
   const [content, setContent] = useState("");
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState({});
 
   const user = useSelector(state => state.session.user)
 
@@ -27,9 +27,8 @@ export default function MessageForm () {
     if (socket && user) {
       socket.emit('join', { dm_id: dmId, first_name: user.firstName })
 
-      socket.on("chat", (chat) => {
-        setMessages(messages => [...messages, chat])
-      })
+      // socket.on("chat", (chat) => setMessages(messages => [...messages, chat]) )
+      socket.on("chat", (chat) => setMessages(chat) )
   }
     // when component unmounts, disconnect
     return (() => {
@@ -41,14 +40,18 @@ export default function MessageForm () {
     e.preventDefault()
 
     let newMessage = {dm_id: dmId, message: content, sender_id: user?.id }
-    await dispatch(createMessageThunk(newMessage))
+    let createdMessage = await dispatch(createMessageThunk(newMessage))
 
-    if (socket) {
-      socket.emit("chat", newMessage);
+    let newMsgObj = {
+      id: createdMessage.id,
+      message: createdMessage.message,
+      senderId: createdMessage.createdAt,
+      user: createdMessage.user
     }
 
-    await dispatch(getDirectMessageThunk(+dmId))
+    if (socket) socket.emit("chat", newMsgObj)
 
+    // await dispatch(getDirectMessageThunk(+dmId))
     setContent("")
   }
 

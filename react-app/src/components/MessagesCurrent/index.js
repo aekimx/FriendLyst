@@ -13,6 +13,7 @@ export default function MessagesCurrent({messages}) {
   userId = +userId.split(".")[2]
 
   const directMessages = useSelector(state => state.messages.currentMessages)
+  if (messages.senderId) directMessages[messages.id] = messages
   const directMessagesArr = Object.values(directMessages)
 
   const allMessages = useSelector(state => state.messages.allMessages)

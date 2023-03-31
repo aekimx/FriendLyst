@@ -5,6 +5,7 @@ import { createUserCommentThunk, getUserPostsThunk, likeUserPostThunk, unlikeUse
 
 import "../Comments/Comments.css"
 import "../Comments/CommentsForm.css"
+import "./UserProfileCommentForm.css"
 
 
 export default function UserProfileComments({comments, postId}) {
@@ -103,8 +104,8 @@ export default function UserProfileComments({comments, postId}) {
             </button>
           </form>
         </div>
+          {content.length === 500 ? <div className='userprof-commentform-error'> Comments must be less than 500 characters </div>: null}
 
-        {content.length === 500 ? <div className='commentform-error'> Comments must be less than 500 characters </div>: null}
       </>
 
 

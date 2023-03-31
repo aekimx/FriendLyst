@@ -79,6 +79,7 @@
   justify-content: center;
   margin-bottom: 10px;
   text-decoration: underline;
+  font-size: 15px;
 }
 
 .loginform-signup:hover {
@@ -96,7 +97,7 @@
   cursor: pointer;
   display: flex;
   height: 40px;
-  width: 200px;
+  width: 300px;
   justify-content: center;
   align-items: center;
   border-radius: 5px;
@@ -113,6 +114,31 @@
   font-size: 15px;
 }
 
-.loginform-demo-containers {
-  margin-top: 10px;
+
+.skills-used {
+  border-top: 0.5px solid rgb(77, 76, 76);
+  height: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding-top: 5px;
+}
+
+.ak-userinfo {
+  position: absolute;
+  font-size: 12px;
+  padding: 10px;
+  bottom: 0;
+  right: 300px;
+  left: 300px;
+}
+
+.ak-name {
+  font-size: 15px;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-bottom: 5px;
 }

@@ -79,14 +79,34 @@ function LoginFormPage() {
             />
 
           <div className='loginform-submit-div'  onClick={handleSubmit}> Log In </div>
+          <div className='loginform-demo-containers'>
+              <div className='loginform-demouser-div' onClick={demoUserLogin}> Demo User 1 </div>
+              <div className='loginform-demouser-div' onClick={demoUserLogin2}> Demo User 2 </div>
+          </div>
           <div> <Link to ='/signup' className='loginform-signup'> Create new account </Link></div>
         </form>
       </div>
-      <div className='loginform-demo-containers'>
-          <div className='loginform-demouser-div' onClick={demoUserLogin}> Demo User 1 </div>
-          <div className='loginform-demouser-div' onClick={demoUserLogin2}> Demo User 2 </div>
       </div>
-      </div>
+    <div className='ak-userinfo'>
+        <div className='ak-name'>
+          <div> Aileen Kim </div>
+          <div> Github </div>
+          <div> LinkedIn </div>
+
+        </div>
+        <div className='skills-used'>
+          <div> Python </div>
+          <div> Flask </div>
+          <div> SQLAlchemy </div>
+          <div> JavaScript </div>
+          <div> React </div>
+          <div> Redux </div>
+          <div> Node </div>
+          <div> HTML </div>
+          <div> CSS </div>
+          <div> Github </div>
+        </div>
+    </div>
     </div>
   </>
   );
