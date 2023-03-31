@@ -18,7 +18,7 @@ def get_all_dms(user_id):
 
     return [dm.to_dict() for dm in all_dms]
 
-
+#GET DM MESSAGES
 @message_routes.route('/<int:dmId>', methods=['GET'])
 @login_required
 def get_dm_by_id(dmId):
@@ -30,7 +30,7 @@ def get_dm_by_id(dmId):
 
     return [message.to_dict_no_dm() for message in messages]
 
-
+#CREATE MESSAGE IN DM
 @message_routes.route('', methods=['POST'])
 @login_required
 def create_message():
@@ -43,7 +43,7 @@ def create_message():
         message = Message( sender_id = data['sender_id'], dm_id = data['dm_id'], message = data['message'])
         db.session.add(message)
         db.session.commit()
-        return message.to_dict()
+        return message.to_dict_no_dm()
 
     return jsonify({"error": "Error validating message"})
 

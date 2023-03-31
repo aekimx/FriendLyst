@@ -31,27 +31,16 @@ export default function MessageForm () {
       socket.on("chat", (chat) => setMessages(chat) )
   }
     // when component unmounts, disconnect
-    return (() => {
-      socket.disconnect()
-    })
+    return ( () => socket.disconnect() )
   }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    let newMessage = {dm_id: dmId, message: content, sender_id: user?.id }
+    let newMessage = {dm_id: dmId, message: content, sender_id: userId }
     let createdMessage = await dispatch(createMessageThunk(newMessage))
 
-    let newMsgObj = {
-      id: createdMessage.id,
-      message: createdMessage.message,
-      senderId: createdMessage.createdAt,
-      user: createdMessage.user
-    }
-
-    if (socket) socket.emit("chat", newMsgObj)
-
-    // await dispatch(getDirectMessageThunk(+dmId))
+    if (socket) socket.emit("chat", createdMessage)
     setContent("")
   }
 

@@ -24,7 +24,6 @@ export default function MessagesCurrent({messages}) {
   else currentFriend = currentDM?.user
 
   useEffect(() => {
-    // dispatch(getAllDirectMessagesThunk(userId))
     dispatch(getDirectMessageThunk(+dmId))
     // return () => dispatch(clearMessages())
   }, [dispatch, dmId])
@@ -49,7 +48,7 @@ export default function MessagesCurrent({messages}) {
     {directMessagesArr.map(message => {
       return (
         <div className='currmessages-each-message-container' key={`currmessages${message.id}`}>
-          {message.senderId === userId ?
+          {+message.senderId === +userId ?
           <div className='currmessages-own-message'>
             <div className='currmessages-msg-content'> {message.message} </div>
           </div>
@@ -57,22 +56,6 @@ export default function MessagesCurrent({messages}) {
           <div className='currmessages-friend-message'>
            <img src={message.user?.profilePic} alt='currmessages-pic' className='currmessages-profpic'/>
            <div className='currmessages-friend-content'> {message.message} </div>
-          </div> }
-
-        </div>
-      )
-    })}
-    {messages.map(msg => {
-      return (
-        <div className='currmessages-each-message-container' key={`xxx`}>
-          {msg.sender_id === userId ?
-          <div className='currmessages-own-message'>
-            <div className='currmessages-msg-content'> {msg.message} </div>
-          </div>
-          :
-          <div className='currmessages-friend-message'>
-            <img src={currentFriend?.profilePic} alt='currmessages-curr' className='currmessages-profpic'/>
-           <div className='currmessages-friend-content'> {msg.message} </div>
           </div> }
 
         </div>
