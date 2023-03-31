@@ -26,8 +26,6 @@ export default function MessageForm () {
 
     if (socket && user) {
       socket.emit('join', { dm_id: dmId, first_name: user.firstName })
-
-      // socket.on("chat", (chat) => setMessages(messages => [...messages, chat]) )
       socket.on("chat", (chat) => setMessages(chat) )
   }
     // when component unmounts, disconnect
@@ -60,7 +58,7 @@ export default function MessageForm () {
             onChange={(e) => setContent(e.target.value)}
             className='messageform-input'/>
 
-            <button type="submit">Send</button>
+            <button type="submit" className='messageform-button'><i class="fa-solid fa-paper-plane" /></button>
           </div>
         </form>
     </div>

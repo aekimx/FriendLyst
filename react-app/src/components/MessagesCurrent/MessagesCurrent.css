@@ -117,3 +117,12 @@
   justify-content: space-evenly;
   font-size: 23px;
 }
+
+#scroller * {
+  overflow-anchor: none;
+}
+
+#anchor {
+  overflow-anchor: auto;
+  height: 1px;
+}

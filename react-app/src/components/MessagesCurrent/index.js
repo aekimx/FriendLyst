@@ -44,7 +44,7 @@ export default function MessagesCurrent({messages}) {
         <i class="fa-solid fa-circle-info" />
       </div>
     </div>
-    <div className='currmessages-container'>
+    <div className='currmessages-container' id='scroller'>
     {directMessagesArr.map(message => {
       return (
         <div className='currmessages-each-message-container' key={`currmessages${message.id}`}>
@@ -61,6 +61,7 @@ export default function MessagesCurrent({messages}) {
         </div>
       )
     })}
+    <div id='anchor'></div>
     </div>
 
     </>

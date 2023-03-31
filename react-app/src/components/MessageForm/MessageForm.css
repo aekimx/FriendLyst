@@ -38,3 +38,10 @@
   align-items: center;
   height: 50px;
 }
+
+.messageform-button {
+  background-color: #232526;
+  color: rgb(228,230,235);
+  border: none;
+  font-size:20px;
+}
