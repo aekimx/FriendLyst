@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import CommentOptions from "../CommentOptions"
 import { createUserCommentThunk, getUserPostsThunk, likeUserPostThunk, unlikeUserPostThunk } from "../../store/user";
 
@@ -14,10 +14,16 @@ export default function UserProfileComments({comments, postId}) {
   const user = useSelector(state => state.session.user)
   const likes = useSelector(state => state.user.posts[postId]?.likes)
 
+  const url = useParams()
+  const userId = url.userId.split(".")[2]
+
   const [content, setContent] = useState("")
 
+  let sessionUserId;
+  if (user) sessionUserId = user.id
+
   let currentLike;
-  if (likes) currentLike = likes.find(el => el.user?.id === user?.id)
+  if (likes) currentLike = likes.find(el => el.user?.id === sessionUserId)
 
   const inputRef = useRef(null);
   const handleClick = () => {
@@ -26,24 +32,19 @@ export default function UserProfileComments({comments, postId}) {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const newComment = {comment: content, userId, postId}
+    const newComment = {comment: content, userId: sessionUserId, postId}
     dispatch(createUserCommentThunk(newComment))
     dispatch(getUserPostsThunk(userId))
     setContent('')
   }
 
-  let userId;
-  if (user) userId = user.id
-
   const likePost = async () => {
-    const like = {postId, userId}
+    const like = {postId, userId: sessionUserId}
     dispatch(likeUserPostThunk(like))
-    dispatch(getUserPostsThunk(userId))
   }
 
   const unlikePost = async () => {
     dispatch(unlikeUserPostThunk(currentLike))
-    dispatch(getUserPostsThunk(userId))
   }
 
 
@@ -61,11 +62,10 @@ export default function UserProfileComments({comments, postId}) {
           <div className='feed-like-text'> Like </div>
         </div>
       }
-
-            <div className='feed-comment-button' onClick={handleClick}>
-              <i className="fa-regular fa-message" />
-              <div className='feed-comment-text'> Comment </div>
-            </div>
+      <div className='feed-comment-button' onClick={handleClick}>
+        <i className="fa-regular fa-message" />
+        <div className='feed-comment-text'> Comment </div>
+      </div>
     </div>
 
     <div className='postcomments-overall-container'>
@@ -73,23 +73,18 @@ export default function UserProfileComments({comments, postId}) {
         return (
           <div key={`postcomment${comment.id}`} className='post-comment-container'>
             <img src={comment.user.profilePic} alt='profilepic' className='post-comment-profpic'/>
-
             <div className='post-comment-comment'>
-
               <div className='post-comment-name-time'>
                 <Link to={`/${comment.user?.firstName}.${comment.user?.lastName}.${comment.user.id}/profile`} className='post-comment-link'>
                   <div> {comment.user.firstName} {comment.user.lastName} </div>
                 </Link>
                 <div className='post-comment-createdat'> {comment.createdAt.slice(0,11)} </div>
               </div>
-
               <div className='post-comment-content'> {comment.comment} </div>
-
             </div>
-
-              {user?.id == comment.userId ?  <div className='post-comment-options-div'> <CommentOptions comment={comment}/> </div> : null}
-
-
+              {user?.id == comment.userId ?
+              <div className='post-comment-options-div'> <CommentOptions comment={comment}/> </div>
+              : null}
           </div>
         )
       })}
@@ -106,10 +101,10 @@ export default function UserProfileComments({comments, postId}) {
             maxLength='500'
             style={{ color: 'rgb(228,230,235)', paddingLeft:'10px'}}
             value={content}
-            onChange={(e) => setContent(e.target.value)}>
-            </input>
-            <button className='commentform-sendbutton'
-            disabled={content.length === 500}> <i className="fa-solid fa-paper-plane"/></button>
+            onChange={(e) => setContent(e.target.value)} />
+            <button className='commentform-sendbutton' disabled={content.length === 500}>
+              <i className="fa-solid fa-paper-plane"/>
+            </button>
           </form>
         </div>
 

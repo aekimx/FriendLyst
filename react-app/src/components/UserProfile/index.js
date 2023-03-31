@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { getUserPostsThunk, getUserThunk } from '../../store/user'
 import NavBar from "../NavBar"
 import UserProfilePosts from '../UserProfilePosts'
@@ -9,6 +9,7 @@ import UserProfileUpdate from '../UserProfileUpdate'
 import { getAllFriendsThunk, deleteFriendThunk, addFriendThunk, getAllRequestsThunk} from '../../store/friend'
 import UserProfPostForm from '../UserProfilePostForm'
 import { clearUser } from '../../store/user'
+
 
 
 import './UserProfile.css'
@@ -22,6 +23,7 @@ export default function UserProfile() {
   const friends = useSelector(state => state.friends?.allFriends)
   const sessionUser = useSelector(state => state.session?.user)
   const allRequests = useSelector(state => state.friends?.allRequests)
+  const posts = useSelector(state => state.user.posts)
 
   const friendsArr = Object.values(friends)
   const currentFriend = friendsArr.find(el => el.friendId === sessionUser?.id)
@@ -32,6 +34,8 @@ export default function UserProfile() {
   const requestsArr = Object.values(allRequests)
   const currentRequest = requestsArr.find(el => el.friendId === sessionUser?.id)
 
+  const postsArr = Object.values(posts)
+  let photosArr = postsArr.filter(post => post.photo.length > 0)
 
   useEffect(() => {
     dispatch(getUserThunk(userId))
@@ -52,6 +56,10 @@ export default function UserProfile() {
     // dispatch(getAllRequestsThunk(userId))
     // dispatch(getAllRequestsThunk(sessionUser?.id))
   }
+  photosArr.reverse();
+  if (photosArr.length >= 9) { photosArr = photosArr.slice(0,9)}
+
+  console.log('photos arr', photosArr)
 
 
   return (
@@ -118,11 +126,32 @@ export default function UserProfile() {
         </div>
 
         <div className='userprofile-photos'>
-          Photos
+          <div className='userprof-photos-text'> Photos </div>
+          <div className='userprof-photos-grid'>
+          {photosArr.map(post => {
+            return (
+              <div className='userprof-photo-container'>
+              {post.photo.length ? <img src={post.photo} className='userprofile-each-photo'/> : null}
+              </div>
+            )
+          })}
+          </div>
         </div>
 
-        <div className='userprofile-friends-list'>
-          Friends
+        <div className='userprofile-photos'>
+          <div className='userprof-photos-text'> Friends </div>
+          <div className='userprof-photos-grid'>
+          {friendsArr.map(friend => {
+            return (
+              <div className='userprof-photo-container'>
+                <Link to={`/${friend.friend.firstName}.${friend.friend.lastName}.${friend.friend.id}/profile`} className='userprof-user-link'>
+                  <img src={friend.friend.profilePic} className='userprofile-each-photo'/>
+                  {friend.friend.firstName} {friend.friend.lastName}
+                </Link>
+              </div>
+            )
+          })}
+          </div>
         </div>
 
       </div>
@@ -130,7 +159,6 @@ export default function UserProfile() {
 
       <div className='userprofile-posts-container'>
         {+userId === sessionUser.id ? <UserProfPostForm /> : null}
-        {/* <UserProfPostForm /> */}
         <div className='userprofile-posts-text'> Posts </div>
         <UserProfilePosts userId={userId}/>
 

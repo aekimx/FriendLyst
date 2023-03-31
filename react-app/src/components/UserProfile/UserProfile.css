@@ -27,7 +27,17 @@
   align-items: center;
   overflow-y: scroll;
   height: 100%;
+}
 
+.userprof-photo-container {
+  font-size: 18px;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.userprof-photo-container:hover {
+  text-decoration: underline;
 }
 
 .userprofile-bio {
@@ -101,16 +111,39 @@
 
 .userprofile-photos {
   width: 500px;
-  margin-right: 20px;
+  /* height: 480px; */
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  /* justify-content: center; */
+  align-items: center;
   background-color: rgb(35,37,38);
   border-radius: 20px;
   padding: 15px;
   margin-top: 15px;
   font-size: 25px;
 }
+
+.userprof-photos-text {
+  text-align: left;
+  width: 500px;
+}
+
+.userprof-photos-grid {
+  margin-top: 10px;
+  margin-left: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, 170px);
+  overflow: hidden;
+}
+
+.userprofile-each-photo {
+  width: 155px;
+  object-fit: cover;
+  height: 135px;
+  border-radius: 15px;
+
+}
+
 
 .userprof-friends {
   font-size: 20px;
@@ -158,4 +191,9 @@
 .userprofile-add:hover, .userprofile-remove:hover {
   background: linear-gradient(to right, #c4198a, #359ed1);
   cursor: pointer;
+}
+
+.userprof-user-link {
+  color: rgb(228,230,235);
+  text-decoration: none;
 }

@@ -11,7 +11,6 @@ import FriendsList from "./components/FriendsList";
 import FriendRequests from "./components/FriendRequests";
 import SearchResults from "./components/SearchResults";
 import AllMessages from "./components/Messages";
-import MessagesCurrent from "./components/MessagesCurrent"
 import MessageForm from "./components/MessageForm";
 
 
@@ -59,7 +58,6 @@ function App() {
       </Route>
 
       <Route path="/:userId/messages/:dmId">
-        <MessagesCurrent />
         <MessageForm />
       </Route>
 

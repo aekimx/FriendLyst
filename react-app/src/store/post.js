@@ -238,8 +238,8 @@ export default function postReducer(state = initialState, action) {
       return newState;
 
     case CREATE_COMMENT, UPDATE_COMMENT:
-      newState = {...state};
-      newState.allPosts[action.comment.postId].comments[action.comment.id] = action.comment;
+      newState = {...state, allPosts: {...state.allPosts}};
+      newState.allPosts[action.comment.postId].comments.push(action.comment)
       return newState;
 
     case DELETE_COMMENT:

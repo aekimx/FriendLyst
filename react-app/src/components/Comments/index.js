@@ -38,12 +38,10 @@ export default function AllComments({comments, postId}) {
   const likePost = async () => {
     const like = {postId, userId}
     dispatch(likePostThunk(like))
-    dispatch(getAllPostsThunk(userId))
   }
 
   const unlikePost = async () => {
     dispatch(unlikePostThunk(currentLike))
-    dispatch(getAllPostsThunk(userId))
   }
 
 

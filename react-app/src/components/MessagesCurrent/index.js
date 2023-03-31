@@ -26,7 +26,7 @@ export default function MessagesCurrent({messages}) {
     // dispatch(getAllDirectMessagesThunk(userId))
     dispatch(getDirectMessageThunk(+dmId))
     // return () => dispatch(clearMessages())
-  }, [dispatch]) //dmId
+  }, [dispatch, dmId])
 
   if (!messages) return null;
 
