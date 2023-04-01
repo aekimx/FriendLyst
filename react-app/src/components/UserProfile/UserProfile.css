@@ -197,3 +197,22 @@
   color: rgb(228,230,235);
   text-decoration: none;
 }
+
+.userprof-propic-button {
+  display: flex;
+  justify-content: center;
+  border-radius: 30px;
+  background-color: #292a31;
+  margin-left: -50px;
+  margin-bottom: -25px;
+  padding-top: 3px;
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  color: rgb(228,230,235);
+  border: 2px solid white;
+}
+
+.userprof-propic-button:hover {
+  cursor: pointer;
+}

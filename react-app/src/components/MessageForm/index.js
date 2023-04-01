@@ -14,11 +14,10 @@ export default function MessageForm () {
 
   let {userId, dmId} = useParams();
   userId = +userId.split(".")[2];
+  const user = useSelector(state => state.session.user)
 
   const [content, setContent] = useState("");
   const [messages, setMessages] = useState({});
-
-  const user = useSelector(state => state.session.user)
 
   useEffect(() => {
     // open socket connection - create websocket

@@ -18,11 +18,11 @@
 
 .post-comment-comment {
   background-color: rgb(58,59,61);
-  border-radius: 30px;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
   justify-content: left;
-  padding: 20px;
+  padding: 12px;
   margin-top: 10px;
   max-width: 550px;
 }
@@ -55,6 +55,7 @@
   align-items: center;
   margin-left: 5px;
   position: relative;
+  margin-top: 11px;
 }
 
 .post-comment-options-div:hover {

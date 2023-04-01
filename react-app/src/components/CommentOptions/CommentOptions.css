@@ -2,10 +2,6 @@
   display: none
 }
 
-.commentoptions-container {
-  position: absolute;
-}
-
 .commentoptions-dropdown {
   border-radius: 5px;
   width: 150px;

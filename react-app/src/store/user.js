@@ -8,7 +8,6 @@ const CREATE_USER_POST = 'user/CREATE_USER_POST'
 const CREATE_USER_COMMENT = 'user/CREATE_USER_COMMENT'
 const LIKE_USER_POST = 'user/LIKE_POST'
 const UNLIKE_USER_POST = 'user/UNLIKE_POST'
-const GET_USER_PHOTOS= 'user/GET_USER_PHOTOS'
 
 const CLEAR_USER = 'user/CLEAR_USER'
 
@@ -53,12 +52,6 @@ const unlikeUserPost = (like) => ({
   like
 })
 
-const getUserPhotos = (photos) => ({
-  type: GET_USER_PHOTOS,
-  photos
-
-})
-
 export const clearUser = () => ({
   type: CLEAR_USER
 })
@@ -92,15 +85,14 @@ export const createUserThunk = (userProfile) => async (dispatch) => {
 
 }
 
-export const updateUserThunk = (userId, userProfile) => async (dispatch) => {
-  const response = await fetch(`/api/users/${userId}`, {
-    method: 'PUT',
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(userProfile)
+export const updateUserThunk = (formData) => async (dispatch) => {
+  const res = await fetch(`/api/users/profile`, {
+    method: "PUT",
+    body: formData,
   })
 
-  if (response.ok) {
-    const userProfile = response.json();
+  if (res.ok) {
+    const userProfile = await res.json();
     dispatch(updateUserProfile(userProfile));
     return userProfile;
   }
@@ -184,20 +176,11 @@ export const unlikeUserPostThunk = (like) => async (dispatch) => {
   }
 }
 
-export const getUserPhotosThunk = (userId) => async (dispatch) => {
-  const res = await fetch(`/api/posts/${userId}/posts/current/photos`)
-
-  if (res.ok) {
-    let userPhotos = await res.json();
-    dispatch(getUserPhotos(userPhotos));
-    return userPhotos;
-  }
-}
 
 
 // ----------------------------------- Reducer  ----------------------------------------
 
-const initialState = { user: { } , posts: { } , search: { } , photos: { }};
+const initialState = { user: { } , posts: { } , search: { }};
 
 export default function userReducer(state = initialState, action) {
   let newState = {};
@@ -208,8 +191,8 @@ export default function userReducer(state = initialState, action) {
 			return newState
 
     case UPDATE_USER_PROFILE:
-      newState = {...state, user: {}}
-      newState.user = { ...action.user}
+      newState = {...state, user: {...state.user}}
+      newState.user = action.user
       return newState
 
     case CREATE_USER_PROFILE:
@@ -250,13 +233,6 @@ export default function userReducer(state = initialState, action) {
       newState = {...state, posts: {...state.posts}};
       const newLikes = newState.posts[action.like.postId].likes.filter(like => like.id !== action.like.id)
       newState.posts[action.like.postId].likes = newLikes
-      return newState;
-
-    case GET_USER_PHOTOS:
-      newState = {...state, photos: {...state.photos}};
-      action.photos.forEach(photo => {
-        newState.photos[photo.id] = photo
-      })
       return newState;
 
     case CLEAR_USER:

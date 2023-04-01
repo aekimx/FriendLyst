@@ -146,8 +146,8 @@ function SignupFormPage() {
 
           </div>
 
-        <div className='signupform-privacy'> By clicking sign up, you agree to our Terms, Privacy Policy, and Cookies Policy. </div>
         <button className='signupform-signup-button' type="submit">Sign Up</button>
+        <div className='signupform-privacy'> By clicking sign up, you agree to our Terms, Privacy Policy, and Cookies Policy. </div>
         <Link to='/' className='signupform-signin'> Already have an account? </Link>
       </form>
       </div>

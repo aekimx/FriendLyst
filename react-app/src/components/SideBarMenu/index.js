@@ -6,8 +6,10 @@ import './SideBarMenu.css'
 export default function SideBarMenu() {
   const user = useSelector(state => state.session?.user)
 
-  // Navlink is a side bar thing className and active class name
-  // or use location key = pathname
+  const newFeatureAlert = (e) => {
+    e.preventDefault();
+    window.alert('Feature Coming Soon...');
+  }
 
   return (
     <>
@@ -45,18 +47,18 @@ export default function SideBarMenu() {
           </NavLink>
         </div>
 
-        <div className='sidebar-link' >
-          <NavLink to={`/${user?.firstName}.${user?.lastName}.${user?.id}/events`} className='sidebar-link'>
+        <div className='sidebar-link' onClick={newFeatureAlert}>
+          {/* <NavLink to={`/${user?.firstName}.${user?.lastName}.${user?.id}/events`} className='sidebar-link'> */}
             <i class="fa-solid fa-calendar-plus" />
             <span> Events </span>
-          </NavLink>
+          {/* </NavLink> */}
         </div>
 
-        <div className='sidebar-link' >
-          <NavLink to='placeholder' className='sidebar-link'>
+        <div className='sidebar-link' onClick={newFeatureAlert}>
+          {/* <NavLink to='placeholder' className='sidebar-link'> */}
             <i class="fa-solid fa-users-rectangle" />
             <span> Groups </span>
-          </NavLink>
+          {/* </NavLink> */}
         </div>
 
         {/* <div className='sidebar-link'> <i class="fa-solid fa-shop" /> Marketplace </div> */}

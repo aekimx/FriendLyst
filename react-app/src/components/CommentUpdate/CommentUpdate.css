@@ -88,6 +88,7 @@
   align-items: center;
   cursor: pointer;
   margin-left: 10px;
+  margin-top: 20px;
   border-radius: 10px;
   font-size: 15px;
   font-weight: 500;
@@ -106,10 +107,9 @@
 
 .commentupdate-error {
   text-align: center;
-  margin-bottom: 10px;
-  margin-top: -20px;
+  margin-bottom: -20px;
   height: 20px;
-  font-size: 15px;
+  font-size: 12px;
   color: rgb(218, 65, 65);
 
 

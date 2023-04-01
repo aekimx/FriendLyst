@@ -106,7 +106,9 @@
 }
 
 .signupform-privacy {
-  margin-bottom: 15px;
+  width: 350px;
+  margin-top: 15px;
+  font-size: 12px;
 }
 
 .signupform-signup-button {
@@ -115,7 +117,7 @@
   color: rgb(228,230,235);
   font-family: 'Ruda', sans-serif;
   border: none;
-  width: 300px;
+  width: 350px;
   height: 40px;
   border-radius: 5px;
   cursor: pointer;

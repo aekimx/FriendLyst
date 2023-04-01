@@ -16,7 +16,7 @@ export default function UserProfileUpdate({user}) {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    let updatedUserProfile = {bio, location}
+    let updatedUserProfile = {userId: user.id, bio, location}
     dispatch(updateUserThunk(updatedUserProfile))
     dispatch(getUserThunk(user.id))
     .then(() => {closeModal()})
@@ -39,30 +39,27 @@ export default function UserProfileUpdate({user}) {
 
           <div className='userprof-update-form-inputs-container'>
             <div className='userprof-solo-inputs-container'>
-            <label> Biography </label>
+              <label> Biography </label>
               <textarea type='text'
               placeholder='Biography'
               value={bio}
               className='userprof-update-bio-text'
               onChange={(e) => setBio(e.target.value)}
               />
-
             </div>
 
             <div className='userprof-solo-inputs-container'>
-            <label> Location </label>
+              <label> Location </label>
               <input type='text'
               placeholder='Location'
               value={location}
               className='userprof-update-location-text'
               onChange={(e) => setLocation(e.target.value)}
               />
-
             </div>
 
               <button className='userupdate-update-button' type='submit'
               disabled={bio.length < 1 || location.length < 1}> Save </button>
-            {/* </div> */}
           </div>
 
           </form>

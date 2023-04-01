@@ -9,6 +9,7 @@ import UserProfileUpdate from '../UserProfileUpdate'
 import { getAllFriendsThunk, deleteFriendThunk, addFriendThunk, getAllRequestsThunk} from '../../store/friend'
 import UserProfPostForm from '../UserProfilePostForm'
 import { clearUser } from '../../store/user'
+import UserProPicUpdate from '../UserProPicUpdate'
 
 
 
@@ -27,9 +28,6 @@ export default function UserProfile() {
 
   const friendsArr = Object.values(friends)
   const currentFriend = friendsArr.find(el => el.friendId === sessionUser?.id)
-
-  // console.log("what is in friends arr", friendsArr)
-  // console.log("what is current friend?", currentFriend)
 
   const requestsArr = Object.values(allRequests)
   const currentRequest = requestsArr.find(el => el.friendId === sessionUser?.id)
@@ -59,8 +57,6 @@ export default function UserProfile() {
   photosArr.reverse();
   if (photosArr.length >= 9) { photosArr = photosArr.slice(0,9)}
 
-  console.log('photos arr', photosArr)
-
 
   return (
     <>
@@ -78,6 +74,13 @@ export default function UserProfile() {
           <div className='userprof-name-container'>
             <div className='userprof-name'> {user.user?.firstName} {user.user?.lastName} </div>
             <div className='userprof-friends'> {friendsArr.length} Friends </div>
+            {+userId === sessionUser?.id ?
+            <OpenModalButton
+            buttonText={<i class="fa-solid fa-camera" />}
+            modalComponent={<UserProPicUpdate user={user}/>}
+            className='userprof-propic-button'/>
+            // <div className='userprof-profpic-modal'> <i class="fa-solid fa-camera" /> </div>
+            : null}
           </div>
         </div>
 

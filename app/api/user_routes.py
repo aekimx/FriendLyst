@@ -1,7 +1,8 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.models import User, UserProfile, db, Friend, Post
-from app.forms import UserProfileForm
+from app.forms import UserProfileForm, UserForm
+from app.api.aws_helpers import upload_file_to_s3, get_unique_filename
 
 user_routes = Blueprint('users', __name__)
 
@@ -89,8 +90,6 @@ def update_user_by_id(id):
     data = request.get_json()
 
     if form.validate_on_submit:
-        user_profile.profile_pic = data['profile_pic'] or user_profile.profile_pic
-        user_profile.cover_photo = data['cover_photo'] or user_profile.cover_photo
         user_profile.bio = data['bio'] or user_profile.bio
         user_profile.location = data['location'] or user_profile.location
         db.session.commit()
@@ -120,14 +119,30 @@ def get_friend_list(id):
 
     return jsonify([friend.to_dict_no_self() for friend in all_friends]), 200
 
-@user_routes.route('/<int:id>/photos', methods=["GET"])
+
+#Update user profile pic
+@user_routes.route("/profile", methods=["PUT"])
 @login_required
-def get_photos(id):
-    ''' Query for all posts with photos by user Id. Return in a list of dictionaries'''
+def update_prof_pic():
+    ''' Query for a user and if they exist, update their profile photo'''
 
-    all_photos = Post.query.filter(Post.user_id == id).filter(len(Post.photo) > 0).all()
+    form = UserForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
 
-    if all_photos is None:
-        return jsonify({'error': 'No photos found'})
+    user = User.query.get(form.data['user_id'])
 
-    return jsonify([post.to_dict_basic() for post in all_photos])
+    if user is None:
+        return jsonify({'error': 'No user found'}), 404
+
+
+    if form.validate_on_submit():
+        photo = form.data['photo']
+        photo.filename = get_unique_filename(photo.filename)
+        upload = upload_file_to_s3(photo)
+
+        if "url" not in upload:
+            return jsonify({"errors": "An error occurred when uploading"}), 400
+
+        user.profile_photo = upload['url']
+        db.session.commit()
+        return jsonify(user.to_dict())

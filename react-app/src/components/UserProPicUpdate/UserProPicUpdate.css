@@ -1,0 +1,73 @@
+.user-propic-update-container {
+  width: 600px;
+  height: 600px;
+  background-color: rgb(35,37,38);
+  color: rgb(228,230,235);
+  font-family: 'Ruda', sans-serif;
+  border-radius: 15px;
+  padding: 5px;
+}
+
+
+.user-profpic-update-text {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 0.5px solid rgb(65, 64, 64);
+  font-size: 25px;
+}
+
+.userprof-inner-form-container {
+  height: 520px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content:space-between;
+  align-items: center;
+
+}
+
+.userprof-form-label > input[type='file'] {
+  display: none
+}
+
+.userprof-form-label:hover {
+  cursor: pointer;
+}
+
+.userprof-form-label {
+  font-size: 25px;
+}
+
+.profpic-submit-button {
+  width: 425px;
+  height: 35px;
+  background-color: rgb(43,116,225);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-top: 20px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  color: rgb(228,230,235);
+  border: none;
+}
+
+.userprof-preview {
+  width: 300px;
+  max-height: 350px;
+  object-fit: contain;
+}
+
+.profpic-submit-button:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
+.profpic-submit-button:hover {
+  background-color: rgb(61, 126, 224);
+}
