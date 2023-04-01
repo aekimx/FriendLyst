@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { updateUserThunk } from "../../store/user";
+import { getUserThunk, updateUserThunk } from "../../store/user";
 import { useModal } from "../../context/Modal";
 
 import "./UserProPicUpdate.css"
@@ -34,6 +34,7 @@ export default function UserProPicUpdate() {
     formData.append("photo", profilePic)
 
     dispatch(updateUserThunk(formData))
+    dispatch(getUserThunk(user?.id))
     .then(() => {closeModal()})
   }
 

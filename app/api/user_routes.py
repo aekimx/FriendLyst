@@ -130,12 +130,14 @@ def update_prof_pic():
     form["csrf_token"].data = request.cookies["csrf_token"]
 
     user = User.query.get(form.data['user_id'])
+    print('******* are we getting the user?! ', user )
 
     if user is None:
         return jsonify({'error': 'No user found'}), 404
 
 
     if form.validate_on_submit():
+        print("***** HITTING FORM VALIDATE ON SUBMIT??? ***** ")
         photo = form.data['photo']
         photo.filename = get_unique_filename(photo.filename)
         upload = upload_file_to_s3(photo)
@@ -143,6 +145,6 @@ def update_prof_pic():
         if "url" not in upload:
             return jsonify({"errors": "An error occurred when uploading"}), 400
 
-        user.profile_photo = upload['url']
+        user.profile_pic = upload['url']
         db.session.commit()
         return jsonify(user.to_dict())
