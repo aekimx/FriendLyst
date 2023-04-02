@@ -1,6 +1,7 @@
 // ----------------------------------- constants  ----------------------------------------
 const GET_USER_PROFILE = 'user/GET_USER_PROFILE'
 const CREATE_USER_PROFILE = 'user/CREATE_USER_PROFILE'
+const UPDATE_USER_PROPIC = 'user/UPDATE_USER_PROPIC'
 const UPDATE_USER_PROFILE = 'user/UPDATE_USER_PROFILE'
 const GET_USER_POSTS = 'user/GET_USER_POSTS'
 const SEARCH_USERS = 'user/SEARCH_USERS'
@@ -19,6 +20,11 @@ const getUserProfile = (user) => ({
 
 const updateUserProfile = (user) => ({
   type: UPDATE_USER_PROFILE,
+  user
+})
+
+const updateUserProPic = (user) => ({
+  type: UPDATE_USER_PROPIC,
   user
 })
 
@@ -85,6 +91,21 @@ export const createUserThunk = (userProfile) => async (dispatch) => {
 
 }
 
+export const updateUserProfileThunk = (profile) => async (dispatch) => {
+  const res = await fetch(`/api/users/${profile.userId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(profile)
+  })
+
+  if (res.ok) {
+    let updatedProfile = await res.json();
+    dispatch(updateUserProfile(updatedProfile))
+    return updatedProfile;
+  }
+
+}
+
 export const updateUserThunk = (formData) => async (dispatch) => {
   const res = await fetch(`/api/users/profile`, {
     method: "PUT",
@@ -92,9 +113,9 @@ export const updateUserThunk = (formData) => async (dispatch) => {
   })
 
   if (res.ok) {
-    const userProfile = await res.json();
-    dispatch(updateUserProfile(userProfile));
-    return userProfile;
+    const userProPic = await res.json();
+    dispatch(updateUserProPic(userProPic));
+    return userProPic;
   }
 }
 
@@ -193,6 +214,11 @@ export default function userReducer(state = initialState, action) {
     case UPDATE_USER_PROFILE:
       newState = {...state, user: {...state.user}}
       newState.user = action.user
+      return newState
+
+    case UPDATE_USER_PROPIC:
+      newState = {...state, user: {...state.user}}
+      newState.user.user = action.user
       return newState
 
     case CREATE_USER_PROFILE:

@@ -1,6 +1,6 @@
 import React from "react"
 import { useDispatch } from "react-redux"
-import { getUserThunk, updateUserThunk } from "../../store/user";
+import { getUserThunk, updateUserProfileThunk } from "../../store/user";
 import { useState } from "react"
 import { useModal } from "../../context/Modal";
 import "./UserProfileUpdate.css"
@@ -17,7 +17,7 @@ export default function UserProfileUpdate({user}) {
   const handleSubmit = (e) => {
     e.preventDefault()
     let updatedUserProfile = {userId: user.id, bio, location}
-    dispatch(updateUserThunk(updatedUserProfile))
+    dispatch(updateUserProfileThunk(updatedUserProfile))
     dispatch(getUserThunk(user.id))
     .then(() => {closeModal()})
   }
