@@ -75,12 +75,10 @@ def create_post():
     if len(form.data["caption"]) > 2000:
         return jsonify({"errors": "Messages must be less than 2000 characters"}), 400
 
-    url = upload['url'] if upload != "" else ''
-
     if form.validate_on_submit():
         new_post = Post(
             caption= form.data['caption'],
-            photo=  url if url is not None else upload,
+            photo=  upload['url'] or '',
             user_id= form.data['user_id']
          )
 

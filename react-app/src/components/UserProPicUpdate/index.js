@@ -16,7 +16,7 @@ export default function UserProPicUpdate() {
 
   useEffect(() => {
     if (!profilePic) {
-      setPreview(undefined)
+      setPreview(null)
       return
     }
 
@@ -40,7 +40,7 @@ export default function UserProPicUpdate() {
 
   const setPhoto = (e) => {
     if (!e.target.files || e.target.files.length === 0) {
-      setProfilePic(undefined)
+      setProfilePic(null)
       return
   }
     setProfilePic(e.target.files[0])
