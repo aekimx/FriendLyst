@@ -38,7 +38,7 @@ export default function UserProfile() {
   useEffect(() => {
     dispatch(getUserThunk(userId))
     dispatch(getAllFriendsThunk(userId))
-    dispatch(getAllRequestsThunk(sessionUser.id))
+    dispatch(getAllRequestsThunk(sessionUser?.id))
     dispatch(getUserPostsThunk(userId))
     return () => dispatch(clearUser())
   }, [dispatch, userId])
@@ -161,7 +161,7 @@ export default function UserProfile() {
 
 
       <div className='userprofile-posts-container'>
-        {+userId === sessionUser.id ? <UserProfPostForm /> : null}
+        {+userId === sessionUser?.id ? <UserProfPostForm /> : null}
         <div className='userprofile-posts-text'> Posts </div>
         <UserProfilePosts userId={userId}/>
 
