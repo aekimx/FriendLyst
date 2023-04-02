@@ -16,7 +16,8 @@ from .api.event_routes import event_routes
 from .seeds import seed_commands
 from .config import Config
 from .socket import socketio
-
+from gevent import monkey
+monkey.patch_all()
 app = Flask(__name__, static_folder='../react-app/build', static_url_path='/')
 
 # Setup login manager
