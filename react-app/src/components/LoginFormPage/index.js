@@ -92,8 +92,8 @@ function LoginFormPage() {
           <div> Aileen Kim </div>
           <div> Github </div>
           <div> LinkedIn </div>
-
         </div>
+
         <div className='skills-used'>
           <div> Python </div>
           <div> Flask </div>
@@ -104,6 +104,8 @@ function LoginFormPage() {
           <div> Node </div>
           <div> HTML </div>
           <div> CSS </div>
+          <div> SocketIO </div>
+          <div> AWS S3 </div>
           <div> Github </div>
         </div>
     </div>
