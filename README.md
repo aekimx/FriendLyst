@@ -1,148 +1,82 @@
-# Flask React Project
+# FriendLyst
 
-This is the starter for the Flask React project.
+Welcome to FriendLyst! A full stack Facebook clone that utilizes a Flask Python backend and a React Redux frontend.
 
-## Getting started
-1. Clone this repository (only this branch)
+Here on FriendLyst you can search users to add as a friend, create posts, write comments, and send live messages.\
 
-2. Install dependencies
+[Click here to view FriendLyst Live Site](http://friendlyst-onrender.com)
 
-      ```bash
-      pipenv install -r requirements.txt
-      ```
+**Please see below links to project Wiki:**\
+[Feature List](https://github.com/aekimx/FriendLyst/wiki/FriendLyst-Features-List)\
+[Database Schema](https://github.com/aekimx/FriendLyst/wiki/FriendLyst-DB-Schema)\
+[Redux Store State Shape](https://github.com/aekimx/AKBnB/wiki/Redux-Store-Shape)
 
-3. Create a **.env** file based on the example with proper settings for your
-   development environment
+**This project is built with:**\
+JavaScript\
+PostgreSQL\
+Flask\
+Python\
+React\
+Redux\
+Socket.IO\
+AWS S3\
+HTML\
+CSS
 
-4. Make sure the SQLite3 database connection URL is in the **.env** file
+# Check out FriendLyst's features! #
 
-5. This starter organizes all tables inside the `flask_schema` schema, defined
-   by the `SCHEMA` environment variable.  Replace the value for
-   `SCHEMA` with a unique name, **making sure you use the snake_case
-   convention**.
+## Getting Started: Sign Up or Log in as Demo User ##
+* You can get started on FriendLyst by signing up or clicking either Demo Users.
+* The log in button is disabled if there is nothing inputted in the fields.
+* If the credentials are invalid, you will see a dynamic error show up top.\
+INSERT GIF HERE
 
-6. Get into your pipenv, migrate your database, seed your database, and run your Flask app
+## View and Update Your User Profile and view Friend Profiles ##
+* You can view your user profile after signing in by clicking the top right on the screen, or clicking on your name in one of the posts or comments.
+* You can view any user's user profiles by clicking on their name in your feed.
+* You can update your user profile and edit your bio and location by clicking the camera button and the gear button, respectively! \
+INSERT GIF HERE
 
-   ```bash
-   pipenv shell
-   ```
+## Create Posts and View Post Detail ##
+* You can create a post to update your status or send a photo update to your friends either on the home page, or your user profile page.
+* This feature utilizes AWS S3 for cloud storage for photos.
+* You can click the image button to upload a photo (with the accepted image extensions like JPG, JPEG, or PNG). Make sure to include a caption, otherwise the post button will be disabled.
+* If you hit the length validation, the error message will show up in red to the right.
+* After posting, you should see the newly created post on your feed or user profile, with the ability to like, comment, edit, or delete!
+* Clicking on any post will take you to the post detail page, where you can see a larger version of the photo and all the associated comments. \
+INSERT GIF HERE
 
-   ```bash
-   flask db upgrade
-   ```
+## Edit or Delete Posts ##
+* You can edit or delete your own posts by clicking the gear and the x on the top right, respectively.
+* You can only edit or delete your own post, so the options are conditionally rendered.
+* Clicking update will open a modal with the pre-populated caption. You cannot currently edit the photo at this time.
+* Error validations will show up if you try to remove the caption, as captions are required, or if the caption is too long.
+* Clicking delete will open a confirmation modal.  \
+INSERT GIF HERE
 
-   ```bash
-   flask seed all
-   ```
+## Create, Edit, Delete Comments ##
+* You can write a comment on any post, including your own, as you see it on your feed, your user profile, or someone ele's user profile.
+* You can edit and delete your own comments, with the drop down menu conditionally rendered on your comments only.
+* Clicking edit comment will open a modal with the pre-populated comment for user ease.
+* All comments contain a length validation, and an error message will appear if the comment does not meet it.
+* Clicking delete comment will open a confirmation modal. \
+INSERT GIF HERE
 
-   ```bash
-   flask run
-   ```
+## Search Users ##
+* You can search for users at the top left of your screen to view their profiles.
+* The search is case insensitive, and does not require the full name to be inputted for maximum search flexibiilty.
+* Users that are your friends and are not your friends will both show up in the search results. \
+INSERT GIF HERE
 
-7. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
+## Add or Remove Friend, Accept or Deny Friend Request ##
+* You can add a user by clicking on to their profile after searching and by clicking the add friend button.
+* The Request will be sitting in their Friend Requests page to the left, where they will have the option to accept or deny your request.
+* That user's posts will not show up in your feed until they have accepted the request.
+* You can go onto any existing friend's page and remove them as a friend. You have the option to re-add them as a friend, but their posts will be removed from your feed. \
+INSERT GIF HERE
 
-
-## Deployment through Render.com
-
-First, refer to your Render.com deployment articles for more detailed
-instructions about getting started with [Render.com], creating a production
-database, and deployment debugging tips.
-
-From the [Dashboard], click on the "New +" button in the navigation bar, and
-click on "Web Service" to create the application that will be deployed.
-
-Look for the name of the application you want to deploy, and click the "Connect"
-button to the right of the name.
-
-Now, fill out the form to configure the build and start commands, as well as add
-the environment variables to properly deploy the application.
-
-### Part A: Configure the Start and Build Commands
-
-Start by giving your application a name.
-
-Leave the root directory field blank. By default, Render will run commands from
-the root directory.
-
-Make sure the Environment field is set set to "Python 3", the Region is set to
-the location closest to you, and the Branch is set to "main".
-
-Next, add your Build command. This is a script that should include everything
-that needs to happen _before_ starting the server.
-
-For your Flask project, enter the following command into the Build field, all in
-one line:
-
-```shell
-# build command - enter all in one line
-npm install --prefix react-app &&
-npm run build --prefix react-app &&
-pip install -r requirements.txt &&
-pip install psycopg2 &&
-flask db upgrade &&
-flask seed all
-```
-
-This script will install dependencies for the frontend, and run the build
-command in the __package.json__ file for the frontend, which builds the React
-application. Then, it will install the dependencies needed for the Python
-backend, and run the migration and seed files.
-
-Now, add your start command in the Start field:
-
-```shell
-# start script
-gunicorn app:app
-```
-
-_If you are using websockets, use the following start command instead for increased performance:_
-
-`gunicorn --worker-class eventlet -w 1 app:app`
-
-### Part B: Add the Environment Variables
-
-Click on the "Advanced" button at the bottom of the form to configure the
-environment variables your application needs to access to run properly. In the
-development environment, you have been securing these variables in the __.env__
-file, which has been removed from source control. In this step, you will need to
-input the keys and values for the environment variables you need for production
-into the Render GUI.
-
-Click on "Add Environment Variable" to start adding all of the variables you
-need for the production environment.
-
-Add the following keys and values in the Render GUI form:
-
-- SECRET_KEY (click "Generate" to generate a secure secret for production)
-- FLASK_ENV production
-- FLASK_APP app
-- SCHEMA (your unique schema name, in snake_case)
-- REACT_APP_BASE_URL (use render.com url, located at top of page, similar to
-  https://this-application-name.onrender.com)
-
-In a new tab, navigate to your dashboard and click on your Postgres database
-instance.
-
-Add the following keys and values:
-
-- DATABASE_URL (copy value from Internal Database URL field)
-
-_Note: Add any other keys and values that may be present in your local __.env__
-file. As you work to further develop your project, you may need to add more
-environment variables to your local __.env__ file. Make sure you add these
-environment variables to the Render GUI as well for the next deployment._
-
-Next, choose "Yes" for the Auto-Deploy field. This will re-deploy your
-application every time you push to main.
-
-Now, you are finally ready to deploy! Click "Create Web Service" to deploy your
-project. The deployment process will likely take about 10-15 minutes if
-everything works as expected. You can monitor the logs to see your build and
-start commands being executed, and see any errors in the build process.
-
-When deployment is complete, open your deployed site and check to see if you
-successfully deployed your Flask application to Render! You can find the URL for
-your site just below the name of the Web Service at the top of the page.
-
-[Render.com]: https://render.com/
-[Dashboard]: https://dashboard.render.com/
+## Send A Message ##
+* You can send a direct message to your friends! Upon adding a user as a friend, a DM channel is created for you in your message tab to the left. Removing a friend will delete that channel.
+* This feature utilizes Socket.IO for instant live chat.
+* You can test the live messaging feature by opening a new Incognito window and logging in as the other Demo User. (Demo user 1 is Demo Lition, and Demo user 2 is Aileen Kim ) \
+INSERT GIF HERE
