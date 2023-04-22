@@ -60,25 +60,13 @@ def create_post():
     form = PostForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
 
-    upload = ''
-    if form.data['photo'] is None:
-        pass
-    else:
-        photo = form.data['photo']
-        photo.filename = get_unique_filename(photo.filename)
-        upload = upload_file_to_s3(photo)
-
-        if "url" not in upload:
-            return jsonify({"errors": "An error occurred when uploading"}), 400
-
-
     if len(form.data["caption"]) > 2000:
         return jsonify({"errors": "Messages must be less than 2000 characters"}), 400
 
-    if form.validate_on_submit():
+    if form.data['photo'] is None and form.validate_on_submit():
         new_post = Post(
             caption= form.data['caption'],
-            photo=  upload['url'] or '',
+            photo=  '',
             user_id= form.data['user_id']
          )
 
@@ -86,7 +74,28 @@ def create_post():
         db.session.commit()
         return new_post.to_dict()
 
-    return jsonify({'error': "form did not validate on submit"})
+    else:
+        photo = form.data['photo']
+        photo.filename = get_unique_filename(photo.filename)
+        upload = upload_file_to_s3(photo)
+
+
+        if "url" not in upload:
+            return jsonify({"errors": "An error occurred when uploading"}), 400
+
+        if form.validate_on_submit():
+            new_post = Post(
+                caption= form.data['caption'],
+                photo=  upload['url'],
+                user_id= form.data['user_id']
+            )
+
+            db.session.add(new_post)
+            db.session.commit()
+            return new_post.to_dict()
+
+        return jsonify({'error': "form did not validate on submit"})
+
 
 # UPDATE POST
 @post_routes.route('/<int:id>', methods=["PUT"])
