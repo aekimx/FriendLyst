@@ -42,6 +42,18 @@ function LoginFormPage() {
 			)
 	};
 
+  function portfolio() {
+    window.open('https://aekimx.github.io/')
+  }
+
+  function github() {
+    window.open('https://github.com/aekimx/FriendLyst')
+  }
+
+  function linkedIn() {
+    window.open('https://www.linkedin.com/in/aekimx/')
+  }
+
 
 
   return (
@@ -79,7 +91,7 @@ function LoginFormPage() {
             />
 
           <div className='loginform-submit-div'  onClick={handleSubmit}> Log In </div>
-          <div className='loginform-demo-containers'>
+          <div className='loginform-demo-container'>
               <div className='loginform-demouser-div' onClick={demoUserLogin}> Demo User 1 </div>
               <div className='loginform-demouser-div' onClick={demoUserLogin2}> Demo User 2 </div>
           </div>
@@ -89,9 +101,9 @@ function LoginFormPage() {
       </div>
     <div className='ak-userinfo'>
         <div className='ak-name'>
-          <div> Aileen Kim </div>
-          <div> Github </div>
-          <div> LinkedIn </div>
+          <div onClick={portfolio}> Aileen Kim </div>
+          <div onClick={github}> Github </div>
+          <div onClick={linkedIn}> LinkedIn </div>
         </div>
 
         <div className='skills-used'>

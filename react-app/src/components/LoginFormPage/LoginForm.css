@@ -92,12 +92,18 @@
   transition: background-position 5s ease;
 }
 
+.loginform-demo-container {
+  display: flex;
+  flex-direction: row;
+}
+
 .loginform-demouser-div {
   border: 1px solid white;
   cursor: pointer;
   display: flex;
   height: 40px;
-  width: 300px;
+  width: 145px;
+  margin-right: 10px;
   justify-content: center;
   align-items: center;
   border-radius: 5px;
