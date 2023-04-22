@@ -96,6 +96,7 @@ export default function AllComments({comments, postId}) {
         <div className='commentform-input-container'>
           <img src={user?.profilePic} className='commentform-userprof'/>
           <form onSubmit={handleSubmit}>
+
             <input
             placeholder='Write a comment...'
             ref={inputRef}
@@ -105,6 +106,7 @@ export default function AllComments({comments, postId}) {
             value={content}
             onChange={(e) => setContent(e.target.value)}>
             </input>
+
             <button className='commentform-sendbutton'
             disabled={content.length === 500}> <i className="fa-solid fa-paper-plane"/></button>
           </form>
@@ -112,10 +114,6 @@ export default function AllComments({comments, postId}) {
 
         {content.length === 500 ? <div className='commentform-error'> Comments must be less than 500 characters </div>: null}
       </>
-
-
-
-
     </>
   )
 }
