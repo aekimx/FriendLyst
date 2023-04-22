@@ -61,7 +61,7 @@ function LoginFormPage() {
     <div className='loginform-container'>
       <div className='loginform-signin'>
       <div className='loginform-logo'> <img src="https://friendlyst-bucket.s3.amazonaws.com/FullLogo_Text_NoBuffer.png" className='loginform-logo'/> </div>
-      <div className='loginform-title'>Connect with friends and the world around you on FriendLyst </div>
+      <div className='loginform-title'>Connect with friends and the world around you on FriendLyst!</div>
       <div className='loginform-input-container'>
         <form onSubmit={handleSubmit}>
           <ul>
@@ -101,9 +101,9 @@ function LoginFormPage() {
       </div>
     <div className='ak-userinfo'>
         <div className='ak-name'>
-          <div onClick={portfolio}> Aileen Kim </div>
-          <div onClick={github}> Github </div>
-          <div onClick={linkedIn}> LinkedIn </div>
+          <div onClick={portfolio} className='outer-link'> Aileen Kim </div>
+          <div onClick={github} className='outer-link'> Github </div>
+          <div onClick={linkedIn} className='outer-link'> LinkedIn </div>
         </div>
 
         <div className='skills-used'>

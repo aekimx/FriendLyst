@@ -34,6 +34,12 @@
   width: 600px;
 }
 
+.loginform-title {
+  font-size: 20px;
+  width:600px;
+  text-align: center;
+}
+
 .loginform-input-container > form {
   display: flex;
   flex-direction: column;
@@ -147,4 +153,9 @@
   flex-direction: row;
   justify-content: space-evenly;
   margin-bottom: 5px;
+}
+
+.outer-link:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }

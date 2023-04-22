@@ -52,8 +52,8 @@ export default function CommentUpdate({comment}) {
             maxLength='500'
             onChange={(e) => setContent(e.target.value)}
             />
-             {content.length === 500 ? <div className='commentupdate-error'> 'Comments must be less than 500 characters' </div> : null}
-             {content.length === 0 ? <div className='commentupdate-error'> 'Comment is required' </div> : null}
+             {content.length === 500 ? <div className='commentupdate-error'> Comments must be less than 500 characters </div> : null}
+             {content.length === 0 ? <div className='commentupdate-error'> Comment is required </div> : null}
 
             <button className='commentupdate-update-button' type='submit'
             disabled={content.length < 1 || content.length === 500}> Save </button>

@@ -33,3 +33,7 @@
 .commentoptions-edit:hover, .commentoptions-delete:hover {
   background-color: rgb(58,59,61);
 }
+
+.commentoptions-container:hover {
+  cursor: pointer;
+}
