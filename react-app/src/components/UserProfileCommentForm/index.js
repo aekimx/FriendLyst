@@ -30,6 +30,17 @@ export default function UserProfileComments({comments, postId}) {
     inputRef.current.focus()
   }
 
+  const handleChange = (e) => {
+    setContent(e.target.value)
+    e.target.style.height = 'auto'
+    e.target.style.height =  `${e.target.scrollHeight}px`
+  }
+
+  const handleBlur = (e) => {
+    e.target.style.height = 'auto'
+  }
+
+
   const handleSubmit = (e) => {
     e.preventDefault()
     const newComment = {comment: content, userId: sessionUserId, postId}
@@ -91,18 +102,22 @@ export default function UserProfileComments({comments, postId}) {
         <div className='commentform-input-container'>
           <img src={user?.profilePic} className='commentform-userprof'/>
           <form onSubmit={handleSubmit}>
-            <input
+
+            <textarea
             placeholder='Write a comment...'
             ref={inputRef}
             className='commentform-input'
             maxLength='500'
             style={{ color: 'rgb(228,230,235)', paddingLeft:'10px'}}
             value={content}
-            onChange={(e) => setContent(e.target.value)} />
+            onBlur={handleBlur}
+            onChange={handleChange} />
+          </form>
+
             <button className='commentform-sendbutton' disabled={content.length === 500}>
               <i className="fa-solid fa-paper-plane"/>
             </button>
-          </form>
+
         </div>
           {content.length === 500 ? <div className='userprof-commentform-error'> Comments must be less than 500 characters </div>: null}
 
