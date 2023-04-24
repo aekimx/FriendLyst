@@ -20,8 +20,19 @@ export default function AllComments({comments, postId}) {
 
 
   const inputRef = useRef(null);
+
   const handleClick = () => {
     inputRef.current.focus()
+  }
+
+  const handleChange = (e) => {
+    setContent(e.target.value)
+    e.target.style.height = 'auto'
+    e.target.style.height =  `${e.target.scrollHeight}px`
+  }
+
+  const handleBlur = (e) => {
+    e.target.style.height = 'auto'
   }
 
   const handleSubmit = (e) => {
@@ -97,19 +108,20 @@ export default function AllComments({comments, postId}) {
           <img src={user?.profilePic} className='commentform-userprof'/>
           <form onSubmit={handleSubmit}>
 
-            <input
+            <textarea
             placeholder='Write a comment...'
             ref={inputRef}
             className='commentform-input'
             maxLength='500'
-            style={{ color: 'rgb(228,230,235)', paddingLeft:'10px'}}
             value={content}
-            onChange={(e) => setContent(e.target.value)}>
-            </input>
+            onBlur={handleBlur}
+            onChange={handleChange}>
+            </textarea>
 
-            <button className='commentform-sendbutton'
-            disabled={content.length === 500}> <i className="fa-solid fa-paper-plane"/></button>
           </form>
+            <button className='commentform-sendbutton'
+            onClick={handleSubmit}
+            disabled={content.length === 500}> <i className="fa-solid fa-paper-plane"/></button>
         </div>
 
         {content.length === 500 ? <div className='commentform-error'> Comments must be less than 500 characters </div>: null}
