@@ -128,6 +128,7 @@ function SignupFormPage() {
 
             <select
             className='signupform-select-year'
+            defaultValue={1990}
             onChange={(e) => setYear(e.target.value)}>
               {generateOptions(1940, new Date().getFullYear())}
             </select>
