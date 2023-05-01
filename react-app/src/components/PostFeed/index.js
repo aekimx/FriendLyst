@@ -44,7 +44,7 @@ export default function PostFeed() {
             <Link to={`/${post.user?.firstName}.${post.user?.lastName}.${post.user?.id}/profile`} className='postfeed-name'>
               <div className='postfeed-name'> {post.user?.firstName} {post.user?.lastName} </div>
             </Link>
-              <div className='postfeed-time'> {post.createdAt.slice(0,11)} </div>
+              <div className='postfeed-time'> {post.createdAt.slice(0,16)} </div>
             </div>
 
           </div>
