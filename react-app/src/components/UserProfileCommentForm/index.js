@@ -31,12 +31,14 @@ export default function UserProfileComments({comments, postId}) {
   }
 
   const handleChange = (e) => {
+    e.preventDefault()
     setContent(e.target.value)
     e.target.style.height = 'auto'
     e.target.style.height =  `${e.target.scrollHeight}px`
   }
 
   const handleBlur = (e) => {
+    e.preventDefault()
     e.target.style.height = 'auto'
   }
 
@@ -101,7 +103,7 @@ export default function UserProfileComments({comments, postId}) {
       <>
         <div className='commentform-input-container'>
           <img src={user?.profilePic} className='commentform-userprof'/>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className='userprof-commentform-form'>
 
             <textarea
             placeholder='Write a comment...'
@@ -112,11 +114,11 @@ export default function UserProfileComments({comments, postId}) {
             value={content}
             onBlur={handleBlur}
             onChange={handleChange} />
-          </form>
 
-            <button className='commentform-sendbutton' disabled={content.length === 500}>
+            <button className='user-commentform-sendbutton' disabled={content.length === 500}>
               <i className="fa-solid fa-paper-plane"/>
             </button>
+          </form>
 
         </div>
           {content.length === 500 ? <div className='userprof-commentform-error'> Comments must be less than 500 characters </div>: null}

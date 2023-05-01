@@ -17,6 +17,7 @@
 .home-navbar-middle-icons {
   display: flex;
   flex-direction: row;
+  justify-content: left;
   width: 500px;
   font-size: 23px;
   margin-top: -20px;
@@ -43,7 +44,7 @@
 }
 
 .home-home, .home-video, .home-store, .home-game{
-  margin-top: 20px;
+  /* margin-top: 20px; */
   width: 75px;
   height: 50px;
   display: flex;
@@ -51,7 +52,8 @@
   align-items: center;
   margin-right: 20px;
   border-radius: 20px;
-  cursor: pointer
+  cursor: pointer;
+  font-size: 23px;
 }
 
 .home-home:hover, .home-video:hover, .home-store:hover,

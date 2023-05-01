@@ -6,3 +6,27 @@
   margin-left: 10px;
   text-align: center;
 }
+
+.user-commentform-sendbutton {
+  font-size: 23px;
+  padding-left: 5px;
+  cursor: pointer;
+  background-color: rgb(35,37,38);
+  border: none;
+  margin-top: 5px;
+  color: rgb(228,230,235);
+}
+
+.user-commentform-sendbutton:disabled {
+  cursor: not-allowed;
+}
+
+.user-commentform-sendbutton:hover {
+  color: white;
+}
+
+.userprof-commentform-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}

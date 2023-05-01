@@ -16,16 +16,14 @@ export default function SideBarMenu() {
     <div className='sidebar-menu-container'>
       <div className='sidebar-smaller-container'>
 
-        <div className='sidebar-link'>
-
+      <div className='sidebar-link'>
         <NavLink to={`/${user?.firstName}.${user?.lastName}.${user?.id}/profile`} className='sidebar-link'>
           <i className="fa-solid fa-user" />
           <span> User Profile </span>
         </NavLink>
-        </div>
+      </div>
 
         <div className='sidebar-link'>
-
           <NavLink to={`/${user?.firstName}.${user?.lastName}.${user?.id}/friends`} className='sidebar-link'>
             <i class="fa-solid fa-users" />
             <span> Friends </span>
@@ -33,7 +31,6 @@ export default function SideBarMenu() {
         </div>
 
         <div className='sidebar-link'>
-
           <NavLink to={`/${user?.firstName}.${user?.lastName}.${user?.id}/requests`} className='sidebar-link'>
             <i className="fa-solid fa-user-plus" />
             <span> Friend Requests </span>
@@ -47,19 +44,19 @@ export default function SideBarMenu() {
           </NavLink>
         </div>
 
-        <div className='sidebar-link' onClick={newFeatureAlert}>
+        {/* <div className='sidebar-link' onClick={newFeatureAlert}> */}
           {/* <NavLink to={`/${user?.firstName}.${user?.lastName}.${user?.id}/events`} className='sidebar-link'> */}
-            <i class="fa-solid fa-calendar-plus" />
-            <span> Events </span>
+            {/* <i class="fa-solid fa-calendar-plus" />
+            <span> Events </span> */}
           {/* </NavLink> */}
-        </div>
+        {/* </div> */}
 
-        <div className='sidebar-link' onClick={newFeatureAlert}>
+        {/* <div className='sidebar-link' onClick={newFeatureAlert}> */}
           {/* <NavLink to='placeholder' className='sidebar-link'> */}
-            <i class="fa-solid fa-users-rectangle" />
-            <span> Groups </span>
+            {/* <i class="fa-solid fa-users-rectangle" />
+            <span> Groups </span> */}
           {/* </NavLink> */}
-        </div>
+        {/* </div> */}
 
         {/* <div className='sidebar-link'> <i class="fa-solid fa-shop" /> Marketplace </div> */}
       </div>
