@@ -22,20 +22,32 @@ export default function MessageForm () {
     socket = io();
 
     if (socket && user) {
-      socket.emit('join', { dm_id: dmId, first_name: user.firstName })
+      socket.emit('join', { dm_id: +dmId, first_name: user.firstName }, (res) => {
+        console.log('Response from joining room: ', res)
+      })
+
       socket.on("chat", (chat) => setMessages(chat) )
     }
     // when component unmounts, disconnect
-    return ( () => socket.disconnect() )
-  }, [])
+    return ( () => {
+      console.log('hitting the return when component unmounts')
+      socket.emit('leave', { dm_id: +dmId, username: user.username }, (res) => {
+        console.log("Response from leave room", res)
+      })
+      socket.disconnect()
+    }
+      )
+  }, [dmId])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    let newMessage = {dm_id: dmId, message: content, sender_id: userId }
-    let createdMessage = await dispatch(createMessageThunk(newMessage))
+    let newMessage = {dm_id: dmId, message: content, sender_id: userId };
+    let createdMessage = await dispatch(createMessageThunk(newMessage));
 
-    if (socket) socket.emit("chat", createdMessage)
+    if (socket) socket.emit("chat", createdMessage, (res) => {
+      console.log('Response from sending chat: ', res)
+    })
     setContent("")
   }
 
