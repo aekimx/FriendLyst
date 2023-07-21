@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux";
-import {createMessageThunk } from "../../store/message"
+// import {createMessageThunk } from "../../store/message"
+import { createMessage } from "../../store/message";
 import { io } from 'socket.io-client';
 import MessagesCurrent from "../MessagesCurrent"
 import "./MessageForm.css"
@@ -22,6 +23,7 @@ export default function MessageForm () {
     socket = io();
 
     if (socket && user) {
+      // join the DM room
       socket.emit('join', { dm_id: +dmId, first_name: user.firstName }, (res) => {
         console.log('Response from joining room: ', res)
       })
@@ -30,7 +32,6 @@ export default function MessageForm () {
     }
     // when component unmounts, disconnect
     return ( () => {
-      console.log('hitting the return when component unmounts')
       socket.emit('leave', { dm_id: +dmId, username: user.username }, (res) => {
         console.log("Response from leave room", res)
       })
@@ -42,11 +43,12 @@ export default function MessageForm () {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    let newMessage = {dm_id: dmId, message: content, sender_id: userId };
-    let createdMessage = await dispatch(createMessageThunk(newMessage));
+    let data = {dm_id: dmId, message: content, sender_id: userId };
+    // let createdMessage = await dispatch(createMessageThunk(newMessage));
 
-    if (socket) socket.emit("chat", createdMessage, (res) => {
+    if (socket) socket.emit("chat", data, (res) => {
       console.log('Response from sending chat: ', res)
+      dispatch(createMessage(res))
     })
     setContent("")
   }

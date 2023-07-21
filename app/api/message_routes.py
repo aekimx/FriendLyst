@@ -30,22 +30,30 @@ def get_dm_by_id(dmId):
 
     return [message.to_dict_no_dm() for message in messages]
 
+
+# CREATE Message / Edit Message / Delete Message in socket.py ????
+
+
+
+
+
+
 #CREATE MESSAGE IN DM
-@message_routes.route('', methods=['POST'])
-@login_required
-def create_message():
-    ''' Create a message and return as a dictionary '''
-    data = request.get_json()
-    form = MessageForm()
-    form["csrf_token"].data = request.cookies["csrf_token"]
+# @message_routes.route('', methods=['POST'])
+# @login_required
+# def create_message():
+#     ''' Create a message and return as a dictionary '''
+#     data = request.get_json()
+#     form = MessageForm()
+#     form["csrf_token"].data = request.cookies["csrf_token"]
 
-    if form.validate_on_submit:
-        message = Message( sender_id = data['sender_id'], dm_id = data['dm_id'], message = data['message'])
-        db.session.add(message)
-        db.session.commit()
-        return message.to_dict_no_dm()
+#     if form.validate_on_submit:
+#         message = Message( sender_id = data['sender_id'], dm_id = data['dm_id'], message = data['message'])
+#         db.session.add(message)
+#         db.session.commit()
+#         return message.to_dict_no_dm()
 
-    return jsonify({"error": "Error validating message"})
+#     return jsonify({"error": "Error validating message"})
 
 
 

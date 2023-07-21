@@ -51,20 +51,20 @@ export const getDirectMessageThunk = (dmId) => async (dispatch) => {
   }
 }
 
-export const createMessageThunk = (message) => async (dispatch) => {
-  const res = await fetch(`/api/messages`, {
-    method: "POST",
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(message)
-  });
+// export const createMessageThunk = (message) => async (dispatch) => {
+//   const res = await fetch(`/api/messages`, {
+//     method: "POST",
+//     headers: { 'Content-Type': 'application/json' },
+//     body: JSON.stringify(message)
+//   });
 
-  if (res.ok) {
-    const message = await res.json();
-    dispatch(createMessage(message));
-    return message;
-  }
+//   if (res.ok) {
+//     const message = await res.json();
+//     dispatch(createMessage(message));
+//     return message;
+//   }
 
-}
+// }
 
 
 // ----------------------------------- Reducer  ----------------------------------------
