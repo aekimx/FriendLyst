@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux";
-// import {createMessageThunk } from "../../store/message"
-import { createMessage, getDirectMessageThunk } from "../../store/message";
+import { getDirectMessageThunk } from "../../store/message";
 import { io } from 'socket.io-client';
 import MessagesCurrent from "../MessagesCurrent"
 import "./MessageForm.css"
@@ -20,6 +19,10 @@ export default function MessageForm () {
   useEffect(() => {
     // open socket connection - create websocket
     socket = io();
+
+    socket.on('chat', (data) => {
+      dispatch(getDirectMessageThunk(dmId))
+    })
 
     if (socket && user) {
       // join the DM room
@@ -42,10 +45,8 @@ export default function MessageForm () {
     let data = {dm_id: dmId, message: content, sender_id: userId };
 
     if (socket) {
-      socket.emit("chat", data, (res) => {
-        dispatch(createMessage(res))
-        dispatch(getDirectMessageThunk(dmId))
-      })
+      socket.emit("chat", data)
+      // , (res) => { // dispatch(createMessage(res))}
     }
 
     setContent("");

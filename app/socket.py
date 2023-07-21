@@ -54,21 +54,14 @@ def on_leave(data):
 # handle chat messages
 @socketio.on("chat")
 def handle_chat(data):
-    print(' ---------------------- in HANDLE CHAT in socket.py ----------------------------- ')
     message = Message (
         sender_id = data['sender_id'],
         dm_id = int(data['dm_id']),
         message = data['message']
         )
 
-    print(' ---------------------- message created ----------------------------- ', message)
     db.session.add(message)
     db.session.commit()
-    print(' ---------------------- message added to db, to_dict ----------------------------- ', message.to_dict_no_dm())
+
     emit('chat', message.to_dict_no_dm(), broadcast = True) # good to broadcast true?
     return 'DM message sent'  # This will be sent back to the client
-
-    # Old code!!!!
-    # dm_id = data['dm_id']
-    # dm_room = f'room{dm_id}'
-    # emit("chat", data, room=dm_room)

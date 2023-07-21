@@ -17,11 +17,6 @@ const getDirectMessage = (messages) => ({
 
 })
 
-export const createMessage = (message) => ({
-  type: CREATE_MESSAGE,
-  message
-})
-
 
 export const clearMessages = () => ({
   type: CLEAR_MESSAGES
@@ -51,21 +46,6 @@ export const getDirectMessageThunk = (dmId) => async (dispatch) => {
   }
 }
 
-// export const createMessageThunk = (message) => async (dispatch) => {
-//   const res = await fetch(`/api/messages`, {
-//     method: "POST",
-//     headers: { 'Content-Type': 'application/json' },
-//     body: JSON.stringify(message)
-//   });
-
-//   if (res.ok) {
-//     const message = await res.json();
-//     dispatch(createMessage(message));
-//     return message;
-//   }
-
-// }
-
 
 // ----------------------------------- Reducer  ----------------------------------------
 let initialState = { allMessages: {} , currentMessages: {}}
@@ -85,11 +65,6 @@ export default function messageReducer(state = initialState, action) {
       action.messages.forEach(message => {
         newState.currentMessages[message.id] = message
       })
-      return newState;
-
-    case CREATE_MESSAGE:
-      newState = {...state, currentMessages: {...state.currentMessages}}
-      newState.currentMessages[action.message.id] = action.message;
       return newState;
 
     case CLEAR_MESSAGES:
