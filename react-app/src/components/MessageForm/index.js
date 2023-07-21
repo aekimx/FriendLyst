@@ -46,7 +46,6 @@ export default function MessageForm () {
 
     if (socket) {
       socket.emit("chat", data)
-      // , (res) => { // dispatch(createMessage(res))}
     }
 
     setContent("");
@@ -56,7 +55,6 @@ export default function MessageForm () {
     <>
     <MessagesCurrent />
     <div className='messageform-container'>
-
         <form onSubmit={handleSubmit}>
           <div> {content.length === 2000 ? 'Messages must be less than 2000 characters' : null}</div>
           <div className='messageform-input-container'>
@@ -67,7 +65,6 @@ export default function MessageForm () {
               maxLength='2000'
               onChange={(e) => setContent(e.target.value)}
               className='messageform-input'/>
-
             <button type="submit" className='messageform-button'><i class="fa-solid fa-paper-plane" /></button>
           </div>
         </form>
