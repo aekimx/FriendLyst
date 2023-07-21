@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux";
 // import {createMessageThunk } from "../../store/message"
-import { createMessage } from "../../store/message";
+import { createMessage, getDirectMessageThunk } from "../../store/message";
 import { io } from 'socket.io-client';
 import MessagesCurrent from "../MessagesCurrent"
 import "./MessageForm.css"
@@ -16,7 +16,6 @@ export default function MessageForm () {
   const user = useSelector(state => state.session.user)
 
   const [content, setContent] = useState("");
-  // const [messages, setMessages] = useState({});
 
   useEffect(() => {
     // open socket connection - create websocket
@@ -28,30 +27,28 @@ export default function MessageForm () {
         console.log('Response from joining room: ', res)
       })
 
-      // socket.on("chat", (chat) => setMessages(chat) )
     }
     // when component unmounts, disconnect
     return ( () => {
-      socket.emit('leave', { dm_id: +dmId, username: user.firstName }, (res) => {
-        console.log("Response from leave room", res)
-      })
-      socket.disconnect()
+      socket.emit('leave', { dm_id: +dmId, username: user.firstName })
+      socket.disconnect();
     }
       )
   }, [dmId])
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     let data = {dm_id: dmId, message: content, sender_id: userId };
-    // let createdMessage = await dispatch(createMessageThunk(newMessage));
 
     if (socket) {
       socket.emit("chat", data, (res) => {
-      console.log('Response from sending chat: ', res)
-      dispatch(createMessage(res))
-    })}
-    setContent("")
+        dispatch(createMessage(res))
+        dispatch(getDirectMessageThunk(dmId))
+      })
+    }
+
+    setContent("");
   }
 
   return (user && (

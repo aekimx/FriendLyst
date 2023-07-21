@@ -65,7 +65,7 @@ def handle_chat(data):
     db.session.add(message)
     db.session.commit()
     print(' ---------------------- message added to db, to_dict ----------------------------- ', message.to_dict_no_dm())
-    emit('chat', message.to_dict_no_dm(), broadcast = False) # good to broadcast true?
+    emit('chat', message.to_dict_no_dm(), broadcast = True) # good to broadcast true?
     return 'DM message sent'  # This will be sent back to the client
 
     # Old code!!!!
