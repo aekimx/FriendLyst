@@ -6,14 +6,14 @@ import { getDirectMessageThunk, clearMessages, getAllDirectMessagesThunk } from 
 import "./MessagesCurrent.css"
 
 
-export default function MessagesCurrent({messages}) {
+export default function MessagesCurrent() {
   const dispatch = useDispatch()
 
   let {userId, dmId} = useParams();
   userId = +userId.split(".")[2]
 
   const directMessages = useSelector(state => state.messages.currentMessages)
-  if (messages.senderId) directMessages[messages.id] = messages
+  // if (messages.senderId) directMessages[messages.id] = messages
   const directMessagesArr = Object.values(directMessages)
 
   const allMessages = useSelector(state => state.messages.allMessages)
@@ -28,7 +28,7 @@ export default function MessagesCurrent({messages}) {
     // return () => dispatch(clearMessages())
   }, [dispatch, dmId])
 
-  if (!messages) return null;
+  // if (!messages) return null;
 
   return (
     <>

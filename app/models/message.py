@@ -23,7 +23,7 @@ class Message(db.Model):
         return {
             'id': self.id,
             'message': self.message,
-            'createdAt': self.created_at,
+            # 'createdAt': self.created_at,
             'dm_id': self.dm_id,
             'direct_message': self.direct_message.to_dict_no_message()
         }
@@ -32,7 +32,7 @@ class Message(db.Model):
         return {
             'id': self.id,
             'message': self.message,
-            'createdAt': self.created_at,
+            # 'createdAt': self.created_at,
             'senderId': self.sender_id,
             'user': self.user.to_dict_name(),
             'dm_id': self.dm_id,

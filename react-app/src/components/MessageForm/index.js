@@ -16,7 +16,7 @@ export default function MessageForm () {
   const user = useSelector(state => state.session.user)
 
   const [content, setContent] = useState("");
-  const [messages, setMessages] = useState({});
+  // const [messages, setMessages] = useState({});
 
   useEffect(() => {
     // open socket connection - create websocket
@@ -28,11 +28,11 @@ export default function MessageForm () {
         console.log('Response from joining room: ', res)
       })
 
-      socket.on("chat", (chat) => setMessages(chat) )
+      // socket.on("chat", (chat) => setMessages(chat) )
     }
     // when component unmounts, disconnect
     return ( () => {
-      socket.emit('leave', { dm_id: +dmId, username: user.username }, (res) => {
+      socket.emit('leave', { dm_id: +dmId, username: user.firstName }, (res) => {
         console.log("Response from leave room", res)
       })
       socket.disconnect()
@@ -46,16 +46,17 @@ export default function MessageForm () {
     let data = {dm_id: dmId, message: content, sender_id: userId };
     // let createdMessage = await dispatch(createMessageThunk(newMessage));
 
-    if (socket) socket.emit("chat", data, (res) => {
+    if (socket) {
+      socket.emit("chat", data, (res) => {
       console.log('Response from sending chat: ', res)
       dispatch(createMessage(res))
-    })
+    })}
     setContent("")
   }
 
   return (user && (
     <>
-    <MessagesCurrent messages={messages}/>
+    <MessagesCurrent />
     <div className='messageform-container'>
 
         <form onSubmit={handleSubmit}>
